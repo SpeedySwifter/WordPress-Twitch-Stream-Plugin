@@ -7,9 +7,9 @@
 ![Twitch](https://img.shields.io/badge/Twitch_API-9146FF?style=for-the-badge&logo=twitch&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-[![GitHub Stars](https://img.shields.io/github/stars/SpeedySwifter/wp-twitch-stream?style=social)](https://github.com/SpeedySwifter/wp-twitch-stream/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/SpeedySwifter/wp-twitch-stream?style=social)](https://github.com/SpeedySwifter/wp-twitch-stream/forks)
-[![GitHub Issues](https://img.shields.io/github/issues/SpeedySwifter/wp-twitch-stream)](https://github.com/SpeedySwifter/wp-twitch-stream/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/forks)
+[![GitHub Issues](https://img.shields.io/github/issues/SpeedySwifter/WordPress-Twitch-Stream-Plugin)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/issues)
 
 **Ein leichtgewichtiges WordPress-Plugin zur Einbindung von Twitch-Streams per Shortcode**
 
@@ -70,10 +70,10 @@ Dieses **WordPress-Plugin** ermöglicht die nahtlose Integration von **Twitch-St
 
 ```bash
 # Repository klonen
-git clone https://github.com/SpeedySwifter/wp-twitch-stream.git
+git clone https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin.git
 
 # Ordner nach wp-content/plugins/ verschieben
-mv wp-twitch-stream /pfad/zu/wordpress/wp-content/plugins/
+mv WordPress-Twitch-Stream-Plugin /pfad/zu/wordpress/wp-content/plugins/
 ```
 
 Dann im WordPress-Backend unter **Plugins** aktivieren.
@@ -157,7 +157,7 @@ Category:             Website Integration
 ## 📂 Plugin-Struktur
 
 ```
-wp-twitch-stream/
+WordPress-Twitch-Stream-Plugin/
 │
 ├── 📄 wp-twitch-stream.php        # Haupt-Plugin-Datei
 ├── 📄 README.md                   # Diese Datei
@@ -193,7 +193,7 @@ wp-twitch-stream/
 <?php
 /**
  * Plugin Name: WordPress Twitch Stream
- * Plugin URI: https://github.com/SpeedySwifter/wp-twitch-stream
+ * Plugin URI: https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin
  * Description: Bindet Twitch-Streams per Shortcode ein mit Live-Status-Erkennung
  * Version: 1.0.0
  * Requires at least: 5.8
@@ -700,7 +700,7 @@ SOFTWARE.
 
 Gib dem Repository einen ⭐ Stern auf GitHub!
 
-[![GitHub Stars](https://img.shields.io/github/stars/SpeedySwifter/wp-twitch-stream?style=social)](https://github.com/SpeedySwifter/wp-twitch-stream/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/stargazers)
 
 ### 💖 Sponsor werden
 
@@ -715,9 +715,9 @@ Gib dem Repository einen ⭐ Stern auf GitHub!
 
 <div align="center">
 
-![GitHub repo size](https://img.shields.io/github/repo-size/SpeedySwifter/wp-twitch-stream)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/SpeedySwifter/wp-twitch-stream)
-![GitHub last commit](https://img.shields.io/github/last-commit/SpeedySwifter/wp-twitch-stream)
+![GitHub repo size](https://img.shields.io/github/repo-size/SpeedySwifter/WordPress-Twitch-Stream-Plugin)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/SpeedySwifter/WordPress-Twitch-Stream-Plugin)
+![GitHub last commit](https://img.shields.io/github/last-commit/SpeedySwifter/WordPress-Twitch-Stream-Plugin)
 
 </div>
 
