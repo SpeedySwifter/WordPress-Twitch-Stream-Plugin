@@ -1,0 +1,231 @@
+/* assets/css/frontend.css */
+
+.twitch-stream-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.twitch-stream-container iframe {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+.twitch-offline {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.twitch-offline p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.twitch-offline a {
+    color: #ffffff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.twitch-offline a:hover {
+    color: #9146FF;
+}
+
+.twitch-error {
+    background-color: #fee;
+    border-left: 4px solid #f44;
+    padding: 15px;
+    margin: 20px 0;
+    color: #d00;
+    border-radius: 4px;
+}
+
+.twitch-error a {
+    color: #d00;
+    text-decoration: underline;
+}
+
+.twitch-error a:hover {
+    color: #b00;
+}
+
+/* Stream Info Styles */
+.twitch-stream-info {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.twitch-thumbnail {
+    width: 160px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.twitch-info-details {
+    flex: 1;
+}
+
+.twitch-title {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #23282d;
+}
+
+.twitch-game {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.twitch-viewers {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.twitch-info-offline {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    color: #6c757d;
+}
+
+/* Loading Animation */
+.twitch-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.twitch-loading::after {
+    content: '';
+    width: 32px;
+    height: 32px;
+    border: 3px solid #9146FF;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: twitch-spin 1s linear infinite;
+}
+
+@keyframes twitch-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .twitch-stream-container {
+        margin: 15px 0;
+    }
+    
+    .twitch-offline {
+        padding: 30px 15px;
+    }
+    
+    .twitch-offline p {
+        font-size: 16px;
+    }
+    
+    .twitch-stream-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .twitch-thumbnail {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+    
+    .twitch-info-details {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .twitch-offline {
+        padding: 20px 10px;
+    }
+    
+    .twitch-offline p {
+        font-size: 14px;
+    }
+    
+    .twitch-stream-info {
+        padding: 15px;
+    }
+    
+    .twitch-title {
+        font-size: 16px;
+    }
+    
+    .twitch-game,
+    .twitch-viewers {
+        font-size: 13px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .twitch-stream-info {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+    
+    .twitch-title {
+        color: #e2e8f0;
+    }
+    
+    .twitch-game,
+    .twitch-viewers {
+        color: #a0aec0;
+    }
+    
+    .twitch-info-offline {
+        background: #2d3748;
+        border-color: #4a5568;
+        color: #a0aec0;
+    }
+    
+    .twitch-loading {
+        background: #2d3748;
+    }
+}
+
+/* Custom CSS Classes für Benutzer */
+.twitch-custom-container {
+    /* Benutzer können diese Klasse überschreiben */
+}
+
+.twitch-custom-offline {
+    /* Benutzer können diese Klasse überschreiben */
+}
+
+.twitch-custom-error {
+    /* Benutzer können diese Klasse überschreiben */
+}
