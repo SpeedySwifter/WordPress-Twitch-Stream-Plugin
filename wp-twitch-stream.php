@@ -259,10 +259,52 @@ add_action('enqueue_block_editor_assets', 'wp_twitch_enqueue_block_assets');
 // Aktivierungs-Hook
 register_activation_hook(__FILE__, 'wp_twitch_activate');
 function wp_twitch_activate() {
+    global $wpdb;
+    $charset_collate = $wpdb->get_charset_collate();
+
     // Standard-Optionen setzen
     add_option('twitch_client_id', '');
     add_option('twitch_client_secret', '');
     
+    // Datenbank-Tabellen erstellen
+    $stream_schedules_sql = "CREATE TABLE {$wpdb->prefix}twitch_stream_schedules (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        channel varchar(100) NOT NULL,
+        title varchar(255) NOT NULL,
+        description text,
+        start_time datetime NOT NULL,
+        end_time datetime NOT NULL,
+        timezone varchar(50) DEFAULT 'UTC',
+        stream_type varchar(50) DEFAULT 'live',
+        category varchar(100),
+        tags text,
+        thumbnail_url text,
+        status enum('scheduled','live','completed','cancelled') DEFAULT 'scheduled',
+        is_recurring tinyint(1) DEFAULT 0,
+        recurring_pattern varchar(255),
+        recurring_end_date date,
+        created_at datetime DEFAULT CURRENT_TIMESTAMP,
+        updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id),
+        KEY channel (channel),
+        KEY start_time (start_time),
+        KEY status (status)
+    ) $charset_collate;";
+
+    $recurring_patterns_sql = "CREATE TABLE {$wpdb->prefix}twitch_recurring_patterns (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        pattern_name varchar(255) NOT NULL,
+        pattern_type enum('daily','weekly','monthly') NOT NULL,
+        pattern_data text NOT NULL,
+        created_at datetime DEFAULT CURRENT_TIMESTAMP,
+        updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($stream_schedules_sql);
+    dbDelta($recurring_patterns_sql);
+
     // Transients löschen bei Aktivierung
     delete_transient('twitch_access_token');
 }
