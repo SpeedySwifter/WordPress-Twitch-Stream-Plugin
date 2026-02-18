@@ -3,7 +3,7 @@
  * Plugin Name: WordPress Twitch Stream
  * Plugin URI: https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin
  * Description: Bindet Twitch-Streams per Shortcode ein mit Live-Status-Erkennung
- * Version: 1.2.0
+ * Version: 1.3.0
  * Requires at least: 5.8
  * Requires PHP: 7.4
  * Author: SpeedySwifter
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin-Konstanten
-define('WP_TWITCH_VERSION', '1.2.0');
+define('WP_TWITCH_VERSION', '1.3.0');
 define('WP_TWITCH_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WP_TWITCH_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -32,6 +32,13 @@ require_once WP_TWITCH_PLUGIN_DIR . 'includes/gutenberg-block.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/page-builder-compatibility.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/cookie-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/sidebar-widgets.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/rest-api.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/webhook-support.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-analytics.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/stream-recording.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/multi-channel-dashboard.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/custom-css-builder.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-cache.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
