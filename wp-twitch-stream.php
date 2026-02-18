@@ -46,6 +46,7 @@ require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-analytics-dashboard.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/multi-language-support.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/woocommerce-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/membership-plugin-integration.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-shortcode-builder.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
@@ -132,6 +133,14 @@ function wp_twitch_enqueue_frontend_styles() {
             WP_TWITCH_VERSION
         );
     }
+    
+    // Shortcode Builder Styles
+    wp_enqueue_style(
+        'wp-twitch-stream-shortcode-builder',
+        WP_TWITCH_PLUGIN_URL . 'assets/css/shortcode-builder.css',
+        array(),
+        WP_TWITCH_VERSION
+    );
 }
 add_action('wp_enqueue_scripts', 'wp_twitch_enqueue_frontend_styles');
 
@@ -143,8 +152,33 @@ function wp_twitch_enqueue_admin_styles() {
         array(),
         WP_TWITCH_VERSION
     );
+    
+    // Shortcode Builder Styles for admin
+    if (isset($_GET['page']) && $_GET['page'] === 'twitch-shortcode-builder') {
+        wp_enqueue_style(
+            'wp-twitch-stream-shortcode-builder',
+            WP_TWITCH_PLUGIN_URL . 'assets/css/shortcode-builder.css',
+            array(),
+            WP_TWITCH_VERSION
+        );
+    }
 }
 add_action('admin_enqueue_scripts', 'wp_twitch_enqueue_admin_styles');
+
+// Admin-Scripts laden
+function wp_twitch_enqueue_admin_scripts($hook) {
+    // Shortcode Builder Scripts
+    if (isset($_GET['page']) && $_GET['page'] === 'twitch-shortcode-builder') {
+        wp_enqueue_script(
+            'wp-twitch-stream-shortcode-builder',
+            WP_TWITCH_PLUGIN_URL . 'assets/js/shortcode-builder.js',
+            array('jquery', 'wp-util'),
+            WP_TWITCH_VERSION,
+            true
+        );
+    }
+}
+add_action('admin_enqueue_scripts', 'wp_twitch_enqueue_admin_scripts');
 
 // Gutenberg Block Assets laden
 function wp_twitch_enqueue_block_assets() {
