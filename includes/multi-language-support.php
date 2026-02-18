@@ -33,8 +33,7 @@ class WP_Twitch_Multi_Language_Support {
         $this->language_settings = $this->get_language_settings();
         $this->current_language = $this->get_current_language();
         
-        add_action('init', array($this, 'init_language_support'));
-        add_action('plugins_loaded', array($this, 'load_textdomain'));
+        add_action('plugins_loaded', array($this, 'init_language_support'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_language_scripts'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_language_scripts'));
         add_action('wp_ajax_twitch_language_switch', array($this, 'handle_language_switch'));
@@ -50,6 +49,7 @@ class WP_Twitch_Multi_Language_Support {
         
         // Load translations
         $this->load_translations();
+    }
     
     /**
      * Initialize language support
