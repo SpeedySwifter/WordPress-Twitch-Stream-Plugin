@@ -48,7 +48,10 @@ class WP_Twitch_API {
                     error_log('Twitch API Error: No access_token in response');
                     $token = null;
                 }
-        }
+            } else {
+                // API call failed
+                $token = null;
+            }
 
         return $token;
     }
