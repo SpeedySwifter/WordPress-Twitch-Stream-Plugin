@@ -25,6 +25,11 @@ class WP_Twitch_Multi_Language_Support {
     private $translations = array();
     
     public function __construct() {
+        // Delay initialization until WordPress is loaded
+        add_action('init', array($this, 'init'));
+    }
+
+    public function init() {
         $this->language_settings = $this->get_language_settings();
         $this->current_language = $this->get_current_language();
         
@@ -45,7 +50,6 @@ class WP_Twitch_Multi_Language_Support {
         
         // Load translations
         $this->load_translations();
-    }
     
     /**
      * Initialize language support
