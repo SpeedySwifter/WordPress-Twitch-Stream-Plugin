@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WordPress Twitch Stream
- * Plugin URI: https://github.com/SpeedySwifter/wp-twitch-stream
+ * Plugin URI: https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin
  * Description: Bindet Twitch-Streams per Shortcode ein mit Live-Status-Erkennung
  * Version: 1.0.0
  * Requires at least: 5.8
