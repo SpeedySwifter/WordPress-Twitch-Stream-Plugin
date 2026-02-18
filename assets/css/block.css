@@ -1,0 +1,226 @@
+/**
+ * Gutenberg Block Editor Styles
+ */
+
+/* Block Category Icon */
+.wp-block[data-type="wp-twitch-stream/stream"] .block-editor-block-card__icon,
+.wp-block[data-type="wp-twitch-stream/grid"] .block-editor-block-card__icon {
+    color: #9146FF;
+}
+
+/* Block Editor Wrapper */
+.twitch-block-editor {
+    position: relative;
+}
+
+.twitch-block-notice {
+    padding: 20px;
+    text-align: center;
+}
+
+.twitch-block-notice .components-notice {
+    margin-bottom: 16px;
+}
+
+.twitch-block-notice .button {
+    margin-top: 12px;
+}
+
+/* Preview Placeholder */
+.twitch-block-preview {
+    min-height: 200px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+    margin: 16px 0;
+}
+
+.twitch-preview-placeholder {
+    text-align: center;
+    color: #666;
+}
+
+.twitch-preview-placeholder .dashicons {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    display: block;
+    margin: 0 auto 16px;
+    color: #9146FF;
+}
+
+.twitch-preview-placeholder p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.twitch-preview-content {
+    width: 100%;
+    text-align: center;
+}
+
+.twitch-preview-content .twitch-preview-placeholder {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #9146FF;
+    border-radius: 8px;
+    padding: 32px;
+    margin: 0;
+}
+
+.twitch-preview-content .dashicons {
+    color: #9146FF;
+    font-size: 64px;
+    height: 64px;
+    width: 64px;
+}
+
+.twitch-preview-content p:first-of-type {
+    font-size: 18px;
+    font-weight: 600;
+    color: #23282d;
+    margin: 16px 0 8px;
+}
+
+.twitch-preview-content p:last-of-type {
+    font-size: 14px;
+    color: #6c757d;
+    font-style: italic;
+    margin: 8px 0 0;
+}
+
+/* Inspector Controls */
+.components-panel__body .twitch-control-help {
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+/* Block List View */
+.block-editor-block-list__block[data-type="wp-twitch-stream/stream"] .block-list-appender,
+.block-editor-block-list__block[data-type="wp-twitch-stream/grid"] .block-list-appender {
+    margin-top: 16px;
+}
+
+/* Block Toolbar */
+.block-editor-block-toolbar .wp-twitch-stream-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Responsive Preview */
+@media (max-width: 768px) {
+    .twitch-block-preview {
+        min-height: 150px;
+        margin: 12px 0;
+    }
+    
+    .twitch-preview-placeholder .dashicons {
+        font-size: 36px;
+        height: 36px;
+        width: 36px;
+        margin-bottom: 12px;
+    }
+    
+    .twitch-preview-content .twitch-preview-placeholder {
+        padding: 24px;
+    }
+    
+    .twitch-preview-content .dashicons {
+        font-size: 48px;
+        height: 48px;
+        width: 48px;
+    }
+    
+    .twitch-preview-content p:first-of-type {
+        font-size: 16px;
+    }
+}
+
+/* Dark Mode Support */
+.is-dark-theme .twitch-block-preview {
+    background: #2d3748;
+    border-color: #4a5568;
+}
+
+.is-dark-theme .twitch-preview-placeholder {
+    color: #a0aec0;
+}
+
+.is-dark-theme .twitch-preview-content .twitch-preview-placeholder {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    border-color: #9146FF;
+}
+
+.is-dark-theme .twitch-preview-content p:first-of-type {
+    color: #e2e8f0;
+}
+
+.is-dark-theme .twitch-preview-content p:last-of-type {
+    color: #a0aec0;
+}
+
+/* Loading State */
+.twitch-block-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.twitch-block-loading::after {
+    content: '';
+    width: 32px;
+    height: 32px;
+    border: 3px solid #9146FF;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: twitch-spin 1s linear infinite;
+}
+
+@keyframes twitch-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.twitch-block-error {
+    background: #fee;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 16px 0;
+    color: #c33;
+    text-align: center;
+}
+
+.twitch-block-error .dashicons {
+    color: #c33;
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+    margin-bottom: 8px;
+}
+
+/* Success State */
+.twitch-block-success {
+    background: #efe;
+    border: 1px solid #cfc;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 16px 0;
+    color: #3c3;
+    text-align: center;
+}
+
+.twitch-block-success .dashicons {
+    color: #3c3;
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+    margin-bottom: 8px;
+}

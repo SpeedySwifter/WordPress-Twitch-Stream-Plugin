@@ -86,6 +86,77 @@ class WP_Twitch_API {
     }
 
     /**
+     * Benutzer-Informationen abrufen
+     */
+    public function get_user_info($channel) {
+        $response = wp_remote_get(
+            "https://api.twitch.tv/helix/users?login={$channel}",
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->access_token,
+                    'Client-Id' => $this->client_id
+                ]
+            ]
+        );
+
+        if (!is_wp_error($response)) {
+            $data = json_decode(wp_remote_retrieve_body($response), true);
+            return $data['data'][0] ?? null;
+        }
+
+        return null;
+    }
+
+    /**
+     * Spiel-Informationen abrufen
+     */
+    public function get_game_info($game_id) {
+        if (empty($game_id)) return null;
+
+        $response = wp_remote_get(
+            "https://api.twitch.tv/helix/games?id={$game_id}",
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->access_token,
+                    'Client-Id' => $this->client_id
+                ]
+            ]
+        );
+
+        if (!is_wp_error($response)) {
+            $data = json_decode(wp_remote_retrieve_body($response), true);
+            return $data['data'][0] ?? null;
+        }
+
+        return null;
+    }
+
+    /**
+     * Vollständige Stream-Informationen abrufen
+     */
+    public function get_complete_stream_info($channel) {
+        $stream_data = $this->get_stream_data($channel);
+        $user_info = $this->get_user_info($channel);
+
+        if (!$stream_data && !$user_info) {
+            return null;
+        }
+
+        $info = [
+            'is_live' => !empty($stream_data),
+            'user' => $user_info,
+            'stream' => $stream_data,
+            'game' => null
+        ];
+
+        if ($stream_data && !empty($stream_data['game_id'])) {
+            $info['game'] = $this->get_game_info($stream_data['game_id']);
+        }
+
+        return $info;
+    }
+
+    /**
      * Benutzer-ID abrufen
      */
     public function get_user_id($username) {

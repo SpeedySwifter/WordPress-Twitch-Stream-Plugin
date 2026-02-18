@@ -3,7 +3,7 @@
  * Plugin Name: WordPress Twitch Stream
  * Plugin URI: https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin
  * Description: Bindet Twitch-Streams per Shortcode ein mit Live-Status-Erkennung
- * Version: 1.0.0
+ * Version: 1.1.0
  * Requires at least: 5.8
  * Requires PHP: 7.4
  * Author: SpeedySwifter
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin-Konstanten
-define('WP_TWITCH_VERSION', '1.0.0');
+define('WP_TWITCH_VERSION', '1.1.0');
 define('WP_TWITCH_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WP_TWITCH_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -28,6 +28,7 @@ define('WP_TWITCH_PLUGIN_URL', plugin_dir_url(__FILE__));
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/twitch-api.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/shortcode.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/token-manager.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/gutenberg-block.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
@@ -58,6 +59,27 @@ function wp_twitch_enqueue_admin_styles() {
     );
 }
 add_action('admin_enqueue_scripts', 'wp_twitch_enqueue_admin_styles');
+
+// Gutenberg Block Assets laden
+function wp_twitch_enqueue_block_assets() {
+    // Block Editor Script
+    wp_enqueue_script(
+        'twitch-stream-block',
+        WP_TWITCH_PLUGIN_URL . 'assets/js/block.js',
+        array('wp-blocks', 'wp-element', 'wp-components', 'wp-editor'),
+        WP_TWITCH_VERSION,
+        true
+    );
+
+    // Block Editor Style
+    wp_enqueue_style(
+        'twitch-stream-block-style',
+        WP_TWITCH_PLUGIN_URL . 'assets/css/block.css',
+        array(),
+        WP_TWITCH_VERSION
+    );
+}
+add_action('enqueue_block_editor_assets', 'wp_twitch_enqueue_block_assets');
 
 // Aktivierungs-Hook
 register_activation_hook(__FILE__, 'wp_twitch_activate');
