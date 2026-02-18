@@ -44,6 +44,7 @@ require_once WP_TWITCH_PLUGIN_DIR . 'includes/twitch-chat-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/stream-recording-download.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-analytics-dashboard.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/multi-language-support.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/woocommerce-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
@@ -109,6 +110,16 @@ function wp_twitch_enqueue_frontend_styles() {
         array(),
         WP_TWITCH_VERSION
     );
+    
+    // WooCommerce Integration Styles (only if WooCommerce is active)
+    if (class_exists('WooCommerce')) {
+        wp_enqueue_style(
+            'wp-twitch-stream-woocommerce',
+            WP_TWITCH_PLUGIN_URL . 'assets/css/woocommerce-integration.css',
+            array(),
+            WP_TWITCH_VERSION
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'wp_twitch_enqueue_frontend_styles');
 

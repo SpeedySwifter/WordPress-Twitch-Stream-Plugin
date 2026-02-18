@@ -1,0 +1,824 @@
+/**
+ * WooCommerce Integration Styles
+ */
+
+/* Twitch WooCommerce Products Grid */
+.twitch-woo-products {
+    display: grid;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.twitch-woo-columns-1 { grid-template-columns: 1fr; }
+.twitch-woo-columns-2 { grid-template-columns: repeat(2, 1fr); }
+.twitch-woo-columns-3 { grid-template-columns: repeat(3, 1fr); }
+.twitch-woo-columns-4 { grid-template-columns: repeat(4, 1fr); }
+.twitch-woo-columns-5 { grid-template-columns: repeat(5, 1fr); }
+.twitch-woo-columns-6 { grid-template-columns: repeat(6, 1fr); }
+
+.twitch-woo-product {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.twitch-woo-product:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.twitch-woo-product.twitch-product {
+    border: 2px solid #9146ff;
+}
+
+.twitch-woo-product-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.twitch-woo-product-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.twitch-woo-product:hover .twitch-woo-product-image img {
+    transform: scale(1.05);
+}
+
+.twitch-woo-stream-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #9146ff;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 10;
+}
+
+.twitch-badge-icon {
+    font-size: 10px;
+}
+
+.twitch-badge-text {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.twitch-woo-product-content {
+    padding: 16px;
+}
+
+.twitch-woo-product-title {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.twitch-woo-product-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.twitch-woo-product-title a:hover {
+    color: #9146ff;
+}
+
+.twitch-woo-product-price {
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+}
+
+.twitch-woo-product-price .amount {
+    color: #9146ff;
+}
+
+.twitch-woo-product-stream {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #9146ff;
+}
+
+.twitch-stream-info {
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.twitch-woo-product-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.twitch-woo-product-actions .add_to_cart_button {
+    background: #9146ff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.twitch-woo-product-actions .add_to_cart_button:hover {
+    background: #7928ca;
+    transform: translateY(-1px);
+}
+
+.twitch-woo-product-actions .add_to_cart_button.twitch-product {
+    background: linear-gradient(135deg, #9146ff 0%, #7928ca 100%);
+}
+
+/* Single Product Styles */
+.twitch-woo-product-single {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.twitch-woo-product-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 30px;
+}
+
+.twitch-woo-product-image {
+    position: relative;
+}
+
+.twitch-woo-product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.twitch-woo-product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.twitch-woo-product-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+}
+
+.twitch-woo-product-price {
+    font-size: 28px;
+    font-weight: 700;
+    color: #9146ff;
+}
+
+.twitch-woo-product-stream {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid #9146ff;
+}
+
+.twitch-stream-info {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.twitch-stream-link {
+    display: inline-block;
+    background: #9146ff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.twitch-stream-link:hover {
+    background: #7928ca;
+    transform: translateY(-1px);
+}
+
+.twitch-woo-product-description {
+    padding: 0 30px 30px 30px;
+}
+
+.twitch-woo-product-description h3 {
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Product Page Integration */
+.twitch-product-info {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.twitch-product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.twitch-product-badge {
+    background: #9146ff;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.twitch-product-channel {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+.twitch-product-stream {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.twitch-product-stream iframe {
+    width: 100%;
+    height: 360px;
+    border: none;
+}
+
+.twitch-stream-button-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.twitch-stream-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #9146ff 0%, #7928ca 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.twitch-stream-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(145, 70, 255, 0.3);
+}
+
+.twitch-button-icon {
+    font-size: 18px;
+}
+
+.twitch-button-text {
+    font-weight: 600;
+}
+
+/* Stream Tab */
+.twitch-stream-tab {
+    margin: 20px 0;
+}
+
+.twitch-stream-embed {
+    margin-bottom: 20px;
+}
+
+.twitch-stream-embed iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+    border-radius: 8px;
+}
+
+.twitch-chat-embed iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Cart Notices */
+.twitch-woo-cart-notice,
+.twitch-woo-checkout-notice {
+    background: linear-gradient(135deg, #9146ff 0%, #7928ca 100%);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.twitch-notice-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.twitch-notice-icon {
+    font-size: 20px;
+}
+
+.twitch-notice-text {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.twitch-notice-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.twitch-watch-stream-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.twitch-watch-stream-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Cart Page */
+.twitch-cart-notice {
+    background: #e3f2fd;
+    border: 1px solid #2196f3;
+    color: #1976d2;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.twitch-cart-notice .twitch-notice-icon {
+    color: #2196f3;
+}
+
+.twitch-cart-notice .twitch-notice-text {
+    color: #1976d2;
+}
+
+/* Checkout Page */
+.twitch-checkout-notice {
+    background: #e8f5e8;
+    border: 1px solid #4caf50;
+    color: #2e7d32;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.twitch-checkout-notice .twitch-notice-icon {
+    color: #4caf50;
+}
+
+.twitch-checkout-notice .twitch-notice-text {
+    color: #2e7d32;
+}
+
+/* Order Thank You Page */
+.twitch-order-notice {
+    background: #fff3e0;
+    border: 1px solid #ff9800;
+    color: #f57c00;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.twitch-order-notice .twitch-notice-icon {
+    color: #ff9800;
+}
+
+.twitch-order-notice .twitch-notice-text {
+    color: #f57c00;
+}
+
+/* Error Messages */
+.twitch-woo-error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #f5c6cb;
+    margin: 10px 0;
+}
+
+.twitch-woo-no-products {
+    background: #f8f9fa;
+    color: #6c757d;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+/* Loading States */
+.twitch-woo-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.twitch-woo-loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid #9146ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .twitch-woo-columns-5,
+    .twitch-woo-columns-6 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .twitch-woo-columns-3,
+    .twitch-woo-columns-4,
+    .twitch-woo-columns-5,
+    .twitch-woo-columns-6 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .twitch-woo-product-header {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .twitch-woo-product-title {
+        font-size: 20px;
+    }
+    
+    .twitch-woo-product-price {
+        font-size: 24px;
+    }
+    
+    .twitch-product-stream iframe {
+        height: 250px;
+    }
+    
+    .twitch-stream-embed iframe {
+        height: 300px;
+    }
+    
+    .twitch-chat-embed iframe {
+        height: 300px;
+    }
+    
+    .twitch-woo-cart-notice,
+    .twitch-woo-checkout-notice {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+    
+    .twitch-notice-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .twitch-woo-columns-2,
+    .twitch-woo-columns-3,
+    .twitch-woo-columns-4,
+    .twitch-woo-columns-5,
+    .twitch-woo-columns-6 {
+        grid-template-columns: 1fr;
+    }
+    
+    .twitch-woo-product-content {
+        padding: 12px;
+    }
+    
+    .twitch-woo-product-title {
+        font-size: 14px;
+    }
+    
+    .twitch-woo-product-price {
+        font-size: 16px;
+    }
+    
+    .twitch-woo-product-header {
+        padding: 16px;
+    }
+    
+    .twitch-woo-product-title {
+        font-size: 18px;
+    }
+    
+    .twitch-woo-product-price {
+        font-size: 20px;
+    }
+    
+    .twitch-product-info {
+        padding: 16px;
+    }
+    
+    .twitch-product-header {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    
+    .twitch-product-stream iframe {
+        height: 200px;
+    }
+    
+    .twitch-stream-embed iframe {
+        height: 250px;
+    }
+    
+    .twitch-chat-embed iframe {
+        height: 250px;
+    }
+    
+    .twitch-stream-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .twitch-notice-content {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .twitch-notice-text {
+        font-size: 14px;
+    }
+    
+    .twitch-notice-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .twitch-watch-stream-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .twitch-woo-stream-badge,
+    .twitch-stream-button-container,
+    .twitch-product-stream,
+    .twitch-stream-embed,
+    .twitch-chat-embed,
+    .twitch-woo-cart-notice,
+    .twitch-woo-checkout-notice,
+    .twitch-order-notice {
+        display: none;
+    }
+    
+    .twitch-woo-product {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+
+/* Accessibility */
+.twitch-woo-product:focus-within {
+    outline: 2px solid #9146ff;
+    outline-offset: 2px;
+}
+
+.twitch-stream-button:focus,
+.twitch-watch-stream-btn:focus {
+    outline: 2px solid #9146ff;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .twitch-woo-product,
+    .twitch-woo-product-image img,
+    .twitch-woo-product-actions .add_to_cart_button,
+    .twitch-stream-button,
+    .twitch-stream-link,
+    .twitch-watch-stream-btn,
+    .twitch-woo-loading::after {
+        animation: none;
+        transition: none;
+        transform: none;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .twitch-woo-product {
+        border: 2px solid #000;
+    }
+    
+    .twitch-woo-product.twitch-product {
+        border-color: #9146ff;
+        border-width: 3px;
+    }
+    
+    .twitch-stream-badge {
+        border: 2px solid #fff;
+    }
+    
+    .twitch-product-info {
+        border: 2px solid #000;
+    }
+    
+    .twitch-stream-button {
+        border: 2px solid #000;
+    }
+}
+
+/* RTL Support */
+[dir="rtl"] .twitch-woo-product-header {
+    direction: rtl;
+}
+
+[dir="rtl"] .twitch-product-header {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .twitch-notice-content {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .twitch-woo-cart-notice,
+[dir="rtl"] .twitch-woo-checkout-notice {
+    flex-direction: row-reverse;
+}
+
+/* Dark Theme */
+.twitch-theme-dark .twitch-woo-product {
+    background: #2d2d2d;
+    color: #e0e0e0;
+}
+
+.twitch-theme-dark .twitch-woo-product-title a {
+    color: #e0e0e0;
+}
+
+.twitch-theme-dark .twitch-woo-product-title a:hover {
+    color: #9146ff;
+}
+
+.twitch-theme-dark .twitch-woo-product-price {
+    color: #e0e0e0;
+}
+
+.twitch-theme-dark .twitch-woo-product-stream {
+    background: #3d3d3d;
+    color: #e0e0e0;
+}
+
+.twitch-theme-dark .twitch-product-info {
+    background: #3d3d3d;
+    border-color: #4d4d4d;
+}
+
+.twitch-theme-dark .twitch-product-channel {
+    color: #b8b8b8;
+}
+
+.twitch-theme-dark .twitch-woo-product-description {
+    color: #e0e0e0;
+}
+
+.twitch-theme-dark .twitch-woo-product-description h3 {
+    color: #e0e0e0;
+}
+
+/* Custom Scrollbar for Product Grid */
+.twitch-woo-products::-webkit-scrollbar {
+    width: 8px;
+}
+
+.twitch-woo-products::-webkit-scrollbar-track {
+    background: #f1f3f4;
+}
+
+.twitch-woo-products::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.twitch-woo-products::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* WooCommerce Integration Specific */
+.woocommerce .twitch-woo-products {
+    margin: 30px 0;
+}
+
+.woocommerce .twitch-woo-product {
+    margin-bottom: 0;
+}
+
+.woocommerce .twitch-woo-product .price {
+    margin-bottom: 12px;
+}
+
+.woocommerce .twitch-woo-product .button {
+    margin-top: 0;
+}
+
+/* Product Category Integration */
+.product-category .twitch-woo-products {
+    margin-top: 40px;
+}
+
+/* Shop Page Integration */
+.shop .twitch-woo-products {
+    margin-top: 40px;
+}
+
+/* Single Product Page Integration */
+.single-product .twitch-product-info {
+    margin: 30px 0;
+}
+
+.single-product .twitch-stream-tab {
+    margin: 40px 0;
+}
+
+/* Cart Page Integration */
+.woocommerce-cart .twitch-cart-notice {
+    margin: 30px 0;
+}
+
+/* Checkout Page Integration */
+.woocommerce-checkout .twitch-checkout-notice {
+    margin: 30px 0;
+}
+
+/* Order Received Page Integration */
+.woocommerce-order-received .twitch-order-notice {
+    margin: 30px 0;
+}
