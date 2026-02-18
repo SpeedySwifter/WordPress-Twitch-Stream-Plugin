@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WordPress Twitch Stream Plugin
+ * Plugin Name: Live Stream Integration
  * Plugin URI: https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin
  * Description: The ultimate WordPress plugin for Twitch stream integration with mobile apps, scheduling, analytics, and multi-language support.
  * Version: 1.7.0

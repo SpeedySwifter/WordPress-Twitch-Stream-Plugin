@@ -1,4 +1,4 @@
-=== WordPress Twitch Stream Plugin ===
+=== Live Stream Integration ===
 Contributors: speedyswifter
 Donate link: https://www.paypal.com/donate/?hosted_button_id=YOUR_BUTTON_ID
 Tags: twitch, streaming, live stream, twitch.tv, embed, video, gaming, esports, widget, shortcode, chat, clips, vod, analytics, mobile, pwa

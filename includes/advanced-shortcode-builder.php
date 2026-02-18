@@ -14,6 +14,11 @@ class WP_Twitch_Advanced_Shortcode_Builder {
     private $supported_shortcodes = array();
     
     public function __construct() {
+        // Delay initialization until WordPress is loaded
+        add_action('init', array($this, 'init'));
+    }
+
+    public function init() {
         $this->shortcode_definitions = $this->get_shortcode_definitions();
         $this->builder_settings = $this->get_builder_settings();
         
@@ -25,7 +30,6 @@ class WP_Twitch_Advanced_Shortcode_Builder {
         
         // Register shortcodes
         add_action('init', array($this, 'register_builder_shortcodes'));
-    }
     
     /**
      * Initialize shortcode builder

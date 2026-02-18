@@ -14,6 +14,11 @@ class WP_Twitch_Visual_Stream_Scheduler {
     private $recurring_patterns;
     
     public function __construct() {
+        // Delay initialization until WordPress is loaded
+        add_action('init', array($this, 'init'));
+    }
+
+    public function init() {
         $this->scheduler_settings = $this->get_scheduler_settings();
         $this->stream_schedules = $this->get_stream_schedules();
         $this->recurring_patterns = $this->get_recurring_patterns();

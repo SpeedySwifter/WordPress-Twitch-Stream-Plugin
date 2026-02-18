@@ -14,6 +14,11 @@ class WP_Twitch_Mobile_App_Integration {
     private $push_settings;
     
     public function __construct() {
+        // Delay initialization until WordPress is loaded
+        add_action('init', array($this, 'init'));
+    }
+
+    public function init() {
         $this->mobile_settings = $this->get_mobile_settings();
         $this->pwa_manifest = $this->get_pwa_manifest();
         $this->push_settings = $this->get_push_settings();

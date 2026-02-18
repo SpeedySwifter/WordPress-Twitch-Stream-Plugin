@@ -8,6 +8,11 @@ class WP_Twitch_API {
     private $access_token;
 
     public function __construct() {
+        // Delay initialization until WordPress is loaded
+        add_action('init', array($this, 'init'));
+    }
+
+    public function init() {
         $this->client_id = get_option('twitch_client_id');
         $this->client_secret = get_option('twitch_client_secret');
         $this->access_token = $this->get_access_token();

@@ -14,6 +14,11 @@ class WP_Twitch_Membership_Integration {
     private $active_plugins = array();
     
     public function __construct() {
+        // Delay initialization until WordPress is loaded
+        add_action('init', array($this, 'init'));
+    }
+
+    public function init() {
         $this->membership_settings = $this->get_membership_settings();
         $this->detect_membership_plugins();
         
@@ -26,7 +31,6 @@ class WP_Twitch_Membership_Integration {
         
         // Register shortcodes
         add_action('init', array($this, 'register_membership_shortcodes'));
-    }
     
     /**
      * Detect membership plugins
