@@ -20,6 +20,7 @@ class WP_Twitch_Analytics {
     public function init() {
         $this->api = new WP_Twitch_API();
         $this->cache = new WP_Twitch_Cache();
+    }
     
     /**
      * Get channel analytics

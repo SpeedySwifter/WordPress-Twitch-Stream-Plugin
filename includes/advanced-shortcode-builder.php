@@ -30,6 +30,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
         
         // Register shortcodes
         add_action('init', array($this, 'register_builder_shortcodes'));
+    }
     
     /**
      * Initialize shortcode builder
