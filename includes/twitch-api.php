@@ -45,7 +45,7 @@ class WP_Twitch_API {
                     set_transient('twitch_access_token', $token, 50 * DAY_IN_SECONDS);
                 } else {
                     // Log error for debugging
-                    error_log('Twitch API Error: No access_token in response. Response: ' . print_r($data, true));
+                    error_log('Twitch API Error: No access_token in response');
                     $token = null;
                 }
         }
