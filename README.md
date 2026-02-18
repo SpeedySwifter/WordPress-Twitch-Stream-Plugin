@@ -784,7 +784,7 @@ Siehe [Roadmap](#-roadmap) für alle verfügbaren Features.
 
 ## 🗺️ Roadmap
 
-### ✅ Version 1.2.0 (Abgeschlossen)
+### ✅ Version 1.3.0 (Abgeschlossen)
 - [x] Basic Shortcode
 - [x] Live-Status Erkennung
 - [x] Admin Settings Page
@@ -804,19 +804,18 @@ Siehe [Roadmap](#-roadmap) für alle verfügbaren Features.
 - [x] VOD (Video on Demand) Support
 - [x] Clips einbinden
 - [x] Sidebar Widgets (VOD & Clips)
+- [x] REST API Endpoint
+- [x] Webhook-Support (EventSub)
+- [x] Advanced Analytics
+- [x] Stream-Recording Integration
+- [x] Multi-Channel Dashboard
+- [x] Custom CSS Builder
+- [x] Advanced Caching Options
+- [x] Donation Integration (Buy Me a Coffee & PayPal)
 
-### 🚧 Version 1.3.0 (In Entwicklung)
-- [ ] REST API Endpoint
-- [ ] Webhook-Support (EventSub)
-- [ ] Advanced Analytics
-- [ ] Stream-Recording Integration
-- [ ] Multi-Channel Dashboard
-- [ ] Custom CSS Builder
-- [ ] Advanced Caching Options
-
-### 🔮 Version 2.0.0 (Geplant)
+### 🚧 Version 1.4.0 (Geplant)
 - [ ] Twitch Chat Integration
-- [ ] Donation/Subscription Buttons
+- [ ] Donation/Subscription Buttons (erweitert)
 - [ ] Stream-Recording Download
 - [ ] Advanced Analytics Dashboard
 - [ ] Multi-Language Support (EN/DE/FR/ES)
@@ -825,6 +824,18 @@ Siehe [Roadmap](#-roadmap) für alle verfügbaren Features.
 - [ ] Advanced Shortcode Builder
 - [ ] Visual Stream Scheduler
 - [ ] Mobile App Integration
+
+### 🔮 Version 2.0.0 (Geplant)
+- [ ] AI-Powered Stream Recommendations
+- [ ] Advanced Monetization Features
+- [ ] Cross-Platform Integration (YouTube, Facebook Gaming)
+- [ ] Advanced User Management
+- [ ] White-Label Solutions
+- [ ] Enterprise Analytics Suite
+- [ ] API Rate Limiting & Quotas
+- [ ] Advanced Security Features
+- [ ] Cloud Storage Integration
+- [ ] Mobile App Development
 
 ---
 
@@ -884,22 +895,38 @@ Siehe [Roadmap](#-roadmap) für alle verfügbaren Features.
 ### 🚀 Advanced Features (v1.3+)
 | Feature | Status | Version |
 |---------|--------|--------|
-| REST API Endpoint | 🚧 In Entwicklung | 1.3.0 |
-| Webhook-Support (EventSub) | 🚧 In Entwicklung | 1.3.0 |
-| Advanced Analytics | 🚧 In Entwicklung | 1.3.0 |
-| Stream-Recording Integration | 🚧 In Entwicklung | 1.3.0 |
-| Multi-Channel Dashboard | 🚧 In Entwicklung | 1.3.0 |
-| Custom CSS Builder | 🚧 In Entwicklung | 1.3.0 |
-| Advanced Caching Options | 🚧 In Entwicklung | 1.3.0 |
+| REST API Endpoint | ✅ Fertig | 1.3.0 |
+| Webhook-Support (EventSub) | ✅ Fertig | 1.3.0 |
+| Advanced Analytics | ✅ Fertig | 1.3.0 |
+| Stream-Recording Integration | ✅ Fertig | 1.3.0 |
+| Multi-Channel Dashboard | ✅ Fertig | 1.3.0 |
+| Custom CSS Builder | ✅ Fertig | 1.3.0 |
+| Advanced Caching Options | ✅ Fertig | 1.3.0 |
+| Donation Integration | ✅ Fertig | 1.3.1 |
 
 ### 🔮 Future Features (v2.0+)
 | Feature | Status | Version |
 |---------|--------|--------|
-| Twitch Chat Integration | 📋 Geplant | 2.0.0 |
-| Donation/Subscription Buttons | 📋 Geplant | 2.0.0 |
-| Stream-Recording Integration | 📋 Geplant | 2.0.0 |
-| WooCommerce Integration | 📋 Geplant | 2.0.0 |
-| Mobile App Integration | 📋 Geplant | 2.0.0 |
+| Twitch Chat Integration | 📋 Geplant | 1.4.0 |
+| Donation/Subscription Buttons (erweitert) | 📋 Geplant | 1.4.0 |
+| Stream-Recording Download | 📋 Geplant | 1.4.0 |
+| Advanced Analytics Dashboard | 📋 Geplant | 1.4.0 |
+| Multi-Language Support (EN/DE/FR/ES) | 📋 Geplant | 1.4.0 |
+| WooCommerce Integration | 📋 Geplant | 1.4.0 |
+| Membership Plugin Integration | 📋 Geplant | 1.4.0 |
+| Advanced Shortcode Builder | 📋 Geplant | 1.4.0 |
+| Visual Stream Scheduler | 📋 Geplant | 1.4.0 |
+| Mobile App Integration | 📋 Geplant | 1.4.0 |
+| AI-Powered Stream Recommendations | 📋 Geplant | 2.0.0 |
+| Advanced Monetization Features | 📋 Geplant | 2.0.0 |
+| Cross-Platform Integration | 📋 Geplant | 2.0.0 |
+| Advanced User Management | 📋 Geplant | 2.0.0 |
+| White-Label Solutions | 📋 Geplant | 2.0.0 |
+| Enterprise Analytics Suite | 📋 Geplant | 2.0.0 |
+| API Rate Limiting & Quotas | 📋 Geplant | 2.0.0 |
+| Advanced Security Features | 📋 Geplant | 2.0.0 |
+| Cloud Storage Integration | 📋 Geplant | 2.0.0 |
+| Mobile App Development | 📋 Geplant | 2.0.0 |
 
 ---
 
