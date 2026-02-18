@@ -45,6 +45,7 @@ require_once WP_TWITCH_PLUGIN_DIR . 'includes/stream-recording-download.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-analytics-dashboard.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/multi-language-support.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/woocommerce-integration.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/membership-plugin-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
@@ -116,6 +117,17 @@ function wp_twitch_enqueue_frontend_styles() {
         wp_enqueue_style(
             'wp-twitch-stream-woocommerce',
             WP_TWITCH_PLUGIN_URL . 'assets/css/woocommerce-integration.css',
+            array(),
+            WP_TWITCH_VERSION
+        );
+    }
+    
+    // Membership Integration Styles (only if membership plugins are active)
+    if (class_exists('MeprPlugin') || defined('RCP_PLUGIN_VERSION') || class_exists('PMPro_Plugin') || 
+        class_exists('WC_Memberships') || class_exists('UM') || class_exists('c_ws_plugin__s2member')) {
+        wp_enqueue_style(
+            'wp-twitch-stream-membership',
+            WP_TWITCH_PLUGIN_URL . 'assets/css/membership-integration.css',
             array(),
             WP_TWITCH_VERSION
         );
