@@ -25,6 +25,7 @@ class WP_Twitch_Cache {
         add_action('wp_twitch_cleanup_cache', array($this, 'cleanup_expired_cache'));
         add_action('wp_ajax_twitch_cache_management', array($this, 'handle_cache_ajax'));
         add_action('wp_ajax_nopriv_twitch_cache_management', array($this, 'handle_cache_ajax'));
+    }
     
     /**
      * Initialize cache engine
