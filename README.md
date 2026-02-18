@@ -982,11 +982,28 @@ SOFTWARE.
 
 ## 👤 Autor
 
+<div align="center">
+
 **SpeedySwifter - Sven Hajer**
 
 ![hajer.dev](https://hajer.dev/logo-hajerdev.svg)
 
-🌐 [Website](https://hajer.dev) • [GitHub](https://github.com/SpeedySwifter)
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <a href="https://hajer.dev">
+        <img src="https://img.shields.io/badge/Website-hajer.dev-blue?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMCAxMXYxMk0xMCAxMGMwIDYuNjI3LTUuMzczIDEyLTEyIDEyUzAgMTguMzczIDAgMTIgNS4zNzMgMTIgMTJ6Ii8+PC9zdmc+" alt="Website">
+      </a>
+    </td>
+    <td align="center" width="50%">
+      <a href="https://github.com/SpeedySwifter">
+        <img src="https://img.shields.io/badge/GitHub-SpeedySwifter-181717?style=for-the-badge&logo=github" alt="GitHub">
+      </a>
+    </td>
+  </tr>
+</table>
+
+</div>
 
 ---
 
