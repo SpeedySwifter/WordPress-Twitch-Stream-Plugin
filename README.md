@@ -1,4 +1,4 @@
-# 🎮 WordPress Twitch Stream Plugin
+# 🎮 WordPress Twitch Stream Plugin v1.7.0
 
 <div align="center">
 
@@ -11,115 +11,201 @@
 [![GitHub Forks](https://img.shields.io/github/forks/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/forks)
 [![GitHub Issues](https://img.shields.io/github/issues/SpeedySwifter/WordPress-Twitch-Stream-Plugin)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/issues)
 
-**Ein leichtgewichtiges WordPress-Plugin zur Einbindung von Twitch-Streams per Shortcode**
+**The Ultimate WordPress Plugin for Twitch Stream Integration**
 
-[Features](#-features) • [Installation](#-installation) • [Verwendung](#-verwendung) • [FAQ](#-häufige-fragen-faq)
+[🚀 Features](#-features) • [📦 Installation](#-installation) • [🧩 Usage](#-usage) • [📋 Shortcodes](#-shortcodes) • [⚙️ Admin](#-admin-settings) • [🌍 Languages](#-languages)
 
 </div>
 
 ---
 
-## 📌 Was ist das?
+## 📌 What is this?
 
-Dieses **WordPress-Plugin** ermöglicht die nahtlose Integration von **Twitch-Streams** in deine Website. Es zeigt automatisch den Live-Status an und bindet den Twitch-Player nur ein, wenn der Stream tatsächlich live ist.
+The **WordPress Twitch Stream Plugin v1.7.0** is a comprehensive solution for integrating Twitch streams into WordPress websites. It provides everything from basic stream embedding to advanced features like mobile apps, scheduling, analytics, and more.
 
-### ✨ Features
+### ✨ Core Features
 
-- ✅ **Einfacher Shortcode** – `[twitch_stream channel="deinkanal"]`
-- 🔴 **Live-Status Erkennung** – Automatische Prüfung ob Stream online ist
-- 📺 **Responsive Player** – Twitch-Embed passt sich an alle Bildschirmgrößen an
-- ⚙️ **Admin-Panel** – Komfortable Einstellungsseite für API-Credentials
-- 🔐 **Sichere API-Integration** – Nutzt offizielle Twitch Helix API
-- 💾 **Token-Caching** – Reduziert API-Calls durch intelligentes Caching
-- 🎨 **Anpassbar** – CSS-Klassen für individuelles Styling
-- 🧩 **WordPress 6.9.1 kompatibel** – Getestet mit aktueller WP-Version
-- 🎯 **Stream-Infos** – Titel, Spiel, Zuschauer, Avatar, Live Badge
-- 📱 **Multiple Streams Grid** – Mehrere Streams im Grid-Layout
-- 🧩 **Gutenberg Blocks** – Native WordPress Block Editor Integration
-- 🔧 **Page Builder Support** – Elementor, Oxygen, Divi, Beaver Builder & mehr
-- 🍪 **Cookie Banner Integration** – DSGVO-konform mit 6 Cookie-Systemen
-- 📹 **VOD Support** – Video on Demand mit Archiven, Uploads, Highlights
-- 🎬 **Clips Integration** – Twitch Clips mit Embed-Funktionalität
-- 📱 **Sidebar Widgets** – VOD & Clips Widgets für WordPress Sidebars
+- ✅ **Simple Shortcodes** – `[twitch_stream channel="yourchannel"]`
+- 🔴 **Live Status Detection** – Automatic checking if stream is online
+- 📺 **Responsive Player** – Twitch embed adapts to all screen sizes
+- ⚙️ **Admin Panel** – Comfortable settings page for API credentials
+- 🔐 **Secure API Integration** – Uses official Twitch Helix API
+- 💾 **Token Caching** – Reduces API calls through intelligent caching
+- 🎨 **Customizable** – CSS classes for individual styling
+- 🧩 **WordPress 6.9.1 Compatible** – Tested with current WP version
+- 🎯 **Stream Info** – Title, game, viewers, avatar, live badge
+- 📱 **Multiple Streams Grid** – Multiple streams in grid layout
+- 🧩 **Gutenberg Blocks** – Native WordPress Block Editor integration
+- 🔧 **Page Builder Support** – Elementor, Oxygen, Divi, Beaver Builder & more
+- 🍪 **Cookie Banner Integration** – GDPR compliant with 6 cookie systems
 
 ---
 
-## 🎯 Wofür brauche ich das?
+## 🚀 Advanced Features (v1.7.0)
 
-### 📡 Use Cases
+### 📱 **Mobile App Integration**
+- **Progressive Web App (PWA)** with complete manifest
+- **Service Worker** for offline functionality and caching
+- **Push Notifications** with VAPID key support
+- **Mobile-optimized interface** with touch gestures
+- **App install prompts** and smart banners
+- **Offline detection** and synchronization
 
-- 🎮 **Gaming-Websites** – Eigenen Twitch-Stream auf der Webseite zeigen
-- 🏆 **eSports-Teams** – Live-Matches direkt einbetten
-- 🎥 **Content Creator** – Stream-Integration in WordPress-Blog
-- 📰 **News-Portalen** – Event-Streams live übertragen
-- 🎪 **Event-Seiten** – Konferenzen & Tournaments streamen
+### 📅 **Visual Stream Scheduler**
+- **Interactive calendar** with FullCalendar.js integration
+- **Drag-and-drop scheduling** and rescheduling
+- **Multiple view modes** (Calendar, List, Timeline)
+- **Real-time status tracking** (Scheduled/Live/Completed)
+- **Recurring stream patterns** (Daily/Weekly/Monthly)
+- **Advanced filtering** by date, status, category
 
-### 🔧 Was macht es?
+### 🛠️ **Advanced Shortcode Builder**
+- **Interactive GUI** for building Twitch shortcodes
+- **Live preview** with auto-refresh
+- **Support for all 13+ plugin shortcodes**
+- **Category-based organization**
+- **Preset templates** for quick start
+- **Copy-to-clipboard functionality**
+
+### 🔒 **Membership Plugin Integration**
+- **Support for 6 major membership plugins**
+- **MemberPress, RCP, PMPro, WooCommerce Memberships**
+- **Ultimate Member, s2Member integration**
+- **4-tier membership system** (Free/Basic/Premium/VIP)
+- **Content restrictions** based on membership level
+- **Membership badges** and visual indicators
+
+### 🌍 **Multi-Language Support (7 Languages)**
+- **🇺🇸 English (en_US)**
+- **🇩🇪 Deutsch (de_DE)**
+- **🇫🇷 Français (fr_FR)**
+- **🇪🇸 Español (es_ES)**
+- **🇷🇺 Русский (ru_RU)**
+- **🇵🇹 Português (pt_PT)**
+- **🇯🇵 日本語 (ja_JP)**
+
+### 💰 **Donation Integration**
+- **Buy Me a Coffee** and PayPal buttons
+- **Customizable donation forms**
+- **Donation goals and progress tracking**
+- **Responsive design** with dark mode
+- **Donation statistics** and analytics
+
+### 💬 **Twitch Chat Integration**
+- **Advanced chat integration** with emoji picker
+- **Message moderation** and command processing
+- **Chat themes** and customization options
+- **Real-time message polling**
+- **User badges and roles display**
+
+### 📥 **Stream Recording Download**
+- **VOD download functionality**
+- **Stream recording management**
+- **Download progress tracking**
+- **Video player controls**
+- **Download permissions** and access control
+
+### 📊 **Advanced Analytics Dashboard**
+- **Stream analytics** and performance metrics
+- **Viewer statistics** and engagement tracking
+- **Real-time data visualization**
+- **Customizable charts** and reports
+- **Export functionality** for data analysis
+
+### 🛒 **WooCommerce Integration**
+- **Stream-linked products**
+- **Purchase-triggered stream access**
+- **E-commerce integration** for memberships
+- **Order status synchronization**
+- **Revenue tracking** and analytics
+
+---
+
+## 🎯 Use Cases
+
+### 📡 Perfect For
+
+- 🎮 **Gaming Websites** – Display your own Twitch stream on website
+- 🏆 **eSports Teams** – Embed live matches directly
+- 🎥 **Content Creators** – Stream integration in WordPress blog
+- 📰 **News Portals** – Broadcast event streams live
+- 🎪 **Event Sites** – Stream conferences & tournaments
+- 📱 **Mobile Apps** – PWA with offline capabilities
+- 🔒 **Membership Sites** – Content restrictions and access control
+- 📅 **Stream Networks** – Schedule and manage multiple streams
+
+### 🔧 What it does
 
 ```text
-✓ Prüft automatisch ob Stream live ist
-✓ Zeigt Twitch-Player nur bei Live-Streams
-✓ Zeigt Offline-Nachricht wenn Stream nicht aktiv
-✓ Vollständig responsive für alle Geräte
+✓ Automatically checks if stream is live
+✓ Shows Twitch player only for live streams
+✓ Shows offline message when stream not active
+✓ Fully responsive for all devices
+✓ Mobile app with push notifications
+✓ Visual scheduling with calendar interface
+✓ Membership-based content restrictions
+✓ Multi-language support (7 languages)
+✓ Advanced analytics and reporting
+✓ PWA with offline functionality
 ```
 
 ---
 
 ## 📦 Installation
 
-### Option 1: Manuell (ZIP-Upload)
+### Option 1: Manual (ZIP Upload)
 
-1. **Plugin herunterladen** als ZIP
-2. In WordPress: **Plugins → Installieren → Plugin hochladen**
-3. ZIP-Datei auswählen und installieren
-4. Plugin **aktivieren**
+1. **Download plugin** as ZIP
+2. In WordPress: **Plugins → Install → Upload Plugin**
+3. Select ZIP file and install
+4. **Activate** plugin
 
 ### Option 2: FTP/SFTP
 
 ```bash
-# Repository klonen
+# Clone repository
 git clone https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin.git
 
-# Ordner nach wp-content/plugins/ verschieben
-mv WordPress-Twitch-Stream-Plugin /pfad/zu/wordpress/wp-content/plugins/
+# Move folder to wp-content/plugins/
+mv WordPress-Twitch-Stream-Plugin /path/to/wordpress/wp-content/plugins/
 ```
 
-Dann im WordPress-Backend unter **Plugins** aktivieren.
+Then activate in WordPress admin under **Plugins**.
 
 ---
 
-## 🔑 Twitch API einrichten
+## 🔑 Twitch API Setup
 
-### 1️⃣ Twitch App erstellen
+### 1️⃣ Create Twitch App
 
-Du benötigst eine **Twitch Developer Application**, um API-Zugriff zu erhalten:
+You need a **Twitch Developer Application** to get API access:
 
-1. Gehe zu: [https://dev.twitch.tv/console/apps](https://dev.twitch.tv/console/apps)
-2. Klicke auf **"Register Your Application"**
-3. Fülle das Formular aus:
+1. Go to: [https://dev.twitch.tv/console/apps](https://dev.twitch.tv/console/apps)
+2. Click **"Register Your Application"**
+3. Fill the form:
 
 ```
-Name:                 Meine WordPress Site
-OAuth Redirect URLs:  https://deine-domain.de
+Name:                 Your WordPress Site
+OAuth Redirect URLs:  https://your-domain.com
 Category:             Website Integration
 ```
 
-4. **Speichern** und notiere dir:
+4. **Save** and note:
    - ✅ **Client ID**
-   - ✅ **Client Secret** (wird nur einmal angezeigt!)
+   - ✅ **Client Secret** (shown only once!)
 
-### 2️⃣ Credentials in WordPress eintragen
+### 2️⃣ Enter Credentials in WordPress
 
-1. In WordPress-Admin: **Einstellungen → Twitch API**
-2. **Client ID** eintragen
-3. **Client Secret** eintragen
-4. **Änderungen speichern**
+1. In WordPress Admin: **Settings → Twitch API**
+2. Enter **Client ID**
+3. Enter **Client Secret**
+4. **Save Changes**
 
-✅ Fertig! Das Plugin ist jetzt einsatzbereit.
+✅ Done! The plugin is now ready to use.
 
 ---
 
-## 🧩 Verwendung
+## 🧩 Usage
 
 ### Basic Shortcode
 
@@ -127,83 +213,331 @@ Category:             Website Integration
 [twitch_stream channel="shroud"]
 ```
 
-### Mit Optionen
+### With Options
 
 ```text
 [twitch_stream channel="shroud" width="100%" height="480"]
 ```
 
-### Parameter-Übersicht
-
-| Parameter | Beschreibung | Standard | Erforderlich |
-|-----------|--------------|----------|--------------|
-| `channel` | Twitch-Benutzername | - | ✅ Ja |
-| `width` | Breite des Players | `100%` | ❌ Nein |
-| `height` | Höhe des Players | `480` | ❌ Nein |
-| `autoplay` | Automatisch starten | `true` | ❌ Nein |
-| `muted` | Stummgeschaltet | `false` | ❌ Nein |
-
-### 📝 Praktische Beispiele
+### Advanced Mobile App
 
 ```text
-[twitch_stream channel="esl_csgo"]
-[twitch_stream channel="ninja" height="720"]
-[twitch_stream channel="pokimane" autoplay="false"]
-[twitch_stream channel="summit1g" width="800px" height="600"]
+[twitch_mobile_app theme="dark" show_notifications="true"]
 ```
 
-### Stream-Verhalten
+### Stream Scheduler
 
-| Stream-Status | Was passiert? |
-|---------------|---------------|
-| 🟢 **Live** | Twitch-Player wird eingebettet |
-| ⚫ **Offline** | "Stream ist derzeit offline" Nachricht |
-| ⚠️ **Fehler** | Fehlermeldung mit Hinweis |
+```text
+[twitch_stream_scheduler channel="yourchannel" view="calendar"]
+```
+
+### Membership Content
+
+```text
+[twitch_membership_content level="premium"]
+Your premium content here
+[/twitch_membership_content]
+```
 
 ---
 
-## 📂 Plugin-Struktur
+## 📋 Shortcodes Reference
+
+### Core Shortcodes
+
+| Shortcode | Description | Example |
+|-----------|-------------|---------|
+| `[twitch_stream]` | Basic stream embed | `[twitch_stream channel="shroud"]` |
+| `[twitch_chat]` | Standalone chat | `[twitch_chat channel="shroud"]` |
+| `[twitch_follow_button]` | Follow button | `[twitch_follow_button channel="shroud"]` |
+| `[twitch_subscribe_button]` | Subscribe button | `[twitch_subscribe_button channel="shroud"]` |
+| `[twitch_clips]` | Channel clips | `[twitch_clips channel="shroud" limit="10"]` |
+| `[twitch_vod]` | Past broadcasts | `[twitch_vod channel="shroud" type="archive"]` |
+
+### Advanced Shortcodes
+
+| Shortcode | Description | Example |
+|-----------|-------------|---------|
+| `[twitch_mobile_app]` | Mobile app interface | `[twitch_mobile_app theme="dark"]` |
+| `[twitch_stream_scheduler]` | Visual scheduler | `[twitch_stream_scheduler view="calendar"]` |
+| `[twitch_shortcode_builder]` | Shortcode builder GUI | `[twitch_shortcode_builder show_preview="true"]` |
+| `[twitch_membership_content]` | Restricted content | `[twitch_membership_content level="vip"]` |
+| `[twitch_donations]` | Donation integration | `[twitch_donations type="both"]` |
+| `[twitch_chat_integration]` | Advanced chat | `[twitch_chat_integration theme="dark"]` |
+| `[twitch_recording_download]` | VOD downloads | `[twitch_recording_download limit="10"]` |
+| `[twitch_analytics]` | Analytics dashboard | `[twitch_analytics time_range="7d"]` |
+
+### Utility Shortcodes
+
+| Shortcode | Description | Example |
+|-----------|-------------|---------|
+| `[twitch_pwa_install]` | PWA install button | `[twitch_pwa_install text="Install App"]` |
+| `[twitch_mobile_menu]` | Mobile navigation | `[twitch_mobile_menu position="left"]` |
+| `[twitch_mobile_streams]` | Mobile stream grid | `[twitch_mobile_streams limit="10"]` |
+| `[twitch_push_notifications]` | Notification settings | `[twitch_push_notifications show_settings="true"]` |
+| `[twitch_upcoming_streams]` | Upcoming streams | `[twitch_upcoming_streams limit="5"]` |
+| `[twitch_stream_schedule]` | Weekly schedule | `[twitch_stream_schedule days="7"]` |
+
+---
+
+## ⚙️ Admin Settings
+
+### Main Settings Page
+**WordPress Admin → Settings → Twitch API**
+
+- **Client ID & Secret** – Twitch API credentials
+- **Caching Options** – Token and data caching settings
+- **Display Options** – Default player dimensions and themes
+
+### Mobile App Settings
+**WordPress Admin → Twitch Dashboard → Mobile App**
+
+- **PWA Configuration** – App manifest and service worker settings
+- **Push Notifications** – VAPID keys and notification preferences
+- **Theme Settings** – Mobile app appearance customization
+
+### Stream Scheduler
+**WordPress Admin → Twitch Dashboard → Stream Scheduler**
+
+- **Calendar Settings** – Default view and time zone
+- **Notification Settings** – Email and push notification preferences
+- **Recurring Patterns** – Automated stream scheduling
+
+### Membership Integration
+**WordPress Admin → Twitch Dashboard → Membership**
+
+- **Plugin Detection** – Auto-detection of membership plugins
+- **Level Mapping** – Map membership levels to access tiers
+- **Content Restrictions** – Configure access control rules
+
+---
+
+## 📂 Plugin Structure
 
 ```
 WordPress-Twitch-Stream-Plugin/
 │
-├── 📄 wp-twitch-stream.php        # Haupt-Plugin-Datei
-├── 📄 README.md                   # Diese Datei
-├── 📄 LICENSE                     # MIT Lizenz
+├── 📄 wp-twitch-stream.php                    # Main plugin file
+├── 📄 README.md                               # Documentation (7 languages)
+├── 📄 LICENSE                                 # MIT License
 │
 ├── 📁 admin/
-│   ├── 📄 settings-page.php       # Admin-Einstellungsseite
-│   └── 📄 admin-styles.css        # Admin-Styling
+│   ├── 📄 settings-page.php                   # Admin settings page
+│   └── 📄 admin-styles.css                    # Admin styling
 │
 ├── 📁 includes/
-│   ├── 📄 twitch-api.php          # API-Handler
-│   ├── 📄 shortcode.php           # Shortcode-Logic
-│   ├── 📄 token-manager.php       # Token-Caching
-│   ├── 📄 gutenberg-block.php     # Gutenberg Blocks
-│   ├── 📄 page-builder-compatibility.php # Page Builder Integration
-│   ├── 📄 cookie-integration.php  # Cookie Banner Integration
-│   └── � sidebar-widgets.php    # VOD & Clips Widgets
+│   ├── 📄 twitch-api.php                      # API handler
+│   ├── 📄 shortcode.php                       # Shortcode logic
+│   ├── 📄 token-manager.php                   # Token caching
+│   ├── 📄 gutenberg-block.php                 # Gutenberg blocks
+│   ├── 📄 page-builder-compatibility.php      # Page builder integration
+│   ├── 📄 cookie-integration.php              # Cookie banner integration
+│   ├── 📄 sidebar-widgets.php                 # VOD & clips widgets
+│   ├── 📄 donation-integration.php            # Donation system
+│   ├── 📄 twitch-chat-integration.php         # Advanced chat
+│   ├── 📄 stream-recording-download.php       # VOD downloads
+│   ├── 📄 advanced-analytics-dashboard.php    # Analytics system
+│   ├── 📄 multi-language-support.php          # i18n support
+│   ├── 📄 woocommerce-integration.php         # eCommerce integration
+│   ├── 📄 membership-plugin-integration.php   # Membership system
+│   ├── 📄 advanced-shortcode-builder.php      # Shortcode builder
+│   ├── 📄 visual-stream-scheduler.php         # Calendar scheduler
+│   └── 📄 mobile-app-integration.php          # PWA & mobile app
 │
-├── �📁 assets/
+├── 📁 assets/
 │   ├── 📁 css/
-│   │   ├── 📄 frontend.css        # Frontend-Styles
-│   │   ├── 📄 block.css           # Gutenberg Block Styles
-│   │   ├── 📄 page-builder-compatibility.css # Page Builder Styles
-│   │   ├── 📄 cookie-integration.css # Cookie Integration Styles
-│   │   └── � vod-clips.css       # VOD & Clips Styles
-│   └── �📁 js/
-│       ├── 📄 player.js            # Player-Funktionen
-│       ├── 📄 block.js            # Gutenberg Block JavaScript
-│       ├── 📄 oxygen-builder.js    # Oxygen Builder JS
-│       └── 📄 divi-builder.js      # Divi Builder JS
+│   │   ├── 📄 frontend.css                     # Frontend styles
+│   │   ├── 📄 block.css                        # Gutenberg block styles
+│   │   ├── 📄 page-builder-compatibility.css   # Page builder styles
+│   │   ├── 📄 cookie-integration.css           # Cookie integration styles
+│   │   ├── 📄 vod-clips.css                    # VOD & clips styles
+│   │   ├── 📄 donations.css                    # Donation system styles
+│   │   ├── 📄 twitch-chat.css                  # Chat integration styles
+│   │   ├── 📄 recording-download.css           # Download system styles
+│   │   ├── 📄 analytics-dashboard.css          # Analytics styles
+│   │   ├── 📄 language-support.css             # Multi-language styles
+│   │   ├── 📄 woocommerce-integration.css      # eCommerce styles
+│   │   ├── 📄 membership-integration.css       # Membership styles
+│   │   ├── 📄 shortcode-builder.css            # Builder interface styles
+│   │   ├── 📄 stream-scheduler.css             # Calendar styles
+│   │   └── 📄 mobile-app.css                   # Mobile app styles
+│   └── 📁 js/
+│       ├── 📄 player.js                        # Player functions
+│       ├── 📄 block.js                         # Gutenberg block JavaScript
+│       ├── 📄 oxygen-builder.js                # Oxygen builder JS
+│       ├── 📄 divi-builder.js                  # Divi builder JS
+│       ├── 📄 donations.js                     # Donation system JS
+│       ├── 📄 twitch-chat.js                   # Chat integration JS
+│       ├── 📄 recording-download.js            # Download system JS
+│       ├── 📄 analytics-dashboard.js           # Analytics JS
+│       ├── 📄 language-support.js              # Multi-language JS
+│       ├── 📄 woocommerce-integration.js       # eCommerce JS
+│       ├── 📄 membership-integration.js        # Membership JS
+│       ├── 📄 shortcode-builder.js             # Builder interface JS
+│       ├── 📄 stream-scheduler.js              # Calendar JS
+│       └── 📄 mobile-app.js                    # Mobile app JS
 │
 ├── 📁 docs/
-│   └── 📄 cookie-banner-integration.md # Cookie Integration Tutorial
+│   ├── 📄 cookie-banner-integration.md        # Cookie integration tutorial
+│   ├── 📄 membership-plugin-integration.md    # Membership setup guide
+│   ├── 📄 mobile-app-setup.md                 # PWA configuration
+│   └── 📄 api-reference.md                    # Complete API reference
 │
-└── 📁 languages/
-    ├── 📄 wp-twitch-stream-de_DE.po
-    └── 📄 wp-twitch-stream-de_DE.mo
+├── 📁 languages/
+│   ├── 📄 wp-twitch-stream-en_US.po
+│   ├── 📄 wp-twitch-stream-en_US.mo
+│   ├── 📄 wp-twitch-stream-de_DE.po
+│   ├── 📄 wp-twitch-stream-de_DE.mo
+│   ├── 📄 wp-twitch-stream-fr_FR.po
+│   ├── 📄 wp-twitch-stream-fr_FR.mo
+│   ├── 📄 wp-twitch-stream-es_ES.po
+│   ├── 📄 wp-twitch-stream-es_ES.mo
+│   ├── 📄 wp-twitch-stream-ru_RU.po
+│   ├── 📄 wp-twitch-stream-ru_RU.mo
+│   ├── 📄 wp-twitch-stream-pt_PT.po
+│   ├── 📄 wp-twitch-stream-pt_PT.mo
+│   ├── 📄 wp-twitch-stream-ja_JP.po
+│   └── 📄 wp-twitch-stream-ja_JP.mo
+│
+└── 📁 templates/
+    ├── 📄 offline-page.html                   # PWA offline page
+    └── 📄 mobile-app-manifest.json            # PWA manifest template
 ```
+
+---
+
+## 🌍 Languages / Sprachen
+
+The plugin supports **7 languages** with complete translations:
+
+### 🇺🇸 English (en_US) - Default
+- Complete English documentation and interface
+
+### 🇩🇪 Deutsch (de_DE)
+- Vollständige deutsche Dokumentation und Benutzeroberfläche
+
+### 🇫🇷 Français (fr_FR)
+- Documentation et interface utilisateur complètes en français
+
+### 🇪🇸 Español (es_ES)
+- Documentación e interfaz de usuario completas en español
+
+### 🇷🇺 Русский (ru_RU)
+- Полная документация и пользовательский интерфейс на русском
+
+### 🇵🇹 Português (pt_PT)
+- Documentação e interface do usuário completas em português
+
+### 🇯🇵 日本語 (ja_JP)
+- 完全な日本語のドキュメントとユーザーインターフェース
+
+---
+
+## 📊 Version History
+
+### v1.7.0 - Mobile App Integration 🚀
+- 📱 Progressive Web App (PWA) with offline support
+- 🔔 Push notifications with VAPID key configuration
+- 👆 Touch gestures and mobile-optimized interface
+- 📅 Visual stream scheduler with calendar interface
+- 🛠️ Advanced shortcode builder GUI
+- 🔒 Membership plugin integration (6 plugins supported)
+- 🌍 Multi-language support (7 languages)
+
+### v1.6.0 - Visual Stream Scheduler 📅
+- 📅 Interactive calendar with FullCalendar.js
+- 🖱️ Drag-and-drop stream scheduling
+- 📋 Multiple view modes (Calendar/List/Timeline)
+- 🔄 Real-time status tracking and updates
+- 🔁 Recurring stream patterns support
+- 🎯 Advanced filtering and search capabilities
+
+### v1.5.0 - Advanced Shortcode Builder 🛠️
+- 🎨 Interactive GUI for building shortcodes
+- 👀 Live preview with auto-refresh
+- 📋 Support for all plugin shortcodes (13+)
+- 📂 Category-based organization
+- 💾 Preset templates and quick-start options
+- 📋 Copy-to-clipboard functionality
+
+### v1.4.0 - Membership Plugin Integration 🔒
+- 👥 Support for 6 major membership plugins
+- 🏆 4-tier membership system (Free/Basic/Premium/VIP)
+- 🚫 Content restrictions based on membership level
+- 🏷️ Membership badges and visual indicators
+- 🔐 Access control and permission management
+
+### v1.3.0 - Advanced Features Suite 💎
+- 💰 Donation Integration (Buy Me a Coffee + PayPal)
+- 💬 Twitch Chat Integration with emoji support
+- 📥 Stream Recording Download functionality
+- 📊 Advanced Analytics Dashboard with charts
+- 🌍 Multi-Language Support (EN/DE/FR/ES/RU/PT/JA)
+
+### v1.2.0 - WooCommerce Integration 🛒
+- 🛒 eCommerce integration for stream-linked products
+- 💳 Purchase-triggered stream access
+- 📈 Revenue tracking and order synchronization
+- 🏪 WooCommerce membership and subscription support
+
+### v1.1.0 - Extended Content Support 🎬
+- 🎬 VOD (Video on Demand) support with archives
+- 🎞️ Twitch Clips integration and embedding
+- 📱 Sidebar widgets for VODs and clips
+- 🧩 Extended page builder compatibility
+
+### v1.0.0 - Core Release 🎯
+- ✅ Basic Twitch stream embedding
+- 🔴 Live status detection
+- 📺 Responsive player integration
+- ⚙️ Admin settings panel
+- 🔐 Secure API integration
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- **Twitch** for providing the amazing streaming platform and API
+- **WordPress** for the incredible CMS foundation
+- **FullCalendar.js** for the calendar functionality
+- **All contributors** who help make this plugin better
+
+---
+
+## 📞 Support
+
+- 📧 **Email**: support@speedyswifter.com
+- 🐛 **Issues**: [GitHub Issues](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/issues)
+- 📖 **Documentation**: [Wiki](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/wiki)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/discussions)
+
+---
+
+<div align="center">
+
+**Made with ❤️ by [SpeedySwifter](https://github.com/SpeedySwifter)**
+
+⭐ If you find this plugin helpful, please give it a star!
+
+</div>
 
 ---
 
