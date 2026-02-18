@@ -52,6 +52,7 @@ class WP_Twitch_API {
                 // API call failed
                 $token = null;
             }
+        }
 
         return $token;
     }
