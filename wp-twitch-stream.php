@@ -29,6 +29,7 @@ require_once WP_TWITCH_PLUGIN_DIR . 'includes/twitch-api.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/shortcode.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/token-manager.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/gutenberg-block.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/page-builder-compatibility.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren

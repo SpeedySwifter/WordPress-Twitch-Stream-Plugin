@@ -1,0 +1,270 @@
+/**
+ * Oxygen Builder Frontend Styles
+ */
+
+/* Oxygen Builder Specific Styles */
+.twitch-stream-oxygen,
+.twitch-grid-oxygen {
+    position: relative;
+}
+
+.twitch-stream-wrapper,
+.twitch-grid-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Oxygen Builder Preview */
+.twitch-preview-placeholder {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f8f9fa;
+    border: 2px dashed #e9ecef;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.twitch-preview-placeholder .dashicons {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    display: block;
+    margin: 0 auto 16px;
+    color: #9146FF;
+}
+
+.twitch-preview-placeholder p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.twitch-preview-placeholder p:first-of-type {
+    font-size: 16px;
+    font-weight: 600;
+    color: #23282d;
+    margin-bottom: 4px;
+}
+
+.twitch-preview-placeholder p:last-of-type {
+    font-style: italic;
+    color: #6c757d;
+}
+
+/* Oxygen Builder Edit Mode */
+.oxygen-builder-active .twitch-stream-oxygen,
+.oxygen-builder-active .twitch-grid-oxygen {
+    outline: 2px solid #0073aa;
+    outline-offset: 2px;
+}
+
+.oxygen-builder-active .twitch-stream-oxygen:hover,
+.oxygen-builder-active .twitch-grid-oxygen:hover {
+    outline-color: #00a0d2;
+}
+
+/* Oxygen Builder Controls */
+.twitch-oxygen-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.twitch-stream-oxygen:hover .twitch-oxygen-controls,
+.twitch-grid-oxygen:hover .twitch-oxygen-controls {
+    opacity: 1;
+}
+
+.twitch-oxygen-controls button {
+    background: #0073aa;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.twitch-oxygen-controls button:hover {
+    background: #00a0d2;
+}
+
+/* Oxygen Builder Responsive */
+@media (max-width: 768px) {
+    .twitch-preview-placeholder {
+        padding: 30px 15px;
+        margin: 15px 0;
+    }
+    
+    .twitch-preview-placeholder .dashicons {
+        font-size: 36px;
+        height: 36px;
+        width: 36px;
+        margin-bottom: 12px;
+    }
+    
+    .twitch-preview-placeholder p {
+        font-size: 13px;
+    }
+    
+    .twitch-preview-placeholder p:first-of-type {
+        font-size: 15px;
+    }
+}
+
+/* Oxygen Builder Dark Mode */
+.oxygen-dark-mode .twitch-preview-placeholder {
+    background: #2d3748;
+    border-color: #4a5568;
+}
+
+.oxygen-dark-mode .twitch-preview-placeholder .dashicons {
+    color: #9146FF;
+}
+
+.oxygen-dark-mode .twitch-preview-placeholder p {
+    color: #a0aec0;
+}
+
+.oxygen-dark-mode .twitch-preview-placeholder p:first-of-type {
+    color: #e2e8f0;
+}
+
+/* Oxygen Builder Loading State */
+.twitch-oxygen-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.twitch-oxygen-loading::after {
+    content: '';
+    width: 32px;
+    height: 32px;
+    border: 3px solid #9146FF;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: twitch-spin 1s linear infinite;
+}
+
+@keyframes twitch-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Oxygen Builder Error State */
+.twitch-oxygen-error {
+    background: #fee;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 20px 0;
+    color: #c33;
+    text-align: center;
+}
+
+.twitch-oxygen-error .dashicons {
+    color: #c33;
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+    margin-bottom: 8px;
+}
+
+/* Oxygen Builder Success State */
+.twitch-oxygen-success {
+    background: #efe;
+    border: 1px solid #cfc;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 20px 0;
+    color: #3c3;
+    text-align: center;
+}
+
+.twitch-oxygen-success .dashicons {
+    color: #3c3;
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+    margin-bottom: 8px;
+}
+
+/* Oxygen Builder API Warning */
+.twitch-api-warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 12px;
+    margin: 10px 0;
+}
+
+.twitch-api-warning p {
+    margin: 0;
+    color: #856404;
+}
+
+.twitch-api-warning a {
+    color: #856404;
+    text-decoration: underline;
+}
+
+.twitch-api-warning a:hover {
+    color: #533f03;
+}
+
+/* Oxygen Builder Component Specific */
+.twitch-stream-oxygen .twitch-stream-container {
+    width: 100%;
+    height: auto;
+}
+
+.twitch-grid-oxygen .twitch-streams-grid {
+    width: 100%;
+}
+
+.twitch-grid-oxygen .twitch-grid-item {
+    margin-bottom: 20px;
+}
+
+/* Oxygen Builder Responsive Breakpoints */
+@media (max-width: 1200px) {
+    .twitch-grid-oxygen .twitch-columns-6,
+    .twitch-grid-oxygen .twitch-columns-5,
+    .twitch-grid-oxygen .twitch-columns-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .twitch-grid-oxygen .twitch-columns-6,
+    .twitch-grid-oxygen .twitch-columns-5,
+    .twitch-grid-oxygen .twitch-columns-4,
+    .twitch-grid-oxygen .twitch-columns-3,
+    .twitch-grid-oxygen .twitch-columns-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .twitch-grid-oxygen .twitch-columns-6,
+    .twitch-grid-oxygen .twitch-columns-5,
+    .twitch-grid-oxygen .twitch-columns-4,
+    .twitch-grid-oxygen .twitch-columns-3,
+    .twitch-grid-oxygen .twitch-columns-2,
+    .twitch-grid-oxygen .twitch-columns-1 {
+        grid-template-columns: 1fr;
+    }
+}

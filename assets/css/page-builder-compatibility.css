@@ -1,0 +1,525 @@
+/**
+ * Universal Page Builder Compatibility Styles
+ */
+
+/* Base Compatibility Styles */
+.twitch-page-builder-compatibility {
+    position: relative;
+}
+
+/* Universal Preview Placeholder */
+.twitch-universal-preview {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f8f9fa;
+    border: 2px dashed #e9ecef;
+    border-radius: 8px;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+}
+
+.twitch-universal-preview:hover {
+    border-color: #9146FF;
+    background: #f0f4ff;
+}
+
+.twitch-universal-preview .dashicons {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    display: block;
+    margin: 0 auto 16px;
+    color: #9146FF;
+    transition: transform 0.3s ease;
+}
+
+.twitch-universal-preview:hover .dashicons {
+    transform: scale(1.1);
+}
+
+.twitch-universal-preview p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.twitch-universal-preview:hover p {
+    color: #23282d;
+}
+
+.twitch-universal-preview p:first-of-type {
+    font-size: 16px;
+    font-weight: 600;
+    color: #23282d;
+    margin-bottom: 4px;
+}
+
+.twitch-universal-preview p:last-of-type {
+    font-style: italic;
+    color: #6c757d;
+}
+
+/* Builder-Specific Overrides */
+.elementor-editor-active .twitch-universal-preview {
+    background: #f8f9fa;
+    border-color: #9146FF;
+}
+
+.oxygen-builder-active .twitch-universal-preview {
+    background: #f8f9fa;
+    border-color: #0073aa;
+}
+
+.et-fb-app .twitch-universal-preview {
+    background: #f8f9fa;
+    border-color: #9146FF;
+    border-radius: 4px;
+    padding: 30px;
+}
+
+.fl-builder-active .twitch-universal-preview {
+    background: #f8f9fa;
+    border-color: #ff6900;
+}
+
+.vc_editor .twitch-universal-preview {
+    background: #f8f9fa;
+    border-color: #5e7c9d;
+}
+
+.fusion-builder-active .twitch-universal-preview {
+    background: #f8f9fa;
+    border-color: #a0ce4e;
+}
+
+.siteorigin-panels-active .twitch-universal-preview {
+    background: #f8f9fa;
+    border-color: #0073aa;
+}
+
+.tve-active .twitch-universal-preview {
+    background: #f8f9fa;
+    border-color: #ff6900;
+}
+
+/* Universal Widget Styles */
+.twitch-widget-container {
+    position: relative;
+    margin: 20px 0;
+}
+
+.twitch-widget-container .twitch-stream-container,
+.twitch-widget-container .twitch-streams-grid {
+    width: 100%;
+}
+
+.twitch-widget-container .twitch-grid-item {
+    margin-bottom: 15px;
+}
+
+/* Universal Shortcode Styles */
+.twitch-shortcode-container {
+    position: relative;
+    margin: 20px 0;
+}
+
+.twitch-shortcode-container .twitch-stream-container,
+.twitch-shortcode-container .twitch-streams-grid {
+    width: 100%;
+}
+
+/* Builder Loading States */
+.twitch-builder-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.twitch-builder-loading::after {
+    content: '';
+    width: 32px;
+    height: 32px;
+    border: 3px solid #9146FF;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: twitch-spin 1s linear infinite;
+}
+
+@keyframes twitch-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Builder Error States */
+.twitch-builder-error {
+    background: #fee;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 20px 0;
+    color: #c33;
+    text-align: center;
+}
+
+.twitch-builder-error .dashicons {
+    color: #c33;
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+    margin-bottom: 8px;
+}
+
+/* Builder Success States */
+.twitch-builder-success {
+    background: #efe;
+    border: 1px solid #cfc;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 20px 0;
+    color: #3c3;
+    text-align: center;
+}
+
+.twitch-builder-success .dashicons {
+    color: #3c3;
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+    margin-bottom: 8px;
+}
+
+/* Universal API Warning */
+.twitch-api-warning-universal {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 12px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.twitch-api-warning-universal p {
+    margin: 0;
+    color: #856404;
+}
+
+.twitch-api-warning-universal a {
+    color: #856404;
+    text-decoration: underline;
+}
+
+.twitch-api-warning-universal a:hover {
+    color: #533f03;
+}
+
+/* Responsive Design for All Builders */
+@media (max-width: 1200px) {
+    .twitch-universal-preview {
+        padding: 35px 18px;
+    }
+    
+    .twitch-universal-preview .dashicons {
+        font-size: 44px;
+        height: 44px;
+        width: 44px;
+        margin-bottom: 14px;
+    }
+    
+    .twitch-universal-preview p {
+        font-size: 13px;
+    }
+    
+    .twitch-universal-preview p:first-of-type {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .twitch-universal-preview {
+        padding: 30px 15px;
+        margin: 15px 0;
+    }
+    
+    .twitch-universal-preview .dashicons {
+        font-size: 36px;
+        height: 36px;
+        width: 36px;
+        margin-bottom: 12px;
+    }
+    
+    .twitch-universal-preview p {
+        font-size: 13px;
+    }
+    
+    .twitch-universal-preview p:first-of-type {
+        font-size: 15px;
+    }
+    
+    .twitch-widget-container,
+    .twitch-shortcode-container {
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .twitch-universal-preview {
+        padding: 25px 12px;
+        margin: 12px 0;
+    }
+    
+    .twitch-universal-preview .dashicons {
+        font-size: 32px;
+        height: 32px;
+        width: 32px;
+        margin-bottom: 10px;
+    }
+    
+    .twitch-universal-preview p {
+        font-size: 12px;
+    }
+    
+    .twitch-universal-preview p:first-of-type {
+        font-size: 14px;
+    }
+    
+    .twitch-widget-container,
+    .twitch-shortcode-container {
+        margin: 12px 0;
+    }
+}
+
+/* Dark Mode Support for All Builders */
+.is-dark-theme .twitch-universal-preview,
+.et-fb-app.et-fb-dark-mode .twitch-universal-preview,
+.oxygen-dark-mode .twitch-universal-preview {
+    background: #2d3748;
+    border-color: #4a5568;
+}
+
+.is-dark-theme .twitch-universal-preview .dashicons,
+.et-fb-app.et-fb-dark-mode .twitch-universal-preview .dashicons,
+.oxygen-dark-mode .twitch-universal-preview .dashicons {
+    color: #9146FF;
+}
+
+.is-dark-theme .twitch-universal-preview p,
+.et-fb-app.et-fb-dark-mode .twitch-universal-preview p,
+.oxygen-dark-mode .twitch-universal-preview p {
+    color: #a0aec0;
+}
+
+.is-dark-theme .twitch-universal-preview p:first-of-type,
+.et-fb-app.et-fb-dark-mode .twitch-universal-preview p:first-of-type,
+.oxygen-dark-mode .twitch-universal-preview p:first-of-type {
+    color: #e2e8f0;
+}
+
+.is-dark-theme .twitch-universal-preview:hover p,
+.et-fb-app.et-fb-dark-mode .twitch-universal-preview:hover p,
+.oxygen-dark-mode .twitch-universal-preview:hover p {
+    color: #e2e8f0;
+}
+
+/* Universal Animation Classes */
+.twitch-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: twitchFadeIn 0.6s ease forwards;
+}
+
+@keyframes twitchFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.twitch-slide-in {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: twitchSlideIn 0.6s ease forwards;
+}
+
+@keyframes twitchSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.twitch-scale-in {
+    opacity: 0;
+    transform: scale(0.9);
+    animation: twitchScaleIn 0.6s ease forwards;
+}
+
+@keyframes twitchScaleIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Universal Hover Effects */
+.twitch-hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.twitch-hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.twitch-hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.twitch-hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.twitch-hover-glow {
+    transition: box-shadow 0.3s ease;
+}
+
+.twitch-hover-glow:hover {
+    box-shadow: 0 0 20px rgba(145, 70, 255, 0.3);
+}
+
+/* Universal Builder Controls */
+.twitch-builder-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.twitch-universal-preview:hover .twitch-builder-controls {
+    opacity: 1;
+}
+
+.twitch-builder-controls button {
+    background: #0073aa;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 0 2px;
+    transition: background 0.2s ease;
+}
+
+.twitch-builder-controls button:hover {
+    background: #00a0d2;
+}
+
+/* Universal Builder Status Indicators */
+.twitch-builder-status {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #0073aa;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    z-index: 999;
+}
+
+.twitch-builder-status.elementor {
+    background: #92003b;
+}
+
+.twitch-builder-status.oxygen {
+    background: #0073aa;
+}
+
+.twitch-builder-status.divi {
+    background: #9146FF;
+}
+
+.twitch-builder-status.beaver {
+    background: #ff6900;
+}
+
+.twitch-builder-status.visual-composer {
+    background: #5e7c9d;
+}
+
+.twitch-builder-status.fusion {
+    background: #a0ce4e;
+}
+
+.twitch-builder-status.siteorigin {
+    background: #0073aa;
+}
+
+.twitch-builder-status.thrive {
+    background: #ff6900;
+}
+
+/* Universal Builder Compatibility Classes */
+.twitch-compatible-elementor,
+.twitch-compatible-oxygen,
+.twitch-compatible-divi,
+.twitch-compatible-beaver,
+.twitch-compatible-vc,
+.twitch-compatible-fusion,
+.twitch-compatible-siteorigin,
+.twitch-compatible-thrive {
+    position: relative;
+}
+
+.twitch-compatible-elementor::before,
+.twitch-compatible-oxygen::before,
+.twitch-compatible-divi::before,
+.twitch-compatible-beaver::before,
+.twitch-compatible-vc::before,
+.twitch-compatible-fusion::before,
+.twitch-compatible-siteorigin::before,
+.twitch-compatible-thrive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #9146FF, #0073aa, #ff6900);
+    border-radius: 3px 3px 0 0;
+    opacity: 0.8;
+}
+
+/* Universal Builder Debug Mode */
+.twitch-debug-mode .twitch-universal-preview {
+    border: 2px solid #ff6900;
+    background: #fff3cd;
+}
+
+.twitch-debug-mode .twitch-universal-preview::before {
+    content: 'DEBUG MODE';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #ff6900;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    z-index: 1001;
+}
