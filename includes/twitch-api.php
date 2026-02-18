@@ -36,11 +36,18 @@ class WP_Twitch_API {
 
             if (!is_wp_error($response)) {
                 $data = json_decode(wp_remote_retrieve_body($response), true);
-                $token = $data['access_token'];
+                
+                // Check if access_token exists in response
+                if (isset($data['access_token'])) {
+                    $token = $data['access_token'];
 
-                // Token für 50 Tage cachen
-                set_transient('twitch_access_token', $token, 50 * DAY_IN_SECONDS);
-            }
+                    // Token für 50 Tage cachen
+                    set_transient('twitch_access_token', $token, 50 * DAY_IN_SECONDS);
+                } else {
+                    // Log error for debugging
+                    error_log('Twitch API Error: No access_token in response. Response: ' . print_r($data, true));
+                    $token = null;
+                }
         }
 
         return $token;
