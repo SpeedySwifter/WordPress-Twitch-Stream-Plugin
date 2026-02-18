@@ -13,7 +13,12 @@ class WP_Twitch_Analytics_Dashboard {
     private $dashboard_settings;
     
     public function __construct() {
-        $this->analytics = new WP_Twitch_Advanced_Analytics();
+        // Delay initialization until WordPress is loaded
+        add_action('init', array($this, 'init'));
+    }
+
+    public function init() {
+        $this->analytics = new WP_Twitch_Analytics();
         $this->dashboard_settings = $this->get_dashboard_settings();
         
         add_action('admin_menu', array($this, 'add_dashboard_menu'));
