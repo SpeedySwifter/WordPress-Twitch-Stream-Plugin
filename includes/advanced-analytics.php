@@ -13,9 +13,13 @@ class WP_Twitch_Analytics {
     private $cache;
     
     public function __construct() {
+        // Delay initialization until WordPress is loaded
+        add_action('init', array($this, 'init'));
+    }
+
+    public function init() {
         $this->api = new WP_Twitch_API();
         $this->cache = new WP_Twitch_Cache();
-    }
     
     /**
      * Get channel analytics

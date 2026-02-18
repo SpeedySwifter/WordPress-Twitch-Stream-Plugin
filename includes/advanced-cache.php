@@ -13,14 +13,18 @@ class WP_Twitch_Cache {
     private $cache_engine;
     
     public function __construct() {
+        // Delay initialization until WordPress is loaded
+        add_action('init', array($this, 'init'));
+    }
+
+    public function init() {
         $this->cache_settings = $this->get_cache_settings();
         $this->cache_engine = $this->init_cache_engine();
-        
+
         add_action('init', array($this, 'schedule_cache_cleanup'));
         add_action('wp_twitch_cleanup_cache', array($this, 'cleanup_expired_cache'));
         add_action('wp_ajax_twitch_cache_management', array($this, 'handle_cache_ajax'));
         add_action('wp_ajax_nopriv_twitch_cache_management', array($this, 'handle_cache_ajax'));
-    }
     
     /**
      * Initialize cache engine
