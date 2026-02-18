@@ -33,6 +33,14 @@ Dieses **WordPress-Plugin** ermöglicht die nahtlose Integration von **Twitch-St
 - 💾 **Token-Caching** – Reduziert API-Calls durch intelligentes Caching
 - 🎨 **Anpassbar** – CSS-Klassen für individuelles Styling
 - 🧩 **WordPress 6.9.1 kompatibel** – Getestet mit aktueller WP-Version
+- 🎯 **Stream-Infos** – Titel, Spiel, Zuschauer, Avatar, Live Badge
+- 📱 **Multiple Streams Grid** – Mehrere Streams im Grid-Layout
+- 🧩 **Gutenberg Blocks** – Native WordPress Block Editor Integration
+- 🔧 **Page Builder Support** – Elementor, Oxygen, Divi, Beaver Builder & mehr
+- 🍪 **Cookie Banner Integration** – DSGVO-konform mit 6 Cookie-Systemen
+- 📹 **VOD Support** – Video on Demand mit Archiven, Uploads, Highlights
+- 🎬 **Clips Integration** – Twitch Clips mit Embed-Funktionalität
+- 📱 **Sidebar Widgets** – VOD & Clips Widgets für WordPress Sidebars
 
 ---
 
@@ -170,13 +178,27 @@ WordPress-Twitch-Stream-Plugin/
 ├── 📁 includes/
 │   ├── 📄 twitch-api.php          # API-Handler
 │   ├── 📄 shortcode.php           # Shortcode-Logic
-│   └── 📄 token-manager.php       # Token-Caching
+│   ├── 📄 token-manager.php       # Token-Caching
+│   ├── 📄 gutenberg-block.php     # Gutenberg Blocks
+│   ├── 📄 page-builder-compatibility.php # Page Builder Integration
+│   ├── 📄 cookie-integration.php  # Cookie Banner Integration
+│   └── � sidebar-widgets.php    # VOD & Clips Widgets
 │
-├── 📁 assets/
+├── �📁 assets/
 │   ├── 📁 css/
-│   │   └── 📄 frontend.css        # Frontend-Styles
-│   └── 📁 js/
-│       └── 📄 player.js            # Player-Funktionen
+│   │   ├── 📄 frontend.css        # Frontend-Styles
+│   │   ├── 📄 block.css           # Gutenberg Block Styles
+│   │   ├── 📄 page-builder-compatibility.css # Page Builder Styles
+│   │   ├── 📄 cookie-integration.css # Cookie Integration Styles
+│   │   └── � vod-clips.css       # VOD & Clips Styles
+│   └── �📁 js/
+│       ├── 📄 player.js            # Player-Funktionen
+│       ├── 📄 block.js            # Gutenberg Block JavaScript
+│       ├── 📄 oxygen-builder.js    # Oxygen Builder JS
+│       └── 📄 divi-builder.js      # Divi Builder JS
+│
+├── 📁 docs/
+│   └── 📄 cookie-banner-integration.md # Cookie Integration Tutorial
 │
 └── 📁 languages/
     ├── 📄 wp-twitch-stream-de_DE.po
@@ -355,6 +377,153 @@ function wp_twitch_stream_shortcode($atts) {
 add_shortcode('twitch_stream', 'wp_twitch_stream_shortcode');
 ?>
 ```
+
+---
+
+## 🎮 Erweiterte Shortcodes (v1.1.0+)
+
+### Stream-Infos Shortcode
+Zeigt detaillierte Informationen über einen Twitch-Stream an:
+
+```text
+[twitch_stream_info channel="username" layout="horizontal" show_avatar="true"]
+```
+
+**Parameter:**
+- `channel` - Twitch-Benutzername
+- `layout` - horizontal, vertical, compact
+- `show_avatar` - Avatar anzeigen (true/false)
+- `show_thumbnail` - Thumbnail anzeigen (true/false)
+- `show_title` - Titel anzeigen (true/false)
+- `show_game` - Spiel anzeigen (true/false)
+- `show_viewers` - Zuschauer anzeigen (true/false)
+- `show_language` - Sprache anzeigen (true/false)
+- `show_start_time` - Startzeit anzeigen (true/false)
+
+### Multiple Streams Grid
+Zeigt mehrere Twitch-Streams in einem Grid an:
+
+```text
+[twitch_streams_grid channels="user1,user2,user3" columns="3" layout="grid"]
+```
+
+**Parameter:**
+- `channels` - Kommagetrennte Liste von Kanälen
+- `columns` - Anzahl der Spalten (1-6)
+- `layout` - grid, list, masonry
+- `gap` - Abstand zwischen Items
+- `show_player` - Player anzeigen (true/false)
+- `show_info` - Informationen anzeigen (true/false)
+- `responsive` - Responsive Breakpoints (true/false)
+
+---
+
+## 📹 VOD & Clips Shortcodes (v1.2.0+)
+
+### VOD (Video on Demand) Shortcode
+Zeigt Twitch-Videos oder VODs an:
+
+```text
+[twitch_vod channel="username" limit="5" type="archive" layout="grid"]
+[twitch_vod video_id="123456" width="100%" height="480" autoplay="false"]
+```
+
+**Parameter:**
+- `channel` - Twitch-Benutzername (für Liste)
+- `video_id` - Spezifische Video-ID
+- `limit` - Anzahl der Videos (1-20)
+- `type` - archive, upload, highlight
+- `width` - Breite des Players
+- `height` - Höhe des Players
+- `autoplay` - Autoplay (true/false)
+- `muted` - Stummgeschaltet (true/false)
+- `show_info` - Informationen anzeigen (true/false)
+- `show_thumbnail` - Thumbnail anzeigen (true/false)
+- `layout` - grid, list, single
+
+### Clips Shortcode
+Zeigt Twitch-Clips an:
+
+```text
+[twitch_clips channel="username" limit="10" layout="grid"]
+[twitch_clips clip_id="FunnyClip123" autoplay="true"]
+```
+
+**Parameter:**
+- `channel` - Twitch-Benutzername (für Liste)
+- `clip_id` - Spezifische Clip-ID
+- `limit` - Anzahl der Clips (1-20)
+- `width` - Breite des Players
+- `height` - Höhe des Players
+- `autoplay` - Autoplay (true/false)
+- `show_info` - Informationen anzeigen (true/false)
+- `layout` - grid, list, single
+
+---
+
+## 🧩 Gutenberg Blocks (v1.1.0+)
+
+### Twitch Stream Block
+- **Name**: Twitch Stream
+- **Kategorie**: Twitch Stream
+- **Funktion**: Einzelnen Stream mit allen Optionen
+- **Einstellungen**: Kanal, Größe, Autoplay, Stream-Infos
+
+### Twitch Grid Block
+- **Name**: Twitch Stream Grid
+- **Kategorie**: Twitch Stream
+- **Funktion**: Multiple Streams im Grid
+- **Einstellungen**: Kanäle, Spalten, Layout, Player/Info
+
+---
+
+## 🔧 Page Builder Integration (v1.1.0+)
+
+### Unterstützte Page Builder:
+- ✅ **Gutenberg** (Native WordPress Blocks)
+- ✅ **Elementor** (Widgets mit Inspector Controls)
+- ✅ **Oxygen Builder** (Components mit Visual Builder)
+- ✅ **Divi Builder** (Modules mit Visual Builder)
+- ✅ **Beaver Builder** (Module Support)
+- ✅ **Visual Composer/WPBakery** (Shortcode Integration)
+- ✅ **Fusion Builder** (Module Support)
+- ✅ **SiteOrigin** (Widget Support)
+- ✅ **Thrive Architect** (Component Support)
+
+---
+
+## 🍪 Cookie Banner Integration (v1.1.0+)
+
+### Unterstützte Cookie-Systeme:
+- ✅ **Borlabs Cookie** (Premium)
+- ✅ **Real Cookie Banner** (Pro/Kostenlos)
+- ✅ **Complianz** (Kostenlos/Premium)
+- ✅ **Cookiebot** (SaaS)
+- ✅ **OMR** (Online-Marketing-Regional)
+- ✅ **Universal Solution** (Fallback)
+
+### Features:
+- **Auto-Detection** aktiver Cookie-Plugins
+- **DSGVO-konforme** Platzhalter
+- **Zustimmungs-Buttons** für alle Cookie-Typen
+- **Responsive Design** für alle Geräte
+- **Builder-Kompatibilität**
+
+---
+
+## 📱 Sidebar Widgets (v1.2.0+)
+
+### Twitch VOD Widget
+- **Funktion**: Einzelnes Video oder Video-Liste
+- **Einstellungen**: Kanal, Video-ID, Anzahl, Typ, Layout
+- **Display**: Optimiert für Sidebar-Anzeige
+
+### Twitch Clips Widget
+- **Funktion**: Einzelner Clip oder Clip-Liste
+- **Einstellungen**: Kanal, Clip-ID, Anzahl, Layout
+- **Display**: Optimiert für Sidebar-Anzeige
+
+---
 
 ### Admin Settings Page
 
