@@ -890,13 +890,6 @@ class WP_Twitch_Multi_Language_Support {
     }
     
     /**
-     * Get current language
-     */
-    public function get_current_language() {
-        return $this->current_language;
-    }
-    
-    /**
      * Get supported languages
      */
     public function get_supported_languages() {
