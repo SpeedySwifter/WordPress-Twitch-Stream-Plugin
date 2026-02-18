@@ -1,4 +1,4 @@
-# 🎮 WordPress Twitch Stream Plugin v1.7.0
+# 🎮 WordPress Twitch Stream Plugin v1.7.1
 
 <div align="center">
 
@@ -21,7 +21,7 @@
 
 ## 📌 What is this?
 
-The **WordPress Twitch Stream Plugin v1.7.0** is a comprehensive solution for integrating Twitch streams into WordPress websites. It provides everything from basic stream embedding to advanced features like mobile apps, scheduling, analytics, and more.
+The **WordPress Twitch Stream Plugin v1.7.1** is a comprehensive solution for integrating Twitch streams into WordPress websites. It provides everything from basic stream embedding to advanced features like mobile apps, scheduling, analytics, and more.
 
 ### ✨ Core Features
 
@@ -41,7 +41,7 @@ The **WordPress Twitch Stream Plugin v1.7.0** is a comprehensive solution for in
 
 ---
 
-## 🚀 Advanced Features (v1.7.0)
+## 🚀 Advanced Features (v1.7.1)
 
 ### 📱 **Mobile App Integration**
 - **Progressive Web App (PWA)** with complete manifest
@@ -434,6 +434,15 @@ The plugin supports **7 languages** with complete translations:
 ---
 
 ## 📊 Version History
+
+### v1.7.1 - Bug Fixes & Stability Improvements 🛠️
+- 🐛 **Fixed critical WordPress activation errors** - Plugin now activates without fatal errors
+- 🔧 **PHP syntax errors resolved** - All missing braces and syntax issues fixed
+- 🗄️ **Database table creation** - Automatic creation of missing tables on activation
+- 🛡️ **Improved error handling** - Better API response validation and error logging
+- ⚡ **Performance optimizations** - Reduced API calls and improved caching
+- 🔄 **WordPress compatibility** - Enhanced compatibility with WordPress 6.9.1+
+- 🎯 **Stability improvements** - More robust initialization and error recovery
 
 ### v1.7.0 - Mobile App Integration 🚀
 - 📱 Progressive Web App (PWA) with offline support

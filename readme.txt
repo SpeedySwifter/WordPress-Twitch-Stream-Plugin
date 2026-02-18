@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=YOUR_BUTTON_ID
 Tags: twitch, streaming, live stream, twitch.tv, embed, video, gaming, esports, widget, shortcode, chat, clips, vod, analytics, mobile, pwa
 Requires at least: 5.8
 Tested up to: 6.9.1
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 7.4
@@ -13,7 +13,7 @@ The ultimate WordPress plugin for Twitch stream integration with mobile app, sch
 
 == Description ==
 
-**WordPress Twitch Stream Plugin v1.7.0** is a comprehensive solution for integrating Twitch streams into WordPress websites. It provides everything from basic stream embedding to advanced features like mobile apps, scheduling, analytics, and more.
+**WordPress Twitch Stream Plugin v1.7.1** is a comprehensive solution for integrating Twitch streams into WordPress websites. It provides everything from basic stream embedding to advanced features like mobile apps, scheduling, analytics, and more.
 
 ### ✨ Core Features
 
@@ -31,7 +31,7 @@ The ultimate WordPress plugin for Twitch stream integration with mobile app, sch
 - 🔧 **Page Builder Support** – Elementor, Oxygen, Divi, Beaver Builder & more
 - 🍪 **Cookie Banner Integration** – GDPR compliant with 6 cookie systems
 
-### 🚀 Advanced Features (v1.7.0)
+### 🚀 Advanced Features (v1.7.1)
 
 #### 📱 Mobile App Integration
 - Progressive Web App (PWA) with offline support
@@ -228,6 +228,15 @@ Yes, the plugin includes cookie banner integration and is fully GDPR compliant. 
 
 == Changelog ==
 
+= 1.7.1 - Bug Fixes & Stability Improvements =
+* 🐛 **Fixed critical WordPress activation errors** - Plugin now activates without fatal errors
+* 🔧 **PHP syntax errors resolved** - All missing braces and syntax issues fixed
+* 🗄️ **Database table creation** - Automatic creation of missing tables on activation
+* 🛡️ **Improved error handling** - Better API response validation and error logging
+* ⚡ **Performance optimizations** - Reduced API calls and improved caching
+* 🔄 **WordPress compatibility** - Enhanced compatibility with WordPress 6.9.1+
+* 🎯 **Stability improvements** - More robust initialization and error recovery
+
 = 1.7.0 - Mobile App Integration =
 * 🚀 **Progressive Web App (PWA)** with offline support
 * 🔔 **Push notifications** with VAPID key configuration
@@ -288,6 +297,9 @@ Yes, the plugin includes cookie banner integration and is fully GDPR compliant. 
 * 🔐 Secure API integration
 
 == Upgrade Notice ==
+
+= 1.7.1 =
+Critical bug fix release addressing plugin activation issues. Fixes WordPress function calls, PHP syntax errors, and database table creation. Recommended update for all users.
 
 = 1.7.0 =
 Major update with mobile app integration, visual scheduler, and advanced features. Requires WordPress 5.8+ and PHP 7.4+. Backup your database before upgrading.
