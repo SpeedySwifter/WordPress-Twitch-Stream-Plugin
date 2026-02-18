@@ -784,7 +784,7 @@ Siehe [Roadmap](#-roadmap) für alle verfügbaren Features.
 
 ## 🗺️ Roadmap
 
-### ✅ Version 1.1.0 (Abgeschlossen)
+### ✅ Version 1.2.0 (Abgeschlossen)
 - [x] Basic Shortcode
 - [x] Live-Status Erkennung
 - [x] Admin Settings Page
@@ -801,10 +801,11 @@ Siehe [Roadmap](#-roadmap) für alle verfügbaren Features.
 - [x] Multi-Language (DE/EN)
 - [x] Dark Mode Support
 - [x] Responsive Design
+- [x] VOD (Video on Demand) Support
+- [x] Clips einbinden
+- [x] Sidebar Widgets (VOD & Clips)
 
-### 🚧 Version 1.2.0 (In Entwicklung)
-- [ ] VOD (Video on Demand) Support
-- [ ] Clips einbinden
+### 🚧 Version 1.3.0 (In Entwicklung)
 - [ ] REST API Endpoint
 - [ ] Webhook-Support (EventSub)
 - [ ] Advanced Analytics
@@ -847,7 +848,17 @@ Siehe [Roadmap](#-roadmap) für alle verfügbaren Features.
 | Cookie Banner Integration | ✅ Fertig | 1.1.0 |
 | Dark Mode Support | ✅ Fertig | 1.1.0 |
 
-### 🔧 Builder Integration (v1.1+)
+### � VOD & Clips Features (v1.2+)
+| Feature | Status | Version |
+|---------|--------|--------|
+| VOD (Video on Demand) Support | ✅ Fertig | 1.2.0 |
+| Clips einbinden | ✅ Fertig | 1.2.0 |
+| Sidebar Widgets (VOD & Clips) | ✅ Fertig | 1.2.0 |
+| Enhanced API Integration | ✅ Fertig | 1.2.0 |
+| Responsive VOD/Clips Design | ✅ Fertig | 1.2.0 |
+| Video Metadata Display | ✅ Fertig | 1.2.0 |
+
+### �🔧 Builder Integration (v1.1+)
 | Builder | Status | Version |
 |--------|--------|--------|
 | Gutenberg | ✅ Fertig | 1.1.0 |
@@ -870,14 +881,16 @@ Siehe [Roadmap](#-roadmap) für alle verfügbaren Features.
 | OMR | ✅ Fertig | 1.1.0 |
 | Universal Solution | ✅ Fertig | 1.1.0 |
 
-### 🚀 Advanced Features (v1.2+)
+### 🚀 Advanced Features (v1.3+)
 | Feature | Status | Version |
 |---------|--------|--------|
-| VOD Support | 🚧 In Entwicklung | 1.2.0 |
-| Clips einbinden | 🚧 In Entwicklung | 1.2.0 |
-| REST API Endpoint | 🚧 In Entwicklung | 1.2.0 |
-| Webhook-Support | 🚧 In Entwicklung | 1.2.0 |
-| Advanced Analytics | 🚧 In Entwicklung | 1.2.0 |
+| REST API Endpoint | 🚧 In Entwicklung | 1.3.0 |
+| Webhook-Support (EventSub) | 🚧 In Entwicklung | 1.3.0 |
+| Advanced Analytics | 🚧 In Entwicklung | 1.3.0 |
+| Stream-Recording Integration | 🚧 In Entwicklung | 1.3.0 |
+| Multi-Channel Dashboard | 🚧 In Entwicklung | 1.3.0 |
+| Custom CSS Builder | 🚧 In Entwicklung | 1.3.0 |
+| Advanced Caching Options | 🚧 In Entwicklung | 1.3.0 |
 
 ### 🔮 Future Features (v2.0+)
 | Feature | Status | Version |
