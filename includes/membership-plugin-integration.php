@@ -31,6 +31,7 @@ class WP_Twitch_Membership_Integration {
         
         // Register shortcodes
         add_action('init', array($this, 'register_membership_shortcodes'));
+    }
     
     /**
      * Detect membership plugins
