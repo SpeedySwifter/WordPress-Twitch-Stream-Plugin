@@ -603,28 +603,121 @@ Der Token ist standardmäßig **~60 Tage** gültig und wird automatisch gecacht.
 
 ### ❓ Zeigt das Plugin Zuschauerzahlen an?
 
-📌 **Aktuell nicht**, aber geplant für Version 2.0!
+📌 **Ja!** Ab Version 1.1.0 werden Zuschauerzahlen in den Stream-Infos angezeigt.
 
-Siehe [Roadmap](#-roadmap)
+```text
+[twitch_stream_info channel="username" show_viewers="true"]
+```
+
+Siehe [Roadmap](#-roadmap) für alle verfügbaren Features.
 
 ---
 
 ## 🗺️ Roadmap
 
+### ✅ Version 1.1.0 (Abgeschlossen)
 - [x] Basic Shortcode
 - [x] Live-Status Erkennung
 - [x] Admin Settings Page
 - [x] Token-Caching
-- [ ] Stream-Infos (Titel, Spiel, Zuschauer)
-- [ ] Multiple Streams Grid-Layout
-- [ ] Gutenberg Block
+- [x] Stream-Infos (Titel, Spiel, Zuschauer, Avatar, Live Badge)
+- [x] Multiple Streams Grid-Layout
+- [x] Gutenberg Block (Stream & Grid)
+- [x] Elementor Widgets (Stream & Grid)
+- [x] Oxygen Builder Components
+- [x] Divi Builder Modules
+- [x] Universal Page Builder Compatibility
+- [x] WordPress Widgets (Stream & Grid)
+- [x] Cookie Banner Integration (DSGVO)
+- [x] Multi-Language (DE/EN)
+- [x] Dark Mode Support
+- [x] Responsive Design
+
+### 🚧 Version 1.2.0 (In Entwicklung)
 - [ ] VOD (Video on Demand) Support
 - [ ] Clips einbinden
-- [ ] Sidebar Widget
 - [ ] REST API Endpoint
 - [ ] Webhook-Support (EventSub)
-- [ ] Multi-Language (EN/DE)
-- [ ] Dark Mode
+- [ ] Advanced Analytics
+- [ ] Stream-Recording Integration
+- [ ] Multi-Channel Dashboard
+- [ ] Custom CSS Builder
+- [ ] Advanced Caching Options
+
+### 🔮 Version 2.0.0 (Geplant)
+- [ ] Twitch Chat Integration
+- [ ] Donation/Subscription Buttons
+- [ ] Stream-Recording Download
+- [ ] Advanced Analytics Dashboard
+- [ ] Multi-Language Support (EN/DE/FR/ES)
+- [ ] WooCommerce Integration
+- [ ] Membership Plugin Integration
+- [ ] Advanced Shortcode Builder
+- [ ] Visual Stream Scheduler
+- [ ] Mobile App Integration
+
+---
+
+## 📊 Feature-Übersicht
+
+### 🎮 Core Features (v1.0+)
+| Feature | Status | Version |
+|---------|--------|--------|
+| Basic Shortcode | ✅ Fertig | 1.0.0 |
+| Live-Status Erkennung | ✅ Fertig | 1.0.0 |
+| Admin Settings Page | ✅ Fertig | 1.0.0 |
+| Token-Caching | ✅ Fertig | 1.0.0 |
+
+### 🎯 Enhanced Features (v1.1+)
+| Feature | Status | Version |
+|---------|--------|--------|
+| Stream-Infos (Titel, Spiel, Zuschauer) | ✅ Fertig | 1.1.0 |
+| Multiple Streams Grid-Layout | ✅ Fertig | 1.1.0 |
+| Gutenberg Block | ✅ Fertig | 1.1.0 |
+| Page Builder Integration | ✅ Fertig | 1.1.0 |
+| Cookie Banner Integration | ✅ Fertig | 1.1.0 |
+| Dark Mode Support | ✅ Fertig | 1.1.0 |
+
+### 🔧 Builder Integration (v1.1+)
+| Builder | Status | Version |
+|--------|--------|--------|
+| Gutenberg | ✅ Fertig | 1.1.0 |
+| Elementor | ✅ Fertig | 1.1.0 |
+| Oxygen Builder | ✅ Fertig | 1.1.0 |
+| Divi Builder | ✅ Fertig | 1.1.0 |
+| Beaver Builder | ✅ Fertig | 1.1.0 |
+| Visual Composer | ✅ Fertig | 1.1.0 |
+| Fusion Builder | ✅ Fertig | 1.1.0 |
+| SiteOrigin | ✅ Fertig | 1.1.0 |
+| Thrive Architect | ✅ Fertig | 1.1.0 |
+
+### 🍪 Cookie Integration (v1.1+)
+| Cookie-System | Status | Version |
+|--------------|--------|--------|
+| Borlabs Cookie | ✅ Fertig | 1.1.0 |
+| Real Cookie Banner | ✅ Fertig | 1.1.0 |
+| Complianz | ✅ Fertig | 1.1.0 |
+| Cookiebot | ✅ Fertig | 1.1.0 |
+| OMR | ✅ Fertig | 1.1.0 |
+| Universal Solution | ✅ Fertig | 1.1.0 |
+
+### 🚀 Advanced Features (v1.2+)
+| Feature | Status | Version |
+|---------|--------|--------|
+| VOD Support | 🚧 In Entwicklung | 1.2.0 |
+| Clips einbinden | 🚧 In Entwicklung | 1.2.0 |
+| REST API Endpoint | 🚧 In Entwicklung | 1.2.0 |
+| Webhook-Support | 🚧 In Entwicklung | 1.2.0 |
+| Advanced Analytics | 🚧 In Entwicklung | 1.2.0 |
+
+### 🔮 Future Features (v2.0+)
+| Feature | Status | Version |
+|---------|--------|--------|
+| Twitch Chat Integration | 📋 Geplant | 2.0.0 |
+| Donation/Subscription Buttons | 📋 Geplant | 2.0.0 |
+| Stream-Recording Integration | 📋 Geplant | 2.0.0 |
+| WooCommerce Integration | 📋 Geplant | 2.0.0 |
+| Mobile App Integration | 📋 Geplant | 2.0.0 |
 
 ---
 
