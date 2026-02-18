@@ -1,15 +1,16 @@
 <?php
 /**
- * Plugin Name: WordPress Twitch Stream
+ * Plugin Name: WordPress Twitch Stream Plugin
  * Plugin URI: https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin
- * Description: Bindet Twitch-Streams per Shortcode ein mit Live-Status-Erkennung
- * Version: 1.3.0
+ * Description: The ultimate WordPress plugin for Twitch stream integration with mobile apps, scheduling, analytics, and multi-language support.
+ * Version: 1.7.0
  * Requires at least: 5.8
+ * Tested up to: 6.9.1
  * Requires PHP: 7.4
  * Author: SpeedySwifter
  * Author URI: https://github.com/SpeedySwifter
- * License: MIT
- * License URI: https://opensource.org/licenses/MIT
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wp-twitch-stream
  * Domain Path: /languages
  */
@@ -20,7 +21,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin-Konstanten
-define('WP_TWITCH_VERSION', '1.3.0');
+define('WP_TWITCH_VERSION', '1.7.0');
 define('WP_TWITCH_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WP_TWITCH_PLUGIN_URL', plugin_dir_url(__FILE__));
 
