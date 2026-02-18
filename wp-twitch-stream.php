@@ -39,6 +39,7 @@ require_once WP_TWITCH_PLUGIN_DIR . 'includes/stream-recording.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/multi-channel-dashboard.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/custom-css-builder.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-cache.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/donation-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
@@ -61,6 +62,14 @@ function wp_twitch_enqueue_frontend_styles() {
     wp_enqueue_style(
         'wp-twitch-stream-vod-clips',
         WP_TWITCH_PLUGIN_URL . 'assets/css/vod-clips.css',
+        array(),
+        WP_TWITCH_VERSION
+    );
+    
+    // Donation Styles
+    wp_enqueue_style(
+        'wp-twitch-stream-donations',
+        WP_TWITCH_PLUGIN_URL . 'assets/css/donations.css',
         array(),
         WP_TWITCH_VERSION
     );

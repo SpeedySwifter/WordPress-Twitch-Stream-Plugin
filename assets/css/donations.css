@@ -1,0 +1,602 @@
+/**
+ * Donation Integration Styles
+ */
+
+/* Donation Container */
+.twitch-donations-container {
+    position: relative;
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.twitch-donations-container.twitch-donation-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr;
+}
+
+.twitch-donations-container.twitch-donation-horizontal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.twitch-donations-container.twitch-donation-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Donation Goal */
+.twitch-donation-goal,
+.twitch-donation-goal-widget {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.twitch-donation-goal-header h3,
+.twitch-donation-goal-widget h3 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.twitch-donation-goal-header p,
+.twitch-donation-goal-widget p {
+    margin: 0 0 15px 0;
+    opacity: 0.9;
+}
+
+.twitch-donation-goal-progress {
+    position: relative;
+}
+
+.twitch-donation-goal-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.twitch-donation-goal-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+.twitch-donation-goal-stats,
+.twitch-donation-goal-amounts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.twitch-donation-goal-current,
+.twitch-donation-goal-target {
+    font-weight: 600;
+}
+
+.twitch-donation-goal-percentage {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.twitch-donation-amount {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* Donation Stats */
+.twitch-donation-stats {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.twitch-donation-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+}
+
+.twitch-donation-stat {
+    text-align: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.twitch-donation-stat-number {
+    font-size: 24px;
+    font-weight: 700;
+    color: #9146FF;
+    margin-bottom: 5px;
+}
+
+.twitch-donation-stat-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Donation Buttons */
+.twitch-donation-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.twitch-donation-button {
+    display: inline-block;
+}
+
+/* Buy Me a Coffee Button */
+.twitch-bmc-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: #FFDD00;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.twitch-bmc-link:hover {
+    background: #FFC700;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 221, 0, 0.3);
+}
+
+.twitch-bmc-link.bmc-small {
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.twitch-bmc-link.bmc-small img {
+    height: 20px;
+}
+
+.twitch-bmc-link.bmc-medium {
+    padding: 12px 20px;
+    font-size: 16px;
+}
+
+.twitch-bmc-link.bmc-medium img {
+    height: 30px;
+}
+
+.twitch-bmc-link.bmc-large {
+    padding: 16px 24px;
+    font-size: 18px;
+}
+
+.twitch-bmc-link.bmc-large img {
+    height: 40px;
+}
+
+/* PayPal Button */
+.twitch-paypal-form {
+    display: inline-block;
+}
+
+.twitch-paypal-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: #0070BA;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.twitch-paypal-button:hover {
+    background: #005EA6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 112, 186, 0.3);
+}
+
+.twitch-paypal-button.paypal-small {
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.twitch-paypal-button.paypal-small img {
+    height: 20px;
+}
+
+.twitch-paypal-button.paypal-medium {
+    padding: 12px 20px;
+    font-size: 16px;
+}
+
+.twitch-paypal-button.paypal-medium img {
+    height: 24px;
+}
+
+.twitch-paypal-button.paypal-large {
+    padding: 16px 24px;
+    font-size: 18px;
+}
+
+.twitch-paypal-button.paypal-large img {
+    height: 28px;
+}
+
+/* Donation Message */
+.twitch-donation-message {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+/* Disabled State */
+.twitch-donation-disabled {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .twitch-donations-container {
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    .twitch-donation-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .twitch-donation-button {
+        width: 100%;
+    }
+    
+    .twitch-bmc-link,
+    .twitch-paypal-button {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .twitch-donation-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .twitch-donation-goal-stats,
+    .twitch-donation-goal-amounts {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .twitch-donations-container {
+        padding: 12px;
+        margin: 12px 0;
+    }
+    
+    .twitch-donation-goal,
+    .twitch-donation-goal-widget {
+        padding: 15px;
+    }
+    
+    .twitch-donation-goal-header h3,
+    .twitch-donation-goal-widget h3 {
+        font-size: 18px;
+    }
+    
+    .twitch-donation-stat-number {
+        font-size: 20px;
+    }
+    
+    .twitch-bmc-link.bmc-small,
+    .twitch-bmc-link.bmc-medium,
+    .twitch-bmc-link.bmc-large {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .twitch-bmc-link.bmc-small img,
+    .twitch-bmc-link.bmc-medium img,
+    .twitch-bmc-link.bmc-large img {
+        height: 20px;
+    }
+    
+    .twitch-paypal-button.paypal-small,
+    .twitch-paypal-button.paypal-medium,
+    .twitch-paypal-button.paypal-large {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .twitch-paypal-button.paypal-small img,
+    .twitch-paypal-button.paypal-medium img,
+    .twitch-paypal-button.paypal-large img {
+        height: 18px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .twitch-donations-container {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .twitch-donation-stats {
+        background: #1a202c;
+        border-color: #4a5568;
+    }
+    
+    .twitch-donation-stat {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .twitch-donation-stat-label {
+        color: #a0aec0;
+    }
+    
+    .twitch-donation-message {
+        background: #1a202c;
+        border-color: #4a5568;
+        color: #a0aec0;
+    }
+    
+    .twitch-donation-disabled {
+        background: #2d3748;
+        border-color: #4a5568;
+        color: #a0aec0;
+    }
+}
+
+/* Animation Classes */
+.twitch-donation-goal-fill {
+    animation: goalProgress 1s ease-out;
+}
+
+@keyframes goalProgress {
+    from {
+        width: 0%;
+    }
+}
+
+.twitch-donation-stat {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.twitch-bmc-link,
+.twitch-paypal-button {
+    animation: slideIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Loading State */
+.twitch-donation-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.twitch-donation-loading::after {
+    content: '';
+    width: 32px;
+    height: 32px;
+    border: 3px solid #9146FF;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success State */
+.twitch-donation-success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 20px 0;
+    color: #155724;
+    text-align: center;
+}
+
+.twitch-donation-success::before {
+    content: '✓';
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Error State */
+.twitch-donation-error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 20px 0;
+    color: #721c24;
+    text-align: center;
+}
+
+.twitch-donation-error::before {
+    content: '✗';
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Widget Specific Styles */
+.widget .twitch-donations-container {
+    margin: 10px 0;
+    padding: 15px;
+}
+
+.widget .twitch-donation-goal,
+.widget .twitch-donation-goal-widget {
+    padding: 15px;
+}
+
+.widget .twitch-donation-goal-header h3,
+.widget .twitch-donation-goal-widget h3 {
+    font-size: 16px;
+}
+
+.widget .twitch-donation-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.widget .twitch-donation-buttons {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.widget .twitch-bmc-link,
+.widget .twitch-paypal-button {
+    width: 100%;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.widget .twitch-bmc-link img,
+.widget .twitch-paypal-button img {
+    height: 20px;
+}
+
+/* Print Styles */
+@media print {
+    .twitch-donation-buttons {
+        display: none;
+    }
+    
+    .twitch-donation-message {
+        display: none;
+    }
+}
+
+/* Accessibility */
+.twitch-bmc-link:focus,
+.twitch-paypal-button:focus {
+    outline: 2px solid #9146FF;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .twitch-donation-goal-fill,
+    .twitch-donation-stat,
+    .twitch-bmc-link,
+    .twitch-paypal-button {
+        animation: none;
+    }
+    
+    .twitch-bmc-link:hover,
+    .twitch-paypal-button:hover {
+        transform: none;
+    }
+}
+
+/* Custom Styles for Different Layouts */
+.twitch-donations-container.twitch-donation-compact {
+    padding: 15px;
+}
+
+.twitch-donations-container.twitch-donation-compact .twitch-donation-buttons {
+    gap: 10px;
+}
+
+.twitch-donations-container.twitch-donation-compact .twitch-bmc-link,
+.twitch-donations-container.twitch-donation-compact .twitch-paypal-button {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+.twitch-donations-container.twitch-donation-compact .twitch-bmc-link img,
+.twitch-donations-container.twitch-donation-compact .twitch-paypal-button img {
+    height: 20px;
+}
+
+.twitch-donations-container.twitch-donation-large {
+    padding: 30px;
+}
+
+.twitch-donations-container.twitch-donation-large .twitch-donation-buttons {
+    gap: 20px;
+}
+
+.twitch-donations-container.twitch-donation-large .twitch-bmc-link,
+.twitch-donations-container.twitch-donation-large .twitch-paypal-button {
+    padding: 16px 24px;
+    font-size: 18px;
+}
+
+.twitch-donations-container.twitch-donation-large .twitch-bmc-link img,
+.twitch-donations-container.twitch-donation-large .twitch-paypal-button img {
+    height: 35px;
+}
