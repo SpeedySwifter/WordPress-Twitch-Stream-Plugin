@@ -3,7 +3,7 @@
  * Plugin Name: WordPress Twitch Stream
  * Plugin URI: https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin
  * Description: Bindet Twitch-Streams per Shortcode ein mit Live-Status-Erkennung
- * Version: 1.1.0
+ * Version: 1.2.0
  * Requires at least: 5.8
  * Requires PHP: 7.4
  * Author: SpeedySwifter
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin-Konstanten
-define('WP_TWITCH_VERSION', '1.1.0');
+define('WP_TWITCH_VERSION', '1.2.0');
 define('WP_TWITCH_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WP_TWITCH_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -31,6 +31,7 @@ require_once WP_TWITCH_PLUGIN_DIR . 'includes/token-manager.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/gutenberg-block.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/page-builder-compatibility.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/cookie-integration.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/sidebar-widgets.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
@@ -41,15 +42,23 @@ function wp_twitch_init() {
 }
 
 // Frontend-Styles laden
-function wp_twitch_enqueue_styles() {
+function wp_twitch_enqueue_frontend_styles() {
     wp_enqueue_style(
         'wp-twitch-stream-frontend',
         WP_TWITCH_PLUGIN_URL . 'assets/css/frontend.css',
         array(),
         WP_TWITCH_VERSION
     );
+    
+    // VOD und Clips Styles
+    wp_enqueue_style(
+        'wp-twitch-stream-vod-clips',
+        WP_TWITCH_PLUGIN_URL . 'assets/css/vod-clips.css',
+        array(),
+        WP_TWITCH_VERSION
+    );
 }
-add_action('wp_enqueue_scripts', 'wp_twitch_enqueue_styles');
+add_action('wp_enqueue_scripts', 'wp_twitch_enqueue_frontend_styles');
 
 // Admin-Styles laden
 function wp_twitch_enqueue_admin_styles() {

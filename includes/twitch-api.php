@@ -157,6 +157,149 @@ class WP_Twitch_API {
     }
 
     /**
+     * VODs (Videos) von einem Kanal abrufen
+     */
+    public function get_channel_videos($channel, $limit = 10, $type = 'archive') {
+        $user_info = $this->get_user_info($channel);
+        
+        if (!$user_info || empty($user_info['id'])) {
+            return null;
+        }
+
+        $user_id = $user_info['id'];
+        
+        $response = wp_remote_get(
+            "https://api.twitch.tv/helix/videos?user_id={$user_id}&first={$limit}&type={$type}",
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->access_token,
+                    'Client-Id' => $this->client_id
+                ]
+            ]
+        );
+
+        if (!is_wp_error($response)) {
+            $data = json_decode(wp_remote_retrieve_body($response), true);
+            return $data['data'] ?? [];
+        }
+
+        return array();
+    }
+
+    /**
+     * Spezifisches VOD abrufen
+     */
+    public function get_video($video_id) {
+        $response = wp_remote_get(
+            "https://api.twitch.tv/helix/videos?id={$video_id}",
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->access_token,
+                    'Client-Id' => $this->client_id
+                ]
+            ]
+        );
+
+        if (!is_wp_error($response)) {
+            $data = json_decode(wp_remote_retrieve_body($response), true);
+            return $data['data'][0] ?? null;
+        }
+
+        return null;
+    }
+
+    /**
+     * Clips von einem Kanal abrufen
+     */
+    public function get_channel_clips($channel, $limit = 10) {
+        $user_info = $this->get_user_info($channel);
+        
+        if (!$user_info || empty($user_info['id'])) {
+            return null;
+        }
+
+        $user_id = $user_info['id'];
+        
+        $response = wp_remote_get(
+            "https://api.twitch.tv/helix/clips?broadcaster_id={$user_id}&first={$limit}",
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->access_token,
+                    'Client-Id' => $this->client_id
+                ]
+            ]
+        );
+
+        if (!is_wp_error($response)) {
+            $data = json_decode(wp_remote_retrieve_body($response), true);
+            return $data['data'] ?? [];
+        }
+
+        return array();
+    }
+
+    /**
+     * Spezifischen Clip abrufen
+     */
+    public function get_clip($clip_id) {
+        $response = wp_remote_get(
+            "https://api.twitch.tv/helix/clips?id={$clip_id}",
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->access_token,
+                    'Client-Id' => $this->client_id
+                ]
+            ]
+        );
+
+        if (!is_wp_error($response)) {
+            $data = json_decode(wp_remote_retrieve_body($response), true);
+            return $data['data'][0] ?? null;
+        }
+
+        return null;
+    }
+
+    /**
+     * VOD-URL für Embed erstellen
+     */
+    public function get_vod_embed_url($video_id, $autoplay = false, $muted = false) {
+        $domain = $_SERVER['HTTP_HOST'];
+        
+        if (in_array($domain, ['localhost', '127.0.0.1'])) {
+            $domain = 'localhost';
+        }
+        
+        $params = array(
+            'video' => $video_id,
+            'parent' => $domain,
+            'autoplay' => $autoplay ? 'true' : 'false',
+            'muted' => $muted ? 'true' : 'false'
+        );
+        
+        return 'https://player.twitch.tv/?' . http_build_query($params);
+    }
+
+    /**
+     * Clip-URL für Embed erstellen
+     */
+    public function get_clip_embed_url($clip_id, $autoplay = false) {
+        $domain = $_SERVER['HTTP_HOST'];
+        
+        if (in_array($domain, ['localhost', '127.0.0.1'])) {
+            $domain = 'localhost';
+        }
+        
+        $params = array(
+            'clip' => $clip_id,
+            'parent' => $domain,
+            'autoplay' => $autoplay ? 'true' : 'false'
+        );
+        
+        return 'https://clips.twitch.tv/embed?' . http_build_query($params);
+    }
+
+    /**
      * Benutzer-ID abrufen
      */
     public function get_user_id($username) {

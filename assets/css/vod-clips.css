@@ -1,0 +1,584 @@
+/**
+ * VOD and Clips Styles
+ */
+
+/* VOD Container */
+.twitch-vod-container {
+    position: relative;
+    margin: 20px 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.twitch-vod-info {
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.twitch-vod-info .twitch-vod-thumbnail {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.twitch-vod-details {
+    margin-bottom: 15px;
+}
+
+.twitch-vod-title {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.twitch-vod-meta,
+.twitch-vod-duration,
+.twitch-vod-views {
+    margin: 5px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.twitch-vod-player {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.twitch-vod-player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* VOD List */
+.twitch-vod-list {
+    display: grid;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.twitch-vod-list-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.twitch-vod-list-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.twitch-vod-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.twitch-vod-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.twitch-vod-item .twitch-vod-thumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.twitch-vod-item-info {
+    padding: 15px;
+}
+
+.twitch-vod-item-title {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #23282d;
+    line-height: 1.4;
+}
+
+.twitch-vod-item-meta {
+    margin: 0 0 15px 0;
+    font-size: 13px;
+    color: #646970;
+}
+
+.twitch-vod-watch,
+.twitch-vod-embed {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.twitch-vod-watch {
+    background: #9146FF;
+    color: white;
+}
+
+.twitch-vod-watch:hover {
+    background: #7928CA;
+    transform: translateY(-1px);
+}
+
+.twitch-vod-embed {
+    background: #0073aa;
+    color: white;
+}
+
+.twitch-vod-embed:hover {
+    background: #005a87;
+    transform: translateY(-1px);
+}
+
+/* Clips Container */
+.twitch-clip-container {
+    position: relative;
+    margin: 20px 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.twitch-clip-info {
+    padding: 20px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    color: white;
+}
+
+.twitch-clip-title {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.twitch-clip-meta,
+.twitch-clip-views {
+    margin: 5px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.twitch-clip-player {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.twitch-clip-player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Clips List */
+.twitch-clips-list {
+    display: grid;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.twitch-clips-list-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.twitch-clips-list-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.twitch-clip-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.twitch-clip-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.twitch-clip-thumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.twitch-clip-item-info {
+    padding: 15px;
+}
+
+.twitch-clip-item-title {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #23282d;
+    line-height: 1.4;
+}
+
+.twitch-clip-item-meta {
+    margin: 0 0 15px 0;
+    font-size: 13px;
+    color: #646970;
+}
+
+.twitch-clip-watch,
+.twitch-clip-embed {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.twitch-clip-watch {
+    background: #ff6b6b;
+    color: white;
+}
+
+.twitch-clip-watch:hover {
+    background: #ee5a24;
+    transform: translateY(-1px);
+}
+
+.twitch-clip-embed {
+    background: #0073aa;
+    color: white;
+}
+
+.twitch-clip-embed:hover {
+    background: #005a87;
+    transform: translateY(-1px);
+}
+
+/* Empty States */
+.twitch-vod-empty,
+.twitch-clips-empty {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+    color: #646970;
+}
+
+.twitch-vod-empty p,
+.twitch-clips-empty p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .twitch-vod-list-grid,
+    .twitch-clips-list-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .twitch-vod-info,
+    .twitch-clip-info {
+        padding: 15px;
+    }
+    
+    .twitch-vod-title,
+    .twitch-clip-title {
+        font-size: 18px;
+    }
+    
+    .twitch-vod-item-info,
+    .twitch-clip-item-info {
+        padding: 12px;
+    }
+    
+    .twitch-vod-item-title,
+    .twitch-clip-item-title {
+        font-size: 15px;
+    }
+    
+    .twitch-vod-watch,
+    .twitch-vod-embed,
+    .twitch-clip-watch,
+    .twitch-clip-embed {
+        padding: 6px 12px;
+        font-size: 12px;
+        margin: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .twitch-vod-info,
+    .twitch-clip-info {
+        padding: 12px;
+    }
+    
+    .twitch-vod-title,
+    .twitch-clip-title {
+        font-size: 16px;
+    }
+    
+    .twitch-vod-item-info,
+    .twitch-clip-item-info {
+        padding: 10px;
+    }
+    
+    .twitch-vod-item-title,
+    .twitch-clip-item-title {
+        font-size: 14px;
+    }
+    
+    .twitch-vod-watch,
+    .twitch-vod-embed,
+    .twitch-clip-watch,
+    .twitch-clip-embed {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .twitch-vod-container,
+    .twitch-clip-container {
+        background: #2d3748;
+    }
+    
+    .twitch-vod-item,
+    .twitch-clip-item {
+        background: #1a202c;
+        color: #e2e8f0;
+    }
+    
+    .twitch-vod-item-title,
+    .twitch-clip-item-title {
+        color: #e2e8f0;
+    }
+    
+    .twitch-vod-item-meta,
+    .twitch-clip-item-meta {
+        color: #a0aec0;
+    }
+    
+    .twitch-vod-empty,
+    .twitch-clips-empty {
+        background: #2d3748;
+        color: #a0aec0;
+    }
+}
+
+/* Animation Classes */
+.twitch-vod-fade-in,
+.twitch-clip-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: twitchFadeIn 0.6s ease forwards;
+}
+
+@keyframes twitchFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.twitch-vod-slide-in,
+.twitch-clip-slide-in {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: twitchSlideIn 0.6s ease forwards;
+}
+
+@keyframes twitchSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Loading State */
+.twitch-vod-loading,
+.twitch-clips-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.twitch-vod-loading::after,
+.twitch-clips-loading::after {
+    content: '';
+    width: 32px;
+    height: 32px;
+    border: 3px solid #9146FF;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: twitch-spin 1s linear infinite;
+}
+
+@keyframes twitch-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.twitch-vod-error,
+.twitch-clips-error {
+    background: #fee;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 20px 0;
+    color: #c33;
+    text-align: center;
+}
+
+.twitch-vod-error .dashicons,
+.twitch-clips-error .dashicons {
+    color: #c33;
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+    margin-bottom: 8px;
+}
+
+/* Success State */
+.twitch-vod-success,
+.twitch-clips-success {
+    background: #efe;
+    border: 1px solid #cfc;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 20px 0;
+    color: #3c3;
+    text-align: center;
+}
+
+.twitch-vod-success .dashicons,
+.twitch-clips-success .dashicons {
+    color: #3c3;
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+    margin-bottom: 8px;
+}
+
+/* Widget Specific Styles */
+.widget .twitch-vod-container,
+.widget .twitch-clip-container {
+    margin: 10px 0;
+}
+
+.widget .twitch-vod-info,
+.widget .twitch-clip-info {
+    padding: 15px;
+}
+
+.widget .twitch-vod-title,
+.widget .twitch-clip-title {
+    font-size: 16px;
+}
+
+.widget .twitch-vod-item,
+.widget .twitch-clip-item {
+    margin-bottom: 15px;
+}
+
+.widget .twitch-vod-item-info,
+.widget .twitch-clip-item-info {
+    padding: 10px;
+}
+
+.widget .twitch-vod-item-title,
+.widget .twitch-clip-item-title {
+    font-size: 14px;
+}
+
+.widget .twitch-vod-watch,
+.widget .twitch-vod-embed,
+.widget .twitch-clip-watch,
+.widget .twitch-clip-embed {
+    padding: 6px 12px;
+    font-size: 12px;
+    margin: 3px;
+}
+
+/* Print Styles */
+@media print {
+    .twitch-vod-player,
+    .twitch-clip-player {
+        display: none;
+    }
+    
+    .twitch-vod-watch,
+    .twitch-vod-embed,
+    .twitch-clip-watch,
+    .twitch-clip-embed {
+        display: none;
+    }
+}
+
+/* Accessibility */
+.twitch-vod-watch:focus,
+.twitch-vod-embed:focus,
+.twitch-clip-watch:focus,
+.twitch-clip-embed:focus {
+    outline: 2px solid #9146FF;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .twitch-vod-item,
+    .twitch-clip-item {
+        transition: none;
+    }
+    
+    .twitch-vod-fade-in,
+    .twitch-clip-fade-in,
+    .twitch-vod-slide-in,
+    .twitch-clip-slide-in {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .twitch-vod-loading::after,
+    .twitch-clips-loading::after {
+        animation: none;
+    }
+}

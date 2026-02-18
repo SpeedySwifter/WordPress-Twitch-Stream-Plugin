@@ -321,6 +321,328 @@ function wp_twitch_streams_grid_shortcode($atts) {
 add_shortcode('twitch_streams_grid', 'wp_twitch_streams_grid_shortcode');
 
 /**
+ * Shortcode für VOD (Video on Demand)
+ */
+function wp_twitch_vod_shortcode($atts) {
+    $atts = shortcode_atts([
+        'channel' => '',
+        'video_id' => '',
+        'limit' => '10',
+        'type' => 'archive', // archive, upload, highlight
+        'width' => '100%',
+        'height' => '480',
+        'autoplay' => 'false',
+        'muted' => 'false',
+        'show_info' => 'true',
+        'show_thumbnail' => 'true',
+        'layout' => 'grid' // grid, list
+    ], $atts);
+
+    if (empty($atts['channel']) && empty($atts['video_id'])) {
+        return '<p class="twitch-error">❌ Bitte gib einen Kanal oder Video-ID an.</p>';
+    }
+
+    $api = new WP_Twitch_API();
+    
+    // API-Verbindung testen
+    $connection_test = $api->test_connection();
+    if (!$connection_test['success']) {
+        return '<div class="twitch-error">
+            <p>⚠️ API-Verbindungsfehler: ' . esc_html($connection_test['message']) . '</p>
+            <p>Bitte überprüfe deine API-Einstellungen unter <a href="' . admin_url('options-general.php?page=twitch-api-settings') . '">Einstellungen → Twitch API</a>.</p>
+        </div>';
+    }
+
+    if (!empty($atts['video_id'])) {
+        // Spezifisches Video anzeigen
+        return wp_twitch_render_single_vod($atts, $api);
+    } else {
+        // Video-Liste vom Kanal anzeigen
+        return wp_twitch_render_vod_list($atts, $api);
+    }
+}
+
+/**
+ * Einzelnes VOD rendern
+ */
+function wp_twitch_render_single_vod($atts, $api) {
+    $video = $api->get_video($atts['video_id']);
+    
+    if (!$video) {
+        return '<div class="twitch-error">
+            <p>⚠️ Video nicht gefunden.</p>
+        </div>';
+    }
+
+    $embed_url = $api->get_vod_embed_url($atts['video_id'], $atts['autoplay'] === 'true', $atts['muted'] === 'true');
+    
+    $output = '<div class="twitch-vod-container">';
+    
+    // Video-Info
+    if ($atts['show_info'] === 'true') {
+        $output .= '<div class="twitch-vod-info">';
+        
+        if ($atts['show_thumbnail'] === 'true' && !empty($video['thumbnail_url'])) {
+            $thumbnail_url = str_replace('%{width}', '320', str_replace('%{height}', '180', $video['thumbnail_url']));
+            $output .= '<img src="' . esc_url($thumbnail_url) . '" alt="' . esc_attr($video['title']) . '" class="twitch-vod-thumbnail">';
+        }
+        
+        $output .= '<div class="twitch-vod-details">';
+        $output .= '<h3 class="twitch-vod-title">' . esc_html($video['title']) . '</h3>';
+        $output .= '<p class="twitch-vod-meta">📅 ' . date_i18n(get_option('date_format'), strtotime($video['created_at'])) . '</p>';
+        $output .= '<p class="twitch-vod-duration">⏱️ ' . wp_twitch_format_duration($video['duration']) . '</p>';
+        $output .= '<p class="twitch-vod-views">👁️ ' . number_format($video['view_count']) . ' Aufrufe</p>';
+        $output .= '</div></div>';
+    }
+    
+    // Video Player
+    $output .= '<div class="twitch-vod-player">';
+    $output .= '<iframe
+        src="' . esc_url($embed_url) . '"
+        width="' . esc_attr($atts['width']) . '"
+        height="' . esc_attr($atts['height']) . '"
+        frameborder="0"
+        scrolling="no"
+        allowfullscreen="true">
+    </iframe>';
+    $output .= '</div></div>';
+    
+    return $output;
+}
+
+/**
+ * VOD-Liste rendern
+ */
+function wp_twitch_render_vod_list($atts, $api) {
+    $videos = $api->get_channel_videos($atts['channel'], intval($atts['limit']), $atts['type']);
+    
+    if (empty($videos)) {
+        return '<div class="twitch-vod-empty">
+            <p>📹 Keine Videos gefunden.</p>
+        </div>';
+    }
+
+    $layout_class = 'twitch-vod-list-' . esc_attr($atts['layout']);
+    $output = '<div class="twitch-vod-list ' . $layout_class . '">';
+
+    foreach ($videos as $video) {
+        $output .= '<div class="twitch-vod-item">';
+        
+        // Thumbnail
+        if ($atts['show_thumbnail'] === 'true' && !empty($video['thumbnail_url'])) {
+            $thumbnail_url = str_replace('%{width}', '320', str_replace('%{height}', '180', $video['thumbnail_url']));
+            $output .= '<img src="' . esc_url($thumbnail_url) . '" alt="' . esc_attr($video['title']) . '" class="twitch-vod-thumbnail">';
+        }
+        
+        $output .= '<div class="twitch-vod-item-info">';
+        $output .= '<h4 class="twitch-vod-item-title">' . esc_html($video['title']) . '</h4>';
+        $output .= '<p class="twitch-vod-item-meta">📅 ' . date_i18n(get_option('date_format'), strtotime($video['created_at'])) . ' • ⏱️ ' . wp_twitch_format_duration($video['duration']) . '</p>';
+        
+        // Video-Link
+        $output .= '<a href="' . esc_url($video['url']) . '" target="_blank" class="twitch-vod-watch" rel="noopener noreferrer">';
+        $output .= '🎮 Auf Twitch ansehen';
+        $output .= '</a>';
+        
+        // Embed-Button
+        $embed_url = $api->get_vod_embed_url($video['id']);
+        $output .= '<button class="twitch-vod-embed" onclick="wp_twitch_embed_vod(\'' . esc_js($video['id']) . '\', \'' . esc_js($atts['width']) . '\', \'' . esc_js($atts['height']) . '\')">';
+        $output .= '📺 Einbetten';
+        $output .= '</button>';
+        
+        $output .= '</div></div>';
+    }
+
+    $output .= '</div>';
+    
+    // JavaScript für Embed-Funktion
+    $output .= '<script>
+    function wp_twitch_embed_vod(videoId, width, height) {
+        var container = event.target.closest(".twitch-vod-item");
+        var embedUrl = "' . esc_url($api->get_vod_embed_url('VIDEO_ID')) . '";
+        embedUrl = embedUrl.replace("VIDEO_ID", videoId);
+        
+        var iframe = document.createElement("iframe");
+        iframe.src = embedUrl;
+        iframe.width = width;
+        iframe.height = height;
+        iframe.frameBorder = "0";
+        iframe.scrolling = "no";
+        iframe.allowFullscreen = true;
+        
+        container.innerHTML = "";
+        container.appendChild(iframe);
+    }
+    </script>';
+    
+    return $output;
+}
+
+/**
+ * Shortcode für Clips
+ */
+function wp_twitch_clips_shortcode($atts) {
+    $atts = shortcode_atts([
+        'channel' => '',
+        'clip_id' => '',
+        'limit' => '10',
+        'width' => '100%',
+        'height' => '480',
+        'autoplay' => 'false',
+        'show_info' => 'true',
+        'layout' => 'grid' // grid, list
+    ], $atts);
+
+    if (empty($atts['channel']) && empty($atts['clip_id'])) {
+        return '<p class="twitch-error">❌ Bitte gib einen Kanal oder Clip-ID an.</p>';
+    }
+
+    $api = new WP_Twitch_API();
+    
+    // API-Verbindung testen
+    $connection_test = $api->test_connection();
+    if (!$connection_test['success']) {
+        return '<div class="twitch-error">
+            <p>⚠️ API-Verbindungsfehler: ' . esc_html($connection_test['message']) . '</p>
+            <p>Bitte überprüfe deine API-Einstellungen unter <a href="' . admin_url('options-general.php?page=twitch-api-settings') . '">Einstellungen → Twitch API</a>.</p>
+        </div>';
+    }
+
+    if (!empty($atts['clip_id'])) {
+        // Spezifischen Clip anzeigen
+        return wp_twitch_render_single_clip($atts, $api);
+    } else {
+        // Clip-Liste vom Kanal anzeigen
+        return wp_twitch_render_clip_list($atts, $api);
+    }
+}
+
+/**
+ * Einzelnen Clip rendern
+ */
+function wp_twitch_render_single_clip($atts, $api) {
+    $clip = $api->get_clip($atts['clip_id']);
+    
+    if (!$clip) {
+        return '<div class="twitch-error">
+            <p>⚠️ Clip nicht gefunden.</p>
+        </div>';
+    }
+
+    $embed_url = $api->get_clip_embed_url($atts['clip_id'], $atts['autoplay'] === 'true');
+    
+    $output = '<div class="twitch-clip-container">';
+    
+    // Clip-Info
+    if ($atts['show_info'] === 'true') {
+        $output .= '<div class="twitch-clip-info">';
+        $output .= '<h3 class="twitch-clip-title">🎬 ' . esc_html($clip['title']) . '</h3>';
+        $output .= '<p class="twitch-clip-meta">👤 ' . esc_html($clip['broadcaster_name']) . ' • 📅 ' . date_i18n(get_option('date_format'), strtotime($clip['created_at'])) . '</p>';
+        $output .= '<p class="twitch-clip-views">👁️ ' . number_format($clip['view_count']) . ' Aufrufe</p>';
+        $output .= '</div>';
+    }
+    
+    // Clip Player
+    $output .= '<div class="twitch-clip-player">';
+    $output .= '<iframe
+        src="' . esc_url($embed_url) . '"
+        width="' . esc_attr($atts['width']) . '"
+        height="' . esc_attr($atts['height']) . '"
+        frameborder="0"
+        scrolling="no"
+        allowfullscreen="true">
+    </iframe>';
+    $output .= '</div></div>';
+    
+    return $output;
+}
+
+/**
+ * Clip-Liste rendern
+ */
+function wp_twitch_render_clip_list($atts, $api) {
+    $clips = $api->get_channel_clips($atts['channel'], intval($atts['limit']));
+    
+    if (empty($clips)) {
+        return '<div class="twitch-clips-empty">
+            <p>🎬 Keine Clips gefunden.</p>
+        </div>';
+    }
+
+    $layout_class = 'twitch-clips-list-' . esc_attr($atts['layout']);
+    $output = '<div class="twitch-clips-list ' . $layout_class . '">';
+
+    foreach ($clips as $clip) {
+        $output .= '<div class="twitch-clip-item">';
+        
+        // Thumbnail
+        if (!empty($clip['thumbnail_url'])) {
+            $output .= '<img src="' . esc_url($clip['thumbnail_url']) . '" alt="' . esc_attr($clip['title']) . '" class="twitch-clip-thumbnail">';
+        }
+        
+        $output .= '<div class="twitch-clip-item-info">';
+        $output .= '<h4 class="twitch-clip-item-title">🎬 ' . esc_html($clip['title']) . '</h4>';
+        $output .= '<p class="twitch-clip-item-meta">👤 ' . esc_html($clip['broadcaster_name']) . ' • 📅 ' . date_i18n(get_option('date_format'), strtotime($clip['created_at'])) . '</p>';
+        
+        // Clip-Link
+        $output .= '<a href="' . esc_url($clip['url']) . '" target="_blank" class="twitch-clip-watch" rel="noopener noreferrer">';
+        $output .= '🎬 Auf Twitch ansehen';
+        $output .= '</a>';
+        
+        // Embed-Button
+        $embed_url = $api->get_clip_embed_url($clip['id']);
+        $output .= '<button class="twitch-clip-embed" onclick="wp_twitch_embed_clip(\'' . esc_js($clip['id']) . '\', \'' . esc_js($atts['width']) . '\', \'' . esc_js($atts['height']) . '\')">';
+        $output .= '📺 Einbetten';
+        $output .= '</button>';
+        
+        $output .= '</div></div>';
+    }
+
+    $output .= '</div>';
+    
+    // JavaScript für Embed-Funktion
+    $output .= '<script>
+    function wp_twitch_embed_clip(clipId, width, height) {
+        var container = event.target.closest(".twitch-clip-item");
+        var embedUrl = "' . esc_url($api->get_clip_embed_url('CLIP_ID')) . '";
+        embedUrl = embedUrl.replace("CLIP_ID", clipId);
+        
+        var iframe = document.createElement("iframe");
+        iframe.src = embedUrl;
+        iframe.width = width;
+        iframe.height = height;
+        iframe.frameBorder = "0";
+        iframe.scrolling = "no";
+        iframe.allowFullscreen = true;
+        
+        container.innerHTML = "";
+        container.appendChild(iframe);
+    }
+    </script>';
+    
+    return $output;
+}
+
+/**
+ * Hilfsfunktion für Dauer-Formatierung
+ */
+function wp_twitch_format_duration($duration) {
+    $hours = floor($duration / 3600);
+    $minutes = floor(($duration % 3600) / 60);
+    $seconds = $duration % 60;
+    
+    if ($hours > 0) {
+        return sprintf('%d:%02d:%02d', $hours, $minutes, $seconds);
+    } elseif ($minutes > 0) {
+        return sprintf('%d:%02d', $minutes, $seconds);
+    } else {
+        return sprintf('%ds', $seconds);
+    }
+}
+
+add_shortcode('twitch_vod', 'wp_twitch_vod_shortcode');
+add_shortcode('twitch_clips', 'wp_twitch_clips_shortcode');
+
+/**
  * AJAX-Handler für Live-Status-Prüfung
  */
 function wp_twitch_check_stream_status() {
