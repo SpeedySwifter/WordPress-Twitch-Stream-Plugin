@@ -1118,58 +1118,52 @@ Siehe [Roadmap](#-roadmap) für alle verfügbaren Features.
 
 ## 🗺️ Roadmap
 
-### ✅ Version 1.3.0 (Abgeschlossen)
-- [x] Basic Shortcode
-- [x] Live-Status Erkennung
-- [x] Admin Settings Page
-- [x] Token-Caching
-- [x] Stream-Infos (Titel, Spiel, Zuschauer, Avatar, Live Badge)
-- [x] Multiple Streams Grid-Layout
-- [x] Gutenberg Block (Stream & Grid)
-- [x] Elementor Widgets (Stream & Grid)
-- [x] Oxygen Builder Components
-- [x] Divi Builder Modules
-- [x] Universal Page Builder Compatibility
-- [x] WordPress Widgets (Stream & Grid)
-- [x] Cookie Banner Integration (DSGVO)
-- [x] Multi-Language (DE/EN)
-- [x] Dark Mode Support
-- [x] Responsive Design
-- [x] VOD (Video on Demand) Support
-- [x] Clips einbinden
-- [x] Sidebar Widgets (VOD & Clips)
-- [x] REST API Endpoint
-- [x] Webhook-Support (EventSub)
-- [x] Advanced Analytics
-- [x] Stream-Recording Integration
-- [x] Multi-Channel Dashboard
-- [x] Custom CSS Builder
-- [x] Advanced Caching Options
-- [x] Donation Integration (Buy Me a Coffee & PayPal)
+### ✅ Version 1.7.0 (Abgeschlossen - Current Release)
+- [x] **Mobile App Integration** - Progressive Web App (PWA) with offline support
+- [x] **Push Notifications** - VAPID key configuration and browser notifications
+- [x] **Touch Gestures** - Mobile-optimized interface with swipe controls
+- [x] **Visual Stream Scheduler** - Calendar interface for stream planning
+- [x] **Advanced Shortcode Builder** - GUI for creating custom shortcodes
+- [x] **Membership Plugin Integration** - Support for 6 major membership plugins
+- [x] **Multi-Language Support** - Complete translations in 7 languages
+- [x] **Donation Integration** - Buy Me a Coffee and PayPal buttons
+- [x] **Twitch Chat Integration** - Advanced chat with emoji support
+- [x] **Stream Recording Download** - VOD download functionality
+- [x] **Advanced Analytics Dashboard** - Real-time metrics and charts
+- [x] **WooCommerce Integration** - eCommerce integration for memberships
+- [x] **Cookie Banner Integration** - GDPR compliant with 6 cookie systems
+- [x] **VOD Support** - Video on Demand with archives and highlights
+- [x] **Clips Integration** - Twitch clips embedding and management
+- [x] **Sidebar Widgets** - VOD and clips widgets for sidebars
+- [x] **Page Builder Support** - Elementor, Oxygen, Divi, Beaver Builder & more
+- [x] **Gutenberg Blocks** - Native WordPress block editor integration
+- [x] **REST API Endpoints** - Programmatic access to plugin features
+- [x] **Webhook Support** - EventSub integration for real-time updates
+- [x] **Multi-Channel Dashboard** - Manage multiple Twitch channels
+- [x] **Custom CSS Builder** - Visual CSS customization interface
+- [x] **Advanced Caching** - Performance optimization and caching options
+- [x] **Dark Mode Support** - Complete dark theme implementation
+- [x] **Responsive Design** - Mobile-first responsive layouts
+- [x] **Basic Stream Embedding** - Core Twitch integration functionality
+- [x] **Live Status Detection** - Automatic stream status checking
+- [x] **Admin Settings Panel** - Comprehensive configuration interface
+- [x] **Token Caching System** - Intelligent API token management
 
-### 🚧 Version 1.4.0 (Geplant)
-- [ ] Twitch Chat Integration
-- [ ] Donation/Subscription Buttons (erweitert)
-- [ ] Stream-Recording Download
-- [ ] Advanced Analytics Dashboard
-- [ ] Multi-Language Support (EN/DE/FR/ES)
-- [ ] WooCommerce Integration
-- [ ] Membership Plugin Integration
-- [ ] Advanced Shortcode Builder
-- [ ] Visual Stream Scheduler
-- [ ] Mobile App Integration
+### � Version 1.8.0 (Geplant - Next Release)
+- [ ] **AI-Powered Features** - Smart stream recommendations and analytics
+- [ ] **Advanced Monetization** - Subscription models and premium features
+- [ ] **Cross-Platform Integration** - YouTube, Facebook Gaming support
+- [ ] **Enterprise Features** - White-label solutions and advanced security
+- [ ] **Performance Enhancements** - Advanced caching and optimization
+- [ ] **Developer Tools** - Enhanced API and webhook capabilities
 
-### 🔮 Version 2.0.0 (Geplant)
-- [ ] AI-Powered Stream Recommendations
-- [ ] Advanced Monetization Features
-- [ ] Cross-Platform Integration (YouTube, Facebook Gaming)
-- [ ] Advanced User Management
-- [ ] White-Label Solutions
-- [ ] Enterprise Analytics Suite
-- [ ] API Rate Limiting & Quotas
-- [ ] Advanced Security Features
-- [ ] Cloud Storage Integration
-- [ ] Mobile App Development
+### 🔮 Version 2.0.0 (Langfristig geplant)
+- [ ] **AI Stream Assistant** - AI-powered stream management and optimization
+- [ ] **Advanced Analytics Suite** - Enterprise-level reporting and insights
+- [ ] **Mobile App Development** - Dedicated mobile applications
+- [ ] **Cloud Integration** - Advanced cloud storage and CDN support
+- [ ] **API Rate Limiting** - Advanced quota management and scaling
+- [ ] **White-Label Solutions** - Custom branding and licensing options
 
 ---
 

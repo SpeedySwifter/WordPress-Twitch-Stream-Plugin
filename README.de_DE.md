@@ -495,7 +495,54 @@ Das Plugin unterstützt **7 Sprachen** mit vollständigen Übersetzungen:
 
 ---
 
-## 🤝 Mitwirken
+## 🗺️ Roadmap
+
+### ✅ Version 1.7.0 (Abgeschlossen - Aktuelle Version)
+- [x] **Mobile App Integration** - Progressive Web App (PWA) mit Offline-Support
+- [x] **Push-Benachrichtigungen** - VAPID-Schlüssel-Konfiguration und Browser-Benachrichtigungen
+- [x] **Touch-Gesten** - Mobile-optimierte Oberfläche mit Swipe-Steuerung
+- [x] **Visueller Stream-Scheduler** - Kalender-Oberfläche für Stream-Planung
+- [x] **Erweiterter Shortcode-Builder** - GUI zum Erstellen benutzerdefinierter Shortcodes
+- [x] **Membership Plugin Integration** - Support für 6 wichtige Membership-Plugins
+- [x] **Multi-Language Support** - Vollständige Übersetzungen in 7 Sprachen
+- [x] **Donation Integration** - Buy Me a Coffee und PayPal Buttons
+- [x] **Twitch Chat Integration** - Erweiterter Chat mit Emoji-Support
+- [x] **Stream Recording Download** - VOD Download-Funktionalität
+- [x] **Advanced Analytics Dashboard** - Echtzeit-Metriken und Charts
+- [x] **WooCommerce Integration** - eCommerce-Integration für Memberships
+- [x] **Cookie Banner Integration** - DSGVO-konform mit 6 Cookie-Systemen
+- [x] **VOD Support** - Video on Demand mit Archiven und Highlights
+- [x] **Clips Integration** - Twitch Clips Einbettung und Verwaltung
+- [x] **Sidebar Widgets** - VOD und Clips Widgets für Sidebars
+- [x] **Page Builder Support** - Elementor, Oxygen, Divi, Beaver Builder & mehr
+- [x] **Gutenberg Blocks** - Native WordPress Block Editor Integration
+- [x] **REST API Endpoints** - Programmatischer Zugriff auf Plugin-Features
+- [x] **Webhook Support** - EventSub Integration für Echtzeit-Updates
+- [x] **Multi-Channel Dashboard** - Mehrere Twitch-Kanäle verwalten
+- [x] **Custom CSS Builder** - Visuelle CSS-Anpassungsoberfläche
+- [x] **Advanced Caching** - Performance-Optimierung und Caching-Optionen
+- [x] **Dark Mode Support** - Vollständige Dark Theme Implementierung
+- [x] **Responsive Design** - Mobile-first responsive Layouts
+- [x] **Basic Stream Embedding** - Core Twitch Integrationsfunktionalität
+- [x] **Live Status Detection** - Automatische Stream-Status-Prüfung
+- [x] **Admin Settings Panel** - Umfassende Konfigurationsoberfläche
+- [x] **Token Caching System** - Intelligente API Token-Verwaltung
+
+### 🚀 Version 1.8.0 (Geplant - Nächste Version)
+- [ ] **AI-gestützte Features** - Smarte Stream-Empfehlungen und Analytics
+- [ ] **Erweiterte Monetarisierung** - Abonnement-Modelle und Premium-Features
+- [ ] **Cross-Platform Integration** - YouTube, Facebook Gaming Support
+- [ ] **Enterprise Features** - White-Label Lösungen und erweiterte Sicherheit
+- [ ] **Performance Enhancements** - Erweiterte Caching und Optimierung
+- [ ] **Developer Tools** - Enhanced API und Webhook Capabilities
+
+### 🔮 Version 2.0.0 (Langfristig geplant)
+- [ ] **AI Stream Assistant** - KI-gestützte Stream-Verwaltung und -Optimierung
+- [ ] **Advanced Analytics Suite** - Enterprise-Level Reporting und Insights
+- [ ] **Mobile App Development** - Dedizierte mobile Anwendungen
+- [ ] **Cloud Integration** - Erweiterte Cloud Storage und CDN Support
+- [ ] **API Rate Limiting** - Erweiterte Quota-Verwaltung und Skalierung
+- [ ] **White-Label Solutions** - Custom Branding und Licensing-Optionen
 
 Wir freuen uns über Beiträge! Siehe unsere [Contributing Guide](CONTRIBUTING.md) für Details.
 

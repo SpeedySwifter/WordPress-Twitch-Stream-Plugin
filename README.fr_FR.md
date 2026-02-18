@@ -495,7 +495,54 @@ Le plugin supporte **7 langues** avec des traductions complètes:
 
 ---
 
-## 🤝 Contribuer
+## 🗺️ Roadmap
+
+### ✅ Version 1.7.0 (Terminée - Version actuelle)
+- [x] **Intégration d'application mobile** - Progressive Web App (PWA) avec support hors ligne
+- [x] **Notifications push** - Configuration des clés VAPID et notifications de navigateur
+- [x] **Gestes tactiles** - Interface optimisée pour mobile avec contrôle par balayage
+- [x] **Planificateur de streams visuel** - Interface calendrier pour la planification de streams
+- [x] **Constructeur de shortcodes avancé** - GUI pour créer des shortcodes personnalisés
+- [x] **Intégration de plugins d'adhésion** - Support pour 6 plugins d'adhésion majeurs
+- [x] **Support multi-langues** - Traductions complètes dans 7 langues
+- [x] **Intégration de dons** - Boutons Buy Me a Coffee et PayPal
+- [x] **Intégration du chat Twitch** - Chat avancé avec support des emojis
+- [x] **Téléchargement d'enregistrement de streams** - Fonctionnalité de téléchargement VOD
+- [x] **Tableau de bord d'analyses avancé** - Métriques en temps réel et graphiques
+- [x] **Intégration WooCommerce** - Intégration e-commerce pour les adhésions
+- [x] **Intégration de bannières cookie** - Conforme RGPD avec 6 systèmes de cookies
+- [x] **Support VOD** - Video on Demand avec archives et temps forts
+- [x] **Intégration de clips** - Intégration et gestion des clips Twitch
+- [x] **Widgets de sidebar** - Widgets VOD et clips pour sidebars
+- [x] **Support de constructeurs de pages** - Elementor, Oxygen, Divi, Beaver Builder & plus
+- [x] **Blocs Gutenberg** - Intégration native de l'éditeur de blocs WordPress
+- [x] **Points de terminaison REST API** - Accès programmatique aux fonctionnalités du plugin
+- [x] **Support webhook** - Intégration EventSub pour mises à jour en temps réel
+- [x] **Tableau de bord multi-chaînes** - Gérer plusieurs chaînes Twitch
+- [x] **Constructeur CSS personnalisé** - Interface d'ajustement CSS visuelle
+- [x] **Cache avancé** - Optimisation des performances et options de cache
+- [x] **Support du mode sombre** - Implémentation complète du thème sombre
+- [x] **Design responsive** - Layouts responsives mobile-first
+- [x] **Intégration de stream de base** - Fonctionnalité d'intégration Twitch de base
+- [x] **Détection de statut en direct** - Vérification automatique du statut du stream
+- [x] **Panneau de paramètres admin** - Interface de configuration complète
+- [x] **Système de cache de tokens** - Gestion intelligente des tokens API
+
+### 🚀 Version 1.8.0 (Planifiée - Prochaine version)
+- [ ] **Fonctionnalités alimentées par IA** - Recommandations de streams intelligentes et analyses
+- [ ] **Monétisation avancée** - Modèles d'abonnement et fonctionnalités premium
+- [ ] **Intégration multi-plateforme** - Support YouTube, Facebook Gaming
+- [ ] **Fonctionnalités d'entreprise** - Solutions white-label et sécurité avancée
+- [ ] **Améliorations de performance** - Cache et optimisation avancés
+- [ ] **Outils de développement** - API et capacités webhook améliorées
+
+### 🔮 Version 2.0.0 (Planifiée à long terme)
+- [ ] **Assistant IA de stream** - Gestion et optimisation de streams alimentées par IA
+- [ ] **Suite d'analyses avancée** - Reporting et insights de niveau entreprise
+- [ ] **Développement d'application mobile** - Applications mobiles dédiées
+- [ ] **Intégration cloud** - Support avancé de stockage cloud et CDN
+- [ ] **Limitation du taux API** - Gestion avancée de quotas et mise à l'échelle
+- [ ] **Solutions white-label** - Branding personnalisé et options de licence
 
 Nous accueillons les contributions ! Voir notre [Guide de contribution](CONTRIBUTING.md) pour les détails.
 
