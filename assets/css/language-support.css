@@ -1,0 +1,620 @@
+/**
+ * Multi-Language Support Styles
+ */
+
+/* Language Switcher Container */
+.twitch-language-switcher {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Dropdown Style */
+.twitch-switcher-dropdown {
+    position: relative;
+}
+
+.twitch-language-select {
+    appearance: none;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px 32px 8px 12px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333" d="M6 9L2 5h8z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+}
+
+.twitch-language-select:hover {
+    border-color: #9146ff;
+    box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.2);
+}
+
+.twitch-language-select:focus {
+    border-color: #9146ff;
+    box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.2);
+}
+
+/* Button Style */
+.twitch-switcher-buttons {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.twitch-language-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.twitch-language-btn:hover {
+    border-color: #9146ff;
+    background: #f8f9fa;
+    transform: translateY(-1px);
+}
+
+.twitch-language-btn.active {
+    background: #9146ff;
+    border-color: #9146ff;
+    color: white;
+}
+
+.twitch-language-btn:focus {
+    border-color: #9146ff;
+    box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.2);
+}
+
+/* Language Flag */
+.twitch-flag {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.twitch-language-flag {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.twitch-language-name {
+    font-weight: 500;
+}
+
+/* Compact Style */
+.twitch-switcher-compact .twitch-language-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.twitch-switcher-compact .twitch-flag {
+    font-size: 16px;
+}
+
+/* Minimal Style */
+.twitch-switcher-minimal .twitch-language-btn {
+    background: transparent;
+    border: none;
+    padding: 4px;
+}
+
+.twitch-switcher-minimal .twitch-language-btn:hover {
+    background: rgba(145, 70, 255, 0.1);
+}
+
+.twitch-switcher-minimal .twitch-language-btn.active {
+    background: rgba(145, 70, 255, 0.2);
+    color: #9146ff;
+}
+
+/* Flag Only Style */
+.twitch-switcher-flags .twitch-language-btn {
+    padding: 4px;
+}
+
+.twitch-switcher-flags .twitch-language-name {
+    display: none;
+}
+
+/* Name Only Style */
+.twitch-switcher-names .twitch-language-flag {
+    display: none;
+}
+
+/* Language Widget */
+.widget .twitch-language-switcher {
+    margin: 10px 0;
+}
+
+.widget .twitch-language-select {
+    width: 100%;
+}
+
+.widget .twitch-language-buttons {
+    justify-content: center;
+}
+
+.widget .twitch-language-btn {
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+}
+
+/* Navigation Integration */
+.navbar .twitch-language-switcher {
+    margin-left: auto;
+}
+
+.navbar .twitch-language-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: inherit;
+    padding: 8px 12px;
+}
+
+.navbar .twitch-language-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar .twitch-language-btn.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Footer Integration */
+.footer .twitch-language-switcher {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.footer .twitch-language-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: inherit;
+}
+
+.footer .twitch-language-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.footer .twitch-language-btn.active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Dark Theme */
+.twitch-theme-dark .twitch-language-select {
+    background: #2d2d2d;
+    border-color: #4d4d4d;
+    color: #e0e0e0;
+}
+
+.twitch-theme-dark .twitch-language-btn {
+    background: #2d2d2d;
+    border-color: #4d4d4d;
+    color: #e0e0e0;
+}
+
+.twitch-theme-dark .twitch-language-btn:hover {
+    border-color: #9146ff;
+    background: #3d3d3d;
+}
+
+.twitch-theme-dark .twitch-language-btn.active {
+    background: #9146ff;
+    border-color: #9146ff;
+    color: white;
+}
+
+/* Loading State */
+.twitch-language-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.twitch-language-loading::after {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.twitch-language-error {
+    border-color: #dc3545 !important;
+    background: #f8d7da !important;
+    color: #721c24 !important;
+}
+
+/* Success State */
+.twitch-language-success {
+    border-color: #28a745 !important;
+    background: #d4edda !important;
+    color: #155724 !important;
+}
+
+/* Language Indicator */
+.twitch-language-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    background: rgba(145, 70, 255, 0.1);
+    border: 1px solid rgba(145, 70, 255, 0.2);
+    border-radius: 12px;
+    font-size: 12px;
+    color: #9146ff;
+    font-weight: 500;
+}
+
+.twitch-language-indicator .twitch-flag {
+    font-size: 14px;
+}
+
+/* Language Menu */
+.twitch-language-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 4px;
+}
+
+.twitch-language-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.twitch-language-menu-item:last-child {
+    border-bottom: none;
+}
+
+.twitch-language-menu-item:hover {
+    background: #f8f9fa;
+}
+
+.twitch-language-menu-item.active {
+    background: #9146ff;
+    color: white;
+}
+
+.twitch-language-menu-item.active:hover {
+    background: #7928ca;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .twitch-language-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .twitch-language-btn {
+        justify-content: flex-start;
+        width: 100%;
+    }
+    
+    .widget .twitch-language-buttons {
+        flex-direction: row;
+        gap: 4px;
+    }
+    
+    .widget .twitch-language-btn {
+        width: auto;
+        justify-content: center;
+    }
+    
+    .navbar .twitch-language-switcher {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    .navbar .twitch-language-buttons {
+        flex-direction: row;
+        gap: 4px;
+    }
+    
+    .navbar .twitch-language-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .twitch-language-select {
+        font-size: 12px;
+        padding: 6px 28px 6px 10px;
+    }
+    
+    .twitch-language-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+    
+    .twitch-flag {
+        font-size: 16px;
+    }
+    
+    .twitch-language-name {
+        font-size: 11px;
+    }
+    
+    .twitch-switcher-compact .twitch-language-btn {
+        padding: 3px 6px;
+        font-size: 11px;
+    }
+    
+    .twitch-switcher-compact .twitch-flag {
+        font-size: 14px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .twitch-language-switcher {
+        display: none;
+    }
+}
+
+/* Accessibility */
+.twitch-language-btn:focus-visible,
+.twitch-language-select:focus-visible {
+    outline: 2px solid #9146ff;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .twitch-language-btn,
+    .twitch-language-select,
+    .twitch-language-loading::after {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .twitch-language-select {
+        border: 2px solid #000;
+    }
+    
+    .twitch-language-btn {
+        border: 2px solid #000;
+    }
+    
+    .twitch-language-btn.active {
+        border-color: #9146ff;
+    }
+}
+
+/* RTL Support */
+[dir="rtl"] .twitch-language-buttons {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .twitch-language-btn {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .navbar .twitch-language-switcher {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+[dir="rtl"] .twitch-language-select {
+    background-position: left 12px center;
+    padding: 8px 12px 8px 32px;
+}
+
+/* Custom Scrollbar for Language Menu */
+.twitch-language-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.twitch-language-menu::-webkit-scrollbar-track {
+    background: #f1f3f4;
+}
+
+.twitch-language-menu::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.twitch-language-menu::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Language Settings Page */
+.twitch-language-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.twitch-language-checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.twitch-language-checkboxes label:hover {
+    background: #e9ecef;
+}
+
+.twitch-language-checkboxes input[type="checkbox"] {
+    margin: 0;
+}
+
+/* Language Detection Notice */
+.twitch-language-notice {
+    background: #e3f2fd;
+    border: 1px solid #2196f3;
+    border-radius: 4px;
+    padding: 12px;
+    margin: 16px 0;
+    color: #1976d2;
+    font-size: 14px;
+}
+
+.twitch-language-notice .twitch-flag {
+    margin-right: 8px;
+}
+
+/* Language Switch Animation */
+.twitch-language-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.twitch-language-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.twitch-language-btn:active::before {
+    width: 200px;
+    height: 200px;
+}
+
+/* Tooltip */
+.twitch-language-tooltip {
+    position: relative;
+}
+
+.twitch-language-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1001;
+}
+
+.twitch-language-tooltip:hover::after {
+    opacity: 1;
+}
+
+/* Language Badge */
+.twitch-language-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #9146ff;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.twitch-language-badge .twitch-flag {
+    font-size: 12px;
+}
+
+/* Language Progress */
+.twitch-language-progress {
+    width: 100%;
+    height: 4px;
+    background: #f0f0f0;
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.twitch-language-progress-bar {
+    height: 100%;
+    background: #9146ff;
+    transition: width 0.3s ease;
+}
+
+/* Language Stats */
+.twitch-language-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.twitch-language-stat {
+    text-align: center;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.twitch-language-stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.twitch-language-stat-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}

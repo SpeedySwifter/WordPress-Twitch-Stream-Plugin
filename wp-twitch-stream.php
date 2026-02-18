@@ -43,6 +43,7 @@ require_once WP_TWITCH_PLUGIN_DIR . 'includes/donation-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/twitch-chat-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/stream-recording-download.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-analytics-dashboard.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/multi-language-support.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
@@ -97,6 +98,14 @@ function wp_twitch_enqueue_frontend_styles() {
     wp_enqueue_style(
         'wp-twitch-stream-analytics-dashboard',
         WP_TWITCH_PLUGIN_URL . 'assets/css/analytics-dashboard.css',
+        array(),
+        WP_TWITCH_VERSION
+    );
+    
+    // Language Support Styles
+    wp_enqueue_style(
+        'wp-twitch-stream-language-support',
+        WP_TWITCH_PLUGIN_URL . 'assets/css/language-support.css',
         array(),
         WP_TWITCH_VERSION
     );
