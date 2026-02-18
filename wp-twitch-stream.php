@@ -47,6 +47,7 @@ require_once WP_TWITCH_PLUGIN_DIR . 'includes/multi-language-support.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/woocommerce-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/membership-plugin-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-shortcode-builder.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/visual-stream-scheduler.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
@@ -141,6 +142,14 @@ function wp_twitch_enqueue_frontend_styles() {
         array(),
         WP_TWITCH_VERSION
     );
+    
+    // Stream Scheduler Styles
+    wp_enqueue_style(
+        'wp-twitch-stream-scheduler',
+        WP_TWITCH_PLUGIN_URL . 'assets/css/stream-scheduler.css',
+        array(),
+        WP_TWITCH_VERSION
+    );
 }
 add_action('wp_enqueue_scripts', 'wp_twitch_enqueue_frontend_styles');
 
@@ -176,6 +185,31 @@ function wp_twitch_enqueue_admin_scripts($hook) {
             WP_TWITCH_VERSION,
             true
         );
+    }
+    
+    // Stream Scheduler Scripts
+    if (isset($_GET['page']) && $_GET['page'] === 'twitch-stream-scheduler') {
+        wp_enqueue_script(
+            'wp-twitch-stream-scheduler',
+            WP_TWITCH_PLUGIN_URL . 'assets/js/stream-scheduler.js',
+            array('jquery', 'wp-util'),
+            WP_TWITCH_VERSION,
+            true
+        );
+        
+        // Enqueue FullCalendar if available
+        wp_enqueue_script(
+            'fullcalendar',
+            'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js',
+            array(),
+            '6.1.8',
+            true
+        );
+        
+        // Enqueue jQuery UI for date/time pickers
+        wp_enqueue_script('jquery-ui-core');
+        wp_enqueue_script('jquery-ui-datepicker');
+        wp_enqueue_style('jquery-ui', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css');
     }
 }
 add_action('admin_enqueue_scripts', 'wp_twitch_enqueue_admin_scripts');

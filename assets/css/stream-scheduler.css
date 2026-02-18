@@ -1,0 +1,1218 @@
+/**
+ * Visual Stream Scheduler Styles
+ */
+
+/* Main Scheduler Container */
+.twitch-stream-scheduler {
+    background: #ffffff;
+    border: 1px solid #e1e5e9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 100%;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] {
+    background: #1a1a1a;
+    border-color: #2d2d2d;
+    color: #e0e0e0;
+}
+
+/* Scheduler Header */
+.twitch-scheduler-header {
+    background: linear-gradient(135deg, #9146ff 0%, #7928ca 100%);
+    color: white;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.twitch-scheduler-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.twitch-scheduler-icon {
+    font-size: 24px;
+}
+
+.twitch-scheduler-channel {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+.twitch-scheduler-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* View Selector */
+.twitch-view-selector {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.twitch-view-btn {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.twitch-view-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.twitch-view-btn.active {
+    background: white;
+    color: #9146ff;
+    font-weight: 600;
+}
+
+.twitch-view-icon {
+    font-size: 16px;
+}
+
+/* Scheduler Actions */
+.twitch-scheduler-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.twitch-add-stream-btn,
+.twitch-bulk-actions-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.twitch-add-stream-btn:hover,
+.twitch-bulk-actions-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Filters Section */
+.twitch-scheduler-filters {
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 16px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-scheduler-filters {
+    background: #2a2a2a;
+    border-bottom-color: #3d3d3d;
+}
+
+.twitch-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.twitch-filter-group label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-filter-group label {
+    color: #e0e0e0;
+}
+
+.twitch-date-filter,
+.twitch-status-filter,
+.twitch-category-filter {
+    padding: 6px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 14px;
+    background: white;
+    color: #333;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-date-filter,
+.twitch-stream-scheduler[data-theme="dark"] .twitch-status-filter,
+.twitch-stream-scheduler[data-theme="dark"] .twitch-category-filter {
+    background: #3d3d3d;
+    border-color: #4d4d4d;
+    color: #e0e0e0;
+}
+
+.twitch-clear-filters-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.twitch-clear-filters-btn:hover {
+    background: #5a6268;
+}
+
+/* Main Content Layout */
+.twitch-scheduler-content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    min-height: 600px;
+}
+
+.twitch-scheduler-sidebar {
+    background: #f8f9fa;
+    border-left: 1px solid #e9ecef;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 600px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-scheduler-sidebar {
+    background: #2a2a2a;
+    border-left-color: #3d3d3d;
+}
+
+/* Calendar View */
+.twitch-calendar-view {
+    padding: 24px;
+    height: 600px;
+    overflow: hidden;
+}
+
+/* Calendar Header */
+.fc-header-toolbar {
+    margin-bottom: 20px !important;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.fc-toolbar-title {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .fc-toolbar-title {
+    color: #e0e0e0 !important;
+}
+
+.fc-button {
+    background: #9146ff !important;
+    border: none !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.fc-button:hover {
+    background: #7928ca !important;
+    transform: translateY(-1px) !important;
+}
+
+.fc-button:disabled {
+    background: #6c757d !important;
+    cursor: not-allowed !important;
+}
+
+/* Calendar Grid */
+.fc-view-harness {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .fc-view-harness {
+    background: #2a2a2a;
+}
+
+.fc-col-header {
+    background: #f8f9fa !important;
+    border-bottom: 2px solid #e9ecef !important;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .fc-col-header {
+    background: #3d3d3d !important;
+    border-bottom-color: #4d4d4d !important;
+}
+
+.fc-col-header-cell {
+    font-weight: 600 !important;
+    color: #333 !important;
+    padding: 12px !important;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .fc-col-header-cell {
+    color: #e0e0e0 !important;
+}
+
+/* Calendar Days */
+.fc-daygrid-day {
+    border: 1px solid #e9ecef !important;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .fc-daygrid-day {
+    border-color: #3d3d3d !important;
+}
+
+.fc-daygrid-day-number {
+    padding: 8px !important;
+    font-weight: 500 !important;
+    color: #333 !important;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .fc-daygrid-day-number {
+    color: #e0e0e0 !important;
+}
+
+.fc-day-today {
+    background: #fff3cd !important;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .fc-day-today {
+    background: #3d3d2a !important;
+}
+
+/* Stream Events */
+.twitch-stream-event {
+    border-radius: 4px !important;
+    border: none !important;
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin: 2px 4px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.twitch-stream-event:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.twitch-status-scheduled {
+    background: linear-gradient(135deg, #9146ff 0%, #7928ca 100%) !important;
+}
+
+.twitch-status-live {
+    background: linear-gradient(135deg, #dc3545 0%, #b02a37 100%) !important;
+    animation: pulse-live 2s infinite;
+}
+
+@keyframes pulse-live {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.twitch-status-completed {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%) !important;
+}
+
+.twitch-status-cancelled {
+    background: linear-gradient(135deg, #6c757d 0%, #545b62 100%) !important;
+}
+
+/* List View */
+.twitch-list-view {
+    padding: 24px;
+}
+
+.twitch-streams-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.twitch-stream-list-item {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.twitch-stream-list-item:hover {
+    border-color: #9146ff;
+    box-shadow: 0 4px 16px rgba(145, 70, 255, 0.1);
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-list-item {
+    background: #2a2a2a;
+    border-color: #3d3d3d;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-list-item:hover {
+    border-color: #9146ff;
+}
+
+.twitch-stream-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.twitch-stream-date {
+    font-size: 14px;
+    font-weight: 600;
+    color: #9146ff;
+}
+
+.twitch-stream-clock {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-clock {
+    color: #e0e0e0;
+}
+
+.twitch-stream-info {
+    flex: 1;
+}
+
+.twitch-stream-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-title {
+    color: #e0e0e0;
+}
+
+.twitch-stream-meta {
+    font-size: 12px;
+    color: #666;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-meta {
+    color: #b0b0b0;
+}
+
+.twitch-stream-status {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* Timeline View */
+.twitch-timeline-view {
+    padding: 24px;
+}
+
+.twitch-timeline-container {
+    position: relative;
+}
+
+.twitch-timeline-line {
+    position: absolute;
+    left: 120px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-timeline-line {
+    background: #3d3d3d;
+}
+
+.twitch-timeline-item {
+    display: flex;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.twitch-timeline-time {
+    width: 100px;
+    text-align: right;
+    padding-right: 20px;
+    font-weight: 600;
+    color: #9146ff;
+}
+
+.twitch-timeline-content {
+    flex: 1;
+    margin-left: 40px;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-timeline-content {
+    background: #2a2a2a;
+    border-color: #3d3d3d;
+}
+
+.twitch-timeline-dot {
+    position: absolute;
+    left: 113px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #9146ff;
+    border: 3px solid white;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-timeline-dot {
+    border-color: #1a1a1a;
+}
+
+/* Sidebar Components */
+.twitch-upcoming-streams h4,
+.twitch-stream-stats h4 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-upcoming-streams h4,
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-stats h4 {
+    color: #e0e0e0;
+}
+
+.twitch-upcoming-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.twitch-upcoming-item {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 14px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-upcoming-item {
+    background: #2a2a2a;
+    border-color: #3d3d3d;
+}
+
+.twitch-upcoming-item .twitch-stream-date {
+    font-size: 12px;
+}
+
+.twitch-upcoming-item .twitch-stream-clock {
+    font-size: 14px;
+}
+
+/* Stats Grid */
+.twitch-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.twitch-stat-item {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stat-item {
+    background: #2a2a2a;
+    border-color: #3d3d3d;
+}
+
+.twitch-stat-number {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: #9146ff;
+    margin-bottom: 4px;
+}
+
+.twitch-stat-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stat-label {
+    color: #b0b0b0;
+}
+
+/* Stream Calendar Widget */
+.twitch-stream-calendar {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 20px 0;
+}
+
+.twitch-stream-calendar[data-theme="dark"] {
+    background: #1a1a1a;
+    border-color: #2d2d2d;
+}
+
+.twitch-calendar-header {
+    background: #9146ff;
+    color: white;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.twitch-calendar-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.twitch-calendar-prev,
+.twitch-calendar-next {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.twitch-calendar-prev:hover,
+.twitch-calendar-next:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Upcoming Streams Widget */
+.twitch-upcoming-streams-widget {
+    max-width: 400px;
+    margin: 20px 0;
+}
+
+.twitch-widget-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-widget-title {
+    color: #e0e0e0;
+}
+
+.twitch-no-streams {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 40px 20px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-no-streams {
+    color: #b0b0b0;
+}
+
+/* Stream Items */
+.twitch-stream-item {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.twitch-stream-item:hover {
+    border-color: #9146ff;
+    box-shadow: 0 4px 16px rgba(145, 70, 255, 0.1);
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-item {
+    background: #2a2a2a;
+    border-color: #3d3d3d;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-item:hover {
+    border-color: #9146ff;
+}
+
+.twitch-stream-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.twitch-stream-content {
+    flex: 1;
+}
+
+.twitch-stream-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-title {
+    color: #e0e0e0;
+}
+
+.twitch-stream-description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-description {
+    color: #b0b0b0;
+}
+
+.twitch-stream-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-meta {
+    color: #b0b0b0;
+}
+
+.twitch-stream-channel {
+    font-weight: 500;
+}
+
+.twitch-stream-duration {
+    background: #f8f9fa;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-duration {
+    background: #3d3d3d;
+}
+
+.twitch-stream-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.twitch-remind-btn,
+.twitch-calendar-btn {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #9146ff;
+    border-radius: 4px;
+    background: transparent;
+    color: #9146ff;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.twitch-remind-btn:hover,
+.twitch-calendar-btn:hover {
+    background: #9146ff;
+    color: white;
+}
+
+/* Stream Schedule Widget */
+.twitch-stream-schedule {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-stream-schedule {
+    background: #1a1a1a;
+    border-color: #2d2d2d;
+}
+
+.twitch-schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.twitch-schedule-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-schedule-header h3 {
+    color: #e0e0e0;
+}
+
+.twitch-schedule-legend {
+    display: flex;
+    gap: 12px;
+}
+
+.twitch-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #666;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-legend-item {
+    color: #b0b0b0;
+}
+
+.twitch-legend-item.scheduled {
+    color: #9146ff;
+}
+
+.twitch-legend-item.live {
+    color: #dc3545;
+}
+
+.twitch-legend-item.completed {
+    color: #28a745;
+}
+
+/* Modal Styles */
+.twitch-scheduler-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.twitch-modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-modal-content {
+    background: #2a2a2a;
+}
+
+.twitch-modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-modal-header {
+    border-bottom-color: #3d3d3d;
+}
+
+.twitch-modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-modal-title {
+    color: #e0e0e0;
+}
+
+.twitch-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.twitch-modal-body {
+    padding: 24px;
+}
+
+.twitch-modal-actions {
+    padding: 20px 24px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-modal-actions {
+    border-top-color: #3d3d3d;
+}
+
+.twitch-modal-save,
+.twitch-modal-cancel {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.twitch-modal-save {
+    background: #9146ff;
+    color: white;
+    border: none;
+}
+
+.twitch-modal-save:hover {
+    background: #7928ca;
+}
+
+.twitch-modal-cancel {
+    background: transparent;
+    color: #666;
+    border: 1px solid #d1d5db;
+}
+
+.twitch-modal-cancel:hover {
+    background: #f8f9fa;
+}
+
+/* Form Styles */
+.twitch-scheduler-form {
+    display: grid;
+    gap: 16px;
+}
+
+.twitch-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.twitch-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.twitch-form-label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-form-label {
+    color: #e0e0e0;
+}
+
+.twitch-form-input,
+.twitch-form-select,
+.twitch-form-textarea {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+    color: #333;
+}
+
+.twitch-stream-scheduler[data-theme="dark"] .twitch-form-input,
+.twitch-stream-scheduler[data-theme="dark"] .twitch-form-select,
+.twitch-stream-scheduler[data-theme="dark"] .twitch-form-textarea {
+    background: #3d3d3d;
+    border-color: #4d4d4d;
+    color: #e0e0e0;
+}
+
+.twitch-form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Status Indicators */
+.twitch-status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.twitch-status-scheduled {
+    background: rgba(145, 70, 255, 0.1);
+    color: #9146ff;
+}
+
+.twitch-status-live {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+.twitch-status-completed {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.twitch-status-cancelled {
+    background: rgba(108, 117, 125, 0.1);
+    color: #6c757d;
+}
+
+/* Loading States */
+.twitch-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.twitch-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #9146ff;
+    border-radius: 50%;
+    animation: twitch-spin 1s linear infinite;
+}
+
+@keyframes twitch-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .twitch-scheduler-content {
+        grid-template-columns: 1fr;
+    }
+
+    .twitch-scheduler-sidebar {
+        border-left: none;
+        border-top: 1px solid #e9ecef;
+        max-height: none;
+    }
+
+    .twitch-stream-scheduler[data-theme="dark"] .twitch-scheduler-sidebar {
+        border-top-color: #3d3d3d;
+    }
+}
+
+@media (max-width: 768px) {
+    .twitch-scheduler-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .twitch-scheduler-controls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .twitch-view-selector {
+        justify-content: center;
+    }
+
+    .twitch-scheduler-actions {
+        justify-content: center;
+    }
+
+    .twitch-scheduler-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .twitch-filter-group {
+        justify-content: space-between;
+    }
+
+    .twitch-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .twitch-stream-actions {
+        flex-direction: column;
+    }
+
+    .twitch-schedule-legend {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .twitch-modal-content {
+        margin: 20px;
+        width: calc(100% - 40px);
+    }
+}
+
+@media (max-width: 480px) {
+    .twitch-stream-scheduler {
+        border-radius: 0;
+        margin: 0 -12px;
+    }
+
+    .twitch-scheduler-header,
+    .twitch-scheduler-filters,
+    .twitch-calendar-view,
+    .twitch-scheduler-sidebar {
+        padding: 16px;
+    }
+
+    .twitch-view-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .twitch-add-stream-btn,
+    .twitch-bulk-actions-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .twitch-calendar-title {
+        font-size: 16px;
+    }
+
+    .fc-toolbar-title {
+        font-size: 20px !important;
+    }
+
+    .twitch-stream-item {
+        padding: 12px;
+    }
+
+    .twitch-stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Accessibility */
+.twitch-stream-event:focus,
+.twitch-view-btn:focus,
+.twitch-add-stream-btn:focus,
+.twitch-clear-filters-btn:focus {
+    outline: 2px solid #9146ff;
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .twitch-stream-scheduler {
+        border: 2px solid #000;
+    }
+
+    .twitch-stream-item,
+    .twitch-upcoming-item,
+    .twitch-stat-item {
+        border: 2px solid #000;
+    }
+
+    .twitch-modal-save {
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .twitch-stream-event,
+    .twitch-view-btn,
+    .twitch-add-stream-btn,
+    .twitch-stream-item,
+    .twitch-remind-btn,
+    .twitch-calendar-btn,
+    .twitch-modal-save,
+    .twitch-modal-cancel,
+    .twitch-spinner {
+        animation: none;
+        transition: none;
+        transform: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .twitch-scheduler-modal,
+    .twitch-scheduler-actions,
+    .twitch-stream-actions {
+        display: none !important;
+    }
+
+    .twitch-stream-scheduler {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+}
