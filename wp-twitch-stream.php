@@ -48,6 +48,7 @@ require_once WP_TWITCH_PLUGIN_DIR . 'includes/woocommerce-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/membership-plugin-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-shortcode-builder.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'includes/visual-stream-scheduler.php';
+require_once WP_TWITCH_PLUGIN_DIR . 'includes/mobile-app-integration.php';
 require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
@@ -150,6 +151,14 @@ function wp_twitch_enqueue_frontend_styles() {
         array(),
         WP_TWITCH_VERSION
     );
+    
+    // Mobile App Styles
+    wp_enqueue_style(
+        'wp-twitch-stream-mobile-app',
+        WP_TWITCH_PLUGIN_URL . 'assets/css/mobile-app.css',
+        array(),
+        WP_TWITCH_VERSION
+    );
 }
 add_action('wp_enqueue_scripts', 'wp_twitch_enqueue_frontend_styles');
 
@@ -210,6 +219,17 @@ function wp_twitch_enqueue_admin_scripts($hook) {
         wp_enqueue_script('jquery-ui-core');
         wp_enqueue_script('jquery-ui-datepicker');
         wp_enqueue_style('jquery-ui', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css');
+    }
+    
+    // Mobile App Scripts
+    if (isset($_GET['page']) && $_GET['page'] === 'twitch-mobile-app') {
+        wp_enqueue_script(
+            'wp-twitch-stream-mobile-app',
+            WP_TWITCH_PLUGIN_URL . 'assets/js/mobile-app.js',
+            array('jquery', 'wp-util'),
+            WP_TWITCH_VERSION,
+            true
+        );
     }
 }
 add_action('admin_enqueue_scripts', 'wp_twitch_enqueue_admin_scripts');
