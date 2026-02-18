@@ -986,7 +986,9 @@ SOFTWARE.
 
 **SpeedySwifter - Sven Hajer**
 
-![hajer.dev](https://hajer.dev/logo-hajerdev.svg)
+<a href="https://hajer.dev">
+  <img src="https://hajer.dev/logo-hajerdev.svg" alt="hajer.dev" width="120" height="120">
+</a>
 
 <table>
   <tr>
