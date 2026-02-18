@@ -955,15 +955,11 @@ SOFTWARE.
 
 ## 👤 Autor
 
-<div align="center">
+**SpeedySwifter - Sven Hajer**
 
-**SpeedySwifter**
+![hajer.dev](https://hajer.dev/logo-hajerdev.svg)
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SpeedySwifter)
-[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/SpeedySwifter)
-[![Twitch](https://img.shields.io/badge/Twitch-9146FF?style=for-the-badge&logo=twitch&logoColor=white)](https://twitch.tv/SpeedySwifter)
-
-</div>
+🌐 [Website](https://hajer.dev) • [GitHub](https://github.com/SpeedySwifter) • [Twitter](https://twitter.com/SpeedySwifter) • [Twitch](https://twitch.tv/SpeedySwifter)
 
 ---
 
