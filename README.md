@@ -959,7 +959,7 @@ SOFTWARE.
 
 ![hajer.dev](https://hajer.dev/logo-hajerdev.svg)
 
-🌐 [Website](https://hajer.dev) • [GitHub](https://github.com/SpeedySwifter) • [Twitter](https://twitter.com/SpeedySwifter) • [Twitch](https://twitch.tv/SpeedySwifter)
+🌐 [Website](https://hajer.dev) • [GitHub](https://github.com/SpeedySwifter)
 
 ---
 
