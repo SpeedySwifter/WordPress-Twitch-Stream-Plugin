@@ -211,57 +211,57 @@ class SPSWIFTER_Twitch_Page_Builder_Compatibility {
     private function is_elementor_active() {
         return $this->supported_builders['elementor'] && 
                (defined('ELEMENTOR_VERSION') || 
-                isset(wp_unslash($_GET['elementor-preview'])) || 
-                isset(wp_unslash($_GET['action'])) && wp_unslash($_GET['action']) === 'elementor');
+                isset($_GET['elementor-preview']) || 
+                isset($_GET['action']) && $_GET['action'] === 'elementor');
     }
     
     private function is_oxygen_active() {
         return $this->supported_builders['oxygen'] && 
-               (isset(wp_unslash($_GET['ct_builder'])) || 
-                isset(wp_unslash($_GET['oxygen_iframe'])));
+               (isset($_GET['ct_builder']) || 
+                isset($_GET['oxygen_iframe']));
     }
     
     private function is_divi_active() {
         return $this->supported_builders['divi'] && 
                (et_core_is_fb_enabled() || 
                 et_core_is_builder_active() || 
-                isset(wp_unslash($_GET['et_fb'])));
+                isset($_GET['et_fb']));
     }
     
     private function is_gutenberg_active() {
         return $this->supported_builders['gutenberg'] && 
                (function_exists('use_block_editor_for_post_type') || 
-                isset(wp_unslash($_GET['context'])) && wp_unslash($_GET['context']) === 'edit');
+                isset($_GET['context']) && wp_unslash($_GET['context']) === 'edit');
     }
     
     private function is_beaver_builder_active() {
         return $this->supported_builders['beaver_builder'] && 
                (FLBuilderModel::is_builder_active() || 
-                isset(wp_unslash($_GET['fl_builder'])));
+                isset($_GET['fl_builder']));
     }
     
     private function is_visual_composer_active() {
         return $this->supported_builders['visual_composer'] && 
                (defined('WPB_VC_VERSION') || 
-                isset(wp_unslash($_GET['vc_action'])));
+                isset($_GET['vc_action']));
     }
     
     private function is_fusion_builder_active() {
         return $this->supported_builders['fusion_builder'] && 
                (class_exists('FusionBuilder') || 
-                isset(wp_unslash($_GET['fusion_builder'])));
+                isset($_GET['fusion_builder']));
     }
     
     private function is_siteorigin_active() {
         return $this->supported_builders['siteorigin'] && 
                (SiteOrigin_Panels::is_active() || 
-                isset(wp_unslash($_GET['siteorigin_panels'])));
+                isset($_GET['siteorigin_panels']));
     }
     
     private function is_thrive_active() {
         return $this->supported_builders['thrive'] && 
                (class_exists('Thrive_Leads') || 
-                isset(wp_unslash($_GET['tve'])));
+                isset($_GET['tve']));
     }
     
     /**
