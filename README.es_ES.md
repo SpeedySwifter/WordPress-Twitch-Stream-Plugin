@@ -1,17 +1,17 @@
-# 🎮 Plugin de WordPress Twitch Stream v1.7.0
+# 🎮 SpeedySwifter Stream Integrator para Twitch v1.7.2
 
 <div align="center">
 
-![WordPress](https://img.shields.io/badge/WordPress-6.9.1-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
+![WordPress](https://img.shields.io/badge/WordPress-6.8-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-7.4+-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![Twitch](https://img.shields.io/badge/Twitch_API-9146FF?style=for-the-badge&logo=twitch&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-GPL_v2+-green?style=for-the-badge)
 
 [![GitHub Stars](https://img.shields.io/github/stars/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/forks)
 [![GitHub Issues](https://img.shields.io/github/issues/SpeedySwifter/WordPress-Twitch-Stream-Plugin)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/issues)
 
-**El plugin de WordPress definitivo para la integración de streams de Twitch**
+**Un plugin de WordPress para la integración de streams de Twitch con soporte de aplicación móvil, programación, análisis y soporte multiidioma.**
 
 [🚀 Características](#-características) • [📦 Instalación](#-instalación) • [🧩 Uso](#-uso) • [📋 Shortcodes](#-shortcodes) • [⚙️ Admin](#-configuración-admin) • [🌍 Idiomas](#-idiomas)
 
@@ -21,7 +21,7 @@
 
 ## 📌 ¿Qué es esto?
 
-El **Plugin de WordPress Twitch Stream v1.7.0** es una solución completa para integrar streams de Twitch en sitios web de WordPress. Proporciona todo, desde la integración básica de streams hasta características avanzadas como aplicaciones móviles, programación, análisis, y más.
+El **SpeedySwifter Stream Integrator para Twitch v1.7.2** proporciona una solución para integrar streams de Twitch en sitios web de WordPress. Ofrece características como integración de aplicación móvil, programación de streams, análisis y soporte multiidioma.
 
 ### ✨ Características principales
 

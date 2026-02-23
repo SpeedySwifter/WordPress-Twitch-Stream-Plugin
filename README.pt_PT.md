@@ -1,17 +1,17 @@
-# 🎮 Plugin WordPress Twitch Stream v1.7.0
+# 🎮 SpeedySwifter Stream Integrator para Twitch v1.7.2
 
 <div align="center">
 
-![WordPress](https://img.shields.io/badge/WordPress-6.9.1-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
+![WordPress](https://img.shields.io/badge/WordPress-6.8-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-7.4+-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![Twitch](https://img.shields.io/badge/Twitch_API-9146FF?style=for-the-badge&logo=twitch&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-GPL_v2+-green?style=for-the-badge)
 
 [![GitHub Stars](https://img.shields.io/github/stars/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/forks)
 [![GitHub Issues](https://img.shields.io/github/issues/SpeedySwifter/WordPress-Twitch-Stream-Plugin)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/issues)
 
-**O plugin WordPress definitivo para integração de streams Twitch**
+**Um plugin WordPress para integração de streams Twitch com suporte de aplicação móvel, agendamento, análise e suporte multi-idioma.**
 
 [🚀 Funcionalidades](#-funcionalidades) • [📦 Instalação](#-instalação) • [🧩 Utilização](#-utilização) • [📋 Shortcodes](#-shortcodes) • [⚙️ Admin](#-configurações-admin) • [🌍 Idiomas](#-idiomas)
 
@@ -21,7 +21,7 @@
 
 ## 📌 O que é isso?
 
-O **Plugin WordPress Twitch Stream v1.7.0** é uma solução completa para integrar streams Twitch em sites WordPress. Ele fornece tudo, desde integração básica de streams até funcionalidades avançadas como aplicações móveis, agendamento, análise e muito mais.
+O **SpeedySwifter Stream Integrator para Twitch v1.7.2** fornece uma solução para integrar streams Twitch em sites WordPress. Oferece funcionalidades como integração de aplicação móvel, agendamento de streams, análise e suporte multi-idioma.
 
 ### ✨ Funcionalidades principais
 

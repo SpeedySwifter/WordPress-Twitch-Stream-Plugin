@@ -1,17 +1,17 @@
-# 🎮 Плагин WordPress Twitch Stream v1.7.0
+# 🎮 SpeedySwifter Stream Integrator для Twitch v1.7.2
 
 <div align="center">
 
-![WordPress](https://img.shields.io/badge/WordPress-6.9.1-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
+![WordPress](https://img.shields.io/badge/WordPress-6.8-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-7.4+-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![Twitch](https://img.shields.io/badge/Twitch_API-9146FF?style=for-the-badge&logo=twitch&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-GPL_v2+-green?style=for-the-badge)
 
 [![GitHub Stars](https://img.shields.io/github/stars/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/forks)
 [![GitHub Issues](https://img.shields.io/github/issues/SpeedySwifter/WordPress-Twitch-Stream-Plugin)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/issues)
 
-**Окончательный плагин WordPress для интеграции стримов Twitch**
+**Плагин WordPress для интеграции стримов Twitch с поддержкой мобильных приложений, планирования, аналитики и многоязычной поддержки.**
 
 [🚀 Возможности](#-возможности) • [📦 Установка](#-установка) • [🧩 Использование](#-использование) • [📋 Шорткоды](#-шорткоды) • [⚙️ Админ](#-настройки-админ) • [🌍 Языки](#-языки)
 
@@ -21,7 +21,7 @@
 
 ## 📌 Что это такое?
 
-**Плагин WordPress Twitch Stream v1.7.0** - это комплексное решение для интеграции стримов Twitch в сайты WordPress. Он предоставляет всё: от базовой интеграции стримов до продвинутых функций вроде мобильных приложений, планирования, аналитики и многого другого.
+**SpeedySwifter Stream Integrator для Twitch v1.7.2** предоставляет решение для интеграции стримов Twitch в сайты WordPress. Он предлагает функции вроде интеграции мобильных приложений, планирования стримов, аналитики и многоязычной поддержки.
 
 ### ✨ Основные возможности
 

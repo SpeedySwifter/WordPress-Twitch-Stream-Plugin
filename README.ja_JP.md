@@ -1,17 +1,17 @@
-# 🎮 WordPress Twitch Stream Plugin v1.7.0
+# 🎮 SpeedySwifter Twitch Stream統合 v1.7.2
 
 <div align="center">
 
-![WordPress](https://img.shields.io/badge/WordPress-6.9.1-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
+![WordPress](https://img.shields.io/badge/WordPress-6.8-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-7.4+-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![Twitch](https://img.shields.io/badge/Twitch_API-9146FF?style=for-the-badge&logo=twitch&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-GPL_v2+-green?style=for-the-badge)
 
 [![GitHub Stars](https://img.shields.io/github/stars/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/forks)
 [![GitHub Issues](https://img.shields.io/github/issues/SpeedySwifter/WordPress-Twitch-Stream-Plugin)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/issues)
 
-**Twitchストリーム統合のための究極のWordPressプラグイン**
+**モバイルアプリサポート、スケジューリング、アナリティクス、多言語サポートを備えたTwitchストリーム統合のためのWordPressプラグイン。**
 
 [🚀 機能](#-機能) • [📦 インストール](#-インストール) • [🧩 使用方法](#-使用方法) • [📋 ショートコード](#-ショートコード) • [⚙️ 管理者](#-管理者設定) • [🌍 言語](#-言語)
 
@@ -21,7 +21,7 @@
 
 ## 📌 これは何ですか？
 
-**WordPress Twitch Stream Plugin v1.7.0**は、WordPressサイトにTwitchストリームを統合するための包括的なソリューションです。基本的なストリーム統合からモバイルアプリ、スケジューリング、アナリティクスなどまで、あらゆるものを提供します。
+**SpeedySwifter Twitch Stream統合 v1.7.2**は、WordPressサイトにTwitchストリームを統合するためのソリューションを提供します。モバイルアプリ統合、ストリームスケジューリング、アナリティクス、多言語サポートなどの機能を提供します。
 
 ### ✨ 主な機能
 

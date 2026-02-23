@@ -1,17 +1,17 @@
-# 🎮 WordPress Twitch Stream Plugin v1.7.0
+# 🎮 SpeedySwifter Stream Integrator für Twitch v1.7.2
 
 <div align="center">
 
-![WordPress](https://img.shields.io/badge/WordPress-6.9.1-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
+![WordPress](https://img.shields.io/badge/WordPress-6.8-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-7.4+-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![Twitch](https://img.shields.io/badge/Twitch_API-9146FF?style=for-the-badge&logo=twitch&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-GPL_v2+-green?style=for-the-badge)
 
 [![GitHub Stars](https://img.shields.io/github/stars/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/forks)
 [![GitHub Issues](https://img.shields.io/github/issues/SpeedySwifter/WordPress-Twitch-Stream-Plugin)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/issues)
 
-**Das ultimative WordPress-Plugin für Twitch-Stream-Integration**
+**Ein WordPress-Plugin für Twitch-Stream-Integration mit mobiler App-Unterstützung, Planung, Analysen und Mehrsprachigkeit.**
 
 [🚀 Features](#-features) • [📦 Installation](#-installation) • [🧩 Verwendung](#-verwendung) • [📋 Shortcodes](#-shortcodes) • [⚙️ Admin](#-admin-einstellungen) • [🌍 Sprachen](#-sprachen)
 
@@ -21,7 +21,7 @@
 
 ## 📌 Was ist das?
 
-Das **WordPress Twitch Stream Plugin v1.7.0** ist eine umfassende Lösung zur Integration von Twitch-Streams in WordPress-Websites. Es bietet alles von grundlegender Stream-Einbettung bis hin zu fortschrittlichen Features wie mobilen Apps, Planung, Analysen und mehr.
+Das **SpeedySwifter Stream Integrator für Twitch v1.7.2** bietet eine Lösung zur Integration von Twitch-Streams in WordPress-Websites. Es bietet Features wie mobile App-Integration, Stream-Planung, Analysen und Mehrsprachigkeit.
 
 ### ✨ Kern-Features
 

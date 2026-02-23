@@ -13,7 +13,7 @@ A WordPress plugin for Twitch stream integration with mobile app, scheduling, an
 
 == Description ==
 
-WordPress Twitch Stream Plugin is a solution for integrating Twitch streams into WordPress websites. It provides features like mobile apps, scheduling, analytics, and more.
+SpeedySwifter Stream Integrator for Twitch provides a solution for integrating Twitch streams into WordPress websites. It offers features like mobile app integration, stream scheduling, analytics, and multi-language support.
 
 ### ✨ Core Features
 
@@ -31,7 +31,7 @@ WordPress Twitch Stream Plugin is a solution for integrating Twitch streams into
 - 🔧 **Page Builder Support** – Elementor, Oxygen, Divi, Beaver Builder & more
 - 🍪 **Cookie Banner Integration** – GDPR compliant with 6 cookie systems
 
-### 🚀 Advanced Features (v1.7.1)
+### 🚀 Advanced Features (v1.7.2)
 
 #### 📱 Mobile App Integration
 - Progressive Web App (PWA) with offline support
