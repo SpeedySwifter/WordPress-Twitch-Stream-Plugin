@@ -15,13 +15,27 @@ class SPSWIFTER_Twitch_API {
     public function init() {
         $this->client_id = get_option('spswifter_twitch_client_id');
         $this->client_secret = get_option('spswifter_twitch_client_secret');
-        $this->access_token = $this->get_access_token();
+        $this->access_token = $this->fetch_access_token();
+    }
+
+    /**
+     * Public method to get access token
+     */
+    public function get_access_token() {
+        return $this->access_token;
+    }
+
+    /**
+     * Public method to get client ID
+     */
+    public function get_client_id() {
+        return $this->client_id;
     }
 
     /**
      * Access Token abrufen (mit Caching)
      */
-    private function get_access_token() {
+    private function fetch_access_token() {
         // Token aus Cache laden
         $token = get_transient('spswifter_twitch_access_token');
 
