@@ -5,7 +5,7 @@
  * Description: A WordPress plugin for Twitch stream integration with mobile apps, scheduling, analytics, and multi-language support.
  * Version: 1.7.2
  * Requires at least: 5.8
- * Tested up to: 6.8
+ * Tested up to: 6.9
  * Requires PHP: 7.4
  * Author: SpeedySwifter
  * Author URI: https://github.com/SpeedySwifter

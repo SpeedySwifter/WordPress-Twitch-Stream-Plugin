@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class Divi_Twitch_Grid_Module extends ET_Builder_Module {
+class SPSWIFTER_Divi_Twitch_Grid_Module extends ET_Builder_Module {
     
     public function init() {
         $this->name = __('Twitch Stream Grid', 'speedyswifter-stream-integrator-for-twitch');

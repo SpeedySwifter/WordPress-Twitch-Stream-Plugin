@@ -245,7 +245,7 @@ class SPSWIFTER_Twitch_Donation_Integration {
            target="_blank" 
            rel="noopener noreferrer" 
            class="twitch-bmc-link <?php echo esc_attr($size_class); ?>">
-            <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" 
+            <img src="<?php echo esc_url(SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/images/bmc-logo.svg'); ?>" 
                  alt="Buy Me A Coffee" 
                  style="height: 30px; width: auto; margin-right: 8px;">
             <span style="color: #000000; font-size: 16px; font-weight: 600;"><?php echo esc_html($bmc_text); ?></span>
@@ -284,7 +284,7 @@ class SPSWIFTER_Twitch_Donation_Integration {
             <input type="hidden" name="bn" value="SPSWIFTER_Twitch_Plugin_Donation">
             
             <button type="submit" class="twitch-paypal-button">
-                <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_logo_mark_100x30.png" 
+                <img src="<?php echo esc_url(SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/images/paypal-logo.png'); ?>" 
                      alt="PayPal" 
                      style="height: 24px; width: auto; margin-right: 8px;">
                 <span><?php echo esc_html($paypal_text); ?></span>

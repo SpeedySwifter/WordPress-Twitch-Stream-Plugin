@@ -2,6 +2,12 @@
 /**
  * Admin-Einstellungsseite
  */
+
+// Sicherheitscheck
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 function spswifter_twitch_add_admin_menu() {
     add_options_page(
         'SpeedySwifter Twitch API Einstellungen',
