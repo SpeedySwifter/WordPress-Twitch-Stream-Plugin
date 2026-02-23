@@ -139,15 +139,15 @@ class SPSWIFTER_Twitch_Divi_Integration {
 }
 
 // Initialisierung
-function spswifter_spswifter_twitch_divi_init() {
+function spswifter_twitch_divi_init() {
     if (class_exists('ET_Builder_Module')) {
         new SPSWIFTER_Twitch_Divi_Integration();
     }
 }
-add_action('init', 'spswifter_spswifter_twitch_divi_init');
+add_action('init', 'spswifter_twitch_divi_init');
 
 // Admin Notice für Divi
-function spswifter_spswifter_twitch_divi_admin_notice() {
+function spswifter_twitch_divi_admin_notice() {
     if (!class_exists('ET_Builder_Module')) {
         return;
     }
@@ -166,10 +166,10 @@ function spswifter_spswifter_twitch_divi_admin_notice() {
         <?php
     }
 }
-add_action('admin_notices', 'spswifter_spswifter_twitch_divi_admin_notice');
+add_action('admin_notices', 'spswifter_twitch_divi_admin_notice');
 
 // Divi Visual Builder Integration
-function spswifter_spswifter_twitch_divi_visual_builder_integration() {
+function spswifter_twitch_divi_visual_builder_integration() {
     if (!et_core_is_fb_enabled()) {
         return;
     }
@@ -283,5 +283,5 @@ function spswifter_spswifter_twitch_divi_visual_builder_integration() {
     </script>
     <?php
 }
-add_action('admin_footer', 'spswifter_spswifter_twitch_divi_visual_builder_integration');
+add_action('admin_footer', 'spswifter_twitch_divi_visual_builder_integration');
 ?>

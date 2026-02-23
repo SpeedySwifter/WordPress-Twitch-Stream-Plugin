@@ -179,7 +179,7 @@ class Divi_Twitch_Stream_Module extends ET_Builder_Module {
             'muted' => $muted === 'on' ? 'true' : 'false',
         );
         
-        $output = spswifter_spswifter_twitch_stream_shortcode($stream_atts);
+        $output = spswifter_twitch_stream_shortcode($stream_atts);
         
         // Stream Info
         if ($show_info === 'on') {
@@ -193,7 +193,7 @@ class Divi_Twitch_Stream_Module extends ET_Builder_Module {
                 'show_title' => 'true',
             );
             
-            $output .= spswifter_spswifter_twitch_stream_info_shortcode($info_atts);
+            $output .= spswifter_twitch_stream_info_shortcode($info_atts);
         }
         
         // Divi Wrapper Classes

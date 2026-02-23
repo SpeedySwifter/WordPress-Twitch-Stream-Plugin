@@ -22,7 +22,7 @@ class SPSWIFTER_Twitch_Cache {
         $this->cache_engine = $this->init_cache_engine();
 
         add_action('init', array($this, 'schedule_cache_cleanup'));
-        add_action('spswifter_spswifter_twitch_cleanup_cache', array($this, 'cleanup_expired_cache'));
+        add_action('spswifter_twitch_cleanup_cache', array($this, 'cleanup_expired_cache'));
         add_action('wp_ajax_spswifter_twitch_cache_management', array($this, 'handle_cache_ajax'));
         add_action('wp_ajax_nopriv_spswifter_twitch_cache_management', array($this, 'handle_cache_ajax'));
     }
@@ -156,9 +156,9 @@ class SPSWIFTER_Twitch_Cache {
      * Schedule cache cleanup
      */
     public function schedule_cache_cleanup() {
-        if (!wp_next_scheduled('spswifter_spswifter_twitch_cleanup_cache')) {
+        if (!wp_next_scheduled('spswifter_twitch_cleanup_cache')) {
             $interval = $this->cache_settings['cleanup_interval'] ?? 'hourly';
-            wp_schedule_event(time(), $interval, 'spswifter_spswifter_twitch_cleanup_cache');
+            wp_schedule_event(time(), $interval, 'spswifter_twitch_cleanup_cache');
         }
     }
     

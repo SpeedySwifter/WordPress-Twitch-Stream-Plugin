@@ -632,7 +632,7 @@ class SPSWIFTER_Twitch_Donation_Integration {
         update_option('spswifter_twitch_donations', $donations);
         
         // Trigger action for custom handling
-        do_action('spswifter_spswifter_twitch_donation_recorded', $amount, $type, $message);
+        do_action('spswifter_twitch_donation_recorded', $amount, $type, $message);
     }
     
     /**

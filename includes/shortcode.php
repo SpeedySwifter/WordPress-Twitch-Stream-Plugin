@@ -6,7 +6,7 @@
 /**
  * Shortcode: [spswifter_twitch_stream channel="beispiel"]
  */
-function spswifter_spswifter_twitch_stream_shortcode($atts) {
+function spswifter_twitch_stream_shortcode($atts) {
     $atts = shortcode_atts([
         'channel' => '',
         'width' => '100%',
@@ -73,12 +73,12 @@ function spswifter_spswifter_twitch_stream_shortcode($atts) {
     );
 }
 
-add_shortcode('spswifter_twitch_stream', 'spswifter_spswifter_twitch_stream_shortcode');
+add_shortcode('spswifter_twitch_stream', 'spswifter_twitch_stream_shortcode');
 
 /**
  * Shortcode für Stream-Info
  */
-function spswifter_spswifter_twitch_stream_info_shortcode($atts) {
+function spswifter_twitch_stream_info_shortcode($atts) {
     $atts = shortcode_atts([
         'channel' => '',
         'show_title' => 'true',
@@ -172,12 +172,12 @@ function spswifter_spswifter_twitch_stream_info_shortcode($atts) {
     return $output;
 }
 
-add_shortcode('spswifter_twitch_stream_info', 'spswifter_spswifter_twitch_stream_info_shortcode');
+add_shortcode('spswifter_twitch_stream_info', 'spswifter_twitch_stream_info_shortcode');
 
 /**
  * Shortcode für Multiple Streams Grid
  */
-function spswifter_spswifter_twitch_streams_grid_shortcode($atts) {
+function spswifter_twitch_streams_grid_shortcode($atts) {
     $atts = shortcode_atts([
         'channels' => '',
         'columns' => '3',
@@ -220,7 +220,7 @@ function spswifter_spswifter_twitch_streams_grid_shortcode($atts) {
                 'autoplay' => 'false',
                 'muted' => 'true'
             ];
-            $output .= spswifter_spswifter_twitch_stream_shortcode($player_atts);
+            $output .= spswifter_twitch_stream_shortcode($player_atts);
         }
         
         // Stream Info
@@ -234,7 +234,7 @@ function spswifter_spswifter_twitch_streams_grid_shortcode($atts) {
                 'show_avatar' => 'false',
                 'layout' => 'compact'
             ];
-            $output .= spswifter_spswifter_twitch_stream_info_shortcode($info_atts);
+            $output .= spswifter_twitch_stream_info_shortcode($info_atts);
         }
         
         $output .= '</div>';
@@ -318,12 +318,12 @@ function spswifter_spswifter_twitch_streams_grid_shortcode($atts) {
     return $output;
 }
 
-add_shortcode('spswifter_twitch_streams_grid', 'spswifter_spswifter_twitch_streams_grid_shortcode');
+add_shortcode('spswifter_twitch_streams_grid', 'spswifter_twitch_streams_grid_shortcode');
 
 /**
  * Shortcode für VOD (Video on Demand)
  */
-function spswifter_spswifter_twitch_vod_shortcode($atts) {
+function spswifter_twitch_vod_shortcode($atts) {
     $atts = shortcode_atts([
         'channel' => '',
         'video_id' => '',
@@ -355,17 +355,17 @@ function spswifter_spswifter_twitch_vod_shortcode($atts) {
 
     if (!empty($atts['video_id'])) {
         // Spezifisches Video anzeigen
-        return spswifter_spswifter_twitch_render_single_vod($atts, $api);
+        return spswifter_twitch_render_single_vod($atts, $api);
     } else {
         // Video-Liste vom Kanal anzeigen
-        return spswifter_spswifter_twitch_render_vod_list($atts, $api);
+        return spswifter_twitch_render_vod_list($atts, $api);
     }
 }
 
 /**
  * Einzelnes VOD rendern
  */
-function spswifter_spswifter_twitch_render_single_vod($atts, $api) {
+function spswifter_twitch_render_single_vod($atts, $api) {
     $video = $api->get_video($atts['video_id']);
     
     if (!$video) {
@@ -390,7 +390,7 @@ function spswifter_spswifter_twitch_render_single_vod($atts, $api) {
         $output .= '<div class="twitch-vod-details">';
         $output .= '<h3 class="twitch-vod-title">' . esc_html($video['title']) . '</h3>';
         $output .= '<p class="twitch-vod-meta">📅 ' . date_i18n(get_option('date_format'), strtotime($video['created_at'])) . '</p>';
-        $output .= '<p class="twitch-vod-duration">⏱️ ' . spswifter_spswifter_twitch_format_duration($video['duration']) . '</p>';
+        $output .= '<p class="twitch-vod-duration">⏱️ ' . spswifter_twitch_format_duration($video['duration']) . '</p>';
         $output .= '<p class="twitch-vod-views">👁️ ' . number_format($video['view_count']) . ' Aufrufe</p>';
         $output .= '</div></div>';
     }
@@ -413,7 +413,7 @@ function spswifter_spswifter_twitch_render_single_vod($atts, $api) {
 /**
  * VOD-Liste rendern
  */
-function spswifter_spswifter_twitch_render_vod_list($atts, $api) {
+function spswifter_twitch_render_vod_list($atts, $api) {
     $videos = $api->get_channel_videos($atts['channel'], intval($atts['limit']), $atts['type']);
     
     if (empty($videos)) {
@@ -436,7 +436,7 @@ function spswifter_spswifter_twitch_render_vod_list($atts, $api) {
         
         $output .= '<div class="twitch-vod-item-info">';
         $output .= '<h4 class="twitch-vod-item-title">' . esc_html($video['title']) . '</h4>';
-        $output .= '<p class="twitch-vod-item-meta">📅 ' . date_i18n(get_option('date_format'), strtotime($video['created_at'])) . ' • ⏱️ ' . spswifter_spswifter_twitch_format_duration($video['duration']) . '</p>';
+        $output .= '<p class="twitch-vod-item-meta">📅 ' . date_i18n(get_option('date_format'), strtotime($video['created_at'])) . ' • ⏱️ ' . spswifter_twitch_format_duration($video['duration']) . '</p>';
         
         // Video-Link
         $output .= '<a href="' . esc_url($video['url']) . '" target="_blank" class="twitch-vod-watch" rel="noopener noreferrer">';
@@ -445,7 +445,7 @@ function spswifter_spswifter_twitch_render_vod_list($atts, $api) {
         
         // Embed-Button
         $embed_url = $api->get_vod_embed_url($video['id']);
-        $output .= '<button class="twitch-vod-embed" onclick="spswifter_spswifter_twitch_embed_vod(\'' . esc_js($video['id']) . '\', \'' . esc_js($atts['width']) . '\', \'' . esc_js($atts['height']) . '\')">';
+        $output .= '<button class="twitch-vod-embed" onclick="spswifter_twitch_embed_vod(\'' . esc_js($video['id']) . '\', \'' . esc_js($atts['width']) . '\', \'' . esc_js($atts['height']) . '\')">';
         $output .= '📺 Einbetten';
         $output .= '</button>';
         
@@ -456,7 +456,7 @@ function spswifter_spswifter_twitch_render_vod_list($atts, $api) {
     
     // JavaScript für Embed-Funktion
     $output .= '<script>
-    function spswifter_spswifter_twitch_embed_vod(videoId, width, height) {
+    function spswifter_twitch_embed_vod(videoId, width, height) {
         var container = event.target.closest(".twitch-vod-item");
         var embedUrl = "' . esc_url($api->get_vod_embed_url('VIDEO_ID')) . '";
         embedUrl = embedUrl.replace("VIDEO_ID", videoId);
@@ -480,7 +480,7 @@ function spswifter_spswifter_twitch_render_vod_list($atts, $api) {
 /**
  * Shortcode für Clips
  */
-function spswifter_spswifter_twitch_clips_shortcode($atts) {
+function spswifter_twitch_clips_shortcode($atts) {
     $atts = shortcode_atts([
         'channel' => '',
         'clip_id' => '',
@@ -509,17 +509,17 @@ function spswifter_spswifter_twitch_clips_shortcode($atts) {
 
     if (!empty($atts['clip_id'])) {
         // Spezifischen Clip anzeigen
-        return spswifter_spswifter_twitch_render_single_clip($atts, $api);
+        return spswifter_twitch_render_single_clip($atts, $api);
     } else {
         // Clip-Liste vom Kanal anzeigen
-        return spswifter_spswifter_twitch_render_clip_list($atts, $api);
+        return spswifter_twitch_render_clip_list($atts, $api);
     }
 }
 
 /**
  * Einzelnen Clip rendern
  */
-function spswifter_spswifter_twitch_render_single_clip($atts, $api) {
+function spswifter_twitch_render_single_clip($atts, $api) {
     $clip = $api->get_clip($atts['clip_id']);
     
     if (!$clip) {
@@ -559,7 +559,7 @@ function spswifter_spswifter_twitch_render_single_clip($atts, $api) {
 /**
  * Clip-Liste rendern
  */
-function spswifter_spswifter_twitch_render_clip_list($atts, $api) {
+function spswifter_twitch_render_clip_list($atts, $api) {
     $clips = $api->get_channel_clips($atts['channel'], intval($atts['limit']));
     
     if (empty($clips)) {
@@ -590,7 +590,7 @@ function spswifter_spswifter_twitch_render_clip_list($atts, $api) {
         
         // Embed-Button
         $embed_url = $api->get_clip_embed_url($clip['id']);
-        $output .= '<button class="twitch-clip-embed" onclick="spswifter_spswifter_twitch_embed_clip(\'' . esc_js($clip['id']) . '\', \'' . esc_js($atts['width']) . '\', \'' . esc_js($atts['height']) . '\')">';
+        $output .= '<button class="twitch-clip-embed" onclick="spswifter_twitch_embed_clip(\'' . esc_js($clip['id']) . '\', \'' . esc_js($atts['width']) . '\', \'' . esc_js($atts['height']) . '\')">';
         $output .= '📺 Einbetten';
         $output .= '</button>';
         
@@ -601,7 +601,7 @@ function spswifter_spswifter_twitch_render_clip_list($atts, $api) {
     
     // JavaScript für Embed-Funktion
     $output .= '<script>
-    function spswifter_spswifter_twitch_embed_clip(clipId, width, height) {
+    function spswifter_twitch_embed_clip(clipId, width, height) {
         var container = event.target.closest(".twitch-clip-item");
         var embedUrl = "' . esc_url($api->get_clip_embed_url('CLIP_ID')) . '";
         embedUrl = embedUrl.replace("CLIP_ID", clipId);
@@ -625,7 +625,7 @@ function spswifter_spswifter_twitch_render_clip_list($atts, $api) {
 /**
  * Hilfsfunktion für Dauer-Formatierung
  */
-function spswifter_spswifter_twitch_format_duration($duration) {
+function spswifter_twitch_format_duration($duration) {
     $hours = floor($duration / 3600);
     $minutes = floor(($duration % 3600) / 60);
     $seconds = $duration % 60;
@@ -639,13 +639,13 @@ function spswifter_spswifter_twitch_format_duration($duration) {
     }
 }
 
-add_shortcode('spswifter_twitch_vod', 'spswifter_spswifter_twitch_vod_shortcode');
-add_shortcode('spswifter_twitch_clips', 'spswifter_spswifter_twitch_clips_shortcode');
+add_shortcode('spswifter_twitch_vod', 'spswifter_twitch_vod_shortcode');
+add_shortcode('spswifter_twitch_clips', 'spswifter_twitch_clips_shortcode');
 
 /**
  * AJAX-Handler für Live-Status-Prüfung
  */
-function spswifter_spswifter_twitch_check_stream_status() {
+function spswifter_twitch_check_stream_status() {
     check_ajax_referer('spswifter_twitch_stream_nonce', 'nonce');
     
     $channel = sanitize_text_field($_POST['channel']);
@@ -659,6 +659,6 @@ function spswifter_spswifter_twitch_check_stream_status() {
     wp_send_json_success(['is_live' => $is_live]);
 }
 
-add_action('wp_ajax_spswifter_twitch_check_status', 'spswifter_spswifter_twitch_check_stream_status');
-add_action('wp_ajax_nopriv_spswifter_twitch_check_status', 'spswifter_spswifter_twitch_check_stream_status');
+add_action('wp_ajax_spswifter_twitch_check_status', 'spswifter_twitch_check_stream_status');
+add_action('wp_ajax_nopriv_spswifter_twitch_check_status', 'spswifter_twitch_check_stream_status');
 ?>

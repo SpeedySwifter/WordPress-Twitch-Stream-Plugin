@@ -44,15 +44,15 @@ class SPSWIFTER_Twitch_Elementor_Integration {
 }
 
 // Initialisierung
-function spswifter_spswifter_twitch_elementor_init() {
+function spswifter_twitch_elementor_init() {
     if (did_action('elementor/loaded')) {
         new SPSWIFTER_Twitch_Elementor_Integration();
     }
 }
-add_action('init', 'spswifter_spswifter_twitch_elementor_init');
+add_action('init', 'spswifter_twitch_elementor_init');
 
 // Admin Notice wenn Elementor nicht aktiv
-function spswifter_spswifter_twitch_elementor_admin_notice() {
+function spswifter_twitch_elementor_admin_notice() {
     if (!class_exists('Elementor\Plugin')) {
         return;
     }
@@ -75,5 +75,5 @@ function spswifter_spswifter_twitch_elementor_admin_notice() {
         <?php
     }
 }
-add_action('admin_notices', 'spswifter_spswifter_twitch_elementor_admin_notice');
+add_action('admin_notices', 'spswifter_twitch_elementor_admin_notice');
 ?>

@@ -17,8 +17,8 @@ class SPSWIFTER_Twitch_Stream_Recording {
         $this->recording_settings = get_option('spswifter_twitch_recording_settings', array());
         
         add_action('init', array($this, 'schedule_recording_checks'));
-        add_action('spswifter_spswifter_twitch_check_recordings', array($this, 'check_and_record_streams'));
-        add_action('spswifter_spswifter_twitch_process_recording', array($this, 'process_stream_recording'));
+        add_action('spswifter_twitch_check_recordings', array($this, 'check_and_record_streams'));
+        add_action('spswifter_twitch_process_recording', array($this, 'process_stream_recording'));
         add_action('wp_ajax_spswifter_twitch_recording_settings', array($this, 'handle_ajax_settings'));
         add_action('wp_ajax_nopriv_spswifter_twitch_recording_settings', array($this, 'handle_ajax_settings'));
     }
@@ -27,21 +27,21 @@ class SPSWIFTER_Twitch_Stream_Recording {
      * Schedule recording checks
      */
     public function schedule_recording_checks() {
-        if (!wp_next_scheduled('spswifter_spswifter_twitch_check_recordings')) {
+        if (!wp_next_scheduled('spswifter_twitch_check_recordings')) {
             $interval = $this->recording_settings['check_interval'] ?? 'every_minute';
             
             switch ($interval) {
                 case 'every_30_seconds':
-                    wp_schedule_event(time(), 'spswifter_spswifter_twitch_30_seconds', 'spswifter_spswifter_twitch_check_recordings');
+                    wp_schedule_event(time(), 'spswifter_twitch_30_seconds', 'spswifter_twitch_check_recordings');
                     break;
                 case 'every_minute':
-                    wp_schedule_event(time(), 'spswifter_spswifter_twitch_minute', 'spswifter_spswifter_twitch_check_recordings');
+                    wp_schedule_event(time(), 'spswifter_twitch_minute', 'spswifter_twitch_check_recordings');
                     break;
                 case 'every_5_minutes':
-                    wp_schedule_event(time(), 'spswifter_spswifter_twitch_5_minutes', 'spswifter_spswifter_twitch_check_recordings');
+                    wp_schedule_event(time(), 'spswifter_twitch_5_minutes', 'spswifter_twitch_check_recordings');
                     break;
                 default:
-                    wp_schedule_event(time(), 'spswifter_spswifter_twitch_minute', 'spswifter_spswifter_twitch_check_recordings');
+                    wp_schedule_event(time(), 'spswifter_twitch_minute', 'spswifter_twitch_check_recordings');
             }
         }
     }
@@ -112,13 +112,13 @@ class SPSWIFTER_Twitch_Stream_Recording {
         $this->update_recording_status($channel, true, $recording_id);
         
         // Start background recording process
-        wp_schedule_single_event(time(), 'spswifter_spswifter_twitch_process_recording', array($recording_id));
+        wp_schedule_single_event(time(), 'spswifter_twitch_process_recording', array($recording_id));
         
         // Log recording start
         $this->log_recording_event($channel, 'recording_started', $recording_data);
         
         // Trigger action for custom handling
-        do_action('spswifter_spswifter_twitch_recording_started', $channel, $recording_id, $stream_data);
+        do_action('spswifter_twitch_recording_started', $channel, $recording_id, $stream_data);
     }
     
     /**
@@ -148,13 +148,13 @@ class SPSWIFTER_Twitch_Stream_Recording {
         $this->update_recording_status($channel, false);
         
         // Process final recording
-        wp_schedule_single_event(time(), 'spswifter_spswifter_twitch_process_recording', array($recording_id));
+        wp_schedule_single_event(time(), 'spswifter_twitch_process_recording', array($recording_id));
         
         // Log recording stop
         $this->log_recording_event($channel, 'recording_stopped', $recording_data);
         
         // Trigger action for custom handling
-        do_action('spswifter_spswifter_twitch_recording_stopped', $channel, $recording_id, $recording_data);
+        do_action('spswifter_twitch_recording_stopped', $channel, $recording_id, $recording_data);
     }
     
     /**
@@ -195,7 +195,7 @@ class SPSWIFTER_Twitch_Stream_Recording {
         $this->save_recording($recording_data);
         
         // Trigger action for custom handling
-        do_action('spswifter_spswifter_twitch_recording_updated', $channel, $recording_id, $recording_data);
+        do_action('spswifter_twitch_recording_updated', $channel, $recording_id, $recording_data);
     }
     
     /**
@@ -249,7 +249,7 @@ class SPSWIFTER_Twitch_Stream_Recording {
         $this->save_recording($recording_data);
         
         // Trigger action for custom handling
-        do_action('spswifter_spswifter_twitch_recording_processed', $channel, $recording_id, $recording_data);
+        do_action('spswifter_twitch_recording_processed', $channel, $recording_id, $recording_data);
     }
     
     /**
@@ -274,7 +274,7 @@ class SPSWIFTER_Twitch_Stream_Recording {
         $this->save_recording($recording_data);
         
         // Trigger action for custom handling
-        do_action('spswifter_spswifter_twitch_recording_cloud_processed', $channel, $recording_id, $recording_data);
+        do_action('spswifter_twitch_recording_cloud_processed', $channel, $recording_id, $recording_data);
     }
     
     /**
@@ -298,7 +298,7 @@ class SPSWIFTER_Twitch_Stream_Recording {
         $this->save_recording($recording_data);
         
         // Trigger action for custom handling
-        do_action('spswifter_spswifter_twitch_recording_hybrid_processed', $channel, $recording_id, $recording_data);
+        do_action('spswifter_twitch_recording_hybrid_processed', $channel, $recording_id, $recording_data);
     }
     
     /**
@@ -630,7 +630,7 @@ class SPSWIFTER_Twitch_Stream_Recording {
             $this->log_recording_event($recording['channel'], 'recording_deleted', $recording);
             
             // Trigger action
-            do_action('spswifter_spswifter_twitch_recording_deleted', $recording_id, $recording);
+            do_action('spswifter_twitch_recording_deleted', $recording_id, $recording);
             
             return true;
         }

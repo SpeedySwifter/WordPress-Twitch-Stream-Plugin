@@ -53,14 +53,14 @@ require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/mobile-app-integration.php'
 require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
-add_action('plugins_loaded', 'spswifter_spswifter_twitch_init');
+add_action('plugins_loaded', 'spswifter_twitch_init');
 
-function spswifter_spswifter_twitch_init() {
+function spswifter_twitch_init() {
     load_plugin_textdomain('speedyswifter-twitch', false, dirname(plugin_basename(__FILE__)) . '/languages');
 }
 
 // Frontend-Styles laden
-function spswifter_spswifter_twitch_enqueue_frontend_styles() {
+function spswifter_twitch_enqueue_frontend_styles() {
     wp_enqueue_style(
         'spswifter-twitch-frontend',
         SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/frontend.css',
@@ -161,10 +161,10 @@ function spswifter_spswifter_twitch_enqueue_frontend_styles() {
         SPSWIFTER_TWITCH_VERSION
     );
 }
-add_action('wp_enqueue_scripts', 'spswifter_spswifter_twitch_enqueue_frontend_styles');
+add_action('wp_enqueue_scripts', 'spswifter_twitch_enqueue_frontend_styles');
 
 // Admin-Styles laden
-function spswifter_spswifter_twitch_enqueue_admin_styles() {
+function spswifter_twitch_enqueue_admin_styles() {
     wp_enqueue_style(
         'spswifter-twitch-admin',
         SPSWIFTER_TWITCH_PLUGIN_URL . 'admin/admin-styles.css',
@@ -182,10 +182,10 @@ function spswifter_spswifter_twitch_enqueue_admin_styles() {
         );
     }
 }
-add_action('admin_enqueue_scripts', 'spswifter_spswifter_twitch_enqueue_admin_styles');
+add_action('admin_enqueue_scripts', 'spswifter_twitch_enqueue_admin_styles');
 
 // Admin-Scripts laden
-function spswifter_spswifter_twitch_enqueue_admin_scripts($hook) {
+function spswifter_twitch_enqueue_admin_scripts($hook) {
     // Shortcode Builder Scripts
     if (isset($_GET['page']) && $_GET['page'] === 'twitch-shortcode-builder') {
         wp_enqueue_script(
@@ -237,10 +237,10 @@ function spswifter_spswifter_twitch_enqueue_admin_scripts($hook) {
         );
     }
 }
-add_action('admin_enqueue_scripts', 'spswifter_spswifter_twitch_enqueue_admin_scripts');
+add_action('admin_enqueue_scripts', 'spswifter_twitch_enqueue_admin_scripts');
 
 // Gutenberg Block Assets laden
-function spswifter_spswifter_twitch_enqueue_block_assets() {
+function spswifter_twitch_enqueue_block_assets() {
     // Block Editor Script
     wp_enqueue_script(
         'spswifter-twitch-block',
@@ -258,20 +258,20 @@ function spswifter_spswifter_twitch_enqueue_block_assets() {
         SPSWIFTER_TWITCH_VERSION
     );
 }
-add_action('enqueue_block_editor_assets', 'spswifter_spswifter_twitch_enqueue_block_assets');
+add_action('enqueue_block_editor_assets', 'spswifter_twitch_enqueue_block_assets');
 
 // Aktivierungs-Hook
-register_activation_hook(__FILE__, 'spswifter_spswifter_twitch_activate');
-function spswifter_spswifter_twitch_activate() {
+register_activation_hook(__FILE__, 'spswifter_twitch_activate');
+function spswifter_twitch_activate() {
     global $wpdb;
     $charset_collate = $wpdb->get_charset_collate();
 
     // Standard-Optionen setzen
-    add_option('spswifter_spswifter_twitch_client_id', '');
-    add_option('spswifter_spswifter_twitch_client_secret', '');
+    add_option('spswifter_twitch_client_id', '');
+    add_option('spswifter_twitch_client_secret', '');
     
     // Datenbank-Tabellen erstellen
-    $stream_schedules_sql = "CREATE TABLE {$wpdb->prefix}spswifter_spswifter_twitch_stream_schedules (
+    $stream_schedules_sql = "CREATE TABLE {$wpdb->prefix}spswifter_twitch_stream_schedules (
         id int(11) NOT NULL AUTO_INCREMENT,
         channel varchar(100) NOT NULL,
         title varchar(255) NOT NULL,
@@ -295,7 +295,7 @@ function spswifter_spswifter_twitch_activate() {
         KEY status (status)
     ) $charset_collate;";
 
-    $recurring_patterns_sql = "CREATE TABLE {$wpdb->prefix}spswifter_spswifter_twitch_recurring_patterns (
+    $recurring_patterns_sql = "CREATE TABLE {$wpdb->prefix}spswifter_twitch_recurring_patterns (
         id int(11) NOT NULL AUTO_INCREMENT,
         pattern_name varchar(255) NOT NULL,
         pattern_type enum('daily','weekly','monthly') NOT NULL,
@@ -310,13 +310,13 @@ function spswifter_spswifter_twitch_activate() {
     dbDelta($recurring_patterns_sql);
 
     // Transients löschen bei Aktivierung
-    delete_transient('spswifter_spswifter_twitch_access_token');
+    delete_transient('spswifter_twitch_access_token');
 }
 
 // Deaktivierungs-Hook
-register_deactivation_hook(__FILE__, 'spswifter_spswifter_twitch_deactivate');
-function spswifter_spswifter_twitch_deactivate() {
+register_deactivation_hook(__FILE__, 'spswifter_twitch_deactivate');
+function spswifter_twitch_deactivate() {
     // Transients löschen bei Deaktivierung
-    delete_transient('spswifter_spswifter_twitch_access_token');
+    delete_transient('spswifter_twitch_access_token');
 }
 ?>

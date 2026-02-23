@@ -57,7 +57,7 @@ function spswifter_twitch_register_block() {
                 'default' => 'horizontal',
             ),
         ),
-        'render_callback' => 'spswifter_spswifter_twitch_render_block_stream',
+        'render_callback' => 'spswifter_twitch_render_block_stream',
     ));
 
     // Grid Block registrieren
@@ -95,15 +95,15 @@ function spswifter_twitch_register_block() {
                 'default' => true,
             ),
         ),
-        'render_callback' => 'spswifter_spswifter_twitch_render_block_grid',
+        'render_callback' => 'spswifter_twitch_render_block_grid',
     ));
 }
-add_action('init', 'spswifter_spswifter_twitch_register_block');
+add_action('init', 'spswifter_twitch_register_block');
 
 /**
  * Stream Block Render Callback
  */
-function spswifter_spswifter_twitch_render_block_stream($attributes) {
+function spswifter_twitch_render_block_stream($attributes) {
     $atts = array(
         'channel' => $attributes['channel'] ?? '',
         'width' => $attributes['width'] ?? '100%',
@@ -112,7 +112,7 @@ function spswifter_spswifter_twitch_render_block_stream($attributes) {
         'muted' => $attributes['muted'] ? 'true' : 'false',
     );
 
-    $output = spswifter_spswifter_twitch_stream_shortcode($atts);
+    $output = spswifter_twitch_stream_shortcode($atts);
 
     // Stream Info hinzufügen
     if ($attributes['showInfo'] && !empty($attributes['channel'])) {
@@ -125,7 +125,7 @@ function spswifter_spswifter_twitch_render_block_stream($attributes) {
             'show_thumbnail' => 'true',
             'show_avatar' => 'true',
         );
-        $output .= spswifter_spswifter_twitch_stream_info_shortcode($info_atts);
+        $output .= spswifter_twitch_stream_info_shortcode($info_atts);
     }
 
     return $output;
@@ -134,7 +134,7 @@ function spswifter_spswifter_twitch_render_block_stream($attributes) {
 /**
  * Grid Block Render Callback
  */
-function spswifter_spswifter_twitch_render_block_grid($attributes) {
+function spswifter_twitch_render_block_grid($attributes) {
     $atts = array(
         'channels' => $attributes['channels'] ?? '',
         'columns' => $attributes['columns'] ?? 3,
@@ -145,13 +145,13 @@ function spswifter_spswifter_twitch_render_block_grid($attributes) {
         'responsive' => $attributes['responsive'] ? 'true' : 'false',
     );
 
-    return spswifter_spswifter_twitch_streams_grid_shortcode($atts);
+    return spswifter_twitch_streams_grid_shortcode($atts);
 }
 
 /**
  * Block Category hinzufügen
  */
-function spswifter_spswifter_twitch_add_block_category($categories) {
+function spswifter_twitch_add_block_category($categories) {
     return array_merge(
         $categories,
         array(
@@ -163,15 +163,15 @@ function spswifter_spswifter_twitch_add_block_category($categories) {
         )
     );
 }
-add_filter('block_categories_all', 'spswifter_spswifter_twitch_add_block_category');
+add_filter('block_categories_all', 'spswifter_twitch_add_block_category');
 
 /**
  * API-Daten für Block Editor bereitstellen
  */
-function spswifter_spswifter_twitch_block_editor_data() {
+function spswifter_twitch_block_editor_data() {
     wp_localize_script('twitch-stream-block', 'twitchBlockData', array(
         'apiConnected' => !empty(get_option('spswifter_twitch_client_id')) && !empty(get_option('spswifter_twitch_client_secret')),
-        'adminUrl' => admin_url('options-general.php?page=twitch-api-settings'),
+        'adminUrl' => admin_url('options-general.php?page=spswifter-twitch-api-settings'),
         'strings' => array(
             'channelPlaceholder' => __('Twitch Kanalname eingeben...', 'speedyswifter-twitch'),
             'channelsPlaceholder' => __('Kanal1, Kanal2, Kanal3', 'speedyswifter-twitch'),
@@ -180,5 +180,5 @@ function spswifter_spswifter_twitch_block_editor_data() {
         ),
     ));
 }
-add_action('enqueue_block_editor_assets', 'spswifter_spswifter_twitch_block_editor_data');
+add_action('enqueue_block_editor_assets', 'spswifter_twitch_block_editor_data');
 ?>

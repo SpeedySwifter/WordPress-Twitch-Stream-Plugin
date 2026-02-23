@@ -11,7 +11,7 @@ class SPSWIFTER_Twitch_VOD_Widget extends WP_Widget {
     
     public function __construct() {
         parent::__construct(
-            'spswifter_spswifter_twitch_vod_widget',
+            'spswifter_twitch_vod_widget',
             __('Twitch VOD', 'speedyswifter-twitch'),
             array('description' => __('Zeigt Twitch Videos oder VODs an', 'speedyswifter-twitch'))
         );
@@ -46,7 +46,7 @@ class SPSWIFTER_Twitch_VOD_Widget extends WP_Widget {
                 'show_thumbnail' => $show_thumbnail,
                 'layout' => 'single'
             );
-            echo spswifter_spswifter_twitch_vod_shortcode($vod_atts);
+            echo spswifter_twitch_vod_shortcode($vod_atts);
         } else {
             // Video-Liste
             $vod_atts = array(
@@ -59,7 +59,7 @@ class SPSWIFTER_Twitch_VOD_Widget extends WP_Widget {
                 'show_thumbnail' => $show_thumbnail,
                 'layout' => $layout
             );
-            echo spswifter_spswifter_twitch_vod_shortcode($vod_atts);
+            echo spswifter_twitch_vod_shortcode($vod_atts);
         }
         
         echo $args['after_widget'];
@@ -165,7 +165,7 @@ class SPSWIFTER_Twitch_Clips_Widget extends WP_Widget {
     
     public function __construct() {
         parent::__construct(
-            'spswifter_spswifter_twitch_clips_widget',
+            'spswifter_twitch_clips_widget',
             __('Twitch Clips', 'speedyswifter-twitch'),
             array('description' => __('Zeigt Twitch Clips an', 'speedyswifter-twitch'))
         );
@@ -197,7 +197,7 @@ class SPSWIFTER_Twitch_Clips_Widget extends WP_Widget {
                 'show_info' => $show_info,
                 'layout' => 'single'
             );
-            echo spswifter_spswifter_twitch_clips_shortcode($clip_atts);
+            echo spswifter_twitch_clips_shortcode($clip_atts);
         } else {
             // Clip-Liste
             $clip_atts = array(
@@ -209,7 +209,7 @@ class SPSWIFTER_Twitch_Clips_Widget extends WP_Widget {
                 'show_info' => $show_info,
                 'layout' => $layout
             );
-            echo spswifter_spswifter_twitch_clips_shortcode($clip_atts);
+            echo spswifter_twitch_clips_shortcode($clip_atts);
         }
         
         echo $args['after_widget'];
@@ -292,8 +292,8 @@ class SPSWIFTER_Twitch_Clips_Widget extends WP_Widget {
 }
 
 // Widgets registrieren
-function spswifter_spswifter_twitch_register_sidebar_widgets() {
+function spswifter_twitch_register_sidebar_widgets() {
     register_widget('SPSWIFTER_Twitch_VOD_Widget');
     register_widget('SPSWIFTER_Twitch_Clips_Widget');
 }
-add_action('widgets_init', 'spswifter_spswifter_twitch_register_sidebar_widgets');
+add_action('widgets_init', 'spswifter_twitch_register_sidebar_widgets');

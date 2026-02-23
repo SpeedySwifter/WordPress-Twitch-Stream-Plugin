@@ -246,7 +246,7 @@ class SPSWIFTER_Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
             'show_info' => $settings['show_info'] === 'yes' ? 'true' : 'false',
         );
 
-        echo spswifter_spswifter_twitch_streams_grid_shortcode($grid_atts);
+        echo spswifter_twitch_streams_grid_shortcode($grid_atts);
     }
 
     protected function _content_template() {

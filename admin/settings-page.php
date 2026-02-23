@@ -2,40 +2,40 @@
 /**
  * Admin-Einstellungsseite
  */
-function spswifter_spswifter_twitch_add_admin_menu() {
+function spswifter_twitch_add_admin_menu() {
     add_options_page(
         'SpeedySwifter Twitch API Einstellungen',
         'SpeedySwifter Twitch API',
         'manage_options',
         'spswifter-twitch-api-settings',
-        'spswifter_spswifter_twitch_settings_page'
+        'spswifter_twitch_settings_page'
     );
 }
-add_action('admin_menu', 'spswifter_spswifter_twitch_add_admin_menu');
+add_action('admin_menu', 'spswifter_twitch_add_admin_menu');
 
 /**
  * Einstellungen registrieren
  */
-function spswifter_spswifter_twitch_settings_init() {
-    register_setting('spswifter_spswifter_twitch_api', 'spswifter_spswifter_twitch_client_id', array(
+function spswifter_twitch_settings_init() {
+    register_setting('spswifter_twitch_api', 'spswifter_twitch_client_id', array(
         'type'              => 'string',
         'sanitize_callback' => 'sanitize_text_field',
         'default'           => '',
         'show_in_rest'      => false,
     ));
-    register_setting('spswifter_spswifter_twitch_api', 'spswifter_spswifter_twitch_client_secret', array(
+    register_setting('spswifter_twitch_api', 'spswifter_twitch_client_secret', array(
         'type'              => 'string',
         'sanitize_callback' => 'sanitize_text_field',
         'default'           => '',
         'show_in_rest'      => false,
     ));
 }
-add_action('admin_init', 'spswifter_spswifter_twitch_settings_init');
+add_action('admin_init', 'spswifter_twitch_settings_init');
 
 /**
  * Settings-Page HTML
  */
-function spswifter_spswifter_twitch_settings_page() {
+function spswifter_twitch_settings_page() {
     ?>
     <div class="wrap">
         <h1>🎮 SpeedySwifter Twitch API Einstellungen</h1>
@@ -47,21 +47,21 @@ function spswifter_spswifter_twitch_settings_page() {
 
         <form method="post" action="options.php">
             <?php
-            settings_fields('spswifter_spswifter_twitch_api');
-            wp_nonce_field('spswifter_spswifter_twitch_save_settings', 'spswifter_nonce');
+            settings_fields('spswifter_twitch_api');
+            wp_nonce_field('spswifter_twitch_save_settings', 'spswifter_nonce');
             ?>
             
             <table class="form-table">
                 <tr>
                     <th scope="row">
-                        <label for="spswifter_spswifter_twitch_client_id">Client ID</label>
+                        <label for="spswifter_twitch_client_id">Client ID</label>
                     </th>
                     <td>
                         <input 
                             type="text" 
-                            id="spswifter_spswifter_twitch_client_id" 
-                            name="spswifter_spswifter_twitch_client_id" 
-                            value="<?php echo esc_attr(get_option('spswifter_spswifter_twitch_client_id')); ?>" 
+                            id="spswifter_twitch_client_id" 
+                            name="spswifter_twitch_client_id" 
+                            value="<?php echo esc_attr(get_option('spswifter_twitch_client_id')); ?>" 
                             class="regular-text"
                         />
                         <p class="description">Deine Twitch Client ID</p>
@@ -70,14 +70,14 @@ function spswifter_spswifter_twitch_settings_page() {
                 
                 <tr>
                     <th scope="row">
-                        <label for="spswifter_spswifter_twitch_client_secret">Client Secret</label>
+                        <label for="spswifter_twitch_client_secret">Client Secret</label>
                     </th>
                     <td>
                         <input 
                             type="password" 
-                            id="spswifter_spswifter_twitch_client_secret" 
-                            name="spswifter_spswifter_twitch_client_secret" 
-                            value="<?php echo esc_attr(get_option('spswifter_spswifter_twitch_client_secret')); ?>" 
+                            id="spswifter_twitch_client_secret" 
+                            name="spswifter_twitch_client_secret" 
+                            value="<?php echo esc_attr(get_option('spswifter_twitch_client_secret')); ?>" 
                             class="regular-text"
                         />
                         <p class="description">Dein Twitch Client Secret (wird nur einmal angezeigt!)</p>

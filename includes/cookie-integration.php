@@ -512,13 +512,13 @@ class SPSWIFTER_Twitch_Cookie_Integration {
 }
 
 // Initialisierung
-function spswifter_spswifter_twitch_cookie_integration_init() {
+function spswifter_twitch_cookie_integration_init() {
     new SPSWIFTER_Twitch_Cookie_Integration();
 }
-add_action('init', 'spswifter_spswifter_twitch_cookie_integration_init');
+add_action('init', 'spswifter_twitch_cookie_integration_init');
 
 // Admin Notice für Cookie-Integration
-function spswifter_spswifter_twitch_cookie_admin_notice() {
+function spswifter_twitch_cookie_admin_notice() {
     $integration = new SPSWIFTER_Twitch_Cookie_Integration();
     $supported_plugins = $integration->get_supported_plugins();
     $active_plugins = array_filter($supported_plugins);
@@ -535,5 +535,5 @@ function spswifter_spswifter_twitch_cookie_admin_notice() {
         <?php
     }
 }
-add_action('admin_notices', 'spswifter_spswifter_twitch_cookie_admin_notice');
+add_action('admin_notices', 'spswifter_twitch_cookie_admin_notice');
 ?>

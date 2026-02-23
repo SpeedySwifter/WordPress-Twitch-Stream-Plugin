@@ -139,7 +139,7 @@ class SPSWIFTER_Twitch_Page_Builder_Compatibility {
             'builder' => $this->get_current_builder(),
         ), $atts);
         
-        return spswifter_spswifter_twitch_stream_shortcode($atts);
+        return spswifter_twitch_stream_shortcode($atts);
     }
     
     /**
@@ -157,7 +157,7 @@ class SPSWIFTER_Twitch_Page_Builder_Compatibility {
             'builder' => $this->get_current_builder(),
         ), $atts);
         
-        return spswifter_spswifter_twitch_streams_grid_shortcode($atts);
+        return spswifter_twitch_streams_grid_shortcode($atts);
     }
     
     /**
@@ -175,7 +175,7 @@ class SPSWIFTER_Twitch_Page_Builder_Compatibility {
             'builder' => $this->get_current_builder(),
         ), $atts);
         
-        return spswifter_spswifter_twitch_stream_info_shortcode($atts);
+        return spswifter_twitch_stream_info_shortcode($atts);
     }
     
     /**
@@ -367,7 +367,7 @@ class SPSWIFTER_Twitch_Stream_Widget extends WP_Widget {
     
     public function __construct() {
         parent::__construct(
-            'spswifter_spswifter_twitch_stream_widget',
+            'spswifter_twitch_stream_widget',
             __('Twitch Stream', 'speedyswifter-twitch'),
             array('description' => __('Zeigt einen Twitch Stream an', 'speedyswifter-twitch'))
         );
@@ -394,7 +394,7 @@ class SPSWIFTER_Twitch_Stream_Widget extends WP_Widget {
             'muted' => $muted,
         );
         
-        echo spswifter_spswifter_twitch_stream_shortcode($stream_atts);
+        echo spswifter_twitch_stream_shortcode($stream_atts);
         echo $args['after_widget'];
     }
     
@@ -456,7 +456,7 @@ class SPSWIFTER_Twitch_Grid_Widget extends WP_Widget {
     
     public function __construct() {
         parent::__construct(
-            'spswifter_spswifter_twitch_grid_widget',
+            'spswifter_twitch_grid_widget',
             __('Twitch Stream Grid', 'speedyswifter-twitch'),
             array('description' => __('Zeigt mehrere Twitch Streams im Grid an', 'speedyswifter-twitch'))
         );
@@ -481,7 +481,7 @@ class SPSWIFTER_Twitch_Grid_Widget extends WP_Widget {
             'show_info' => 'true',
         );
         
-        echo spswifter_spswifter_twitch_streams_grid_shortcode($grid_atts);
+        echo spswifter_twitch_streams_grid_shortcode($grid_atts);
         echo $args['after_widget'];
     }
     
@@ -526,13 +526,13 @@ class SPSWIFTER_Twitch_Grid_Widget extends WP_Widget {
 }
 
 // Initialisierung
-function spswifter_spswifter_twitch_page_builder_compatibility_init() {
+function spswifter_twitch_page_builder_compatibility_init() {
     new SPSWIFTER_Twitch_Page_Builder_Compatibility();
 }
-add_action('init', 'spswifter_spswifter_twitch_page_builder_compatibility_init');
+add_action('init', 'spswifter_twitch_page_builder_compatibility_init');
 
 // Admin Notice für Page Builder Compatibility
-function spswifter_spswifter_twitch_page_builder_admin_notice() {
+function spswifter_twitch_page_builder_admin_notice() {
     $compatibility = new SPSWIFTER_Twitch_Page_Builder_Compatibility();
     $supported_builders = $compatibility->get_supported_builders();
     $active_builders = array_filter($supported_builders);
@@ -552,5 +552,5 @@ function spswifter_spswifter_twitch_page_builder_admin_notice() {
         <?php
     }
 }
-add_action('admin_notices', 'spswifter_spswifter_twitch_page_builder_admin_notice');
+add_action('admin_notices', 'spswifter_twitch_page_builder_admin_notice');
 ?>

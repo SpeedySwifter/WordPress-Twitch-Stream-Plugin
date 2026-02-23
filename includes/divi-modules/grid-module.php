@@ -161,7 +161,7 @@ class Divi_Twitch_Grid_Module extends ET_Builder_Module {
             'show_info' => $show_info === 'on' ? 'true' : 'false',
         );
         
-        $output = spswifter_spswifter_twitch_streams_grid_shortcode($grid_atts);
+        $output = spswifter_twitch_streams_grid_shortcode($grid_atts);
         
         // Divi Wrapper Classes
         $output = sprintf(

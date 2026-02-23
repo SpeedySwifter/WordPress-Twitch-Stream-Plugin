@@ -245,7 +245,7 @@ class SPSWIFTER_Twitch_Oxygen_Integration {
             'muted' => $muted,
         );
         
-        $output = spswifter_spswifter_twitch_stream_shortcode($stream_atts);
+        $output = spswifter_twitch_stream_shortcode($stream_atts);
         
         // Stream Info
         if ($show_info) {
@@ -259,7 +259,7 @@ class SPSWIFTER_Twitch_Oxygen_Integration {
                 'show_avatar' => 'true',
             );
             
-            $output .= spswifter_spswifter_twitch_stream_info_shortcode($info_atts);
+            $output .= spswifter_twitch_stream_info_shortcode($info_atts);
         }
         
         return $output;
@@ -293,29 +293,29 @@ class SPSWIFTER_Twitch_Oxygen_Integration {
             'show_info' => $show_info ? 'true' : 'false',
         );
         
-        return spswifter_spswifter_twitch_streams_grid_shortcode($grid_atts);
+        return spswifter_twitch_streams_grid_shortcode($grid_atts);
     }
 }
 
 // Oxygen Builder Hook
-function spswifter_spswifter_twitch_oxygen_render_component($output, $component, $atts) {
+function spswifter_twitch_oxygen_render_component($output, $component, $atts) {
     if (strpos($component, 'spswifter_twitch_') === 0) {
         return SPSWIFTER_Twitch_Oxygen_Integration::render_component($component, $atts);
     }
     return $output;
 }
-add_filter('oxygen_vsb_component_render', 'spswifter_spswifter_twitch_oxygen_render_component', 10, 3);
+add_filter('oxygen_vsb_component_render', 'spswifter_twitch_oxygen_render_component', 10, 3);
 
 // Initialisierung
-function spswifter_spswifter_twitch_oxygen_init() {
+function spswifter_twitch_oxygen_init() {
     if (defined('OXYGEN_VSB_VERSION')) {
         new SPSWIFTER_Twitch_Oxygen_Integration();
     }
 }
-add_action('init', 'spswifter_spswifter_twitch_oxygen_init');
+add_action('init', 'spswifter_twitch_oxygen_init');
 
 // Admin Notice für Oxygen
-function spswifter_spswifter_twitch_oxygen_admin_notice() {
+function spswifter_twitch_oxygen_admin_notice() {
     if (!defined('OXYGEN_VSB_VERSION')) {
         return;
     }
@@ -334,5 +334,5 @@ function spswifter_spswifter_twitch_oxygen_admin_notice() {
         <?php
     }
 }
-add_action('admin_notices', 'spswifter_spswifter_twitch_oxygen_admin_notice');
+add_action('admin_notices', 'spswifter_twitch_oxygen_admin_notice');
 ?>
