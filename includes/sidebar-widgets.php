@@ -143,7 +143,7 @@ class SPSWIFTER_Twitch_VOD_Widget extends WP_Widget {
         <?php
     }
     
-    public function update($new_instance, $old_instance) {
+    public function upgmdate($new_instance, $old_instance) {
         $instance = array();
         $instance['title'] = (!empty($new_instance['title'])) ? sanitize_text_field($new_instance['title']) : '';
         $instance['channel'] = (!empty($new_instance['channel'])) ? sanitize_text_field($new_instance['channel']) : '';
@@ -275,7 +275,7 @@ class SPSWIFTER_Twitch_Clips_Widget extends WP_Widget {
         <?php
     }
     
-    public function update($new_instance, $old_instance) {
+    public function upgmdate($new_instance, $old_instance) {
         $instance = array();
         $instance['title'] = (!empty($new_instance['title'])) ? sanitize_text_field($new_instance['title']) : '';
         $instance['channel'] = (!empty($new_instance['channel'])) ? sanitize_text_field($new_instance['channel']) : '';

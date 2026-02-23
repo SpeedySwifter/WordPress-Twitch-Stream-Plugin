@@ -258,7 +258,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
 
         if (empty($settings['channel'])) {
             echo '<div class="elementor-alert elementor-alert-warning">' . 
-                 __('Bitte gib einen Twitch-Kanal an.', 'speedyswifter-stream-integrator-for-twitch') . 
+                 esc_html__('Bitte gib einen Twitch-Kanal an.', 'speedyswifter-stream-integrator-for-twitch') . 
                  '</div>';
             return;
         }
@@ -272,7 +272,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
             'muted' => $settings['muted'] === 'yes' ? 'true' : 'false',
         );
 
-        echo spswifter_twitch_stream_shortcode($stream_atts);
+        echo wp_kses_post(spswifter_twitch_stream_shortcode($stream_atts));
 
         // Stream Info
         if ($settings['show_info'] === 'yes') {
@@ -286,7 +286,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
                 'show_title' => 'true',
             );
 
-            echo spswifter_twitch_stream_info_shortcode($info_atts);
+            echo wp_kses_post(spswifter_twitch_stream_info_shortcode($info_atts));
         }
     }
 

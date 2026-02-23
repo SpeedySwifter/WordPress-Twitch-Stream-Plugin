@@ -211,57 +211,57 @@ class SPSWIFTER_Twitch_Page_Builder_Compatibility {
     private function is_elementor_active() {
         return $this->supported_builders['elementor'] && 
                (defined('ELEMENTOR_VERSION') || 
-                isset($_GET['elementor-preview']) || 
-                isset($_GET['action']) && $_GET['action'] === 'elementor');
+                isset(wp_unslash($_GET['elementor-preview'])) || 
+                isset(wp_unslash($_GET['action'])) && wp_unslash($_GET['action']) === 'elementor');
     }
     
     private function is_oxygen_active() {
         return $this->supported_builders['oxygen'] && 
-               (isset($_GET['ct_builder']) || 
-                isset($_GET['oxygen_iframe']));
+               (isset(wp_unslash($_GET['ct_builder'])) || 
+                isset(wp_unslash($_GET['oxygen_iframe'])));
     }
     
     private function is_divi_active() {
         return $this->supported_builders['divi'] && 
                (et_core_is_fb_enabled() || 
                 et_core_is_builder_active() || 
-                isset($_GET['et_fb']));
+                isset(wp_unslash($_GET['et_fb'])));
     }
     
     private function is_gutenberg_active() {
         return $this->supported_builders['gutenberg'] && 
                (function_exists('use_block_editor_for_post_type') || 
-                isset($_GET['context']) && $_GET['context'] === 'edit');
+                isset(wp_unslash($_GET['context'])) && wp_unslash($_GET['context']) === 'edit');
     }
     
     private function is_beaver_builder_active() {
         return $this->supported_builders['beaver_builder'] && 
                (FLBuilderModel::is_builder_active() || 
-                isset($_GET['fl_builder']));
+                isset(wp_unslash($_GET['fl_builder'])));
     }
     
     private function is_visual_composer_active() {
         return $this->supported_builders['visual_composer'] && 
                (defined('WPB_VC_VERSION') || 
-                isset($_GET['vc_action']));
+                isset(wp_unslash($_GET['vc_action'])));
     }
     
     private function is_fusion_builder_active() {
         return $this->supported_builders['fusion_builder'] && 
                (class_exists('FusionBuilder') || 
-                isset($_GET['fusion_builder']));
+                isset(wp_unslash($_GET['fusion_builder'])));
     }
     
     private function is_siteorigin_active() {
         return $this->supported_builders['siteorigin'] && 
                (SiteOrigin_Panels::is_active() || 
-                isset($_GET['siteorigin_panels']));
+                isset(wp_unslash($_GET['siteorigin_panels'])));
     }
     
     private function is_thrive_active() {
         return $this->supported_builders['thrive'] && 
                (class_exists('Thrive_Leads') || 
-                isset($_GET['tve']));
+                isset(wp_unslash($_GET['tve'])));
     }
     
     /**
@@ -439,7 +439,7 @@ class SPSWIFTER_Twitch_Stream_Widget extends WP_Widget {
         <?php
     }
     
-    public function update($new_instance, $old_instance) {
+    public function upgmdate($new_instance, $old_instance) {
         $instance = array();
         $instance['title'] = (!empty($new_instance['title'])) ? sanitize_text_field($new_instance['title']) : '';
         $instance['channel'] = (!empty($new_instance['channel'])) ? sanitize_text_field($new_instance['channel']) : '';
@@ -514,7 +514,7 @@ class SPSWIFTER_Twitch_Grid_Widget extends WP_Widget {
         <?php
     }
     
-    public function update($new_instance, $old_instance) {
+    public function upgmdate($new_instance, $old_instance) {
         $instance = array();
         $instance['title'] = (!empty($new_instance['title'])) ? sanitize_text_field($new_instance['title']) : '';
         $instance['channels'] = (!empty($new_instance['channels'])) ? sanitize_text_field($new_instance['channels']) : '';

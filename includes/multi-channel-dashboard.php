@@ -77,7 +77,7 @@ class SPSWIFTER_Twitch_Dashboard {
      * Enqueue dashboard scripts
      */
     public function enqueue_dashboard_scripts() {
-        if (is_admin() && isset($_GET['page']) && strpos($_GET['page'], 'twitch-dashboard') === 0) {
+        if (is_admin() && isset(wp_unslash($_GET['page'])) && strpos(wp_unslash($_GET['page']), 'twitch-dashboard') === 0) {
             wp_enqueue_script(
                 'twitch-dashboard',
                 SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/dashboard.js',
@@ -374,7 +374,7 @@ class SPSWIFTER_Twitch_Dashboard {
             wp_send_json_error('Unauthorized');
         }
         
-        $action = $_POST['dashboard_action'] ?? '';
+        $action = wp_unslash($_POST['dashboard_action']) ?? '';
         
         switch ($action) {
             case 'get_overview':
@@ -429,8 +429,8 @@ class SPSWIFTER_Twitch_Dashboard {
      * Get analytics data
      */
     private function get_analytics_data() {
-        $channel = $_POST['channel'] ?? 'all';
-        $period = $_POST['period'] ?? 'week';
+        $channel = wp_unslash($_POST['channel']) ?? 'all';
+        $period = wp_unslash($_POST['period']) ?? 'week';
         
         if ($channel === 'all') {
             $channels = $this->get_dashboard_channels();
@@ -446,9 +446,9 @@ class SPSWIFTER_Twitch_Dashboard {
      * Get recordings data
      */
     private function get_recordings_data() {
-        $channel = $_POST['channel'] ?? 'all';
-        $status = $_POST['status'] ?? 'all';
-        $limit = $_POST['limit'] ?? 50;
+        $channel = wp_unslash($_POST['channel']) ?? 'all';
+        $status = wp_unslash($_POST['status']) ?? 'all';
+        $limit = wp_unslash($_POST['limit']) ?? 50;
         
         $recording = new SPSWIFTER_Twitch_Stream_Recording();
         

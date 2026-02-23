@@ -500,7 +500,7 @@ class SPSWIFTER_Twitch_Analytics_Dashboard {
     public function handle_dashboard_ajax() {
         check_ajax_referer('spswifter_twitch_analytics_dashboard_nonce', 'nonce');
         
-        $action = $_POST['analytics_action'] ?? '';
+        $action = wp_unslash($_POST['analytics_action']) ?? '';
         
         switch ($action) {
             case 'get_overview':
@@ -527,8 +527,8 @@ class SPSWIFTER_Twitch_Analytics_Dashboard {
      * Get overview AJAX
      */
     private function get_overview_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $period = intval($_POST['period'] ?? 30);
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $period = intval(wp_unslash($_POST['period']) ?? 30);
         
         $overview = $this->analytics->get_overview_stats($channel, $period);
         
@@ -539,9 +539,9 @@ class SPSWIFTER_Twitch_Analytics_Dashboard {
      * Get chart data AJAX
      */
     private function get_chart_data_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $period = intval($_POST['period'] ?? 30);
-        $type = sanitize_text_field($_POST['chart_type'] ?? 'viewers');
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $period = intval(wp_unslash($_POST['period']) ?? 30);
+        $type = sanitize_text_field(wp_unslash($_POST['chart_type']) ?? 'viewers');
         
         $chart_data = $this->analytics->get_chart_data($channel, $period, $type);
         
@@ -552,9 +552,9 @@ class SPSWIFTER_Twitch_Analytics_Dashboard {
      * Get top streams AJAX
      */
     private function get_top_streams_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $period = intval($_POST['period'] ?? 30);
-        $limit = intval($_POST['limit'] ?? 10);
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $period = intval(wp_unslash($_POST['period']) ?? 30);
+        $limit = intval(wp_unslash($_POST['limit']) ?? 10);
         
         $top_streams = $this->analytics->get_top_streams($channel, $period, $limit);
         
@@ -565,9 +565,9 @@ class SPSWIFTER_Twitch_Analytics_Dashboard {
      * Get top games AJAX
      */
     private function get_top_games_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $period = intval($_POST['period'] ?? 30);
-        $limit = intval($_POST['limit'] ?? 10);
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $period = intval(wp_unslash($_POST['period']) ?? 30);
+        $limit = intval(wp_unslash($_POST['limit']) ?? 10);
         
         $top_games = $this->analytics->get_top_games($channel, $period, $limit);
         
@@ -578,9 +578,9 @@ class SPSWIFTER_Twitch_Analytics_Dashboard {
      * Export data AJAX
      */
     private function export_data_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $period = intval($_POST['period'] ?? 30);
-        $format = sanitize_text_field($_POST['format'] ?? 'csv');
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $period = intval(wp_unslash($_POST['period']) ?? 30);
+        $format = sanitize_text_field(wp_unslash($_POST['format']) ?? 'csv');
         
         $data = $this->analytics->export_analytics_data($channel, $period, $format);
         

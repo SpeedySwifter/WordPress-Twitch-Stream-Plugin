@@ -646,7 +646,7 @@ class SPSWIFTER_Twitch_Stream_Recording {
             // Local file
             $file_path = str_replace(wp_upload_dir()['baseurl'], wp_upload_dir()['basedir'], $file_path);
             if (file_exists($file_path)) {
-                unlink($file_path);
+                wp_delete_file($file_path);
             }
         }
         // Cloud files would be handled differently
@@ -662,7 +662,7 @@ class SPSWIFTER_Twitch_Stream_Recording {
             wp_die('Unauthorized');
         }
         
-        $action = $_POST['recording_action'] ?? '';
+        $action = wp_unslash($_POST['recording_action']) ?? '';
         
         switch ($action) {
             case 'save_settings':
@@ -687,14 +687,14 @@ class SPSWIFTER_Twitch_Stream_Recording {
      */
     private function save_recording_settings() {
         $settings = array(
-            'enabled' => isset($_POST['enabled']),
-            'channels' => array_map('sanitize_text_field', $_POST['channels'] ?? array()),
-            'check_interval' => sanitize_text_field($_POST['check_interval'] ?? 'every_minute'),
-            'processing_method' => sanitize_text_field($_POST['processing_method'] ?? 'local'),
-            'auto_thumbnails' => isset($_POST['auto_thumbnails']),
-            'auto_clips' => isset($_POST['auto_clips']),
-            'max_recording_duration' => intval($_POST['max_recording_duration'] ?? 720), // 12 hours
-            'storage_location' => sanitize_text_field($_POST['storage_location'] ?? 'local'),
+            'enabled' => isset(wp_unslash($_POST['enabled'])),
+            'channels' => array_map('sanitize_text_field', wp_unslash($_POST['channels']) ?? array()),
+            'check_interval' => sanitize_text_field(wp_unslash($_POST['check_interval']) ?? 'every_minute'),
+            'processing_method' => sanitize_text_field(wp_unslash($_POST['processing_method']) ?? 'local'),
+            'auto_thumbnails' => isset(wp_unslash($_POST['auto_thumbnails'])),
+            'auto_clips' => isset(wp_unslash($_POST['auto_clips'])),
+            'max_recording_duration' => intval(wp_unslash($_POST['max_recording_duration']) ?? 720), // 12 hours
+            'storage_location' => sanitize_text_field(wp_unslash($_POST['storage_location']) ?? 'local'),
         );
         
         update_option('spswifter_twitch_recording_settings', $settings);
@@ -706,9 +706,9 @@ class SPSWIFTER_Twitch_Stream_Recording {
      * Get recordings AJAX
      */
     private function get_recordings_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $status = sanitize_text_field($_POST['status'] ?? '');
-        $limit = intval($_POST['limit'] ?? 50);
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $status = sanitize_text_field(wp_unslash($_POST['status']) ?? '');
+        $limit = intval(wp_unslash($_POST['limit']) ?? 50);
         
         $recordings = $this->get_all_recordings($channel, $status, $limit);
         
@@ -719,7 +719,7 @@ class SPSWIFTER_Twitch_Stream_Recording {
      * Delete recording AJAX
      */
     private function delete_recording_ajax() {
-        $recording_id = sanitize_text_field($_POST['recording_id'] ?? '');
+        $recording_id = sanitize_text_field(wp_unslash($_POST['recording_id']) ?? '');
         
         if ($this->delete_recording($recording_id)) {
             wp_send_json_success(array('message' => 'Recording deleted successfully'));
@@ -732,7 +732,7 @@ class SPSWIFTER_Twitch_Stream_Recording {
      * Get statistics AJAX
      */
     private function get_statistics_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
         $statistics = $this->get_recording_statistics($channel);
         
         wp_send_json_success(array('statistics' => $statistics));

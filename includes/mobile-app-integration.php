@@ -678,7 +678,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
     public function handle_mobile_app_ajax() {
         check_ajax_referer('spswifter_twitch_mobile_app_nonce', 'nonce');
         
-        $action = $_POST['mobile_action'] ?? '';
+        $action = wp_unslash($_POST['mobile_action']) ?? '';
         
         switch ($action) {
             case 'get_streams':
@@ -808,7 +808,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
         echo '<link rel="manifest" href="' . esc_url(home_url('/twitch-pwa-manifest.json')) . '">';
         
         // Canonical URL
-        $request_uri = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '/';
+        $request_uri = isset(wp_unslash($_SERVER['REQUEST_URI'])) ? wp_unslash(wp_unslash($_SERVER['REQUEST_URI'])) : '/';
         echo '<link rel="canonical" href="' . esc_url(home_url(sanitize_url($request_uri))) . '">';
     }
     
@@ -1329,7 +1329,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
     }
     
     private function is_mobile_device() {
-        $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
+        $user_agent = isset(wp_unslash($_SERVER['HTTP_USER_AGENT'])) ? sanitize_text_field(wp_unslash(wp_unslash($_SERVER['HTTP_USER_AGENT']))) : '';
         return preg_match('/(android|iphone|ipad|ipod|blackberry|windows phone)/i', $user_agent);
     }
     
@@ -1338,7 +1338,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
     }
     
     private function get_mobile_user_agent() {
-        return isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
+        return isset(wp_unslash($_SERVER['HTTP_USER_AGENT'])) ? sanitize_text_field(wp_unslash(wp_unslash($_SERVER['HTTP_USER_AGENT']))) : '';
     }
     
     private function optimize_content_for_mobile($content) {
@@ -1418,7 +1418,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
             'endpoint' => $subscription['endpoint'],
             'p256dh' => $subscription['keys']['p256dh'],
             'auth' => $subscription['keys']['auth'],
-            'user_agent' => isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '',
+            'user_agent' => isset(wp_unslash($_SERVER['HTTP_USER_AGENT'])) ? sanitize_text_field(wp_unslash(wp_unslash($_SERVER['HTTP_USER_AGENT']))) : '',
             'active' => 1
         );
         

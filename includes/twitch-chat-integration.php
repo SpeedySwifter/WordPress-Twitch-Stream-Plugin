@@ -186,7 +186,7 @@ class SPSWIFTER_Twitch_Chat_Integration {
             return '<p class="twitch-chat-error">Bitte geben Sie einen Kanal an: [spswifter_twitch_chat_embed channel="username"]</p>';
         }
         
-        $parent = $atts['parent'] ?: $_SERVER['HTTP_HOST'];
+        $parent = $atts['parent'] ?: wp_unslash($_SERVER['HTTP_HOST']);
         
         ob_start();
         ?>
@@ -276,7 +276,7 @@ class SPSWIFTER_Twitch_Chat_Integration {
             array(
                 'user' => 'TestUser1',
                 'message' => 'Great stream! 👍',
-                'timestamp' => date('H:i'),
+                'timestamp' => gmdate('H:i'),
                 'color' => '#FF0000',
                 'badges' => array('subscriber'),
                 'emotes' => array(),
@@ -284,7 +284,7 @@ class SPSWIFTER_Twitch_Chat_Integration {
             array(
                 'user' => 'TestUser2',
                 'message' => 'Hello everyone!',
-                'timestamp' => date('H:i', strtotime('-5 minutes')),
+                'timestamp' => gmdate('H:i', strtotime('-5 minutes')),
                 'color' => '#0000FF',
                 'badges' => array(),
                 'emotes' => array(),
@@ -292,7 +292,7 @@ class SPSWIFTER_Twitch_Chat_Integration {
             array(
                 'user' => 'TestUser3',
                 'message' => 'Love the content!',
-                'timestamp' => date('H:i', strtotime('-10 minutes')),
+                'timestamp' => gmdate('H:i', strtotime('-10 minutes')),
                 'color' => '#00FF00',
                 'badges' => array('vip'),
                 'emotes' => array(),
@@ -328,7 +328,7 @@ class SPSWIFTER_Twitch_Chat_Integration {
     public function handle_chat_ajax() {
         check_ajax_referer('spswifter_twitch_chat_nonce', 'nonce');
         
-        $action = $_POST['chat_action'] ?? '';
+        $action = wp_unslash($_POST['chat_action']) ?? '';
         
         switch ($action) {
             case 'connect':
@@ -354,8 +354,8 @@ class SPSWIFTER_Twitch_Chat_Integration {
     public function handle_chat_messages_ajax() {
         check_ajax_referer('spswifter_twitch_chat_nonce', 'nonce');
         
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $limit = intval($_POST['limit'] ?? 50);
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $limit = intval(wp_unslash($_POST['limit']) ?? 50);
         
         if (empty($channel)) {
             wp_send_json_error('Channel is required');
@@ -370,7 +370,7 @@ class SPSWIFTER_Twitch_Chat_Integration {
      * Connect chat AJAX
      */
     private function connect_chat_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
         
         if (empty($channel)) {
             wp_send_json_error('Channel is required');
@@ -397,8 +397,8 @@ class SPSWIFTER_Twitch_Chat_Integration {
      * Send message AJAX
      */
     private function send_message_ajax() {
-        $message = sanitize_text_field($_POST['message'] ?? '');
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
+        $message = sanitize_text_field(wp_unslash($_POST['message']) ?? '');
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
         
         if (empty($message) || empty($channel)) {
             wp_send_json_error('Message and channel are required');
@@ -417,8 +417,8 @@ class SPSWIFTER_Twitch_Chat_Integration {
      * Get messages AJAX
      */
     private function get_messages_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $limit = intval($_POST['limit'] ?? 50);
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $limit = intval(wp_unslash($_POST['limit']) ?? 50);
         
         if (empty($channel)) {
             wp_send_json_error('Channel is required');

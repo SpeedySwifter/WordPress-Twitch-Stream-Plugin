@@ -120,7 +120,7 @@ class SPSWIFTER_Twitch_Webhook_Support {
                 $this->handle_stream_offline($event_data);
                 break;
             case 'channel.update':
-                $this->handle_channel_update($event_data);
+                $this->handle_channel_upgmdate($event_data);
                 break;
             case 'user.follow':
                 $this->handle_user_follow($event_data);
@@ -205,7 +205,7 @@ class SPSWIFTER_Twitch_Webhook_Support {
     /**
      * Handle channel update event
      */
-    private function handle_channel_update($event_data) {
+    private function handle_channel_upgmdate($event_data) {
         $user_id = $event_data['broadcaster_user_id'];
         $user_login = $event_data['broadcaster_user_login'];
         $title = $event_data['title'];
@@ -440,8 +440,8 @@ class SPSWIFTER_Twitch_Webhook_Support {
         }
         
         // Get Twitch webhook headers
-        $message_id = sanitize_text_field($_SERVER['HTTP_TWITCH_EVENTSUB_MESSAGE_ID'] ?? '');
-        $timestamp = sanitize_text_field($_SERVER['HTTP_TWITCH_EVENTSUB_MESSAGE_TIMESTAMP'] ?? '');
+        $message_id = sanitize_text_field(wp_unslash($_SERVER['HTTP_TWITCH_EVENTSUB_MESSAGE_ID']) ?? '');
+        $timestamp = sanitize_text_field(wp_unslash($_SERVER['HTTP_TWITCH_EVENTSUB_MESSAGE_TIMESTAMP']) ?? '');
         
         // Create HMAC message
         $hmac_message = $message_id . $timestamp . $body;
@@ -700,7 +700,7 @@ class SPSWIFTER_Twitch_Webhook_Support {
                 array(
                     'title' => $title,
                     'color' => $color,
-                    'timestamp' => date('c'),
+                    'timestamp' => gmdate('c'),
                 ),
             ),
         );
@@ -721,7 +721,7 @@ class SPSWIFTER_Twitch_Webhook_Support {
                     'title' => "👥 New Follower!",
                     'description' => "**{$follower}** is now following **{$channel}**!",
                     'color' => 0x9146FF,
-                    'timestamp' => date('c'),
+                    'timestamp' => gmdate('c'),
                 ),
             ),
         );
@@ -750,7 +750,7 @@ class SPSWIFTER_Twitch_Webhook_Support {
                     'title' => "⭐ New Subscriber!",
                     'description' => "**{$subscriber}** subscribed to **{$channel}**! {$emoji} Tier {$tier}",
                     'color' => 0x9146FF,
-                    'timestamp' => date('c'),
+                    'timestamp' => gmdate('c'),
                 ),
             ),
         );
@@ -771,7 +771,7 @@ class SPSWIFTER_Twitch_Webhook_Support {
                     'title' => "💎 New Cheer!",
                     'description' => "**{$user}** cheered **{$bits} bits** to **{$channel}**!",
                     'color' => 0x9146FF,
-                    'timestamp' => date('c'),
+                    'timestamp' => gmdate('c'),
                 ),
             ),
         );
@@ -792,7 +792,7 @@ class SPSWIFTER_Twitch_Webhook_Support {
                     'title' => "🎯 Raid!",
                     'description' => "**{$from_channel}** raided **{$to_channel}** with **{$viewers}** viewers!",
                     'color' => 0x9146FF,
-                    'timestamp' => date('c'),
+                    'timestamp' => gmdate('c'),
                 ),
             ),
         );
@@ -821,7 +821,7 @@ class SPSWIFTER_Twitch_Webhook_Support {
                     'title' => "🎁 Subscription Gift!",
                     'description' => "**{$user}** gifted **{$total}** Tier {$tier} subscriptions to **{$channel}**! {$emoji}",
                     'color' => 0x9146FF,
-                    'timestamp' => date('c'),
+                    'timestamp' => gmdate('c'),
                 ),
             ),
         );

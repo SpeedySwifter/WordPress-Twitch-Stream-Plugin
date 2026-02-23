@@ -93,8 +93,8 @@ class SPSWIFTER_Twitch_Multi_Language_Support {
         // Priority order: URL parameter > User preference > Browser > Default
         
         // 1. URL parameter
-        if (isset($_GET['lang']) && isset($this->supported_languages[$_GET['lang']])) {
-            return sanitize_text_field($_GET['lang']);
+        if (isset(wp_unslash($_GET['lang'])) && isset($this->supported_languages[wp_unslash($_GET['lang'])])) {
+            return sanitize_text_field(wp_unslash($_GET['lang']));
         }
         
         // 2. User preference (if logged in)
@@ -119,8 +119,8 @@ class SPSWIFTER_Twitch_Multi_Language_Support {
      * Get browser language
      */
     private function get_browser_language() {
-        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            $langs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        if (isset(wp_unslash($_SERVER['HTTP_ACCEPT_LANGUAGE']))) {
+            $langs = explode(',', wp_unslash($_SERVER['HTTP_ACCEPT_LANGUAGE']));
             foreach ($langs as $lang) {
                 $lang = substr(trim($lang), 0, 2);
                 if (isset($this->supported_languages[$lang])) {
@@ -642,7 +642,7 @@ class SPSWIFTER_Twitch_Multi_Language_Support {
     public function handle_language_switch() {
         check_ajax_referer('spswifter_twitch_language_nonce', 'nonce');
         
-        $language = sanitize_text_field($_POST['language'] ?? '');
+        $language = sanitize_text_field(wp_unslash($_POST['language']) ?? '');
         
         if (!isset($this->supported_languages[$language])) {
             wp_send_json_error('Invalid language');
@@ -836,8 +836,8 @@ class SPSWIFTER_Twitch_Multi_Language_Support {
      * Handle URL language switching
      */
     private function handle_url_language_switching() {
-        if (isset($_GET['lang']) && isset($this->supported_languages[$_GET['lang']])) {
-            $language = sanitize_text_field($_GET['lang']);
+        if (isset(wp_unslash($_GET['lang'])) && isset($this->supported_languages[wp_unslash($_GET['lang'])])) {
+            $language = sanitize_text_field(wp_unslash($_GET['lang']));
             
             // Save to session
             $_SESSION['spswifter_twitch_language'] = $language;

@@ -759,7 +759,7 @@ class SPSWIFTER_Twitch_Membership_Integration {
     public function handle_membership_ajax() {
         check_ajax_referer('spswifter_twitch_membership_nonce', 'nonce');
         
-        $action = $_POST['membership_action'] ?? '';
+        $action = wp_unslash($_POST['membership_action']) ?? '';
         
         switch ($action) {
             case 'check_access':
@@ -780,7 +780,7 @@ class SPSWIFTER_Twitch_Membership_Integration {
      * Check membership access AJAX
      */
     private function check_membership_access_ajax() {
-        $content_type = sanitize_text_field($_POST['content_type'] ?? '');
+        $content_type = sanitize_text_field(wp_unslash($_POST['content_type']) ?? '');
         $user_level = $this->get_current_membership_level();
         
         $has_access = $this->user_has_content_access($content_type, $user_level);
@@ -796,7 +796,7 @@ class SPSWIFTER_Twitch_Membership_Integration {
      * Get membership level AJAX
      */
     private function get_membership_level_ajax() {
-        $user_id = intval($_POST['user_id'] ?? get_current_user_id());
+        $user_id = intval(wp_unslash($_POST['user_id']) ?? get_current_user_id());
         $level = $this->get_user_membership_level($user_id);
         
         wp_send_json_success(array(
@@ -809,7 +809,7 @@ class SPSWIFTER_Twitch_Membership_Integration {
      * Get upgrade info AJAX
      */
     private function get_upgrade_info_ajax() {
-        $target_level = sanitize_text_field($_POST['target_level'] ?? 'basic');
+        $target_level = sanitize_text_field(wp_unslash($_POST['target_level']) ?? 'basic');
         $current_level = $this->get_current_membership_level();
         
         wp_send_json_success(array(

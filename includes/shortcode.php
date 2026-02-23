@@ -46,7 +46,7 @@ function spswifter_twitch_stream_shortcode($atts) {
     }
 
     // Twitch Embed
-    $domain = $_SERVER['HTTP_HOST'];
+    $domain = wp_unslash($_SERVER['HTTP_HOST']);
     
     // Localhost-Unterstützung
     if (in_array($domain, ['localhost', '127.0.0.1'])) {
@@ -653,7 +653,7 @@ add_shortcode('spswifter_twitch_clips', 'spswifter_twitch_clips_shortcode');
 function spswifter_twitch_check_stream_status() {
     check_ajax_referer('spswifter_twitch_stream_nonce', 'nonce');
     
-    $channel = sanitize_text_field($_POST['channel']);
+    $channel = sanitize_text_field(wp_unslash($_POST['channel']));
     if (empty($channel)) {
         wp_send_json_error(['message' => 'Kein Kanal angegeben']);
     }

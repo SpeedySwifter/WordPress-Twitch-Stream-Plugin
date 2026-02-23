@@ -299,7 +299,7 @@ class SPSWIFTER_Twitch_API {
      * VOD-URL für Embed erstellen
      */
     public function get_vod_embed_url($video_id, $autoplay = false, $muted = false) {
-        $domain = $_SERVER['HTTP_HOST'];
+        $domain = wp_unslash($_SERVER['HTTP_HOST']);
         
         if (in_array($domain, ['localhost', '127.0.0.1'])) {
             $domain = 'localhost';
@@ -319,7 +319,7 @@ class SPSWIFTER_Twitch_API {
      * Clip-URL für Embed erstellen
      */
     public function get_clip_embed_url($clip_id, $autoplay = false) {
-        $domain = $_SERVER['HTTP_HOST'];
+        $domain = wp_unslash($_SERVER['HTTP_HOST']);
         
         if (in_array($domain, ['localhost', '127.0.0.1'])) {
             $domain = 'localhost';

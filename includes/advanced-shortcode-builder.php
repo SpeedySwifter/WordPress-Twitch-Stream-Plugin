@@ -1118,7 +1118,7 @@ class SPSWIFTER_Twitch_Advanced_Shortcode_Builder {
     public function handle_shortcode_builder_ajax() {
         check_ajax_referer('spswifter_twitch_shortcode_builder_nonce', 'nonce');
         
-        $action = $_POST['builder_action'] ?? '';
+        $action = wp_unslash($_POST['builder_action']) ?? '';
         
         switch ($action) {
             case 'generate_shortcode':
@@ -1145,8 +1145,8 @@ class SPSWIFTER_Twitch_Advanced_Shortcode_Builder {
      * Generate shortcode AJAX
      */
     private function generate_shortcode_ajax() {
-        $shortcode = sanitize_text_field($_POST['shortcode'] ?? '');
-        $parameters = $_POST['parameters'] ?? array();
+        $shortcode = sanitize_text_field(wp_unslash($_POST['shortcode']) ?? '');
+        $parameters = wp_unslash($_POST['parameters']) ?? array();
         
         if (!isset($this->supported_shortcodes[$shortcode])) {
             wp_send_json_error('Invalid shortcode');
@@ -1166,8 +1166,8 @@ class SPSWIFTER_Twitch_Advanced_Shortcode_Builder {
      * Validate shortcode AJAX
      */
     private function validate_shortcode_ajax() {
-        $shortcode = sanitize_text_field($_POST['shortcode'] ?? '');
-        $parameters = $_POST['parameters'] ?? array();
+        $shortcode = sanitize_text_field(wp_unslash($_POST['shortcode']) ?? '');
+        $parameters = wp_unslash($_POST['parameters']) ?? array();
         
         $validation_errors = array();
         
@@ -1205,8 +1205,8 @@ class SPSWIFTER_Twitch_Advanced_Shortcode_Builder {
      * Preview shortcode AJAX
      */
     private function preview_shortcode_ajax() {
-        $shortcode = sanitize_text_field($_POST['shortcode'] ?? '');
-        $parameters = $_POST['parameters'] ?? array();
+        $shortcode = sanitize_text_field(wp_unslash($_POST['shortcode']) ?? '');
+        $parameters = wp_unslash($_POST['parameters']) ?? array();
         
         $generated_shortcode = $this->build_shortcode($shortcode, $parameters);
         
@@ -1228,8 +1228,8 @@ class SPSWIFTER_Twitch_Advanced_Shortcode_Builder {
             return;
         }
         
-        $preset_name = sanitize_text_field($_POST['preset_name'] ?? '');
-        $preset_data = $_POST['preset_data'] ?? array();
+        $preset_name = sanitize_text_field(wp_unslash($_POST['preset_name']) ?? '');
+        $preset_data = wp_unslash($_POST['preset_data']) ?? array();
         
         if (empty($preset_name) || empty($preset_data)) {
             wp_send_json_error('Invalid preset data');
@@ -1258,7 +1258,7 @@ class SPSWIFTER_Twitch_Advanced_Shortcode_Builder {
      * Load preset AJAX
      */
     private function load_preset_ajax() {
-        $preset_key = sanitize_key($_POST['preset_key'] ?? '');
+        $preset_key = sanitize_key(wp_unslash($_POST['preset_key']) ?? '');
         
         $presets = get_option('spswifter_twitch_shortcode_builder_presets', array());
         

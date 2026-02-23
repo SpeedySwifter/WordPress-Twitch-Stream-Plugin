@@ -122,7 +122,7 @@ class SPSWIFTER_Twitch_Token_Manager {
      * API-Limits prüfen
      */
     public static function check_rate_limits() {
-        $rate_limit_key = 'spswifter_twitch_api_calls_' . date('Y-m-d-H');
+        $rate_limit_key = 'spswifter_twitch_api_calls_' . gmdate('Y-m-d-H');
         $calls = get_transient($rate_limit_key) ?: 0;
         
         // Twitch API Limit: 30 calls pro Minute
@@ -146,7 +146,7 @@ class SPSWIFTER_Twitch_Token_Manager {
             'token_cached' => get_transient('spswifter_twitch_access_token') !== false,
             'token_valid' => false,
             'last_error' => get_transient('spswifter_twitch_last_error'),
-            'api_calls_this_hour' => get_transient('spswifter_twitch_api_calls_' . date('Y-m-d-H')) ?: 0
+            'api_calls_this_hour' => get_transient('spswifter_twitch_api_calls_' . gmdate('Y-m-d-H')) ?: 0
         ];
         
         if ($info['token_cached']) {

@@ -173,7 +173,7 @@ function spswifter_twitch_enqueue_admin_styles() {
     );
     
     // Shortcode Builder Styles for admin
-    if (isset($_GET['page']) && $_GET['page'] === 'twitch-shortcode-builder') {
+    if (isset(wp_unslash($_GET['page'])) && wp_unslash($_GET['page']) === 'twitch-shortcode-builder') {
         wp_enqueue_style(
             'spswifter-twitch-shortcode-builder',
             SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/shortcode-builder.css',
@@ -187,7 +187,7 @@ add_action('admin_enqueue_scripts', 'spswifter_twitch_enqueue_admin_styles');
 // Admin-Scripts laden
 function spswifter_twitch_enqueue_admin_scripts($hook) {
     // Shortcode Builder Scripts
-    if (isset($_GET['page']) && $_GET['page'] === 'twitch-shortcode-builder') {
+    if (isset(wp_unslash($_GET['page'])) && wp_unslash($_GET['page']) === 'twitch-shortcode-builder') {
         wp_enqueue_script(
             'spswifter-twitch-shortcode-builder',
             SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/shortcode-builder.js',
@@ -198,7 +198,7 @@ function spswifter_twitch_enqueue_admin_scripts($hook) {
     }
     
     // Stream Scheduler Scripts
-    if (isset($_GET['page']) && $_GET['page'] === 'twitch-stream-scheduler') {
+    if (isset(wp_unslash($_GET['page'])) && wp_unslash($_GET['page']) === 'twitch-stream-scheduler') {
         wp_enqueue_script(
             'spswifter-twitch-scheduler',
             SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/stream-scheduler.js',
@@ -227,7 +227,7 @@ function spswifter_twitch_enqueue_admin_scripts($hook) {
     }
     
     // Mobile App Scripts
-    if (isset($_GET['page']) && $_GET['page'] === 'twitch-mobile-app') {
+    if (isset(wp_unslash($_GET['page'])) && wp_unslash($_GET['page']) === 'twitch-mobile-app') {
         wp_enqueue_script(
             'spswifter-twitch-mobile-app',
             SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/mobile-app.js',

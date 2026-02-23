@@ -185,7 +185,7 @@ class SPSWIFTER_Twitch_Cache {
             wp_send_json_error('Unauthorized');
         }
         
-        $action = $_POST['cache_action'] ?? '';
+        $action = wp_unslash($_POST['cache_action']) ?? '';
         
         switch ($action) {
             case 'get_status':
@@ -218,7 +218,7 @@ class SPSWIFTER_Twitch_Cache {
      * Clear cache AJAX
      */
     private function clear_cache_ajax() {
-        $cache_type = $_POST['cache_type'] ?? 'all';
+        $cache_type = wp_unslash($_POST['cache_type']) ?? 'all';
         
         switch ($cache_type) {
             case 'all':
@@ -582,7 +582,7 @@ class SPSWIFTER_Twitch_Cache_File {
         $data = unserialize(file_get_contents($file_path));
         
         if ($data['expires'] < time()) {
-            unlink($file_path);
+            wp_delete_file($file_path);
             return $default;
         }
         
@@ -605,7 +605,7 @@ class SPSWIFTER_Twitch_Cache_File {
         $file_path = $this->get_file_path($key);
         
         if (file_exists($file_path)) {
-            return unlink($file_path);
+            return wp_delete_file($file_path);
         }
         
         return true;
@@ -617,7 +617,7 @@ class SPSWIFTER_Twitch_Cache_File {
         
         foreach ($files as $file) {
             if (is_file($file)) {
-                unlink($file);
+                wp_delete_file($file);
                 $deleted++;
             }
         }
@@ -660,7 +660,7 @@ class SPSWIFTER_Twitch_Cache_File {
                 $data = unserialize(file_get_contents($file));
                 
                 if ($data['expires'] < time()) {
-                    unlink($file);
+                    wp_delete_file($file);
                     $cleaned++;
                 }
             }

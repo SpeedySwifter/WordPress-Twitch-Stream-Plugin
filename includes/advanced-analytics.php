@@ -77,7 +77,7 @@ class SPSWIFTER_Twitch_Analytics {
             $total_hours += $duration;
             $total_viewers += $stream['viewer_count'];
             $peak_viewers = max($peak_viewers, $stream['viewer_count']);
-            $stream_days[] = date('Y-m-d', strtotime($stream['started_at']));
+            $stream_days[] = gmdate('Y-m-d', strtotime($stream['started_at']));
         }
         
         $unique_days = count(array_unique($stream_days));
@@ -331,8 +331,8 @@ class SPSWIFTER_Twitch_Analytics {
         }
         
         return array(
-            'start' => date('Y-m-d H:i:s', $start),
-            'end' => date('Y-m-d H:i:s', $now),
+            'start' => gmdate('Y-m-d H:i:s', $start),
+            'end' => gmdate('Y-m-d H:i:s', $now),
         );
     }
     

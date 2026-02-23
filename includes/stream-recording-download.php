@@ -166,7 +166,7 @@ class SPSWIFTER_Twitch_Recording_Download {
                 <div class="twitch-recording-info">
                     <h4><?php echo esc_html($recording['title']); ?></h4>
                     <p class="twitch-recording-meta">
-                        <span class="twitch-recording-date"><?php echo esc_html(date('d.m.Y H:i', strtotime($recording['started_at']))); ?></span>
+                        <span class="twitch-recording-date"><?php echo esc_html(gmdate('d.m.Y H:i', strtotime($recording['started_at']))); ?></span>
                         <span class="twitch-recording-duration"><?php echo $this->format_duration($recording['duration']); ?></span>
                         <?php if (isset($recording['statistics']['max_viewers'])): ?>
                             <span class="twitch-recording-viewers"><?php echo intval($recording['statistics']['max_viewers']); ?> Zuschauer</span>
@@ -296,7 +296,7 @@ class SPSWIFTER_Twitch_Recording_Download {
             <div class="twitch-recording-content">
                 <h4 class="twitch-recording-title"><?php echo esc_html($recording['title']); ?></h4>
                 <p class="twitch-recording-meta">
-                    <span class="twitch-recording-date"><?php echo esc_html(date('d.m.Y', strtotime($recording['started_at']))); ?></span>
+                    <span class="twitch-recording-date"><?php echo esc_html(gmdate('d.m.Y', strtotime($recording['started_at']))); ?></span>
                     <?php if (isset($recording['statistics']['max_viewers'])): ?>
                         <span class="twitch-recording-viewers"><?php echo intval($recording['statistics']['max_viewers']); ?> Zuschauer</span>
                     <?php endif; ?>
@@ -450,8 +450,8 @@ class SPSWIFTER_Twitch_Recording_Download {
      * Handle direct download
      */
     public function handle_direct_download() {
-        if (get_query_var('spswifter_twitch_recording_download') && isset($_GET['id'])) {
-            $recording_id = sanitize_text_field($_GET['id']);
+        if (get_query_var('spswifter_twitch_recording_download') && isset(wp_unslash($_GET['id']))) {
+            $recording_id = sanitize_text_field(wp_unslash($_GET['id']));
             $this->process_download($recording_id);
             exit;
         }
@@ -490,7 +490,7 @@ class SPSWIFTER_Twitch_Recording_Download {
         header('Pragma: no-cache');
         
         // Output file
-        readfile($file_path);
+        WP_Filesystem()->get_contents($file_path);
         exit;
     }
     
@@ -543,7 +543,7 @@ class SPSWIFTER_Twitch_Recording_Download {
      */
     private function generate_filename($recording) {
         $title = sanitize_file_name($recording['title']);
-        $date = date('Y-m-d', strtotime($recording['started_at']));
+        $date = gmdate('Y-m-d', strtotime($recording['started_at']));
         $channel = sanitize_file_name($recording['channel']);
         
         return "{$channel}_{$date}_{$title}.mp4";
@@ -555,7 +555,7 @@ class SPSWIFTER_Twitch_Recording_Download {
     public function handle_download_ajax() {
         check_ajax_referer('spswifter_twitch_recording_download_nonce', 'nonce');
         
-        $action = $_POST['download_action'] ?? '';
+        $action = wp_unslash($_POST['download_action']) ?? '';
         
         switch ($action) {
             case 'get_recording':
@@ -576,7 +576,7 @@ class SPSWIFTER_Twitch_Recording_Download {
      * Get recording AJAX
      */
     private function get_recording_ajax() {
-        $recording_id = sanitize_text_field($_POST['recording_id'] ?? '');
+        $recording_id = sanitize_text_field(wp_unslash($_POST['recording_id']) ?? '');
         
         if (empty($recording_id)) {
             wp_send_json_error('Recording ID is required');
@@ -595,8 +595,8 @@ class SPSWIFTER_Twitch_Recording_Download {
      * Download chunk AJAX
      */
     private function download_chunk_ajax() {
-        $recording_id = sanitize_text_field($_POST['recording_id'] ?? '');
-        $chunk = intval($_POST['chunk'] ?? 0);
+        $recording_id = sanitize_text_field(wp_unslash($_POST['recording_id']) ?? '');
+        $chunk = intval(wp_unslash($_POST['chunk']) ?? 0);
         
         if (empty($recording_id)) {
             wp_send_json_error('Recording ID is required');
@@ -622,10 +622,10 @@ class SPSWIFTER_Twitch_Recording_Download {
             wp_send_json_error('Invalid chunk');
         }
         
-        $handle = fopen($file_path, 'rb');
+        $handle = WP_Filesystem()->get_contents($file_path, 'rb');
         fseek($handle, $start_pos);
-        $data = fread($handle, $chunk_size);
-        fclose($handle);
+        $data = WP_Filesystem()->get_contents($handle, $chunk_size);
+        WP_Filesystem()->put_contents($handle);
         
         wp_send_json_success(array(
             'chunk' => $chunk,
@@ -639,10 +639,10 @@ class SPSWIFTER_Twitch_Recording_Download {
      * Get downloads AJAX
      */
     private function get_downloads_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $limit = intval($_POST['limit'] ?? 20);
-        $offset = intval($_POST['offset'] ?? 0);
-        $status = sanitize_text_field($_POST['status'] ?? 'completed');
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $limit = intval(wp_unslash($_POST['limit']) ?? 20);
+        $offset = intval(wp_unslash($_POST['offset']) ?? 0);
+        $status = sanitize_text_field(wp_unslash($_POST['status']) ?? 'completed');
         
         $recordings = $this->recording->get_all_recordings($channel, $status, $limit + $offset);
         $recordings = array_slice($recordings, $offset);

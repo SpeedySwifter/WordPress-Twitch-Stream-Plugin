@@ -449,10 +449,10 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
      * Save Twitch product fields
      */
     public function save_spswifter_twitch_product_fields($post_id) {
-        $spswifter_twitch_channel = isset($_POST['_spswifter_twitch_channel']) ? sanitize_text_field($_POST['_spswifter_twitch_channel']) : '';
-        $spswifter_twitch_stream_url = isset($_POST['_spswifter_twitch_stream_url']) ? sanitize_url($_POST['_spswifter_twitch_stream_url']) : '';
-        $spswifter_twitch_enabled = isset($_POST['_spswifter_twitch_enabled']) ? 'yes' : 'no';
-        $spswifter_twitch_chat_embed = isset($_POST['_spswifter_twitch_chat_embed']) ? 'yes' : 'no';
+        $spswifter_twitch_channel = isset(wp_unslash($_POST['_spswifter_twitch_channel'])) ? sanitize_text_field(wp_unslash($_POST['_spswifter_twitch_channel'])) : '';
+        $spswifter_twitch_stream_url = isset(wp_unslash($_POST['_spswifter_twitch_stream_url'])) ? sanitize_url(wp_unslash($_POST['_spswifter_twitch_stream_url'])) : '';
+        $spswifter_twitch_enabled = isset(wp_unslash($_POST['_spswifter_twitch_enabled'])) ? 'yes' : 'no';
+        $spswifter_twitch_chat_embed = isset(wp_unslash($_POST['_spswifter_twitch_chat_embed'])) ? 'yes' : 'no';
         
         update_post_meta($post_id, '_spswifter_twitch_channel', $spswifter_twitch_channel);
         update_post_meta($post_id, '_spswifter_twitch_stream_url', $spswifter_twitch_stream_url);
@@ -683,7 +683,7 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
     public function handle_woo_product_ajax() {
         check_ajax_referer('spswifter_twitch_woo_nonce', 'nonce');
         
-        $action = $_POST['woo_action'] ?? '';
+        $action = wp_unslash($_POST['woo_action']) ?? '';
         
         switch ($action) {
             case 'get_product_stream':
@@ -701,7 +701,7 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
      * Get product stream AJAX
      */
     private function get_product_stream_ajax() {
-        $product_id = intval($_POST['product_id'] ?? 0);
+        $product_id = intval(wp_unslash($_POST['product_id']) ?? 0);
         
         if (!$product_id) {
             wp_send_json_error('Product ID is required');
@@ -728,7 +728,7 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
      * Check stream status AJAX
      */
     private function check_stream_status_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
         
         if (empty($channel)) {
             wp_send_json_error('Channel is required');

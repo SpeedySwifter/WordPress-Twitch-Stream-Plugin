@@ -298,7 +298,7 @@ class SPSWIFTER_Twitch_CSS_Builder {
             wp_send_json_error('Unauthorized');
         }
         
-        $action = $_POST['css_action'] ?? '';
+        $action = wp_unslash($_POST['css_action']) ?? '';
         
         switch ($action) {
             case 'get_preset':
@@ -325,7 +325,7 @@ class SPSWIFTER_Twitch_CSS_Builder {
      * Get preset AJAX
      */
     private function get_preset_ajax() {
-        $preset_id = sanitize_text_field($_POST['preset_id'] ?? 'default');
+        $preset_id = sanitize_text_field(wp_unslash($_POST['preset_id']) ?? 'default');
         $preset = $this->get_preset($preset_id);
         
         wp_send_json_success(array('preset' => $preset));
@@ -335,8 +335,8 @@ class SPSWIFTER_Twitch_CSS_Builder {
      * Save CSS AJAX
      */
     private function save_css_ajax() {
-        $styles = $_POST['styles'] ?? array();
-        $preset = sanitize_text_field($_POST['preset'] ?? 'default');
+        $styles = wp_unslash($_POST['styles']) ?? array();
+        $preset = sanitize_text_field(wp_unslash($_POST['preset']) ?? 'default');
         
         $this->custom_css = array(
             'preset' => $preset,
@@ -353,8 +353,8 @@ class SPSWIFTER_Twitch_CSS_Builder {
      * Save preset AJAX
      */
     private function save_preset_ajax() {
-        $preset_name = sanitize_text_field($_POST['preset_name'] ?? '');
-        $styles = $_POST['styles'] ?? array();
+        $preset_name = sanitize_text_field(wp_unslash($_POST['preset_name']) ?? '');
+        $styles = wp_unslash($_POST['styles']) ?? array();
         
         if (empty($preset_name)) {
             wp_send_json_error('Preset name is required');
@@ -378,7 +378,7 @@ class SPSWIFTER_Twitch_CSS_Builder {
      * Delete preset AJAX
      */
     private function delete_preset_ajax() {
-        $preset_id = sanitize_text_field($_POST['preset_id'] ?? '');
+        $preset_id = sanitize_text_field(wp_unslash($_POST['preset_id']) ?? '');
         
         if (empty($preset_id)) {
             wp_send_json_error('Preset ID is required');

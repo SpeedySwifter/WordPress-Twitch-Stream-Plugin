@@ -516,7 +516,7 @@ class SPSWIFTER_Twitch_Donation_Integration {
             wp_send_json_error('Unauthorized');
         }
         
-        $action = $_POST['donation_action'] ?? '';
+        $action = wp_unslash($_POST['donation_action']) ?? '';
         
         switch ($action) {
             case 'get_stats':
@@ -543,9 +543,9 @@ class SPSWIFTER_Twitch_Donation_Integration {
      * Record donation AJAX
      */
     private function record_donation_ajax() {
-        $amount = floatval($_POST['amount'] ?? 0);
-        $type = sanitize_text_field($_POST['type'] ?? '');
-        $message = sanitize_text_field($_POST['message'] ?? '');
+        $amount = floatval(wp_unslash($_POST['amount']) ?? 0);
+        $type = sanitize_text_field(wp_unslash($_POST['type']) ?? '');
+        $message = sanitize_text_field(wp_unslash($_POST['message']) ?? '');
         
         if ($amount <= 0) {
             wp_send_json_error('Invalid amount');

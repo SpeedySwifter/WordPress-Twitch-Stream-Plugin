@@ -441,7 +441,7 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
     public function handle_stream_scheduler_ajax() {
         check_ajax_referer('spswifter_twitch_stream_scheduler_nonce', 'nonce');
         
-        $action = $_POST['scheduler_action'] ?? '';
+        $action = wp_unslash($_POST['scheduler_action']) ?? '';
         
         switch ($action) {
             case 'get_streams':
@@ -477,12 +477,12 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
      * Get streams AJAX
      */
     private function get_streams_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $start_date = sanitize_text_field($_POST['start_date'] ?? '');
-        $end_date = sanitize_text_field($_POST['end_date'] ?? '');
-        $status = sanitize_text_field($_POST['status'] ?? '');
-        $category = sanitize_text_field($_POST['category'] ?? '');
-        $limit = intval($_POST['limit'] ?? 50);
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $start_date = sanitize_text_field(wp_unslash($_POST['start_date']) ?? '');
+        $end_date = sanitize_text_field(wp_unslash($_POST['end_date']) ?? '');
+        $status = sanitize_text_field(wp_unslash($_POST['status']) ?? '');
+        $category = sanitize_text_field(wp_unslash($_POST['category']) ?? '');
+        $limit = intval(wp_unslash($_POST['limit']) ?? 50);
         
         $streams = $this->get_filtered_streams($channel, $start_date, $end_date, $status, $category, $limit);
         
@@ -502,19 +502,19 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
         }
         
         $stream_data = array(
-            'channel' => sanitize_text_field($_POST['channel'] ?? ''),
-            'title' => sanitize_text_field($_POST['title'] ?? ''),
-            'description' => wp_kses_post($_POST['description'] ?? ''),
-            'start_time' => sanitize_text_field($_POST['start_time'] ?? ''),
-            'end_time' => sanitize_text_field($_POST['end_time'] ?? ''),
-            'timezone' => sanitize_text_field($_POST['timezone'] ?? 'UTC'),
-            'stream_type' => sanitize_text_field($_POST['stream_type'] ?? 'live'),
-            'category' => sanitize_text_field($_POST['category'] ?? ''),
-            'tags' => sanitize_text_field($_POST['tags'] ?? ''),
-            'is_recurring' => intval($_POST['is_recurring'] ?? 0),
-            'recurring_pattern' => sanitize_text_field($_POST['recurring_pattern'] ?? ''),
-            'recurring_end_date' => sanitize_text_field($_POST['recurring_end_date'] ?? ''),
-            'thumbnail_url' => esc_url_raw($_POST['thumbnail_url'] ?? ''),
+            'channel' => sanitize_text_field(wp_unslash($_POST['channel']) ?? ''),
+            'title' => sanitize_text_field(wp_unslash($_POST['title']) ?? ''),
+            'description' => wp_kses_post(wp_unslash($_POST['description']) ?? ''),
+            'start_time' => sanitize_text_field(wp_unslash($_POST['start_time']) ?? ''),
+            'end_time' => sanitize_text_field(wp_unslash($_POST['end_time']) ?? ''),
+            'timezone' => sanitize_text_field(wp_unslash($_POST['timezone']) ?? 'UTC'),
+            'stream_type' => sanitize_text_field(wp_unslash($_POST['stream_type']) ?? 'live'),
+            'category' => sanitize_text_field(wp_unslash($_POST['category']) ?? ''),
+            'tags' => sanitize_text_field(wp_unslash($_POST['tags']) ?? ''),
+            'is_recurring' => intval(wp_unslash($_POST['is_recurring']) ?? 0),
+            'recurring_pattern' => sanitize_text_field(wp_unslash($_POST['recurring_pattern']) ?? ''),
+            'recurring_end_date' => sanitize_text_field(wp_unslash($_POST['recurring_end_date']) ?? ''),
+            'thumbnail_url' => esc_url_raw(wp_unslash($_POST['thumbnail_url']) ?? ''),
         );
         
         // Validate data
@@ -545,7 +545,7 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
             return;
         }
         
-        $stream_id = intval($_POST['stream_id'] ?? 0);
+        $stream_id = intval(wp_unslash($_POST['stream_id']) ?? 0);
         
         if ($this->delete_stream($stream_id)) {
             wp_send_json_success('Stream deleted successfully');
@@ -563,15 +563,15 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
             return;
         }
         
-        $stream_id = intval($_POST['stream_id'] ?? 0);
+        $stream_id = intval(wp_unslash($_POST['stream_id']) ?? 0);
         $updates = array(
-            'title' => sanitize_text_field($_POST['title'] ?? ''),
-            'description' => wp_kses_post($_POST['description'] ?? ''),
-            'start_time' => sanitize_text_field($_POST['start_time'] ?? ''),
-            'end_time' => sanitize_text_field($_POST['end_time'] ?? ''),
-            'status' => sanitize_text_field($_POST['status'] ?? ''),
-            'category' => sanitize_text_field($_POST['category'] ?? ''),
-            'tags' => sanitize_text_field($_POST['tags'] ?? ''),
+            'title' => sanitize_text_field(wp_unslash($_POST['title']) ?? ''),
+            'description' => wp_kses_post(wp_unslash($_POST['description']) ?? ''),
+            'start_time' => sanitize_text_field(wp_unslash($_POST['start_time']) ?? ''),
+            'end_time' => sanitize_text_field(wp_unslash($_POST['end_time']) ?? ''),
+            'status' => sanitize_text_field(wp_unslash($_POST['status']) ?? ''),
+            'category' => sanitize_text_field(wp_unslash($_POST['category']) ?? ''),
+            'tags' => sanitize_text_field(wp_unslash($_POST['tags']) ?? ''),
         );
         
         if ($this->update_stream($stream_id, $updates)) {
@@ -585,9 +585,9 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
      * Get calendar data AJAX
      */
     private function get_calendar_data_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $start_date = sanitize_text_field($_POST['start_date'] ?? '');
-        $end_date = sanitize_text_field($_POST['end_date'] ?? '');
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $start_date = sanitize_text_field(wp_unslash($_POST['start_date']) ?? '');
+        $end_date = sanitize_text_field(wp_unslash($_POST['end_date']) ?? '');
         
         $calendar_data = $this->get_calendar_events($channel, $start_date, $end_date);
         
@@ -603,8 +603,8 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
             return;
         }
         
-        $stream_ids = array_map('intval', $_POST['stream_ids'] ?? array());
-        $updates = $_POST['updates'] ?? array();
+        $stream_ids = array_map('intval', wp_unslash($_POST['stream_ids']) ?? array());
+        $updates = wp_unslash($_POST['updates']) ?? array();
         
         $updated = $this->bulk_update_streams($stream_ids, $updates);
         
@@ -618,8 +618,8 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
      * Set reminder AJAX
      */
     private function set_reminder_ajax() {
-        $stream_id = intval($_POST['stream_id'] ?? 0);
-        $reminder_time = sanitize_text_field($_POST['reminder_time'] ?? '15');
+        $stream_id = intval(wp_unslash($_POST['stream_id']) ?? 0);
+        $reminder_time = sanitize_text_field(wp_unslash($_POST['reminder_time']) ?? '15');
         
         $user_id = get_current_user_id();
         
@@ -634,8 +634,8 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
      * Get stats AJAX
      */
     private function get_stats_ajax() {
-        $channel = sanitize_text_field($_POST['channel'] ?? '');
-        $period = sanitize_text_field($_POST['period'] ?? 'month');
+        $channel = sanitize_text_field(wp_unslash($_POST['channel']) ?? '');
+        $period = sanitize_text_field(wp_unslash($_POST['period']) ?? 'month');
         
         $stats = $this->get_stream_stats($channel, $period);
         
@@ -989,7 +989,7 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
         
         if (isset($data['id'])) {
             // Update existing
-            $wpdb->update($table_name, $data, array('id' => $data['id']));
+            $wpdb->upgmdate($table_name, $data, array('id' => $data['id']));
             return $data['id'];
         } else {
             // Insert new
@@ -1009,7 +1009,7 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
         global $wpdb;
         $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
-        return $wpdb->update($table_name, $updates, array('id' => $stream_id));
+        return $wpdb->upgmdate($table_name, $updates, array('id' => $stream_id));
     }
     
     private function get_calendar_events($channel, $start_date, $end_date) {
@@ -1108,7 +1108,7 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
         global $wpdb;
         $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
-        $wpdb->update(
+        $wpdb->upgmdate(
             $table_name,
             array('status' => 'live', 'spswifter_twitch_stream_id' => $stream_data['id']),
             array(
@@ -1125,7 +1125,7 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
         global $wpdb;
         $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
-        $wpdb->update(
+        $wpdb->upgmdate(
             $table_name,
             array('status' => 'completed'),
             array('spswifter_twitch_stream_id' => $stream_data['id'])
