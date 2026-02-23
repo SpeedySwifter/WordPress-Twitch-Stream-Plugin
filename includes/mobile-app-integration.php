@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Mobile_App_Integration {
+class SPSWIFTER_Twitch_Mobile_App_Integration {
     
     private $mobile_settings;
     private $pwa_manifest;
@@ -708,15 +708,20 @@ class WP_Twitch_Mobile_App_Integration {
      * Handle PWA subscription
      */
     public function handle_pwa_subscription() {
-        $subscription = json_decode(file_get_contents('php://input'), true);
-        
-        if (!$subscription) {
-            wp_send_json_error('Invalid subscription data');
+        $raw_body = file_get_contents('php://input');
+        if (empty($raw_body)) {
+            wp_send_json_error('Empty request body', 400);
+            return;
+        }
+
+        $subscription = json_decode(wp_unslash($raw_body), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            wp_send_json_error('Invalid JSON', 400);
             return;
         }
         
         $user_id = get_current_user_id();
-        $result = $this->save_push_subscription($user_id, $subscription);
+        $result  = $this->save_push_subscription($user_id, $subscription);
         
         if ($result) {
             wp_send_json_success('Subscription saved');
@@ -773,7 +778,7 @@ class WP_Twitch_Mobile_App_Integration {
      * Add Apple touch icons
      */
     public function add_apple_touch_icons() {
-        $icon_url = $this->mobile_settings['app_icon'] ?? WP_TWITCH_PLUGIN_URL . 'assets/images/app-icon.png';
+        $icon_url = $this->mobile_settings['app_icon'] ?? SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/images/app-icon.png';
         
         echo '<link rel="apple-touch-icon" href="' . esc_url($icon_url) . '">';
         echo '<link rel="apple-touch-icon" sizes="180x180" href="' . esc_url($icon_url) . '">';
@@ -803,7 +808,8 @@ class WP_Twitch_Mobile_App_Integration {
         echo '<link rel="manifest" href="' . esc_url(home_url('/twitch-pwa-manifest.json')) . '">';
         
         // Canonical URL
-        echo '<link rel="canonical" href="' . esc_url(home_url($_SERVER['REQUEST_URI'])) . '">';
+        $request_uri = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '/';
+        echo '<link rel="canonical" href="' . esc_url(home_url(sanitize_url($request_uri))) . '">';
     }
     
     /**
@@ -833,14 +839,14 @@ class WP_Twitch_Mobile_App_Integration {
      * Get service worker content
      */
     private function get_service_worker_content() {
-        $cache_name = 'twitch-mobile-v' . WP_TWITCH_VERSION;
+        $cache_name = 'twitch-mobile-v' . SPSWIFTER_TWITCH_VERSION;
         
         return "
         const CACHE_NAME = '{$cache_name}';
         const urlsToCache = [
             '/',
-            '/wp-content/plugins/wp-twitch-stream/assets/css/mobile-app.css',
-            '/wp-content/plugins/wp-twitch-stream/assets/js/mobile-app.js',
+            '" . trailingslashit(SPSWIFTER_TWITCH_PLUGIN_URL) . "assets/css/mobile-app.css',
+            '" . trailingslashit(SPSWIFTER_TWITCH_PLUGIN_URL) . "assets/js/mobile-app.js',
             '" . home_url('/twitch-offline.html') . "'
         ];
 
@@ -889,8 +895,8 @@ class WP_Twitch_Mobile_App_Integration {
             
             const options = {
                 body: data.body,
-                icon: data.icon || '/wp-content/plugins/wp-twitch-stream/assets/images/notification-icon.png',
-                badge: data.badge || '/wp-content/plugins/wp-twitch-stream/assets/images/badge-icon.png',
+                icon: data.icon || '" . trailingslashit(SPSWIFTER_TWITCH_PLUGIN_URL) . "assets/images/notification-icon.png',
+                badge: data.badge || '" . trailingslashit(SPSWIFTER_TWITCH_PLUGIN_URL) . "assets/images/badge-icon.png',
                 vibrate: [200, 100, 200],
                 data: data.data || {},
                 actions: [
@@ -1228,21 +1234,21 @@ class WP_Twitch_Mobile_App_Integration {
      */
     public function enqueue_mobile_app_scripts() {
         wp_enqueue_style(
-            'twitch-mobile-app',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/mobile-app.css',
+            'spswifter-twitch-mobile-app',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/mobile-app.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         wp_enqueue_script(
-            'twitch-mobile-app',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/mobile-app.js',
+            'spswifter-twitch-mobile-app',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/mobile-app.js',
             array('jquery', 'wp-util'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         
-        wp_localize_script('twitch-mobile-app', 'twitchMobileApp', array(
+        wp_localize_script('spswifter-twitch-mobile-app', 'twitchMobileApp', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('twitch_mobile_app_nonce'),
             'pwaEnabled' => $this->mobile_settings['enable_pwa'] ?? true,
@@ -1297,12 +1303,12 @@ class WP_Twitch_Mobile_App_Integration {
             'background_color' => '#ffffff',
             'icons' => array(
                 array(
-                    'src' => $this->mobile_settings['app_icon'] ?: WP_TWITCH_PLUGIN_URL . 'assets/images/icon-192.png',
+                    'src' => $this->mobile_settings['app_icon'] ?: SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/images/icon-192.png',
                     'sizes' => '192x192',
                     'type' => 'image/png'
                 ),
                 array(
-                    'src' => $this->mobile_settings['app_icon'] ?: WP_TWITCH_PLUGIN_URL . 'assets/images/icon-512.png',
+                    'src' => $this->mobile_settings['app_icon'] ?: SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/images/icon-512.png',
                     'sizes' => '512x512',
                     'type' => 'image/png'
                 )
@@ -1323,7 +1329,7 @@ class WP_Twitch_Mobile_App_Integration {
     }
     
     private function is_mobile_device() {
-        $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
         return preg_match('/(android|iphone|ipad|ipod|blackberry|windows phone)/i', $user_agent);
     }
     
@@ -1332,7 +1338,7 @@ class WP_Twitch_Mobile_App_Integration {
     }
     
     private function get_mobile_user_agent() {
-        return $_SERVER['HTTP_USER_AGENT'] ?? '';
+        return isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
     }
     
     private function optimize_content_for_mobile($content) {
@@ -1412,7 +1418,7 @@ class WP_Twitch_Mobile_App_Integration {
             'endpoint' => $subscription['endpoint'],
             'p256dh' => $subscription['keys']['p256dh'],
             'auth' => $subscription['keys']['auth'],
-            'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
+            'user_agent' => isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '',
             'active' => 1
         );
         
@@ -1462,4 +1468,4 @@ class WP_Twitch_Mobile_App_Integration {
 }
 
 // Initialize mobile app integration
-new WP_Twitch_Mobile_App_Integration();
+new SPSWIFTER_Twitch_Mobile_App_Integration();

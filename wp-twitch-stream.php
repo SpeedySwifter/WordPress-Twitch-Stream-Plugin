@@ -21,36 +21,36 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin-Konstanten
-define('WP_TWITCH_VERSION', '1.7.1');
-define('WP_TWITCH_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('WP_TWITCH_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('SPSWIFTER_TWITCH_VERSION', '1.7.2');
+define('SPSWIFTER_TWITCH_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('SPSWIFTER_TWITCH_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 // Autoloader
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/twitch-api.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/shortcode.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/token-manager.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/gutenberg-block.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/page-builder-compatibility.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/cookie-integration.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/sidebar-widgets.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/rest-api.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/webhook-support.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-analytics.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/stream-recording.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/multi-channel-dashboard.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/custom-css-builder.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-cache.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/donation-integration.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/twitch-chat-integration.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/stream-recording-download.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-analytics-dashboard.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/multi-language-support.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/woocommerce-integration.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/membership-plugin-integration.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/advanced-shortcode-builder.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/visual-stream-scheduler.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'includes/mobile-app-integration.php';
-require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/twitch-api.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/shortcode.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/token-manager.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/gutenberg-block.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/page-builder-compatibility.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/cookie-integration.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/sidebar-widgets.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/rest-api.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/webhook-support.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/advanced-analytics.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/stream-recording.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/multi-channel-dashboard.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/custom-css-builder.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/advanced-cache.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/donation-integration.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/twitch-chat-integration.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/stream-recording-download.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/advanced-analytics-dashboard.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/multi-language-support.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/woocommerce-integration.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/membership-plugin-integration.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/advanced-shortcode-builder.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/visual-stream-scheduler.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/mobile-app-integration.php';
+require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 
 // Plugin initialisieren
 add_action('plugins_loaded', 'wp_twitch_init');
@@ -62,67 +62,67 @@ function wp_twitch_init() {
 // Frontend-Styles laden
 function wp_twitch_enqueue_frontend_styles() {
     wp_enqueue_style(
-        'wp-twitch-stream-frontend',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/frontend.css',
+        'spswifter-twitch-frontend',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/frontend.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
     
     // VOD und Clips Styles
     wp_enqueue_style(
-        'wp-twitch-stream-vod-clips',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/vod-clips.css',
+        'spswifter-twitch-vod-clips',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/vod-clips.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
     
     // Donation Styles
     wp_enqueue_style(
-        'wp-twitch-stream-donations',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/donations.css',
+        'spswifter-twitch-donations',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/donations.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
     
     // Chat Styles
     wp_enqueue_style(
-        'wp-twitch-stream-chat',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/twitch-chat.css',
+        'spswifter-twitch-chat',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/twitch-chat.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
     
     // Recording Download Styles
     wp_enqueue_style(
-        'wp-twitch-stream-recording-download',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/recording-download.css',
+        'spswifter-twitch-recording-download',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/recording-download.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
     
     // Analytics Dashboard Styles
     wp_enqueue_style(
-        'wp-twitch-stream-analytics-dashboard',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/analytics-dashboard.css',
+        'spswifter-twitch-analytics-dashboard',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/analytics-dashboard.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
     
     // Language Support Styles
     wp_enqueue_style(
-        'wp-twitch-stream-language-support',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/language-support.css',
+        'spswifter-twitch-language-support',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/language-support.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
     
     // WooCommerce Integration Styles (only if WooCommerce is active)
     if (class_exists('WooCommerce')) {
         wp_enqueue_style(
-            'wp-twitch-stream-woocommerce',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/woocommerce-integration.css',
+            'spswifter-twitch-woocommerce',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/woocommerce-integration.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
     }
     
@@ -130,35 +130,35 @@ function wp_twitch_enqueue_frontend_styles() {
     if (class_exists('MeprPlugin') || defined('RCP_PLUGIN_VERSION') || class_exists('PMPro_Plugin') || 
         class_exists('WC_Memberships') || class_exists('UM') || class_exists('c_ws_plugin__s2member')) {
         wp_enqueue_style(
-            'wp-twitch-stream-membership',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/membership-integration.css',
+            'spswifter-twitch-membership',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/membership-integration.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
     }
     
     // Shortcode Builder Styles
     wp_enqueue_style(
-        'wp-twitch-stream-shortcode-builder',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/shortcode-builder.css',
+        'spswifter-twitch-shortcode-builder',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/shortcode-builder.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
     
     // Stream Scheduler Styles
     wp_enqueue_style(
-        'wp-twitch-stream-scheduler',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/stream-scheduler.css',
+        'spswifter-twitch-scheduler',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/stream-scheduler.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
     
     // Mobile App Styles
     wp_enqueue_style(
-        'wp-twitch-stream-mobile-app',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/mobile-app.css',
+        'spswifter-twitch-mobile-app',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/mobile-app.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
 }
 add_action('wp_enqueue_scripts', 'wp_twitch_enqueue_frontend_styles');
@@ -166,19 +166,19 @@ add_action('wp_enqueue_scripts', 'wp_twitch_enqueue_frontend_styles');
 // Admin-Styles laden
 function wp_twitch_enqueue_admin_styles() {
     wp_enqueue_style(
-        'wp-twitch-stream-admin',
-        WP_TWITCH_PLUGIN_URL . 'admin/admin-styles.css',
+        'spswifter-twitch-admin',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'admin/admin-styles.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
     
     // Shortcode Builder Styles for admin
     if (isset($_GET['page']) && $_GET['page'] === 'twitch-shortcode-builder') {
         wp_enqueue_style(
-            'wp-twitch-stream-shortcode-builder',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/shortcode-builder.css',
+            'spswifter-twitch-shortcode-builder',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/shortcode-builder.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
     }
 }
@@ -189,10 +189,10 @@ function wp_twitch_enqueue_admin_scripts($hook) {
     // Shortcode Builder Scripts
     if (isset($_GET['page']) && $_GET['page'] === 'twitch-shortcode-builder') {
         wp_enqueue_script(
-            'wp-twitch-stream-shortcode-builder',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/shortcode-builder.js',
+            'spswifter-twitch-shortcode-builder',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/shortcode-builder.js',
             array('jquery', 'wp-util'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
     }
@@ -200,35 +200,39 @@ function wp_twitch_enqueue_admin_scripts($hook) {
     // Stream Scheduler Scripts
     if (isset($_GET['page']) && $_GET['page'] === 'twitch-stream-scheduler') {
         wp_enqueue_script(
-            'wp-twitch-stream-scheduler',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/stream-scheduler.js',
+            'spswifter-twitch-scheduler',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/stream-scheduler.js',
             array('jquery', 'wp-util'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         
         // Enqueue FullCalendar if available
+        // FullCalendar wird in einer lokalen Datei bereitgestellt (siehe assets/js/fullcalendar/)
         wp_enqueue_script(
-            'fullcalendar',
-            'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js',
+            'spswifter-fullcalendar',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/fullcalendar/index.global.min.js',
             array(),
             '6.1.8',
-            true
+            array(
+                'in_footer' => true,
+                'strategy'  => 'defer',
+            )
         );
         
         // Enqueue jQuery UI for date/time pickers
         wp_enqueue_script('jquery-ui-core');
         wp_enqueue_script('jquery-ui-datepicker');
-        wp_enqueue_style('jquery-ui', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css');
+        wp_enqueue_style('wp-jquery-ui-dialog');
     }
     
     // Mobile App Scripts
     if (isset($_GET['page']) && $_GET['page'] === 'twitch-mobile-app') {
         wp_enqueue_script(
-            'wp-twitch-stream-mobile-app',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/mobile-app.js',
+            'spswifter-twitch-mobile-app',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/mobile-app.js',
             array('jquery', 'wp-util'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
     }
@@ -239,19 +243,19 @@ add_action('admin_enqueue_scripts', 'wp_twitch_enqueue_admin_scripts');
 function wp_twitch_enqueue_block_assets() {
     // Block Editor Script
     wp_enqueue_script(
-        'twitch-stream-block',
-        WP_TWITCH_PLUGIN_URL . 'assets/js/block.js',
+        'spswifter-twitch-block',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/block.js',
         array('wp-blocks', 'wp-element', 'wp-components', 'wp-editor'),
-        WP_TWITCH_VERSION,
+        SPSWIFTER_TWITCH_VERSION,
         true
     );
 
     // Block Editor Style
     wp_enqueue_style(
-        'twitch-stream-block-style',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/block.css',
+        'spswifter-twitch-block-style',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/block.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
 }
 add_action('enqueue_block_editor_assets', 'wp_twitch_enqueue_block_assets');

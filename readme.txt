@@ -9,7 +9,7 @@ License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 7.4
 
-The ultimate WordPress plugin for Twitch stream integration with mobile app, scheduling, analytics, and multi-language support.
+A powerful WordPress plugin for Twitch stream integration with mobile app, scheduling, analytics, and multi-language support.
 
 == Description ==
 
@@ -24,7 +24,7 @@ The ultimate WordPress plugin for Twitch stream integration with mobile app, sch
 - 🔐 **Secure API Integration** – Uses official Twitch Helix API
 - 💾 **Token Caching** – Reduces API calls through intelligent caching
 - 🎨 **Customizable** – CSS classes for individual styling
-- 🧩 **WordPress 6.9.1 Compatible** – Tested with current WP version
+- 🧩 **WordPress 6.8 Compatible** – Tested with current WP version
 - 🎯 **Stream Info** – Title, game, viewers, avatar, live badge
 - 📱 **Multiple Streams Grid** – Multiple streams in grid layout
 - 🧩 **Gutenberg Blocks** – Native WordPress Block Editor integration
@@ -68,7 +68,7 @@ The ultimate WordPress plugin for Twitch stream integration with mobile app, sch
 - Advanced Analytics Dashboard with charts
 - WooCommerce Integration for e-commerce features
 
-### 🎯 Perfect For
+### 🎯 Use Cases
 
 - **Gaming Websites** – Display your own Twitch stream on website
 - **eSports Teams** – Embed live matches directly
@@ -215,6 +215,35 @@ Yes, the plugin includes cookie banner integration and is fully GDPR compliant. 
 - GitHub Issues: [Report bugs](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/issues)
 - Documentation: [Wiki](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/wiki)
 - Email: support@speedyswifter.com
+
+== External Services ==
+
+This plugin connects to external services to provide its functionality.
+Users should review the terms and privacy policies of these services.
+
+= Twitch API (api.twitch.tv) =
+Used to retrieve live stream status, VODs, clips, channel information,
+and to manage EventSub webhook subscriptions.
+Data sent: Twitch channel name, broadcaster ID, OAuth access token.
+Sent when: A page with a Twitch shortcode or widget is loaded, or when
+the admin triggers a manual data refresh.
+- Terms of Service: https://www.twitch.tv/p/en/legal/terms-of-service/
+- Privacy Policy: https://www.twitch.tv/p/en/legal/privacy-notice/
+- Developer Agreement: https://www.twitch.tv/p/en/legal/developer-agreement/
+
+= Twitch EventSub Webhooks (api.twitch.tv/helix/eventsub) =
+Used to receive real-time event notifications from Twitch (e.g., stream
+online/offline events).
+Data sent: Your site's callback URL, subscription type, broadcaster ID.
+Sent when: The plugin creates or renews webhook subscriptions.
+- Terms of Service: https://www.twitch.tv/p/en/legal/terms-of-service/
+
+= Twitch Embed Player (embed.twitch.tv) =
+Used to embed live streams and chat directly on your site via iFrame.
+Data sent: Your site's domain as referrer. Twitch may set cookies per
+their privacy policy.
+Sent when: A visitor loads a page containing an embedded stream or chat.
+- Privacy Policy: https://www.twitch.tv/p/en/legal/privacy-notice/
 
 == Screenshots ==
 
