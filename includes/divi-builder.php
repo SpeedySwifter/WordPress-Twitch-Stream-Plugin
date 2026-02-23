@@ -24,11 +24,11 @@ class SPSWIFTER_Twitch_Divi_Integration {
         }
         
         // Twitch Stream Module
-        require_once WP_TWITCH_PLUGIN_DIR . 'includes/divi-modules/stream-module.php';
+        require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/divi-modules/stream-module.php';
         new Divi_Twitch_Stream_Module();
         
         // Twitch Grid Module
-        require_once WP_TWITCH_PLUGIN_DIR . 'includes/divi-modules/grid-module.php';
+        require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/divi-modules/grid-module.php';
         new Divi_Twitch_Grid_Module();
     }
     
@@ -39,9 +39,9 @@ class SPSWIFTER_Twitch_Divi_Integration {
         if (et_core_is_fb_enabled() || et_core_is_builder_active()) {
             wp_enqueue_style(
                 'twitch-divi-builder',
-                WP_TWITCH_PLUGIN_URL . 'assets/css/divi-builder.css',
+                SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/divi-builder.css',
                 array(),
-                WP_TWITCH_VERSION
+                SPSWIFTER_TWITCH_VERSION
             );
         }
     }
@@ -53,9 +53,9 @@ class SPSWIFTER_Twitch_Divi_Integration {
         if (et_core_is_fb_enabled() || et_core_is_builder_active()) {
             wp_enqueue_script(
                 'twitch-divi-builder',
-                WP_TWITCH_PLUGIN_URL . 'assets/js/divi-builder.js',
+                SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/divi-builder.js',
                 array('jquery'),
-                WP_TWITCH_VERSION,
+                SPSWIFTER_TWITCH_VERSION,
                 true
             );
             

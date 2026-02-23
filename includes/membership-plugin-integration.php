@@ -962,16 +962,16 @@ class SPSWIFTER_Twitch_Membership_Integration {
         
         wp_enqueue_style(
             'twitch-membership',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/membership-integration.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/membership-integration.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         wp_enqueue_script(
             'twitch-membership',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/membership-integration.js',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/membership-integration.js',
             array('jquery'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         

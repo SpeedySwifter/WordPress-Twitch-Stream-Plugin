@@ -878,16 +878,16 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
         
         wp_enqueue_style(
             'twitch-woocommerce',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/woocommerce-integration.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/woocommerce-integration.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         wp_enqueue_script(
             'twitch-woocommerce',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/woocommerce-integration.js',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/woocommerce-integration.js',
             array('jquery'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         

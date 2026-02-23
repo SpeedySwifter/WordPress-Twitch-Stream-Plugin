@@ -485,9 +485,9 @@ class SPSWIFTER_Twitch_Cookie_Integration {
     public function enqueue_cookie_scripts() {
         wp_enqueue_style(
             'twitch-cookie-integration',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/cookie-integration.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/cookie-integration.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
     }
     

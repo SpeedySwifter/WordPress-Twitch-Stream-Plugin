@@ -34,11 +34,11 @@ class SPSWIFTER_Twitch_Elementor_Integration {
         }
         
         // Twitch Stream Widget
-        require_once WP_TWITCH_PLUGIN_DIR . 'includes/elementor-widgets/stream-widget.php';
+        require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/elementor-widgets/stream-widget.php';
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new \SPSWIFTER_Elementor_Twitch_Stream_Widget());
         
         // Twitch Grid Widget
-        require_once WP_TWITCH_PLUGIN_DIR . 'includes/elementor-widgets/grid-widget.php';
+        require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/elementor-widgets/grid-widget.php';
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new \SPSWIFTER_Elementor_Twitch_Grid_Widget());
     }
 }

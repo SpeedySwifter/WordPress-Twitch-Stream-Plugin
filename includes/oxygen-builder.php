@@ -180,9 +180,9 @@ class SPSWIFTER_Twitch_Oxygen_Integration {
         // Oxygen Builder JavaScript
         wp_enqueue_script(
             'twitch-oxygen-builder',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/oxygen-builder.js',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/oxygen-builder.js',
             array('oxygen-builder'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
     }
@@ -195,9 +195,9 @@ class SPSWIFTER_Twitch_Oxygen_Integration {
         if (defined('OXYGEN_VSB_VERSION')) {
             wp_enqueue_style(
                 'twitch-oxygen-frontend',
-                WP_TWITCH_PLUGIN_URL . 'assets/css/oxygen-frontend.css',
+                SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/oxygen-frontend.css',
                 array(),
-                WP_TWITCH_VERSION
+                SPSWIFTER_TWITCH_VERSION
             );
         }
     }

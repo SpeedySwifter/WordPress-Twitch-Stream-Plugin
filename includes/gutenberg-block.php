@@ -4,22 +4,22 @@
  */
 
 // Block registrieren
-function spswifter_spswifter_twitch_register_block() {
+function spswifter_twitch_register_block() {
     // Block Script registrieren
     wp_register_script(
         'twitch-stream-block',
-        WP_TWITCH_PLUGIN_URL . 'assets/js/block.js',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/block.js',
         array('wp-blocks', 'wp-element', 'wp-components', 'wp-editor'),
-        WP_TWITCH_VERSION,
+        SPSWIFTER_TWITCH_VERSION,
         true
     );
 
     // Block Style registrieren
     wp_register_style(
         'twitch-stream-block-style',
-        WP_TWITCH_PLUGIN_URL . 'assets/css/block.css',
+        SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/block.css',
         array(),
-        WP_TWITCH_VERSION
+        SPSWIFTER_TWITCH_VERSION
     );
 
     // Block Type registrieren

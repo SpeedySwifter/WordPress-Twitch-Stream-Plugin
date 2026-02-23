@@ -80,7 +80,7 @@ class SPSWIFTER_Twitch_Multi_Language_Support {
         load_plugin_textdomain($domain, false, dirname(plugin_basename(__FILE__)) . '/languages');
         
         // Load our custom translations
-        $mofile = WP_TWITCH_PLUGIN_DIR . 'languages/spswifter-twitch-' . $locale . '.mo';
+        $mofile = SPSWIFTER_TWITCH_PLUGIN_DIR . 'languages/spswifter-twitch-' . $locale . '.mo';
         if (file_exists($mofile)) {
             load_textdomain($domain, $mofile);
         }
@@ -782,16 +782,16 @@ class SPSWIFTER_Twitch_Multi_Language_Support {
     public function enqueue_language_scripts() {
         wp_enqueue_style(
             'twitch-language-support',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/language-support.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/language-support.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         wp_enqueue_script(
             'twitch-language-support',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/language-support.js',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/language-support.js',
             array('jquery'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         
@@ -810,9 +810,9 @@ class SPSWIFTER_Twitch_Multi_Language_Support {
     public function enqueue_admin_language_scripts() {
         wp_enqueue_style(
             'twitch-language-admin',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/language-admin.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/language-admin.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
     }
     

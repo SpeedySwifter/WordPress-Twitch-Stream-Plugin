@@ -40,16 +40,16 @@ class SPSWIFTER_Twitch_Chat_Integration {
     public function enqueue_chat_scripts() {
         wp_enqueue_style(
             'twitch-chat',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/twitch-chat.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/twitch-chat.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         wp_enqueue_script(
             'twitch-chat',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/twitch-chat.js',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/twitch-chat.js',
             array('jquery'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         

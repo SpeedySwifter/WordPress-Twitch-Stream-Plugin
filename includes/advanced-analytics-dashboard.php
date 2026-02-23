@@ -57,16 +57,16 @@ class SPSWIFTER_Twitch_Analytics_Dashboard {
     public function enqueue_dashboard_scripts() {
         wp_enqueue_style(
             'twitch-analytics-dashboard',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/analytics-dashboard.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/analytics-dashboard.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         wp_enqueue_script(
             'twitch-analytics-dashboard',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/analytics-dashboard.js',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/analytics-dashboard.js',
             array('jquery', 'chart-js'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         

@@ -75,22 +75,22 @@ class SPSWIFTER_Twitch_Page_Builder_Compatibility {
     private function init_compatibility() {
         // Elementor Integration
         if ($this->supported_builders['elementor']) {
-            require_once WP_TWITCH_PLUGIN_DIR . 'includes/elementor-widget.php';
+            require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/elementor-widget.php';
         }
         
         // Oxygen Builder Integration
         if ($this->supported_builders['oxygen']) {
-            require_once WP_TWITCH_PLUGIN_DIR . 'includes/oxygen-builder.php';
+            require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/oxygen-builder.php';
         }
         
         // Divi Builder Integration
         if ($this->supported_builders['divi']) {
-            require_once WP_TWITCH_PLUGIN_DIR . 'includes/divi-builder.php';
+            require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/divi-builder.php';
         }
         
         // Gutenberg Integration (bereits in gutenberg-block.php)
         if ($this->supported_builders['gutenberg']) {
-            require_once WP_TWITCH_PLUGIN_DIR . 'includes/gutenberg-block.php';
+            require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'includes/gutenberg-block.php';
         }
         
         // Universal Shortcode Support
@@ -271,18 +271,18 @@ class SPSWIFTER_Twitch_Page_Builder_Compatibility {
         // Universal CSS für alle Page Builder
         wp_enqueue_style(
             'twitch-page-builder-compatibility',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/page-builder-compatibility.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/page-builder-compatibility.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         // Builder-spezifische Scripts
         if ($this->is_elementor_active()) {
             wp_enqueue_script(
                 'twitch-elementor-compatibility',
-                WP_TWITCH_PLUGIN_URL . 'assets/js/elementor-compatibility.js',
+                SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/elementor-compatibility.js',
                 array('jquery'),
-                WP_TWITCH_VERSION,
+                SPSWIFTER_TWITCH_VERSION,
                 true
             );
         }
@@ -290,9 +290,9 @@ class SPSWIFTER_Twitch_Page_Builder_Compatibility {
         if ($this->is_divi_active()) {
             wp_enqueue_script(
                 'twitch-divi-compatibility',
-                WP_TWITCH_PLUGIN_URL . 'assets/js/divi-compatibility.js',
+                SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/divi-compatibility.js',
                 array('jquery'),
-                WP_TWITCH_VERSION,
+                SPSWIFTER_TWITCH_VERSION,
                 true
             );
         }
@@ -307,9 +307,9 @@ class SPSWIFTER_Twitch_Page_Builder_Compatibility {
         if ($screen && $this->is_builder_admin_screen($screen->id)) {
             wp_enqueue_script(
                 'twitch-page-builder-admin',
-                WP_TWITCH_PLUGIN_URL . 'assets/js/page-builder-admin.js',
+                SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/page-builder-admin.js',
                 array('jquery'),
-                WP_TWITCH_VERSION,
+                SPSWIFTER_TWITCH_VERSION,
                 true
             );
             

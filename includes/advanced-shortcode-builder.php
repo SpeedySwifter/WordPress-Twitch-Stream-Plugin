@@ -1419,16 +1419,16 @@ class SPSWIFTER_Twitch_Advanced_Shortcode_Builder {
     public function enqueue_shortcode_builder_scripts() {
         wp_enqueue_style(
             'twitch-shortcode-builder',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/shortcode-builder.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/shortcode-builder.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         wp_enqueue_script(
             'twitch-shortcode-builder',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/shortcode-builder.js',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/shortcode-builder.js',
             array('jquery', 'wp-util'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         

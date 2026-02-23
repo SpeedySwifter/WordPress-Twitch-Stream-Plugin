@@ -80,17 +80,17 @@ class SPSWIFTER_Twitch_Dashboard {
         if (is_admin() && isset($_GET['page']) && strpos($_GET['page'], 'twitch-dashboard') === 0) {
             wp_enqueue_script(
                 'twitch-dashboard',
-                WP_TWITCH_PLUGIN_URL . 'assets/js/dashboard.js',
+                SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/dashboard.js',
                 array('jquery', 'wp-api'),
-                WP_TWITCH_VERSION,
+                SPSWIFTER_TWITCH_VERSION,
                 true
             );
             
             wp_enqueue_style(
                 'twitch-dashboard',
-                WP_TWITCH_PLUGIN_URL . 'assets/css/dashboard.css',
+                SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/dashboard.css',
                 array(),
-                WP_TWITCH_VERSION
+                SPSWIFTER_TWITCH_VERSION
             );
             
             wp_localize_script('twitch-dashboard', 'twitchDashboard', array(

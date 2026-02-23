@@ -36,16 +36,16 @@ class SPSWIFTER_Twitch_Donation_Integration {
     public function enqueue_donation_scripts() {
         wp_enqueue_style(
             'twitch-donations',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/donations.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/donations.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         wp_enqueue_script(
             'twitch-donations',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/donations.js',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/donations.js',
             array('jquery'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         

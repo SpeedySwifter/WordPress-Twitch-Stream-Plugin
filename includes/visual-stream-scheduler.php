@@ -741,16 +741,16 @@ class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
     public function enqueue_stream_scheduler_scripts() {
         wp_enqueue_style(
             'twitch-stream-scheduler',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/stream-scheduler.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/stream-scheduler.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         wp_enqueue_script(
             'twitch-stream-scheduler',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/stream-scheduler.js',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/stream-scheduler.js',
             array('jquery', 'jquery-ui-core', 'jquery-ui-datepicker'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         

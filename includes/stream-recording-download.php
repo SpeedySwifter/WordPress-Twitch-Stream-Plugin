@@ -43,16 +43,16 @@ class SPSWIFTER_Twitch_Recording_Download {
     public function enqueue_download_scripts() {
         wp_enqueue_style(
             'twitch-recording-download',
-            WP_TWITCH_PLUGIN_URL . 'assets/css/recording-download.css',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/css/recording-download.css',
             array(),
-            WP_TWITCH_VERSION
+            SPSWIFTER_TWITCH_VERSION
         );
         
         wp_enqueue_script(
             'twitch-recording-download',
-            WP_TWITCH_PLUGIN_URL . 'assets/js/recording-download.js',
+            SPSWIFTER_TWITCH_PLUGIN_URL . 'assets/js/recording-download.js',
             array('jquery'),
-            WP_TWITCH_VERSION,
+            SPSWIFTER_TWITCH_VERSION,
             true
         );
         
