@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Live Stream Integration
+ * Plugin Name: SpeedySwifter Stream Integrator for Twitch
  * Plugin URI: https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin
  * Description: The ultimate WordPress plugin for Twitch stream integration with mobile apps, scheduling, analytics, and multi-language support.
  * Version: 1.7.1
@@ -11,7 +11,7 @@
  * Author URI: https://github.com/SpeedySwifter
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: wp-twitch-stream
+ * Text Domain: speedyswifter-twitch
  * Domain Path: /languages
  */
 
@@ -56,7 +56,7 @@ require_once WP_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 add_action('plugins_loaded', 'wp_twitch_init');
 
 function wp_twitch_init() {
-    load_plugin_textdomain('wp-twitch-stream', false, dirname(plugin_basename(__FILE__)) . '/languages');
+    load_plugin_textdomain('speedyswifter-twitch', false, dirname(plugin_basename(__FILE__)) . '/languages');
 }
 
 // Frontend-Styles laden

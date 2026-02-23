@@ -1,10 +1,10 @@
-=== Live Stream Integration ===
+=== SpeedySwifter Stream Integrator for Twitch ===
 Contributors: speedyswifter
 Donate link: https://www.paypal.com/donate/?hosted_button_id=YOUR_BUTTON_ID
-Tags: twitch, streaming, live stream, twitch.tv, embed, video, gaming, esports, widget, shortcode, chat, clips, vod, analytics, mobile, pwa
-Requires at least: 5.8
-Tested up to: 6.9.1
-Stable tag: 1.7.1
+Tags: twitch, livestream, stream, gaming, twitch-api
+Requires at least: 6.3
+Tested up to: 6.8
+Stable tag: 1.7.2
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 7.4
