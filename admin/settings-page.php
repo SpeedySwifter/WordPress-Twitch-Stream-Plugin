@@ -2,33 +2,43 @@
 /**
  * Admin-Einstellungsseite
  */
-function wp_twitch_add_admin_menu() {
+function spswifter_spswifter_twitch_add_admin_menu() {
     add_options_page(
-        'Twitch API Einstellungen',
-        'Twitch API',
+        'SpeedySwifter Twitch API Einstellungen',
+        'SpeedySwifter Twitch API',
         'manage_options',
-        'twitch-api-settings',
-        'wp_twitch_settings_page'
+        'spswifter-twitch-api-settings',
+        'spswifter_spswifter_twitch_settings_page'
     );
 }
-add_action('admin_menu', 'wp_twitch_add_admin_menu');
+add_action('admin_menu', 'spswifter_spswifter_twitch_add_admin_menu');
 
 /**
  * Einstellungen registrieren
  */
-function wp_twitch_settings_init() {
-    register_setting('twitch_api', 'twitch_client_id');
-    register_setting('twitch_api', 'twitch_client_secret');
+function spswifter_spswifter_twitch_settings_init() {
+    register_setting('spswifter_spswifter_twitch_api', 'spswifter_spswifter_twitch_client_id', array(
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'default'           => '',
+        'show_in_rest'      => false,
+    ));
+    register_setting('spswifter_spswifter_twitch_api', 'spswifter_spswifter_twitch_client_secret', array(
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'default'           => '',
+        'show_in_rest'      => false,
+    ));
 }
-add_action('admin_init', 'wp_twitch_settings_init');
+add_action('admin_init', 'spswifter_spswifter_twitch_settings_init');
 
 /**
  * Settings-Page HTML
  */
-function wp_twitch_settings_page() {
+function spswifter_spswifter_twitch_settings_page() {
     ?>
     <div class="wrap">
-        <h1>🎮 Twitch API Einstellungen</h1>
+        <h1>🎮 SpeedySwifter Twitch API Einstellungen</h1>
         
         <div class="notice notice-info">
             <p><strong>Hinweis:</strong> Du benötigst eine Twitch-App. Erstelle sie hier: 
@@ -36,19 +46,22 @@ function wp_twitch_settings_page() {
         </div>
 
         <form method="post" action="options.php">
-            <?php settings_fields('twitch_api'); ?>
+            <?php
+            settings_fields('spswifter_spswifter_twitch_api');
+            wp_nonce_field('spswifter_spswifter_twitch_save_settings', 'spswifter_nonce');
+            ?>
             
             <table class="form-table">
                 <tr>
                     <th scope="row">
-                        <label for="twitch_client_id">Client ID</label>
+                        <label for="spswifter_spswifter_twitch_client_id">Client ID</label>
                     </th>
                     <td>
                         <input 
                             type="text" 
-                            id="twitch_client_id" 
-                            name="twitch_client_id" 
-                            value="<?php echo esc_attr(get_option('twitch_client_id')); ?>" 
+                            id="spswifter_spswifter_twitch_client_id" 
+                            name="spswifter_spswifter_twitch_client_id" 
+                            value="<?php echo esc_attr(get_option('spswifter_spswifter_twitch_client_id')); ?>" 
                             class="regular-text"
                         />
                         <p class="description">Deine Twitch Client ID</p>
@@ -57,14 +70,14 @@ function wp_twitch_settings_page() {
                 
                 <tr>
                     <th scope="row">
-                        <label for="twitch_client_secret">Client Secret</label>
+                        <label for="spswifter_spswifter_twitch_client_secret">Client Secret</label>
                     </th>
                     <td>
                         <input 
                             type="password" 
-                            id="twitch_client_secret" 
-                            name="twitch_client_secret" 
-                            value="<?php echo esc_attr(get_option('twitch_client_secret')); ?>" 
+                            id="spswifter_spswifter_twitch_client_secret" 
+                            name="spswifter_spswifter_twitch_client_secret" 
+                            value="<?php echo esc_attr(get_option('spswifter_spswifter_twitch_client_secret')); ?>" 
                             class="regular-text"
                         />
                         <p class="description">Dein Twitch Client Secret (wird nur einmal angezeigt!)</p>
@@ -78,7 +91,7 @@ function wp_twitch_settings_page() {
         <hr>
 
         <h2>📖 Shortcode Verwendung</h2>
-        <code>[twitch_stream channel="deinkanal"]</code>
+        <code>[spswifter_twitch_stream channel="deinkanal"]</code>
         
         <h3>Parameter:</h3>
         <ul>
@@ -91,10 +104,10 @@ function wp_twitch_settings_page() {
 
         <h3>Beispiele:</h3>
         <ul>
-            <li><code>[twitch_stream channel="shroud"]</code></li>
-            <li><code>[twitch_stream channel="ninja" height="720"]</code></li>
-            <li><code>[twitch_stream channel="pokimane" autoplay="false"]</code></li>
-            <li><code>[twitch_stream channel="summit1g" width="800px" height="600"]</code></li>
+            <li><code>[spswifter_twitch_stream channel="shroud"]</code></li>
+            <li><code>[spswifter_twitch_stream channel="ninja" height="720"]</code></li>
+            <li><code>[spswifter_twitch_stream channel="pokimane" autoplay="false"]</code></li>
+            <li><code>[spswifter_twitch_stream channel="summit1g" width="800px" height="600"]</code></li>
         </ul>
 
         <hr>

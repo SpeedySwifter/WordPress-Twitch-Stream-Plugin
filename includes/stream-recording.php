@@ -7,41 +7,41 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Stream_Recording {
+class SPSWIFTER_Twitch_Stream_Recording {
     
     private $api;
     private $recording_settings;
     
     public function __construct() {
-        $this->api = new WP_Twitch_API();
-        $this->recording_settings = get_option('twitch_recording_settings', array());
+        $this->api = new SPSWIFTER_Twitch_API();
+        $this->recording_settings = get_option('spswifter_twitch_recording_settings', array());
         
         add_action('init', array($this, 'schedule_recording_checks'));
-        add_action('wp_twitch_check_recordings', array($this, 'check_and_record_streams'));
-        add_action('wp_twitch_process_recording', array($this, 'process_stream_recording'));
-        add_action('wp_ajax_twitch_recording_settings', array($this, 'handle_ajax_settings'));
-        add_action('wp_ajax_nopriv_twitch_recording_settings', array($this, 'handle_ajax_settings'));
+        add_action('spswifter_spswifter_twitch_check_recordings', array($this, 'check_and_record_streams'));
+        add_action('spswifter_spswifter_twitch_process_recording', array($this, 'process_stream_recording'));
+        add_action('wp_ajax_spswifter_twitch_recording_settings', array($this, 'handle_ajax_settings'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_recording_settings', array($this, 'handle_ajax_settings'));
     }
     
     /**
      * Schedule recording checks
      */
     public function schedule_recording_checks() {
-        if (!wp_next_scheduled('wp_twitch_check_recordings')) {
+        if (!wp_next_scheduled('spswifter_spswifter_twitch_check_recordings')) {
             $interval = $this->recording_settings['check_interval'] ?? 'every_minute';
             
             switch ($interval) {
                 case 'every_30_seconds':
-                    wp_schedule_event(time(), 'wp_twitch_30_seconds', 'wp_twitch_check_recordings');
+                    wp_schedule_event(time(), 'spswifter_spswifter_twitch_30_seconds', 'spswifter_spswifter_twitch_check_recordings');
                     break;
                 case 'every_minute':
-                    wp_schedule_event(time(), 'wp_twitch_minute', 'wp_twitch_check_recordings');
+                    wp_schedule_event(time(), 'spswifter_spswifter_twitch_minute', 'spswifter_spswifter_twitch_check_recordings');
                     break;
                 case 'every_5_minutes':
-                    wp_schedule_event(time(), 'wp_twitch_5_minutes', 'wp_twitch_check_recordings');
+                    wp_schedule_event(time(), 'spswifter_spswifter_twitch_5_minutes', 'spswifter_spswifter_twitch_check_recordings');
                     break;
                 default:
-                    wp_schedule_event(time(), 'wp_twitch_minute', 'wp_twitch_check_recordings');
+                    wp_schedule_event(time(), 'spswifter_spswifter_twitch_minute', 'spswifter_spswifter_twitch_check_recordings');
             }
         }
     }
@@ -112,13 +112,13 @@ class WP_Twitch_Stream_Recording {
         $this->update_recording_status($channel, true, $recording_id);
         
         // Start background recording process
-        wp_schedule_single_event(time(), 'wp_twitch_process_recording', array($recording_id));
+        wp_schedule_single_event(time(), 'spswifter_spswifter_twitch_process_recording', array($recording_id));
         
         // Log recording start
         $this->log_recording_event($channel, 'recording_started', $recording_data);
         
         // Trigger action for custom handling
-        do_action('wp_twitch_recording_started', $channel, $recording_id, $stream_data);
+        do_action('spswifter_spswifter_twitch_recording_started', $channel, $recording_id, $stream_data);
     }
     
     /**
@@ -148,13 +148,13 @@ class WP_Twitch_Stream_Recording {
         $this->update_recording_status($channel, false);
         
         // Process final recording
-        wp_schedule_single_event(time(), 'wp_twitch_process_recording', array($recording_id));
+        wp_schedule_single_event(time(), 'spswifter_spswifter_twitch_process_recording', array($recording_id));
         
         // Log recording stop
         $this->log_recording_event($channel, 'recording_stopped', $recording_data);
         
         // Trigger action for custom handling
-        do_action('wp_twitch_recording_stopped', $channel, $recording_id, $recording_data);
+        do_action('spswifter_spswifter_twitch_recording_stopped', $channel, $recording_id, $recording_data);
     }
     
     /**
@@ -195,7 +195,7 @@ class WP_Twitch_Stream_Recording {
         $this->save_recording($recording_data);
         
         // Trigger action for custom handling
-        do_action('wp_twitch_recording_updated', $channel, $recording_id, $recording_data);
+        do_action('spswifter_spswifter_twitch_recording_updated', $channel, $recording_id, $recording_data);
     }
     
     /**
@@ -249,7 +249,7 @@ class WP_Twitch_Stream_Recording {
         $this->save_recording($recording_data);
         
         // Trigger action for custom handling
-        do_action('wp_twitch_recording_processed', $channel, $recording_id, $recording_data);
+        do_action('spswifter_spswifter_twitch_recording_processed', $channel, $recording_id, $recording_data);
     }
     
     /**
@@ -274,7 +274,7 @@ class WP_Twitch_Stream_Recording {
         $this->save_recording($recording_data);
         
         // Trigger action for custom handling
-        do_action('wp_twitch_recording_cloud_processed', $channel, $recording_id, $recording_data);
+        do_action('spswifter_spswifter_twitch_recording_cloud_processed', $channel, $recording_id, $recording_data);
     }
     
     /**
@@ -298,7 +298,7 @@ class WP_Twitch_Stream_Recording {
         $this->save_recording($recording_data);
         
         // Trigger action for custom handling
-        do_action('wp_twitch_recording_hybrid_processed', $channel, $recording_id, $recording_data);
+        do_action('spswifter_spswifter_twitch_recording_hybrid_processed', $channel, $recording_id, $recording_data);
     }
     
     /**
@@ -312,7 +312,7 @@ class WP_Twitch_Stream_Recording {
      * Get recording status
      */
     private function get_recording_status($channel) {
-        $statuses = get_option('twitch_recording_statuses', array());
+        $statuses = get_option('spswifter_twitch_recording_statuses', array());
         return $statuses[$channel] ?? array('is_recording' => false, 'recording_id' => null);
     }
     
@@ -320,7 +320,7 @@ class WP_Twitch_Stream_Recording {
      * Update recording status
      */
     private function update_recording_status($channel, $is_recording, $recording_id = null) {
-        $statuses = get_option('twitch_recording_statuses', array());
+        $statuses = get_option('spswifter_twitch_recording_statuses', array());
         
         $statuses[$channel] = array(
             'is_recording' => $is_recording,
@@ -328,7 +328,7 @@ class WP_Twitch_Stream_Recording {
             'updated_at' => current_time('mysql'),
         );
         
-        update_option('twitch_recording_statuses', $statuses);
+        update_option('spswifter_twitch_recording_statuses', $statuses);
     }
     
     /**
@@ -342,7 +342,7 @@ class WP_Twitch_Stream_Recording {
      * Save recording
      */
     private function save_recording($recording_data) {
-        $recordings = get_option('twitch_recordings', array());
+        $recordings = get_option('spswifter_twitch_recordings', array());
         $recordings[$recording_data['id']] = $recording_data;
         
         // Keep only last 100 recordings
@@ -350,14 +350,14 @@ class WP_Twitch_Stream_Recording {
             $recordings = array_slice($recordings, -100, null, true);
         }
         
-        update_option('twitch_recordings', $recordings);
+        update_option('spswifter_twitch_recordings', $recordings);
     }
     
     /**
      * Get recording
      */
     private function get_recording($recording_id) {
-        $recordings = get_option('twitch_recordings', array());
+        $recordings = get_option('spswifter_twitch_recordings', array());
         return $recordings[$recording_id] ?? null;
     }
     
@@ -375,7 +375,7 @@ class WP_Twitch_Stream_Recording {
      * Log recording event
      */
     private function log_recording_event($channel, $event, $data) {
-        $logs = get_option('twitch_recording_logs', array());
+        $logs = get_option('spswifter_twitch_recording_logs', array());
         
         $logs[] = array(
             'channel' => $channel,
@@ -389,7 +389,7 @@ class WP_Twitch_Stream_Recording {
             $logs = array_slice($logs, -500);
         }
         
-        update_option('twitch_recording_logs', $logs);
+        update_option('spswifter_twitch_recording_logs', $logs);
     }
     
     /**
@@ -540,7 +540,7 @@ class WP_Twitch_Stream_Recording {
      * Get all recordings
      */
     public function get_all_recordings($channel = null, $status = null, $limit = 50) {
-        $recordings = get_option('twitch_recordings', array());
+        $recordings = get_option('spswifter_twitch_recordings', array());
         $filtered_recordings = array();
         
         foreach ($recordings as $recording) {
@@ -608,7 +608,7 @@ class WP_Twitch_Stream_Recording {
      * Delete recording
      */
     public function delete_recording($recording_id) {
-        $recordings = get_option('twitch_recordings', array());
+        $recordings = get_option('spswifter_twitch_recordings', array());
         
         if (isset($recordings[$recording_id])) {
             $recording = $recordings[$recording_id];
@@ -624,13 +624,13 @@ class WP_Twitch_Stream_Recording {
             
             // Remove from database
             unset($recordings[$recording_id]);
-            update_option('twitch_recordings', $recordings);
+            update_option('spswifter_twitch_recordings', $recordings);
             
             // Log deletion
             $this->log_recording_event($recording['channel'], 'recording_deleted', $recording);
             
             // Trigger action
-            do_action('wp_twitch_recording_deleted', $recording_id, $recording);
+            do_action('spswifter_spswifter_twitch_recording_deleted', $recording_id, $recording);
             
             return true;
         }
@@ -656,7 +656,7 @@ class WP_Twitch_Stream_Recording {
      * Handle AJAX settings
      */
     public function handle_ajax_settings() {
-        check_ajax_referer('twitch_recording_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_recording_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
             wp_die('Unauthorized');
@@ -697,7 +697,7 @@ class WP_Twitch_Stream_Recording {
             'storage_location' => sanitize_text_field($_POST['storage_location'] ?? 'local'),
         );
         
-        update_option('twitch_recording_settings', $settings);
+        update_option('spswifter_twitch_recording_settings', $settings);
         
         wp_send_json_success(array('message' => 'Settings saved successfully'));
     }
@@ -740,4 +740,4 @@ class WP_Twitch_Stream_Recording {
 }
 
 // Initialize stream recording
-new WP_Twitch_Stream_Recording();
+new SPSWIFTER_Twitch_Stream_Recording();

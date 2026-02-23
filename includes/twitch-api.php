@@ -2,7 +2,7 @@
 /**
  * Twitch API Handler
  */
-class WP_Twitch_API {
+class SPSWIFTER_Twitch_API {
     private $client_id;
     private $client_secret;
     private $access_token;
@@ -13,8 +13,8 @@ class WP_Twitch_API {
     }
 
     public function init() {
-        $this->client_id = get_option('twitch_client_id');
-        $this->client_secret = get_option('twitch_client_secret');
+        $this->client_id = get_option('spswifter_spswifter_twitch_client_id');
+        $this->client_secret = get_option('spswifter_spswifter_twitch_client_secret');
         $this->access_token = $this->get_access_token();
     }
 
@@ -23,7 +23,7 @@ class WP_Twitch_API {
      */
     private function get_access_token() {
         // Token aus Cache laden
-        $token = get_transient('twitch_access_token');
+        $token = get_transient('spswifter_spswifter_twitch_access_token');
 
         if (!$token) {
             $response = wp_remote_post('https://id.twitch.tv/oauth2/token', [
@@ -42,7 +42,7 @@ class WP_Twitch_API {
                     $token = $data['access_token'];
 
                     // Token für 50 Tage cachen
-                    set_transient('twitch_access_token', $token, 50 * DAY_IN_SECONDS);
+                    set_transient('spswifter_spswifter_twitch_access_token', $token, 50 * DAY_IN_SECONDS);
                 } else {
                     // Log error for debugging
                     error_log('Twitch API Error: No access_token in response');
@@ -366,7 +366,7 @@ class WP_Twitch_API {
      * Cache für Stream-Status
      */
     public function get_cached_stream_status($channel, $cache_time = 300) {
-        $cache_key = 'twitch_stream_status_' . sanitize_key($channel);
+        $cache_key = 'spswifter_twitch_stream_status_' . sanitize_key($channel);
         $cached_status = get_transient($cache_key);
 
         if ($cached_status !== false) {
@@ -384,12 +384,12 @@ class WP_Twitch_API {
      */
     public function clear_stream_cache($channel = null) {
         if ($channel) {
-            delete_transient('twitch_stream_status_' . sanitize_key($channel));
+            delete_transient('spswifter_twitch_stream_status_' . sanitize_key($channel));
         } else {
             // Alle Stream-Caches löschen
             global $wpdb;
             $transient_names = $wpdb->get_col(
-                "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '_transient_twitch_stream_status_%'"
+                "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '_transient_spswifter_twitch_stream_status_%'"
             );
             
             foreach ($transient_names as $transient_name) {

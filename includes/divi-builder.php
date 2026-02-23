@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Divi_Integration {
+class SPSWIFTER_Twitch_Divi_Integration {
     
     public function __construct() {
         add_action('divi_extensions_init', array($this, 'register_divi_extension'));
@@ -61,13 +61,13 @@ class WP_Twitch_Divi_Integration {
             
             // Divi Builder Daten
             wp_localize_script('twitch-divi-builder', 'twitchDiviData', array(
-                'apiConnected' => !empty(get_option('twitch_client_id')) && !empty(get_option('twitch_client_secret')),
+                'apiConnected' => !empty(get_option('spswifter_twitch_client_id')) && !empty(get_option('spswifter_twitch_client_secret')),
                 'adminUrl' => admin_url('options-general.php?page=twitch-api-settings'),
                 'strings' => array(
-                    'channelPlaceholder' => __('z.B. shroud', 'wp-twitch-stream'),
-                    'channelsPlaceholder' => __('shroud, ninja, pokimane', 'wp-twitch-stream'),
-                    'apiNotConnected' => __('Twitch API nicht verbunden', 'wp-twitch-stream'),
-                    'goToSettings' => __('API-Einstellungen', 'wp-twitch-stream'),
+                    'channelPlaceholder' => __('z.B. shroud', 'speedyswifter-twitch'),
+                    'channelsPlaceholder' => __('shroud, ninja, pokimane', 'speedyswifter-twitch'),
+                    'apiNotConnected' => __('Twitch API nicht verbunden', 'speedyswifter-twitch'),
+                    'goToSettings' => __('API-Einstellungen', 'speedyswifter-twitch'),
                 ),
             ));
         }
@@ -120,8 +120,8 @@ class WP_Twitch_Divi_Integration {
                 
             case 'yes_no':
                 $output = '<select name="' . esc_attr($field['name']) . '">';
-                $output .= '<option value="on" ' . selected($field['value'], 'on', false) . '>' . __('Ja', 'wp-twitch-stream') . '</option>';
-                $output .= '<option value="off" ' . selected($field['value'], 'off', false) . '>' . __('Nein', 'wp-twitch-stream') . '</option>';
+                $output .= '<option value="on" ' . selected($field['value'], 'on', false) . '>' . __('Ja', 'speedyswifter-twitch') . '</option>';
+                $output .= '<option value="off" ' . selected($field['value'], 'off', false) . '>' . __('Nein', 'speedyswifter-twitch') . '</option>';
                 $output .= '</select>';
                 break;
                 
@@ -139,15 +139,15 @@ class WP_Twitch_Divi_Integration {
 }
 
 // Initialisierung
-function wp_twitch_divi_init() {
+function spswifter_spswifter_twitch_divi_init() {
     if (class_exists('ET_Builder_Module')) {
-        new WP_Twitch_Divi_Integration();
+        new SPSWIFTER_Twitch_Divi_Integration();
     }
 }
-add_action('init', 'wp_twitch_divi_init');
+add_action('init', 'spswifter_spswifter_twitch_divi_init');
 
 // Admin Notice für Divi
-function wp_twitch_divi_admin_notice() {
+function spswifter_spswifter_twitch_divi_admin_notice() {
     if (!class_exists('ET_Builder_Module')) {
         return;
     }
@@ -157,19 +157,19 @@ function wp_twitch_divi_admin_notice() {
         ?>
         <div class="notice notice-info is-dismissible">
             <p>
-                <?php _e('🎮 Twitch Stream Plugin: Divi Builder Module sind jetzt verfügbar!', 'wp-twitch-stream'); ?>
+                <?php esc_html_e('🎮 SpeedySwifter Twitch: Divi Builder Module sind jetzt verfügbar!', 'speedyswifter-twitch'); ?>
                 <a href="<?php echo admin_url('options-general.php?page=twitch-api-settings'); ?>">
-                    <?php _e('API-Einstellungen konfigurieren', 'wp-twitch-stream'); ?>
+                    <?php esc_html_e('API-Einstellungen konfigurieren', 'speedyswifter-twitch'); ?>
                 </a>
             </p>
         </div>
         <?php
     }
 }
-add_action('admin_notices', 'wp_twitch_divi_admin_notice');
+add_action('admin_notices', 'spswifter_spswifter_twitch_divi_admin_notice');
 
 // Divi Visual Builder Integration
-function wp_twitch_divi_visual_builder_integration() {
+function spswifter_spswifter_twitch_divi_visual_builder_integration() {
     if (!et_core_is_fb_enabled()) {
         return;
     }
@@ -179,101 +179,101 @@ function wp_twitch_divi_visual_builder_integration() {
         jQuery(document).ready(function($) {
             // Twitch Stream Module für Visual Builder
             if (typeof window.ET_Builder !== 'undefined') {
-                window.ET_Builder.Modules.register('twitch_stream', {
-                    name: '<?php _e('Twitch Stream', 'wp-twitch-stream'); ?>',
+                window.ET_Builder.Modules.register('spswifter_twitch_stream', {
+                    name: '<?php esc_html__('Twitch Stream', 'speedyswifter-twitch'); ?>',
                     icon: 'video',
                     category: 'Twitch Stream',
                     settings: {
                         channel: {
                             type: 'text',
-                            label: '<?php _e('Kanal', 'wp-twitch-stream'); ?>',
-                            placeholder: '<?php _e('z.B. shroud', 'wp-twitch-stream'); ?>'
+                            label: '<?php esc_html__('Kanal', 'speedyswifter-twitch'); ?>',
+                            placeholder: '<?php esc_html__('z.B. shroud', 'speedyswifter-twitch'); ?>'
                         },
                         width: {
                             type: 'text',
-                            label: '<?php _e('Breite', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Breite', 'speedyswifter-twitch'); ?>',
                             default: '100%'
                         },
                         height: {
                             type: 'number',
-                            label: '<?php _e('Höhe', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Höhe', 'speedyswifter-twitch'); ?>',
                             default: 480
                         },
                         autoplay: {
                             type: 'yes_no',
-                            label: '<?php _e('Autoplay', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Autoplay', 'speedyswifter-twitch'); ?>',
                             default: 'on'
                         },
                         muted: {
                             type: 'yes_no',
-                            label: '<?php _e('Stummgeschaltet', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Stummgeschaltet', 'speedyswifter-twitch'); ?>',
                             default: 'off'
                         },
                         show_info: {
                             type: 'yes_no',
-                            label: '<?php _e('Stream-Infos anzeigen', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Stream-Infos anzeigen', 'speedyswifter-twitch'); ?>',
                             default: 'off'
                         }
                     },
                     render: function(props) {
-                        var shortcode = '[twitch_stream channel="' + props.channel + '" width="' + props.width + '" height="' + props.height + '" autoplay="' + props.autoplay + '" muted="' + props.muted + '"]';
+                        var shortcode = '[spswifter_twitch_stream channel="' + props.channel + '" width="' + props.width + '" height="' + props.height + '" autoplay="' + props.autoplay + '" muted="' + props.muted + '"]';
                         
                         if (props.show_info === 'on') {
-                            shortcode += '[twitch_stream_info channel="' + props.channel + '"]';
+                            shortcode += '[spswifter_twitch_stream_info channel="' + props.channel + '"]';
                         }
                         
                         return shortcode;
                     }
                 });
                 
-                window.ET_Builder.Modules.register('twitch_grid', {
-                    name: '<?php _e('Twitch Stream Grid', 'wp-twitch-stream'); ?>',
+                window.ET_Builder.Modules.register('spswifter_twitch_grid', {
+                    name: '<?php esc_html__('Twitch Stream Grid', 'speedyswifter-twitch'); ?>',
                     icon: 'grid',
                     category: 'Twitch Stream',
                     settings: {
                         channels: {
                             type: 'text',
-                            label: '<?php _e('Kanäle', 'wp-twitch-stream'); ?>',
-                            placeholder: '<?php _e('shroud, ninja, pokimane', 'wp-twitch-stream'); ?>'
+                            label: '<?php esc_html__('Kanäle', 'speedyswifter-twitch'); ?>',
+                            placeholder: '<?php esc_html__('shroud, ninja, pokimane', 'speedyswifter-twitch'); ?>'
                         },
                         columns: {
                             type: 'number',
-                            label: '<?php _e('Spalten', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Spalten', 'speedyswifter-twitch'); ?>',
                             default: 3
                         },
                         layout: {
                             type: 'select',
-                            label: '<?php _e('Layout', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Layout', 'speedyswifter-twitch'); ?>',
                             default: 'grid',
                             options: {
-                                'grid': '<?php _e('Grid', 'wp-twitch-stream'); ?>',
-                                'list': '<?php _e('Liste', 'wp-twitch-stream'); ?>',
-                                'masonry': '<?php _e('Masonry', 'wp-twitch-stream'); ?>'
+                                'grid': '<?php esc_html__('Grid', 'speedyswifter-twitch'); ?>',
+                                'list': '<?php esc_html__('Liste', 'speedyswifter-twitch'); ?>',
+                                'masonry': '<?php esc_html__('Masonry', 'speedyswifter-twitch'); ?>'
                             }
                         },
                         gap: {
                             type: 'text',
-                            label: '<?php _e('Abstand', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Abstand', 'speedyswifter-twitch'); ?>',
                             default: '20px'
                         },
                         responsive: {
                             type: 'yes_no',
-                            label: '<?php _e('Responsive', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Responsive', 'speedyswifter-twitch'); ?>',
                             default: 'on'
                         },
                         show_player: {
                             type: 'yes_no',
-                            label: '<?php _e('Player anzeigen', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Player anzeigen', 'speedyswifter-twitch'); ?>',
                             default: 'on'
                         },
                         show_info: {
                             type: 'yes_no',
-                            label: '<?php _e('Informationen anzeigen', 'wp-twitch-stream'); ?>',
+                            label: '<?php esc_html__('Informationen anzeigen', 'speedyswifter-twitch'); ?>',
                             default: 'on'
                         }
                     },
                     render: function(props) {
-                        var shortcode = '[twitch_streams_grid channels="' + props.channels + '" columns="' + props.columns + '" layout="' + props.layout + '" gap="' + props.gap + '" responsive="' + props.responsive + '" show_player="' + props.show_player + '" show_info="' + props.show_info + '"]';
+                        var shortcode = '[spswifter_twitch_streams_grid channels="' + props.channels + '" columns="' + props.columns + '" layout="' + props.layout + '" gap="' + props.gap + '" responsive="' + props.responsive + '" show_player="' + props.show_player + '" show_info="' + props.show_info + '"]';
                         
                         return shortcode;
                     }
@@ -283,5 +283,5 @@ function wp_twitch_divi_visual_builder_integration() {
     </script>
     <?php
 }
-add_action('admin_footer', 'wp_twitch_divi_visual_builder_integration');
+add_action('admin_footer', 'spswifter_spswifter_twitch_divi_visual_builder_integration');
 ?>

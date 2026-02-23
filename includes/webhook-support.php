@@ -7,27 +7,27 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Webhook_Support {
+class SPSWIFTER_Twitch_Webhook_Support {
     
     private $api;
     private $webhook_secret;
     private $webhook_url;
     
     public function __construct() {
-        $this->api = new WP_Twitch_API();
-        $this->webhook_secret = get_option('twitch_webhook_secret');
-        $this->webhook_url = home_url('/wp-json/wp-twitch-stream/v1/webhook');
+        $this->api = new SPSWIFTER_Twitch_API();
+        $this->webhook_secret = get_option('spswifter_spswifter_twitch_webhook_secret');
+        $this->webhook_url = home_url('/wp-json/spswifter-twitch/v1/webhook');
         
         add_action('rest_api_init', array($this, 'register_webhook_endpoint'));
         add_action('init', array($this, 'schedule_webhook_cleanup'));
-        add_action('wp_twitch_cleanup_webhooks', array($this, 'cleanup_expired_subscriptions'));
+        add_action('spswifter_spswifter_twitch_cleanup_webhooks', array($this, 'cleanup_expired_subscriptions'));
     }
     
     /**
      * Register webhook endpoint
      */
     public function register_webhook_endpoint() {
-        register_rest_route('wp-twitch-stream/v1', '/webhook', array(
+        register_rest_route('spswifter-twitch/v1', '/webhook', array(
             'methods' => 'POST',
             'callback' => array($this, 'handle_webhook'),
             'permission_callback' => '__return_true',
@@ -40,7 +40,7 @@ class WP_Twitch_Webhook_Support {
     public function handle_webhook($request) {
         $headers = $request->get_headers();
         $body = $request->get_body();
-        $signature = $headers['twitch_eventsub_message_signature'][0] ?? '';
+        $signature = $headers['spswifter_twitch_eventsub_message_signature'][0] ?? '';
         
         // Verify webhook signature
         if (!$this->verify_webhook_signature($body, $signature)) {
@@ -177,7 +177,7 @@ class WP_Twitch_Webhook_Support {
         ));
         
         // Trigger custom actions
-        do_action('wp_twitch_stream_online', $user_login, $event_data);
+        do_action('spswifter_spswifter_twitch_stream_online', $user_login, $event_data);
         
         // Send notifications
         $this->send_stream_notification($user_login, 'online');
@@ -196,7 +196,7 @@ class WP_Twitch_Webhook_Support {
         ));
         
         // Trigger custom actions
-        do_action('wp_twitch_stream_offline', $user_login, $event_data);
+        do_action('spswifter_spswifter_twitch_stream_offline', $user_login, $event_data);
         
         // Send notifications
         $this->send_stream_notification($user_login, 'offline');
@@ -222,7 +222,7 @@ class WP_Twitch_Webhook_Support {
         ));
         
         // Trigger custom actions
-        do_action('wp_twitch_channel_update', $user_login, $event_data);
+        do_action('spswifter_spswifter_twitch_channel_update', $user_login, $event_data);
     }
     
     /**
@@ -239,7 +239,7 @@ class WP_Twitch_Webhook_Support {
         $this->store_follow_event($broadcaster_user_login, $user_login, $followed_at);
         
         // Trigger custom actions
-        do_action('wp_twitch_user_follow', $broadcaster_user_login, $user_login, $event_data);
+        do_action('spswifter_spswifter_twitch_user_follow', $broadcaster_user_login, $user_login, $event_data);
         
         // Send notifications
         $this->send_follow_notification($broadcaster_user_login, $user_login);
@@ -259,7 +259,7 @@ class WP_Twitch_Webhook_Support {
         $this->store_subscribe_event($broadcaster_user_login, $user_login, $tier);
         
         // Trigger custom actions
-        do_action('wp_twitch_channel_subscribe', $broadcaster_user_login, $user_login, $tier, $event_data);
+        do_action('spswifter_spswifter_twitch_channel_subscribe', $broadcaster_user_login, $user_login, $tier, $event_data);
         
         // Send notifications
         $this->send_subscribe_notification($broadcaster_user_login, $user_login, $tier);
@@ -280,7 +280,7 @@ class WP_Twitch_Webhook_Support {
         $this->store_cheer_event($broadcaster_user_login, $user_login, $bits, $message);
         
         // Trigger custom actions
-        do_action('wp_twitch_channel_cheer', $broadcaster_user_login, $user_login, $bits, $message, $event_data);
+        do_action('spswifter_spswifter_twitch_channel_cheer', $broadcaster_user_login, $user_login, $bits, $message, $event_data);
         
         // Send notifications
         $this->send_cheer_notification($broadcaster_user_login, $user_login, $bits);
@@ -300,7 +300,7 @@ class WP_Twitch_Webhook_Support {
         $this->store_raid_event($from_broadcaster_user_login, $to_broadcaster_user_login, $viewers);
         
         // Trigger custom actions
-        do_action('wp_twitch_channel_raid', $from_broadcaster_user_login, $to_broadcaster_user_login, $viewers, $event_data);
+        do_action('spswifter_spswifter_twitch_channel_raid', $from_broadcaster_user_login, $to_broadcaster_user_login, $viewers, $event_data);
         
         // Send notifications
         $this->send_raid_notification($from_broadcaster_user_login, $to_broadcaster_user_login, $viewers);
@@ -321,7 +321,7 @@ class WP_Twitch_Webhook_Support {
         $this->store_subscription_gift_event($broadcaster_user_login, $user_login, $total, $tier);
         
         // Trigger custom actions
-        do_action('wp_twitch_subscription_gift', $broadcaster_user_login, $user_login, $total, $tier, $event_data);
+        do_action('spswifter_spswifter_twitch_subscription_gift', $broadcaster_user_login, $user_login, $total, $tier, $event_data);
         
         // Send notifications
         $this->send_subscription_gift_notification($broadcaster_user_login, $user_login, $total, $tier);
@@ -439,7 +439,12 @@ class WP_Twitch_Webhook_Support {
             return false;
         }
         
-        $hmac_message = $this->webhook_secret . $body;
+        // Get Twitch webhook headers
+        $message_id = sanitize_text_field($_SERVER['HTTP_TWITCH_EVENTSUB_MESSAGE_ID'] ?? '');
+        $timestamp = sanitize_text_field($_SERVER['HTTP_TWITCH_EVENTSUB_MESSAGE_TIMESTAMP'] ?? '');
+        
+        // Create HMAC message
+        $hmac_message = $message_id . $timestamp . $body;
         $expected_signature = 'sha256=' . hash_hmac('sha256', $hmac_message, $this->webhook_secret);
         
         return hash_equals($expected_signature, $signature);
@@ -449,7 +454,7 @@ class WP_Twitch_Webhook_Support {
      * Store subscription
      */
     private function store_subscription($subscription_id, $type, $condition, $status = 'pending', $cost = 0) {
-        $subscriptions = get_option('twitch_webhook_subscriptions', array());
+        $subscriptions = get_option('spswifter_spswifter_twitch_webhook_subscriptions', array());
         
         $subscriptions[$subscription_id] = array(
             'id' => $subscription_id,
@@ -461,18 +466,18 @@ class WP_Twitch_Webhook_Support {
             'updated_at' => current_time('mysql'),
         );
         
-        update_option('twitch_webhook_subscriptions', $subscriptions);
+        update_option('spswifter_spswifter_twitch_webhook_subscriptions', $subscriptions);
     }
     
     /**
      * Remove subscription
      */
     private function remove_subscription($subscription_id) {
-        $subscriptions = get_option('twitch_webhook_subscriptions', array());
+        $subscriptions = get_option('spswifter_spswifter_twitch_webhook_subscriptions', array());
         
         if (isset($subscriptions[$subscription_id])) {
             unset($subscriptions[$subscription_id]);
-            update_option('twitch_webhook_subscriptions', $subscriptions);
+            update_option('spswifter_spswifter_twitch_webhook_subscriptions', $subscriptions);
         }
     }
     
@@ -480,33 +485,33 @@ class WP_Twitch_Webhook_Support {
      * Update stream status
      */
     private function update_stream_status($channel, $status, $data = array()) {
-        $streams = get_option('twitch_stream_status', array());
+        $streams = get_option('spswifter_twitch_stream_status', array());
         
         $streams[$channel] = array_merge(array(
             'status' => $status,
             'updated_at' => current_time('mysql'),
         ), $data);
         
-        update_option('twitch_stream_status', $streams);
+        update_option('spswifter_twitch_stream_status', $streams);
     }
     
     /**
      * Update channel info
      */
     private function update_channel_info($channel, $data) {
-        $channels = get_option('twitch_channel_info', array());
+        $channels = get_option('spswifter_twitch_channel_info', array());
         
         $channels[$channel] = array_merge($channels[$channel] ?? array(), $data);
         $channels[$channel]['updated_at'] = current_time('mysql');
         
-        update_option('twitch_channel_info', $channels);
+        update_option('spswifter_twitch_channel_info', $channels);
     }
     
     /**
      * Store follow event
      */
     private function store_follow_event($channel, $follower, $followed_at) {
-        $events = get_option('twitch_follow_events', array());
+        $events = get_option('spswifter_twitch_follow_events', array());
         
         $events[] = array(
             'channel' => $channel,
@@ -518,14 +523,14 @@ class WP_Twitch_Webhook_Support {
         // Keep only last 100 events
         $events = array_slice($events, -100);
         
-        update_option('twitch_follow_events', $events);
+        update_option('spswifter_twitch_follow_events', $events);
     }
     
     /**
      * Store subscribe event
      */
     private function store_subscribe_event($channel, $subscriber, $tier) {
-        $events = get_option('twitch_subscribe_events', array());
+        $events = get_option('spswifter_twitch_subscribe_events', array());
         
         $events[] = array(
             'channel' => $channel,
@@ -537,14 +542,14 @@ class WP_Twitch_Webhook_Support {
         // Keep only last 100 events
         $events = array_slice($events, -100);
         
-        update_option('twitch_subscribe_events', $events);
+        update_option('spswifter_twitch_subscribe_events', $events);
     }
     
     /**
      * Store cheer event
      */
     private function store_cheer_event($channel, $user, $bits, $message) {
-        $events = get_option('twitch_cheer_events', array());
+        $events = get_option('spswifter_twitch_cheer_events', array());
         
         $events[] = array(
             'channel' => $channel,
@@ -557,14 +562,14 @@ class WP_Twitch_Webhook_Support {
         // Keep only last 100 events
         $events = array_slice($events, -100);
         
-        update_option('twitch_cheer_events', $events);
+        update_option('spswifter_twitch_cheer_events', $events);
     }
     
     /**
      * Store raid event
      */
     private function store_raid_event($from_channel, $to_channel, $viewers) {
-        $events = get_option('twitch_raid_events', array());
+        $events = get_option('spswifter_twitch_raid_events', array());
         
         $events[] = array(
             'from_channel' => $from_channel,
@@ -576,14 +581,14 @@ class WP_Twitch_Webhook_Support {
         // Keep only last 100 events
         $events = array_slice($events, -100);
         
-        update_option('twitch_raid_events', $events);
+        update_option('spswifter_twitch_raid_events', $events);
     }
     
     /**
      * Store subscription gift event
      */
     private function store_subscription_gift_event($channel, $user, $total, $tier) {
-        $events = get_option('twitch_subscription_gift_events', array());
+        $events = get_option('spswifter_twitch_subscription_gift_events', array());
         
         $events[] = array(
             'channel' => $channel,
@@ -596,18 +601,18 @@ class WP_Twitch_Webhook_Support {
         // Keep only last 100 events
         $events = array_slice($events, -100);
         
-        update_option('twitch_subscription_gift_events', $events);
+        update_option('spswifter_twitch_subscription_gift_events', $events);
     }
     
     /**
      * Send stream notification
      */
     private function send_stream_notification($channel, $status) {
-        if (!get_option('twitch_webhook_notifications', false)) {
+        if (!get_option('spswifter_twitch_webhook_notifications', false)) {
             return;
         }
         
-        $webhook_url = get_option('twitch_discord_webhook_url');
+        $webhook_url = get_option('spswifter_twitch_discord_webhook_url');
         if ($webhook_url) {
             $this->send_discord_notification($channel, $status, $webhook_url);
         }
@@ -617,11 +622,11 @@ class WP_Twitch_Webhook_Support {
      * Send follow notification
      */
     private function send_follow_notification($channel, $follower) {
-        if (!get_option('twitch_webhook_notifications', false)) {
+        if (!get_option('spswifter_twitch_webhook_notifications', false)) {
             return;
         }
         
-        $webhook_url = get_option('twitch_discord_webhook_url');
+        $webhook_url = get_option('spswifter_twitch_discord_webhook_url');
         if ($webhook_url) {
             $this->send_discord_follow_notification($channel, $follower, $webhook_url);
         }
@@ -631,11 +636,11 @@ class WP_Twitch_Webhook_Support {
      * Send subscribe notification
      */
     private function send_subscribe_notification($channel, $subscriber, $tier) {
-        if (!get_option('twitch_webhook_notifications', false)) {
+        if (!get_option('spswifter_twitch_webhook_notifications', false)) {
             return;
         }
         
-        $webhook_url = get_option('twitch_discord_webhook_url');
+        $webhook_url = get_option('spswifter_twitch_discord_webhook_url');
         if ($webhook_url) {
             $this->send_discord_subscribe_notification($channel, $subscriber, $tier, $webhook_url);
         }
@@ -645,11 +650,11 @@ class WP_Twitch_Webhook_Support {
      * Send cheer notification
      */
     private function send_cheer_notification($channel, $user, $bits) {
-        if (!get_option('twitch_webhook_notifications', false)) {
+        if (!get_option('spswifter_twitch_webhook_notifications', false)) {
             return;
         }
         
-        $webhook_url = get_option('twitch_discord_webhook_url');
+        $webhook_url = get_option('spswifter_twitch_discord_webhook_url');
         if ($webhook_url) {
             $this->send_discord_cheer_notification($channel, $user, $bits, $webhook_url);
         }
@@ -659,11 +664,11 @@ class WP_Twitch_Webhook_Support {
      * Send raid notification
      */
     private function send_raid_notification($from_channel, $to_channel, $viewers) {
-        if (!get_option('twitch_webhook_notifications', false)) {
+        if (!get_option('spswifter_twitch_webhook_notifications', false)) {
             return;
         }
         
-        $webhook_url = get_option('twitch_discord_webhook_url');
+        $webhook_url = get_option('spswifter_twitch_discord_webhook_url');
         if ($webhook_url) {
             $this->send_discord_raid_notification($from_channel, $to_channel, $viewers, $webhook_url);
         }
@@ -673,11 +678,11 @@ class WP_Twitch_Webhook_Support {
      * Send subscription gift notification
      */
     private function send_subscription_gift_notification($channel, $user, $total, $tier) {
-        if (!get_option('twitch_webhook_notifications', false)) {
+        if (!get_option('spswifter_twitch_webhook_notifications', false)) {
             return;
         }
         
-        $webhook_url = get_option('twitch_discord_webhook_url');
+        $webhook_url = get_option('spswifter_twitch_discord_webhook_url');
         if ($webhook_url) {
             $this->send_discord_subscription_gift_notification($channel, $user, $total, $tier, $webhook_url);
         }
@@ -831,8 +836,8 @@ class WP_Twitch_Webhook_Support {
      * Schedule webhook cleanup
      */
     public function schedule_webhook_cleanup() {
-        if (!wp_next_scheduled('wp_twitch_cleanup_webhooks')) {
-            wp_schedule_event(time(), 'daily', 'wp_twitch_cleanup_webhooks');
+        if (!wp_next_scheduled('spswifter_spswifter_twitch_cleanup_webhooks')) {
+            wp_schedule_event(time(), 'daily', 'spswifter_spswifter_twitch_cleanup_webhooks');
         }
     }
     
@@ -841,7 +846,7 @@ class WP_Twitch_Webhook_Support {
      */
     public function cleanup_expired_subscriptions() {
         $subscriptions = $this->get_subscriptions();
-        $stored_subscriptions = get_option('twitch_webhook_subscriptions', array());
+        $stored_subscriptions = get_option('spswifter_twitch_webhook_subscriptions', array());
         
         $active_subscription_ids = array();
         foreach ($subscriptions as $subscription) {
@@ -857,4 +862,4 @@ class WP_Twitch_Webhook_Support {
 }
 
 // Initialize webhook support
-new WP_Twitch_Webhook_Support();
+new SPSWIFTER_Twitch_Webhook_Support();

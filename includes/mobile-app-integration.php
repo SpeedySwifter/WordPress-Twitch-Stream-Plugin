@@ -26,25 +26,25 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
         add_action('init', array($this, 'init_mobile_app_integration'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_mobile_app_scripts'));
         add_action('wp_head', array($this, 'add_mobile_meta_tags'));
-        add_action('wp_ajax_twitch_mobile_app', array($this, 'handle_mobile_app_ajax'));
-        add_action('wp_ajax_nopriv_twitch_mobile_app', array($this, 'handle_mobile_app_ajax'));
+        add_action('wp_ajax_spswifter_twitch_mobile_app', array($this, 'handle_mobile_app_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_mobile_app', array($this, 'handle_mobile_app_ajax'));
         add_action('admin_menu', array($this, 'add_mobile_app_menu'));
         
         // Register shortcodes
         add_action('init', array($this, 'register_mobile_shortcodes'));
         
         // PWA hooks
-        add_action('wp_ajax_twitch_pwa_subscribe', array($this, 'handle_pwa_subscription'));
-        add_action('wp_ajax_nopriv_twitch_pwa_subscribe', array($this, 'handle_pwa_subscription'));
+        add_action('wp_ajax_spswifter_twitch_pwa_subscribe', array($this, 'handle_pwa_subscription'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_pwa_subscribe', array($this, 'handle_pwa_subscription'));
         
         // Mobile detection
-        add_filter('twitch_mobile_device', array($this, 'detect_mobile_device'));
-        add_filter('twitch_pwa_manifest', array($this, 'filter_pwa_manifest'));
+        add_filter('spswifter_twitch_mobile_device', array($this, 'detect_mobile_device'));
+        add_filter('spswifter_twitch_pwa_manifest', array($this, 'filter_pwa_manifest'));
         
         // Push notification hooks
-        add_action('twitch_stream_started', array($this, 'send_stream_started_notification'), 10, 2);
-        add_action('twitch_stream_ended', array($this, 'send_stream_ended_notification'), 10, 2);
-        add_action('twitch_new_follower', array($this, 'send_follower_notification'), 10, 1);
+        add_action('spswifter_twitch_stream_started', array($this, 'send_stream_started_notification'), 10, 2);
+        add_action('spswifter_twitch_stream_ended', array($this, 'send_stream_ended_notification'), 10, 2);
+        add_action('spswifter_twitch_new_follower', array($this, 'send_follower_notification'), 10, 1);
         
         // Service worker registration
         add_action('wp_footer', array($this, 'register_service_worker'));
@@ -69,7 +69,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
         $charset_collate = $wpdb->get_charset_collate();
         
         // Push subscriptions table
-        $push_table = $wpdb->prefix . 'twitch_push_subscriptions';
+        $push_table = $wpdb->prefix . 'spswifter_twitch_push_subscriptions';
         $push_sql = "CREATE TABLE $push_table (
             id int(11) NOT NULL AUTO_INCREMENT,
             user_id bigint(20) unsigned DEFAULT NULL,
@@ -87,7 +87,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
         ) $charset_collate;";
         
         // Mobile sessions table
-        $session_table = $wpdb->prefix . 'twitch_mobile_sessions';
+        $session_table = $wpdb->prefix . 'spswifter_twitch_mobile_sessions';
         $session_sql = "CREATE TABLE $session_table (
             id int(11) NOT NULL AUTO_INCREMENT,
             session_id varchar(64) NOT NULL,
@@ -102,7 +102,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
         ) $charset_collate;";
         
         // Mobile notifications table
-        $notification_table = $wpdb->prefix . 'twitch_mobile_notifications';
+        $notification_table = $wpdb->prefix . 'spswifter_twitch_mobile_notifications';
         $notification_sql = "CREATE TABLE $notification_table (
             id int(11) NOT NULL AUTO_INCREMENT,
             user_id bigint(20) unsigned NOT NULL,
@@ -129,14 +129,14 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
      * Register PWA endpoints
      */
     private function register_pwa_endpoints() {
-        add_rewrite_rule('^twitch-pwa-manifest\.json/?', 'index.php?twitch_pwa_manifest=1', 'top');
-        add_rewrite_rule('^twitch-service-worker\.js/?', 'index.php?twitch_service_worker=1', 'top');
-        add_rewrite_rule('^twitch-offline\.html/?', 'index.php?twitch_offline_page=1', 'top');
+        add_rewrite_rule('^twitch-pwa-manifest\.json/?', 'index.php?spswifter_twitch_pwa_manifest=1', 'top');
+        add_rewrite_rule('^twitch-service-worker\.js/?', 'index.php?spswifter_twitch_service_worker=1', 'top');
+        add_rewrite_rule('^twitch-offline\.html/?', 'index.php?spswifter_twitch_offline_page=1', 'top');
         
         add_filter('query_vars', function($vars) {
-            $vars[] = 'twitch_pwa_manifest';
-            $vars[] = 'twitch_service_worker';
-            $vars[] = 'twitch_offline_page';
+            $vars[] = 'spswifter_twitch_pwa_manifest';
+            $vars[] = 'spswifter_twitch_service_worker';
+            $vars[] = 'spswifter_twitch_offline_page';
             return $vars;
         });
         
@@ -147,17 +147,17 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
      * Handle PWA requests
      */
     public function handle_pwa_requests($wp) {
-        if (isset($wp->query_vars['twitch_pwa_manifest'])) {
+        if (isset($wp->query_vars['spswifter_twitch_pwa_manifest'])) {
             $this->serve_pwa_manifest();
             exit;
         }
         
-        if (isset($wp->query_vars['twitch_service_worker'])) {
+        if (isset($wp->query_vars['spswifter_twitch_service_worker'])) {
             $this->serve_service_worker();
             exit;
         }
         
-        if (isset($wp->query_vars['twitch_offline_page'])) {
+        if (isset($wp->query_vars['spswifter_twitch_offline_page'])) {
             $this->serve_offline_page();
             exit;
         }
@@ -191,22 +191,22 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
         add_filter('post_thumbnail_html', array($this, 'optimize_images_for_mobile'), 10, 5);
         
         // PWA manifest filters
-        add_filter('twitch_pwa_manifest_data', array($this, 'enhance_pwa_manifest'));
+        add_filter('spswifter_twitch_pwa_manifest_data', array($this, 'enhance_pwa_manifest'));
         
         // Mobile detection filters
-        add_filter('twitch_is_mobile_device', array($this, 'detect_mobile_device'));
-        add_filter('twitch_mobile_user_agent', array($this, 'get_mobile_user_agent'));
+        add_filter('spswifter_twitch_is_mobile_device', array($this, 'detect_mobile_device'));
+        add_filter('spswifter_twitch_mobile_user_agent', array($this, 'get_mobile_user_agent'));
     }
     
     /**
      * Register mobile shortcodes
      */
     public function register_mobile_shortcodes() {
-        add_shortcode('twitch_mobile_app', array($this, 'render_mobile_app_shortcode'));
-        add_shortcode('twitch_pwa_install', array($this, 'render_pwa_install_shortcode'));
-        add_shortcode('twitch_mobile_menu', array($this, 'render_mobile_menu_shortcode'));
-        add_shortcode('twitch_mobile_streams', array($this, 'render_mobile_streams_shortcode'));
-        add_shortcode('twitch_push_notifications', array($this, 'render_push_notifications_shortcode'));
+        add_shortcode('spswifter_twitch_mobile_app', array($this, 'render_mobile_app_shortcode'));
+        add_shortcode('spswifter_twitch_pwa_install', array($this, 'render_pwa_install_shortcode'));
+        add_shortcode('spswifter_twitch_mobile_menu', array($this, 'render_mobile_menu_shortcode'));
+        add_shortcode('spswifter_twitch_mobile_streams', array($this, 'render_mobile_streams_shortcode'));
+        add_shortcode('spswifter_twitch_push_notifications', array($this, 'render_push_notifications_shortcode'));
     }
     
     /**
@@ -281,15 +281,15 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                 
                 <div class="twitch-mobile-main">
                     <div class="twitch-mobile-section active" id="streams-section">
-                        <?php echo do_shortcode('[twitch_mobile_streams]'); ?>
+                        <?php echo do_shortcode('[spswifter_twitch_mobile_streams]'); ?>
                     </div>
                     
                     <div class="twitch-mobile-section" id="schedule-section">
-                        <?php echo do_shortcode('[twitch_stream_scheduler view="list" theme="dark"]'); ?>
+                        <?php echo do_shortcode('[spswifter_twitch_stream_scheduler view="list" theme="dark"]'); ?>
                     </div>
                     
                     <div class="twitch-mobile-section" id="chat-section">
-                        <?php echo do_shortcode('[twitch_chat channel="yourchannel" theme="dark" height="400"]'); ?>
+                        <?php echo do_shortcode('[spswifter_twitch_chat channel="yourchannel" theme="dark" height="400"]'); ?>
                     </div>
                     
                     <div class="twitch-mobile-section" id="profile-section">
@@ -676,7 +676,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
      * Handle mobile app AJAX
      */
     public function handle_mobile_app_ajax() {
-        check_ajax_referer('twitch_mobile_app_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_mobile_app_nonce', 'nonce');
         
         $action = $_POST['mobile_action'] ?? '';
         
@@ -1021,8 +1021,8 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
             
             <div class="twitch-mobile-admin">
                 <form method="post" action="options.php">
-                    <?php settings_fields('twitch_mobile_settings'); ?>
-                    <?php do_settings_sections('twitch_mobile_settings'); ?>
+                    <?php settings_fields('spswifter_twitch_mobile_settings'); ?>
+                    <?php do_settings_sections('spswifter_twitch_mobile_settings'); ?>
                     
                     <div class="twitch-admin-tabs">
                         <div class="twitch-tab-buttons">
@@ -1041,7 +1041,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">Enable Mobile App</th>
                                         <td>
-                                            <input type="checkbox" name="twitch_mobile_settings[enabled]" 
+                                            <input type="checkbox" name="spswifter_twitch_mobile_settings[enabled]" 
                                                    <?php checked($this->mobile_settings['enabled'], true); ?> />
                                             <label>Enable mobile app features and PWA</label>
                                         </td>
@@ -1050,7 +1050,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">App Name</th>
                                         <td>
-                                            <input type="text" name="twitch_mobile_settings[app_name]" 
+                                            <input type="text" name="spswifter_twitch_mobile_settings[app_name]" 
                                                    value="<?php echo esc_attr($this->mobile_settings['app_name'] ?? 'Twitch Mobile'); ?>" 
                                                    class="regular-text" />
                                         </td>
@@ -1059,7 +1059,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">App Icon</th>
                                         <td>
-                                            <input type="url" name="twitch_mobile_settings[app_icon]" 
+                                            <input type="url" name="spswifter_twitch_mobile_settings[app_icon]" 
                                                    value="<?php echo esc_attr($this->mobile_settings['app_icon'] ?? ''); ?>" 
                                                    class="regular-text" />
                                             <p class="description">URL to your app icon (512x512 recommended)</p>
@@ -1069,7 +1069,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">Theme Color</th>
                                         <td>
-                                            <input type="color" name="twitch_mobile_settings[theme_color]" 
+                                            <input type="color" name="spswifter_twitch_mobile_settings[theme_color]" 
                                                    value="<?php echo esc_attr($this->mobile_settings['theme_color'] ?? '#9146ff'); ?>" />
                                         </td>
                                     </tr>
@@ -1077,7 +1077,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">Smart App Banner</th>
                                         <td>
-                                            <input type="checkbox" name="twitch_mobile_settings[smart_app_banner]" 
+                                            <input type="checkbox" name="spswifter_twitch_mobile_settings[smart_app_banner]" 
                                                    <?php checked($this->mobile_settings['smart_app_banner'], true); ?> />
                                             <label>Show iOS smart app banner</label>
                                         </td>
@@ -1086,7 +1086,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">iOS App ID</th>
                                         <td>
-                                            <input type="text" name="twitch_mobile_settings[ios_app_id]" 
+                                            <input type="text" name="spswifter_twitch_mobile_settings[ios_app_id]" 
                                                    value="<?php echo esc_attr($this->mobile_settings['ios_app_id'] ?? ''); ?>" 
                                                    class="regular-text" />
                                         </td>
@@ -1102,7 +1102,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">Enable PWA</th>
                                         <td>
-                                            <input type="checkbox" name="twitch_mobile_settings[enable_pwa]" 
+                                            <input type="checkbox" name="spswifter_twitch_mobile_settings[enable_pwa]" 
                                                    <?php checked($this->mobile_settings['enable_pwa'], true); ?> />
                                             <label>Enable Progressive Web App features</label>
                                         </td>
@@ -1111,7 +1111,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">Display Mode</th>
                                         <td>
-                                            <select name="twitch_mobile_settings[display_mode]">
+                                            <select name="spswifter_twitch_mobile_settings[display_mode]">
                                                 <option value="standalone" <?php selected($this->mobile_settings['display_mode'], 'standalone'); ?>>Standalone</option>
                                                 <option value="fullscreen" <?php selected($this->mobile_settings['display_mode'], 'fullscreen'); ?>>Fullscreen</option>
                                                 <option value="minimal-ui" <?php selected($this->mobile_settings['display_mode'], 'minimal-ui'); ?>>Minimal UI</option>
@@ -1123,7 +1123,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">Orientation</th>
                                         <td>
-                                            <select name="twitch_mobile_settings[orientation]">
+                                            <select name="spswifter_twitch_mobile_settings[orientation]">
                                                 <option value="any" <?php selected($this->mobile_settings['orientation'], 'any'); ?>>Any</option>
                                                 <option value="portrait" <?php selected($this->mobile_settings['orientation'], 'portrait'); ?>>Portrait</option>
                                                 <option value="landscape" <?php selected($this->mobile_settings['orientation'], 'landscape'); ?>>Landscape</option>
@@ -1134,7 +1134,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">Cache Strategy</th>
                                         <td>
-                                            <select name="twitch_mobile_settings[cache_strategy]">
+                                            <select name="spswifter_twitch_mobile_settings[cache_strategy]">
                                                 <option value="network-first" <?php selected($this->mobile_settings['cache_strategy'], 'network-first'); ?>>Network First</option>
                                                 <option value="cache-first" <?php selected($this->mobile_settings['cache_strategy'], 'cache-first'); ?>>Cache First</option>
                                                 <option value="stale-while-revalidate" <?php selected($this->mobile_settings['cache_strategy'], 'stale-while-revalidate'); ?>>Stale While Revalidate</option>
@@ -1152,7 +1152,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">Enable Push Notifications</th>
                                         <td>
-                                            <input type="checkbox" name="twitch_mobile_settings[push_enabled]" 
+                                            <input type="checkbox" name="spswifter_twitch_mobile_settings[push_enabled]" 
                                                    <?php checked($this->mobile_settings['push_enabled'], true); ?> />
                                             <label>Enable push notifications</label>
                                         </td>
@@ -1162,11 +1162,11 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                         <th scope="row">VAPID Keys</th>
                                         <td>
                                             <p>Configure your VAPID keys for push notifications:</p>
-                                            <input type="text" name="twitch_mobile_settings[vapid_public]" 
+                                            <input type="text" name="spswifter_twitch_mobile_settings[vapid_public]" 
                                                    value="<?php echo esc_attr($this->mobile_settings['vapid_public'] ?? ''); ?>" 
                                                    class="regular-text" placeholder="Public Key" />
                                             <br><br>
-                                            <input type="text" name="twitch_mobile_settings[vapid_private]" 
+                                            <input type="text" name="spswifter_twitch_mobile_settings[vapid_private]" 
                                                    value="<?php echo esc_attr($this->mobile_settings['vapid_private'] ?? ''); ?>" 
                                                    class="regular-text" placeholder="Private Key" />
                                             <p class="description">Generate VAPID keys for secure push notifications</p>
@@ -1176,7 +1176,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">Stream Start Notifications</th>
                                         <td>
-                                            <input type="checkbox" name="twitch_mobile_settings[notify_stream_start]" 
+                                            <input type="checkbox" name="spswifter_twitch_mobile_settings[notify_stream_start]" 
                                                    <?php checked($this->mobile_settings['notify_stream_start'], true); ?> />
                                             <label>Send notifications when streams start</label>
                                         </td>
@@ -1185,7 +1185,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
                                     <tr>
                                         <th scope="row">Follower Notifications</th>
                                         <td>
-                                            <input type="checkbox" name="twitch_mobile_settings[notify_followers]" 
+                                            <input type="checkbox" name="spswifter_twitch_mobile_settings[notify_followers]" 
                                                    <?php checked($this->mobile_settings['notify_followers'], false); ?> />
                                             <label>Send notifications for new followers</label>
                                         </td>
@@ -1250,7 +1250,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
         
         wp_localize_script('spswifter-twitch-mobile-app', 'twitchMobileApp', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('twitch_mobile_app_nonce'),
+            'nonce' => wp_create_nonce('spswifter_twitch_mobile_app_nonce'),
             'pwaEnabled' => $this->mobile_settings['enable_pwa'] ?? true,
             'pushEnabled' => $this->mobile_settings['push_enabled'] ?? true,
             'isMobile' => $this->is_mobile_device(),
@@ -1272,7 +1272,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
      * Helper methods
      */
     private function get_mobile_settings() {
-        return get_option('twitch_mobile_settings', array(
+        return get_option('spswifter_twitch_mobile_settings', array(
             'enabled' => true,
             'app_name' => 'Twitch Mobile',
             'app_icon' => '',
@@ -1411,7 +1411,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
     
     private function save_push_subscription($user_id, $subscription) {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_push_subscriptions';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_push_subscriptions';
         
         $data = array(
             'user_id' => $user_id,
@@ -1451,7 +1451,7 @@ class SPSWIFTER_Twitch_Mobile_App_Integration {
     
     private function send_push_notification($title, $body, $data = array()) {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_push_subscriptions';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_push_subscriptions';
         
         $subscriptions = $wpdb->get_results("SELECT * FROM $table_name WHERE active = 1");
         

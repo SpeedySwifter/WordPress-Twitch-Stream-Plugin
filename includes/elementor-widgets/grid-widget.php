@@ -7,14 +7,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
+class SPSWIFTER_Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
 
     public function get_name() {
         return 'twitch-grid';
     }
 
     public function get_title() {
-        return __('Twitch Stream Grid', 'wp-twitch-stream');
+        return __('Twitch Stream Grid', 'speedyswifter-twitch');
     }
 
     public function get_icon() {
@@ -30,7 +30,7 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'content_section',
             array(
-                'label' => __('Grid Einstellungen', 'wp-twitch-stream'),
+                'label' => __('Grid Einstellungen', 'speedyswifter-twitch'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             )
         );
@@ -38,17 +38,17 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'channels',
             array(
-                'label' => __('Twitch Kanäle', 'wp-twitch-stream'),
+                'label' => __('Twitch Kanäle', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'placeholder' => __('shroud, ninja, pokimane', 'wp-twitch-stream'),
-                'description' => __('Kommagetrennte Liste von Twitch-Kanälen', 'wp-twitch-stream'),
+                'placeholder' => __('shroud, ninja, pokimane', 'speedyswifter-twitch'),
+                'description' => __('Kommagetrennte Liste von Twitch-Kanälen', 'speedyswifter-twitch'),
             )
         );
 
         $this->add_control(
             'columns',
             array(
-                'label' => __('Spalten', 'wp-twitch-stream'),
+                'label' => __('Spalten', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'default' => 3,
                 'min' => 1,
@@ -59,13 +59,13 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'layout',
             array(
-                'label' => __('Layout', 'wp-twitch-stream'),
+                'label' => __('Layout', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'grid',
                 'options' => array(
-                    'grid' => __('Grid', 'wp-twitch-stream'),
-                    'list' => __('Liste', 'wp-twitch-stream'),
-                    'masonry' => __('Masonry', 'wp-twitch-stream'),
+                    'grid' => __('Grid', 'speedyswifter-twitch'),
+                    'list' => __('Liste', 'speedyswifter-twitch'),
+                    'masonry' => __('Masonry', 'speedyswifter-twitch'),
                 ),
             )
         );
@@ -73,21 +73,21 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'gap',
             array(
-                'label' => __('Abstand', 'wp-twitch-stream'),
+                'label' => __('Abstand', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => '20px',
-                'placeholder' => __('20px', 'wp-twitch-stream'),
+                'placeholder' => __('20px', 'speedyswifter-twitch'),
             )
         );
 
         $this->add_control(
             'responsive',
             array(
-                'label' => __('Responsive', 'wp-twitch-stream'),
+                'label' => __('Responsive', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => __('Ja', 'wp-twitch-stream'),
-                'label_off' => __('Nein', 'wp-twitch-stream'),
+                'label_on' => __('Ja', 'speedyswifter-twitch'),
+                'label_off' => __('Nein', 'speedyswifter-twitch'),
             )
         );
 
@@ -97,7 +97,7 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'display_section',
             array(
-                'label' => __('Anzeige-Optionen', 'wp-twitch-stream'),
+                'label' => __('Anzeige-Optionen', 'speedyswifter-twitch'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             )
         );
@@ -105,29 +105,29 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_player',
             array(
-                'label' => __('Player anzeigen', 'wp-twitch-stream'),
+                'label' => __('Player anzeigen', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => __('Ja', 'wp-twitch-stream'),
-                'label_off' => __('Nein', 'wp-twitch-stream'),
+                'label_on' => __('Ja', 'speedyswifter-twitch'),
+                'label_off' => __('Nein', 'speedyswifter-twitch'),
             )
         );
 
         $this->add_control(
             'show_info',
             array(
-                'label' => __('Informationen anzeigen', 'wp-twitch-stream'),
+                'label' => __('Informationen anzeigen', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => __('Ja', 'wp-twitch-stream'),
-                'label_off' => __('Nein', 'wp-twitch-stream'),
+                'label_on' => __('Ja', 'speedyswifter-twitch'),
+                'label_off' => __('Nein', 'speedyswifter-twitch'),
             )
         );
 
         $this->add_control(
             'player_height',
             array(
-                'label' => __('Player Höhe', 'wp-twitch-stream'),
+                'label' => __('Player Höhe', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'default' => 200,
                 'min' => 100,
@@ -141,13 +141,13 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'info_layout',
             array(
-                'label' => __('Info Layout', 'wp-twitch-stream'),
+                'label' => __('Info Layout', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'compact',
                 'options' => array(
-                    'horizontal' => __('Horizontal', 'wp-twitch-stream'),
-                    'vertical' => __('Vertikal', 'wp-twitch-stream'),
-                    'compact' => __('Kompakt', 'wp-twitch-stream'),
+                    'horizontal' => __('Horizontal', 'speedyswifter-twitch'),
+                    'vertical' => __('Vertikal', 'speedyswifter-twitch'),
+                    'compact' => __('Kompakt', 'speedyswifter-twitch'),
                 ),
                 'condition' => array(
                     'show_info' => 'yes',
@@ -161,7 +161,7 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style_section',
             array(
-                'label' => __('Grid Styling', 'wp-twitch-stream'),
+                'label' => __('Grid Styling', 'speedyswifter-twitch'),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             )
         );
@@ -170,7 +170,7 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Border::get_type(),
             array(
                 'name' => 'item_border',
-                'label' => __('Item Rahmen', 'wp-twitch-stream'),
+                'label' => __('Item Rahmen', 'speedyswifter-twitch'),
                 'selector' => '{{WRAPPER}} .twitch-grid-item',
             )
         );
@@ -178,7 +178,7 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'item_border_radius',
             array(
-                'label' => __('Item Eckradius', 'wp-twitch-stream'),
+                'label' => __('Item Eckradius', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => array('px', '%'),
                 'range' => array(
@@ -205,7 +205,7 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Box_Shadow::get_type(),
             array(
                 'name' => 'item_box_shadow',
-                'label' => __('Item Schatten', 'wp-twitch-stream'),
+                'label' => __('Item Schatten', 'speedyswifter-twitch'),
                 'selector' => '{{WRAPPER}} .twitch-grid-item',
             )
         );
@@ -213,7 +213,7 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'grid_margin',
             array(
-                'label' => __('Grid Abstand', 'wp-twitch-stream'),
+                'label' => __('Grid Abstand', 'speedyswifter-twitch'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => array('px', 'em', '%'),
                 'selectors' => array(
@@ -230,7 +230,7 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
 
         if (empty($settings['channels'])) {
             echo '<div class="elementor-alert elementor-alert-warning">' . 
-                 __('Bitte gib mindestens einen Twitch-Kanal an.', 'wp-twitch-stream') . 
+                 __('Bitte gib mindestens einen Twitch-Kanal an.', 'speedyswifter-twitch') . 
                  '</div>';
             return;
         }
@@ -246,14 +246,14 @@ class Elementor_Twitch_Grid_Widget extends \Elementor\Widget_Base {
             'show_info' => $settings['show_info'] === 'yes' ? 'true' : 'false',
         );
 
-        echo wp_twitch_streams_grid_shortcode($grid_atts);
+        echo spswifter_spswifter_twitch_streams_grid_shortcode($grid_atts);
     }
 
     protected function _content_template() {
         ?>
         <#
         if (settings.channels) {
-            var gridShortcode = '[twitch_streams_grid channels="' + settings.channels + '" columns="' + settings.columns + '" layout="' + settings.layout + '" gap="' + settings.gap + '" responsive="' + (settings.responsive ? 'true' : 'false') + '" show_player="' + (settings.show_player ? 'true' : 'false') + '" show_info="' + (settings.show_info ? 'true' : 'false') + '"]';
+            var gridShortcode = '[spswifter_twitch_streams_grid channels="' + settings.channels + '" columns="' + settings.columns + '" layout="' + settings.layout + '" gap="' + settings.gap + '" responsive="' + (settings.responsive ? 'true' : 'false') + '" show_player="' + (settings.show_player ? 'true' : 'false') + '" show_info="' + (settings.show_info ? 'true' : 'false') + '"]';
             print(gridShortcode);
         } else {
             print('<div class="elementor-alert elementor-alert-warning">Bitte gib mindestens einen Twitch-Kanal an.</div>');

@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Multi_Language_Support {
+class SPSWIFTER_Twitch_Multi_Language_Support {
     
     private $supported_languages = array(
         'en' => 'English',
@@ -36,8 +36,8 @@ class WP_Twitch_Multi_Language_Support {
         add_action('plugins_loaded', array($this, 'init_language_support'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_language_scripts'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_language_scripts'));
-        add_action('wp_ajax_twitch_language_switch', array($this, 'handle_language_switch'));
-        add_action('wp_ajax_nopriv_twitch_language_switch', array($this, 'handle_language_switch'));
+        add_action('wp_ajax_spswifter_twitch_language_switch', array($this, 'handle_language_switch'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_language_switch', array($this, 'handle_language_switch'));
         add_action('admin_menu', array($this, 'add_language_settings_menu'));
         add_filter('plugin_locale', array($this, 'set_plugin_locale'), 10, 2);
         add_filter('widget_text', array($this, 'translate_widget_text'), 10, 3);
@@ -73,14 +73,14 @@ class WP_Twitch_Multi_Language_Support {
      * Load textdomain
      */
     public function load_textdomain() {
-        $domain = 'wp-twitch-stream';
+        $domain = 'speedyswifter-twitch';
         $locale = $this->get_locale();
         
         // Traditional WordPress language files
         load_plugin_textdomain($domain, false, dirname(plugin_basename(__FILE__)) . '/languages');
         
         // Load our custom translations
-        $mofile = WP_TWITCH_PLUGIN_DIR . 'languages/wp-twitch-stream-' . $locale . '.mo';
+        $mofile = WP_TWITCH_PLUGIN_DIR . 'languages/spswifter-twitch-' . $locale . '.mo';
         if (file_exists($mofile)) {
             load_textdomain($domain, $mofile);
         }
@@ -99,7 +99,7 @@ class WP_Twitch_Multi_Language_Support {
         
         // 2. User preference (if logged in)
         if (is_user_logged_in()) {
-            $user_lang = get_user_meta(get_current_user_id(), 'twitch_language', true);
+            $user_lang = get_user_meta(get_current_user_id(), 'spswifter_twitch_language', true);
             if ($user_lang && isset($this->supported_languages[$user_lang])) {
                 return $user_lang;
             }
@@ -508,10 +508,10 @@ class WP_Twitch_Multi_Language_Support {
      * Register language shortcodes
      */
     public function register_language_shortcodes() {
-        add_shortcode('twitch_language_switcher', array($this, 'render_language_switcher'));
-        add_shortcode('twitch_current_language', array($this, 'render_current_language'));
-        add_shortcode('twitch_translate', array($this, 'render_translate_shortcode'));
-        add_shortcode('twitch_language_flag', array($this, 'render_language_flag'));
+        add_shortcode('spswifter_twitch_language_switcher', array($this, 'render_language_switcher'));
+        add_shortcode('spswifter_twitch_current_language', array($this, 'render_current_language'));
+        add_shortcode('spswifter_twitch_translate', array($this, 'render_translate_shortcode'));
+        add_shortcode('spswifter_twitch_language_flag', array($this, 'render_language_flag'));
     }
     
     /**
@@ -640,7 +640,7 @@ class WP_Twitch_Multi_Language_Support {
      * Handle language switch
      */
     public function handle_language_switch() {
-        check_ajax_referer('twitch_language_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_language_nonce', 'nonce');
         
         $language = sanitize_text_field($_POST['language'] ?? '');
         
@@ -650,14 +650,14 @@ class WP_Twitch_Multi_Language_Support {
         
         // Save user preference if logged in
         if (is_user_logged_in()) {
-            update_user_meta(get_current_user_id(), 'twitch_language', $language);
+            update_user_meta(get_current_user_id(), 'spswifter_twitch_language', $language);
         }
         
         // Save to session
-        $_SESSION['twitch_language'] = $language;
+        $_SESSION['spswifter_twitch_language'] = $language;
         
         // Set cookie
-        setcookie('twitch_language', $language, time() + (86400 * 30), '/');
+        setcookie('spswifter_twitch_language', $language, time() + (86400 * 30), '/');
         
         wp_send_json_success(array('language' => $language));
     }
@@ -685,14 +685,14 @@ class WP_Twitch_Multi_Language_Support {
             <h1 class="wp-heading-inline">Twitch Language Settings</h1>
             
             <form method="post" action="options.php">
-                <?php settings_fields('twitch_language_settings'); ?>
-                <?php do_settings_sections('twitch_language_settings'); ?>
+                <?php settings_fields('spswifter_twitch_language_settings'); ?>
+                <?php do_settings_sections('spswifter_twitch_language_settings'); ?>
                 
                 <table class="form-table">
                     <tr>
                         <th scope="row">Default Language</th>
                         <td>
-                            <select name="twitch_language_settings[default_language]">
+                            <select name="spswifter_twitch_language_settings[default_language]">
                                 <?php foreach ($this->supported_languages as $code => $name): ?>
                                     <option value="<?php echo esc_attr($code); ?>" <?php selected($this->language_settings['default_language'], $code); ?>>
                                         <?php echo $this->get_language_flag($code); ?> <?php echo esc_html($name); ?>
@@ -705,7 +705,7 @@ class WP_Twitch_Multi_Language_Support {
                     <tr>
                         <th scope="row">Enable Language Switching</th>
                         <td>
-                            <input type="checkbox" name="twitch_language_settings[enable_switching]" 
+                            <input type="checkbox" name="spswifter_twitch_language_settings[enable_switching]" 
                                    <?php checked($this->language_settings['enable_switching'], true); ?> />
                             <label>Allow users to switch languages</label>
                         </td>
@@ -714,7 +714,7 @@ class WP_Twitch_Multi_Language_Support {
                     <tr>
                         <th scope="row">Show Language Switcher</th>
                         <td>
-                            <input type="checkbox" name="twitch_language_settings[show_switcher]" 
+                            <input type="checkbox" name="spswifter_twitch_language_settings[show_switcher]" 
                                    <?php checked($this->language_settings['show_switcher'], true); ?> />
                             <label>Show language switcher in widgets</label>
                         </td>
@@ -723,7 +723,7 @@ class WP_Twitch_Multi_Language_Support {
                     <tr>
                         <th scope="row">Auto-detect Language</th>
                         <td>
-                            <input type="checkbox" name="twitch_language_settings[auto_detect]" 
+                            <input type="checkbox" name="spswifter_twitch_language_settings[auto_detect]" 
                                    <?php checked($this->language_settings['auto_detect'], true); ?> />
                             <label>Detect language from browser settings</label>
                         </td>
@@ -732,7 +732,7 @@ class WP_Twitch_Multi_Language_Support {
                     <tr>
                         <th scope="row">URL Language Parameter</th>
                         <td>
-                            <input type="checkbox" name="twitch_language_settings[url_parameter]" 
+                            <input type="checkbox" name="spswifter_twitch_language_settings[url_parameter]" 
                                    <?php checked($this->language_settings['url_parameter'], true); ?> />
                             <label>Allow language switching via URL parameter (?lang=de)</label>
                         </td>
@@ -744,7 +744,7 @@ class WP_Twitch_Multi_Language_Support {
                             <div class="twitch-language-checkboxes">
                                 <?php foreach ($this->supported_languages as $code => $name): ?>
                                     <label>
-                                        <input type="checkbox" name="twitch_language_settings[enabled_languages][]" 
+                                        <input type="checkbox" name="spswifter_twitch_language_settings[enabled_languages][]" 
                                                value="<?php echo esc_attr($code); ?>"
                                                <?php checked(in_array($code, $this->language_settings['enabled_languages'] ?? array_keys($this->supported_languages))); ?> />
                                         <?php echo $this->get_language_flag($code); ?> <?php echo esc_html($name); ?>
@@ -766,7 +766,7 @@ class WP_Twitch_Multi_Language_Support {
      * Get language settings
      */
     private function get_language_settings() {
-        return get_option('twitch_language_settings', array(
+        return get_option('spswifter_twitch_language_settings', array(
             'default_language' => 'en',
             'enable_switching' => true,
             'show_switcher' => true,
@@ -797,7 +797,7 @@ class WP_Twitch_Multi_Language_Support {
         
         wp_localize_script('twitch-language-support', 'twitchLanguageSupport', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('twitch_language_nonce'),
+            'nonce' => wp_create_nonce('spswifter_twitch_language_nonce'),
             'currentLanguage' => $this->current_language,
             'supportedLanguages' => $this->supported_languages,
             'enableSwitching' => $this->language_settings['enable_switching'] ?? true,
@@ -840,10 +840,10 @@ class WP_Twitch_Multi_Language_Support {
             $language = sanitize_text_field($_GET['lang']);
             
             // Save to session
-            $_SESSION['twitch_language'] = $language;
+            $_SESSION['spswifter_twitch_language'] = $language;
             
             // Set cookie
-            setcookie('twitch_language', $language, time() + (86400 * 30), '/');
+            setcookie('spswifter_twitch_language', $language, time() + (86400 * 30), '/');
             
             // Update current language
             $this->current_language = $language;
@@ -854,7 +854,7 @@ class WP_Twitch_Multi_Language_Support {
      * Set plugin locale
      */
     public function set_plugin_locale($locale, $domain) {
-        if ($domain === 'wp-twitch-stream') {
+        if ($domain === 'speedyswifter-twitch') {
             return $this->get_locale();
         }
         return $locale;
@@ -909,4 +909,4 @@ class WP_Twitch_Multi_Language_Support {
 }
 
 // Initialize multi-language support
-new WP_Twitch_Multi_Language_Support();
+new SPSWIFTER_Twitch_Multi_Language_Support();

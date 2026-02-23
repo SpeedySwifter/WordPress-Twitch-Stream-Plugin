@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Cookie_Integration {
+class SPSWIFTER_Twitch_Cookie_Integration {
     
     private $supported_plugins = array(
         'borlabs' => false,
@@ -512,14 +512,14 @@ class WP_Twitch_Cookie_Integration {
 }
 
 // Initialisierung
-function wp_twitch_cookie_integration_init() {
-    new WP_Twitch_Cookie_Integration();
+function spswifter_spswifter_twitch_cookie_integration_init() {
+    new SPSWIFTER_Twitch_Cookie_Integration();
 }
-add_action('init', 'wp_twitch_cookie_integration_init');
+add_action('init', 'spswifter_spswifter_twitch_cookie_integration_init');
 
 // Admin Notice für Cookie-Integration
-function wp_twitch_cookie_admin_notice() {
-    $integration = new WP_Twitch_Cookie_Integration();
+function spswifter_spswifter_twitch_cookie_admin_notice() {
+    $integration = new SPSWIFTER_Twitch_Cookie_Integration();
     $supported_plugins = $integration->get_supported_plugins();
     $active_plugins = array_filter($supported_plugins);
     
@@ -527,13 +527,13 @@ function wp_twitch_cookie_admin_notice() {
         ?>
         <div class="notice notice-info is-dismissible">
             <p>
-                <?php _e('🍪 Twitch Stream Plugin: Cookie-Integration aktiv für ', 'wp-twitch-stream'); ?>
+                <?php esc_html_e('🍪 SpeedySwifter Twitch: Cookie-Integration aktiv für ', 'speedyswifter-twitch'); ?>
                 <strong><?php echo implode(', ', array_keys($active_plugins)); ?></strong>
-                <?php _e(' - DSGVO-konform!', 'wp-twitch-stream'); ?>
+                <?php esc_html_e(' - DSGVO-konform!', 'speedyswifter-twitch'); ?>
             </p>
         </div>
         <?php
     }
 }
-add_action('admin_notices', 'wp_twitch_cookie_admin_notice');
+add_action('admin_notices', 'spswifter_spswifter_twitch_cookie_admin_notice');
 ?>

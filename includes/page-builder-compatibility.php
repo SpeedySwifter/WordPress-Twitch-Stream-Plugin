@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Page_Builder_Compatibility {
+class SPSWIFTER_Twitch_Page_Builder_Compatibility {
     
     private $supported_builders = array(
         'elementor' => false,
@@ -105,13 +105,13 @@ class WP_Twitch_Page_Builder_Compatibility {
      */
     public function add_universal_shortcodes() {
         // Universal Twitch Stream Shortcode
-        add_shortcode('twitch_stream_universal', array($this, 'render_universal_stream'));
+        add_shortcode('spswifter_twitch_stream_universal', array($this, 'render_universal_stream'));
         
         // Universal Twitch Grid Shortcode
-        add_shortcode('twitch_grid_universal', array($this, 'render_universal_grid'));
+        add_shortcode('spswifter_twitch_grid_universal', array($this, 'render_universal_grid'));
         
         // Universal Twitch Info Shortcode
-        add_shortcode('twitch_info_universal', array($this, 'render_universal_info'));
+        add_shortcode('spswifter_twitch_info_universal', array($this, 'render_universal_info'));
     }
     
     /**
@@ -119,10 +119,10 @@ class WP_Twitch_Page_Builder_Compatibility {
      */
     public function register_universal_widgets() {
         // WordPress Widget für Twitch Stream
-        register_widget('WP_Twitch_Stream_Widget');
+        register_widget('SPSWIFTER_Twitch_Stream_Widget');
         
         // WordPress Widget für Twitch Grid
-        register_widget('WP_Twitch_Grid_Widget');
+        register_widget('SPSWIFTER_Twitch_Grid_Widget');
     }
     
     /**
@@ -139,7 +139,7 @@ class WP_Twitch_Page_Builder_Compatibility {
             'builder' => $this->get_current_builder(),
         ), $atts);
         
-        return wp_twitch_stream_shortcode($atts);
+        return spswifter_spswifter_twitch_stream_shortcode($atts);
     }
     
     /**
@@ -157,7 +157,7 @@ class WP_Twitch_Page_Builder_Compatibility {
             'builder' => $this->get_current_builder(),
         ), $atts);
         
-        return wp_twitch_streams_grid_shortcode($atts);
+        return spswifter_spswifter_twitch_streams_grid_shortcode($atts);
     }
     
     /**
@@ -175,7 +175,7 @@ class WP_Twitch_Page_Builder_Compatibility {
             'builder' => $this->get_current_builder(),
         ), $atts);
         
-        return wp_twitch_stream_info_shortcode($atts);
+        return spswifter_spswifter_twitch_stream_info_shortcode($atts);
     }
     
     /**
@@ -316,12 +316,12 @@ class WP_Twitch_Page_Builder_Compatibility {
             wp_localize_script('twitch-page-builder-admin', 'twitchBuilderData', array(
                 'supportedBuilders' => $this->supported_builders,
                 'currentBuilder' => $this->get_current_builder(),
-                'apiConnected' => !empty(get_option('twitch_client_id')) && !empty(get_option('twitch_client_secret')),
+                'apiConnected' => !empty(get_option('spswifter_twitch_client_id')) && !empty(get_option('spswifter_twitch_client_secret')),
                 'adminUrl' => admin_url('options-general.php?page=twitch-api-settings'),
                 'strings' => array(
-                    'apiNotConnected' => __('Twitch API nicht verbunden', 'wp-twitch-stream'),
-                    'goToSettings' => __('API-Einstellungen', 'wp-twitch-stream'),
-                    'builderNotSupported' => __('Builder wird nicht unterstützt', 'wp-twitch-stream'),
+                    'apiNotConnected' => __('Twitch API nicht verbunden', 'speedyswifter-twitch'),
+                    'goToSettings' => __('API-Einstellungen', 'speedyswifter-twitch'),
+                    'builderNotSupported' => __('Builder wird nicht unterstützt', 'speedyswifter-twitch'),
                 ),
             ));
         }
@@ -363,13 +363,13 @@ class WP_Twitch_Page_Builder_Compatibility {
 }
 
 // WordPress Widgets für universelle Unterstützung
-class WP_Twitch_Stream_Widget extends WP_Widget {
+class SPSWIFTER_Twitch_Stream_Widget extends WP_Widget {
     
     public function __construct() {
         parent::__construct(
-            'wp_twitch_stream_widget',
-            __('Twitch Stream', 'wp-twitch-stream'),
-            array('description' => __('Zeigt einen Twitch Stream an', 'wp-twitch-stream'))
+            'spswifter_spswifter_twitch_stream_widget',
+            __('Twitch Stream', 'speedyswifter-twitch'),
+            array('description' => __('Zeigt einen Twitch Stream an', 'speedyswifter-twitch'))
         );
     }
     
@@ -394,7 +394,7 @@ class WP_Twitch_Stream_Widget extends WP_Widget {
             'muted' => $muted,
         );
         
-        echo wp_twitch_stream_shortcode($stream_atts);
+        echo spswifter_spswifter_twitch_stream_shortcode($stream_atts);
         echo $args['after_widget'];
     }
     
@@ -407,33 +407,33 @@ class WP_Twitch_Stream_Widget extends WP_Widget {
         $muted = !empty($instance['muted']) ? $instance['muted'] : 'true';
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Titel:', 'wp-twitch-stream'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Titel:', 'speedyswifter-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('channel'); ?>"><?php _e('Kanal:', 'wp-twitch-stream'); ?></label>
+            <label for="<?php echo $this->get_field_id('channel'); ?>"><?php esc_html_e('Kanal:', 'speedyswifter-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('channel'); ?>" name="<?php echo $this->get_field_name('channel'); ?>" type="text" value="<?php echo esc_attr($channel); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('width'); ?>"><?php _e('Breite:', 'wp-twitch-stream'); ?></label>
+            <label for="<?php echo $this->get_field_id('width'); ?>"><?php esc_html_e('Breite:', 'speedyswifter-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name('width'); ?>" type="text" value="<?php echo esc_attr($width); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('height'); ?>"><?php _e('Höhe:', 'wp-twitch-stream'); ?></label>
+            <label for="<?php echo $this->get_field_id('height'); ?>"><?php esc_html_e('Höhe:', 'speedyswifter-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" type="number" value="<?php echo esc_attr($height); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('autoplay'); ?>"><?php _e('Autoplay:', 'wp-twitch-stream'); ?></label>
+            <label for="<?php echo $this->get_field_id('autoplay'); ?>"><?php esc_html_e('Autoplay:', 'speedyswifter-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('autoplay'); ?>" name="<?php echo $this->get_field_name('autoplay'); ?>">
-                <option value="true" <?php selected($autoplay, 'true'); ?>><?php _e('Ja', 'wp-twitch-stream'); ?></option>
-                <option value="false" <?php selected($autoplay, 'false'); ?>><?php _e('Nein', 'wp-twitch-stream'); ?></option>
+                <option value="true" <?php selected($autoplay, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-twitch'); ?></option>
+                <option value="false" <?php selected($autoplay, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-twitch'); ?></option>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('muted'); ?>"><?php _e('Stumm:', 'wp-twitch-stream'); ?></label>
+            <label for="<?php echo $this->get_field_id('muted'); ?>"><?php esc_html_e('Stumm:', 'speedyswifter-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('muted'); ?>" name="<?php echo $this->get_field_name('muted'); ?>">
-                <option value="true" <?php selected($muted, 'true'); ?>><?php _e('Ja', 'wp-twitch-stream'); ?></option>
-                <option value="false" <?php selected($muted, 'false'); ?>><?php _e('Nein', 'wp-twitch-stream'); ?></option>
+                <option value="true" <?php selected($muted, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-twitch'); ?></option>
+                <option value="false" <?php selected($muted, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-twitch'); ?></option>
             </select>
         </p>
         <?php
@@ -452,13 +452,13 @@ class WP_Twitch_Stream_Widget extends WP_Widget {
     }
 }
 
-class WP_Twitch_Grid_Widget extends WP_Widget {
+class SPSWIFTER_Twitch_Grid_Widget extends WP_Widget {
     
     public function __construct() {
         parent::__construct(
-            'wp_twitch_grid_widget',
-            __('Twitch Stream Grid', 'wp-twitch-stream'),
-            array('description' => __('Zeigt mehrere Twitch Streams im Grid an', 'wp-twitch-stream'))
+            'spswifter_spswifter_twitch_grid_widget',
+            __('Twitch Stream Grid', 'speedyswifter-twitch'),
+            array('description' => __('Zeigt mehrere Twitch Streams im Grid an', 'speedyswifter-twitch'))
         );
     }
     
@@ -481,7 +481,7 @@ class WP_Twitch_Grid_Widget extends WP_Widget {
             'show_info' => 'true',
         );
         
-        echo wp_twitch_streams_grid_shortcode($grid_atts);
+        echo spswifter_spswifter_twitch_streams_grid_shortcode($grid_atts);
         echo $args['after_widget'];
     }
     
@@ -492,23 +492,23 @@ class WP_Twitch_Grid_Widget extends WP_Widget {
         $layout = !empty($instance['layout']) ? $instance['layout'] : 'grid';
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Titel:', 'wp-twitch-stream'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Titel:', 'speedyswifter-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('channels'); ?>"><?php _e('Kanäle:', 'wp-twitch-stream'); ?></label>
+            <label for="<?php echo $this->get_field_id('channels'); ?>"><?php esc_html_e('Kanäle:', 'speedyswifter-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('channels'); ?>" name="<?php echo $this->get_field_name('channels'); ?>" type="text" value="<?php echo esc_attr($channels); ?>">
-            <small><?php _e('Kommagetrennt: kanal1, kanal2, kanal3', 'wp-twitch-stream'); ?></small>
+            <small><?php esc_html_e('Kommagetrennt: kanal1, kanal2, kanal3', 'speedyswifter-twitch'); ?></small>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('columns'); ?>"><?php _e('Spalten:', 'wp-twitch-stream'); ?></label>
+            <label for="<?php echo $this->get_field_id('columns'); ?>"><?php esc_html_e('Spalten:', 'speedyswifter-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('columns'); ?>" name="<?php echo $this->get_field_name('columns'); ?>" type="number" value="<?php echo esc_attr($columns); ?>" min="1" max="4">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('layout'); ?>"><?php _e('Layout:', 'wp-twitch-stream'); ?></label>
+            <label for="<?php echo $this->get_field_id('layout'); ?>"><?php esc_html_e('Layout:', 'speedyswifter-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('layout'); ?>" name="<?php echo $this->get_field_name('layout'); ?>">
-                <option value="grid" <?php selected($layout, 'grid'); ?>><?php _e('Grid', 'wp-twitch-stream'); ?></option>
-                <option value="list" <?php selected($layout, 'list'); ?>><?php _e('Liste', 'wp-twitch-stream'); ?></option>
+                <option value="grid" <?php selected($layout, 'grid'); ?>><?php esc_html_e('Grid', 'speedyswifter-twitch'); ?></option>
+                <option value="list" <?php selected($layout, 'list'); ?>><?php esc_html_e('Liste', 'speedyswifter-twitch'); ?></option>
             </select>
         </p>
         <?php
@@ -526,14 +526,14 @@ class WP_Twitch_Grid_Widget extends WP_Widget {
 }
 
 // Initialisierung
-function wp_twitch_page_builder_compatibility_init() {
-    new WP_Twitch_Page_Builder_Compatibility();
+function spswifter_spswifter_twitch_page_builder_compatibility_init() {
+    new SPSWIFTER_Twitch_Page_Builder_Compatibility();
 }
-add_action('init', 'wp_twitch_page_builder_compatibility_init');
+add_action('init', 'spswifter_spswifter_twitch_page_builder_compatibility_init');
 
 // Admin Notice für Page Builder Compatibility
-function wp_twitch_page_builder_admin_notice() {
-    $compatibility = new WP_Twitch_Page_Builder_Compatibility();
+function spswifter_spswifter_twitch_page_builder_admin_notice() {
+    $compatibility = new SPSWIFTER_Twitch_Page_Builder_Compatibility();
     $supported_builders = $compatibility->get_supported_builders();
     $active_builders = array_filter($supported_builders);
     
@@ -541,16 +541,16 @@ function wp_twitch_page_builder_admin_notice() {
         ?>
         <div class="notice notice-info is-dismissible">
             <p>
-                <?php _e('🎮 Twitch Stream Plugin: Kompatibel mit ', 'wp-twitch-stream'); ?>
+                <?php esc_html_e('🎮 SpeedySwifter Twitch: Kompatibel mit ', 'speedyswifter-twitch'); ?>
                 <strong><?php echo implode(', ', array_keys($active_builders)); ?></strong>
-                <?php _e('Page Buildern!', 'wp-twitch-stream'); ?>
+                <?php esc_html_e('Page Buildern!', 'speedyswifter-twitch'); ?>
                 <a href="<?php echo admin_url('options-general.php?page=twitch-api-settings'); ?>">
-                    <?php _e('API-Einstellungen konfigurieren', 'wp-twitch-stream'); ?>
+                    <?php esc_html_e('API-Einstellungen konfigurieren', 'speedyswifter-twitch'); ?>
                 </a>
             </p>
         </div>
         <?php
     }
 }
-add_action('admin_notices', 'wp_twitch_page_builder_admin_notice');
+add_action('admin_notices', 'spswifter_spswifter_twitch_page_builder_admin_notice');
 ?>

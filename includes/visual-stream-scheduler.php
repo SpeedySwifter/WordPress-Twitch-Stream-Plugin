@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Visual_Stream_Scheduler {
+class SPSWIFTER_Twitch_Visual_Stream_Scheduler {
     
     private $scheduler_settings;
     private $stream_schedules;
@@ -25,17 +25,17 @@ class WP_Twitch_Visual_Stream_Scheduler {
         
         add_action('init', array($this, 'init_stream_scheduler'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_stream_scheduler_scripts'));
-        add_action('wp_ajax_twitch_stream_scheduler', array($this, 'handle_stream_scheduler_ajax'));
-        add_action('wp_ajax_nopriv_twitch_stream_scheduler', array($this, 'handle_stream_scheduler_ajax'));
+        add_action('wp_ajax_spswifter_twitch_stream_scheduler', array($this, 'handle_stream_scheduler_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_stream_scheduler', array($this, 'handle_stream_scheduler_ajax'));
         add_action('admin_menu', array($this, 'add_stream_scheduler_menu'));
         
         // Register shortcodes
         add_action('init', array($this, 'register_scheduler_shortcodes'));
         
         // Schedule cleanup
-        add_action('twitch_scheduler_cleanup', array($this, 'cleanup_old_schedules'));
-        if (!wp_next_scheduled('twitch_scheduler_cleanup')) {
-            wp_schedule_event(time(), 'daily', 'twitch_scheduler_cleanup');
+        add_action('spswifter_twitch_scheduler_cleanup', array($this, 'cleanup_old_schedules'));
+        if (!wp_next_scheduled('spswifter_twitch_scheduler_cleanup')) {
+            wp_schedule_event(time(), 'daily', 'spswifter_twitch_scheduler_cleanup');
         }
     }
     
@@ -56,7 +56,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
         $charset_collate = $wpdb->get_charset_collate();
         
         // Stream schedules table
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         $sql = "CREATE TABLE $table_name (
             id int(11) NOT NULL AUTO_INCREMENT,
             channel varchar(100) NOT NULL,
@@ -72,7 +72,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
             recurring_pattern varchar(50),
             recurring_end_date datetime,
             status enum('scheduled','live','completed','cancelled') DEFAULT 'scheduled',
-            twitch_stream_id varchar(50),
+            spswifter_twitch_stream_id varchar(50),
             thumbnail_url text,
             vod_url text,
             created_by bigint(20) unsigned NOT NULL,
@@ -85,7 +85,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
         ) $charset_collate;";
         
         // Recurring patterns table
-        $recurring_table = $wpdb->prefix . 'twitch_recurring_patterns';
+        $recurring_table = $wpdb->prefix . 'spswifter_twitch_recurring_patterns';
         $recurring_sql = "CREATE TABLE $recurring_table (
             id int(11) NOT NULL AUTO_INCREMENT,
             name varchar(100) NOT NULL,
@@ -109,27 +109,27 @@ class WP_Twitch_Visual_Stream_Scheduler {
      */
     private function load_scheduler_features() {
         // Add timezone support
-        add_filter('twitch_scheduler_timezones', array($this, 'get_supported_timezones'));
+        add_filter('spswifter_twitch_scheduler_timezones', array($this, 'get_supported_timezones'));
         
         // Add stream types
-        add_filter('twitch_scheduler_stream_types', array($this, 'get_stream_types'));
+        add_filter('spswifter_twitch_scheduler_stream_types', array($this, 'get_stream_types'));
         
         // Add categories
-        add_filter('twitch_scheduler_categories', array($this, 'get_stream_categories'));
+        add_filter('spswifter_twitch_scheduler_categories', array($this, 'get_stream_categories'));
         
         // Integration with Twitch API
-        add_action('twitch_stream_started', array($this, 'handle_stream_started'), 10, 2);
-        add_action('twitch_stream_ended', array($this, 'handle_stream_ended'), 10, 2);
+        add_action('spswifter_twitch_stream_started', array($this, 'handle_stream_started'), 10, 2);
+        add_action('spswifter_twitch_stream_ended', array($this, 'handle_stream_ended'), 10, 2);
     }
     
     /**
      * Register scheduler shortcodes
      */
     public function register_scheduler_shortcodes() {
-        add_shortcode('twitch_stream_scheduler', array($this, 'render_stream_scheduler_shortcode'));
-        add_shortcode('twitch_stream_calendar', array($this, 'render_stream_calendar_shortcode'));
-        add_shortcode('twitch_upcoming_streams', array($this, 'render_upcoming_streams_shortcode'));
-        add_shortcode('twitch_stream_schedule', array($this, 'render_stream_schedule_shortcode'));
+        add_shortcode('spswifter_twitch_stream_scheduler', array($this, 'render_stream_scheduler_shortcode'));
+        add_shortcode('spswifter_twitch_stream_calendar', array($this, 'render_stream_calendar_shortcode'));
+        add_shortcode('spswifter_twitch_upcoming_streams', array($this, 'render_upcoming_streams_shortcode'));
+        add_shortcode('spswifter_twitch_stream_schedule', array($this, 'render_stream_schedule_shortcode'));
     }
     
     /**
@@ -439,7 +439,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
      * Handle stream scheduler AJAX
      */
     public function handle_stream_scheduler_ajax() {
-        check_ajax_referer('twitch_stream_scheduler_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_stream_scheduler_nonce', 'nonce');
         
         $action = $_POST['scheduler_action'] ?? '';
         
@@ -668,19 +668,19 @@ class WP_Twitch_Visual_Stream_Scheduler {
                 <p>Schedule and manage your Twitch streams with this visual calendar interface. Create recurring streams, set reminders, and track your streaming schedule.</p>
             </div>
             
-            <?php echo do_shortcode('[twitch_stream_scheduler channel="" view="calendar" allow_booking="false"]'); ?>
+            <?php echo do_shortcode('[spswifter_twitch_stream_scheduler channel="" view="calendar" allow_booking="false"]'); ?>
             
             <div class="twitch-scheduler-settings">
                 <h2>Scheduler Settings</h2>
                 <form method="post" action="options.php">
-                    <?php settings_fields('twitch_scheduler_settings'); ?>
-                    <?php do_settings_sections('twitch_scheduler_settings'); ?>
+                    <?php settings_fields('spswifter_twitch_scheduler_settings'); ?>
+                    <?php do_settings_sections('spswifter_twitch_scheduler_settings'); ?>
                     
                     <table class="form-table">
                         <tr>
                             <th scope="row">Enable Scheduler</th>
                             <td>
-                                <input type="checkbox" name="twitch_scheduler_settings[enabled]" 
+                                <input type="checkbox" name="spswifter_twitch_scheduler_settings[enabled]" 
                                        <?php checked($this->scheduler_settings['enabled'], true); ?> />
                                 <label>Enable the stream scheduler feature</label>
                             </td>
@@ -689,7 +689,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
                         <tr>
                             <th scope="row">Default Timezone</th>
                             <td>
-                                <select name="twitch_scheduler_settings[default_timezone]">
+                                <select name="spswifter_twitch_scheduler_settings[default_timezone]">
                                     <?php foreach ($this->get_supported_timezones() as $tz_key => $tz_name): ?>
                                         <option value="<?php echo esc_attr($tz_key); ?>" 
                                                 <?php selected($this->scheduler_settings['default_timezone'], $tz_key); ?>>
@@ -703,7 +703,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
                         <tr>
                             <th scope="row">Allow Public Booking</th>
                             <td>
-                                <input type="checkbox" name="twitch_scheduler_settings[allow_public_booking]" 
+                                <input type="checkbox" name="spswifter_twitch_scheduler_settings[allow_public_booking]" 
                                        <?php checked($this->scheduler_settings['allow_public_booking'], true); ?> />
                                 <label>Allow visitors to request stream times</label>
                             </td>
@@ -712,7 +712,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
                         <tr>
                             <th scope="row">Email Notifications</th>
                             <td>
-                                <input type="checkbox" name="twitch_scheduler_settings[email_notifications]" 
+                                <input type="checkbox" name="spswifter_twitch_scheduler_settings[email_notifications]" 
                                        <?php checked($this->scheduler_settings['email_notifications'], true); ?> />
                                 <label>Send email notifications for scheduled streams</label>
                             </td>
@@ -721,7 +721,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
                         <tr>
                             <th scope="row">Auto-sync with Twitch</th>
                             <td>
-                                <input type="checkbox" name="twitch_scheduler_settings[auto_sync_twitch]" 
+                                <input type="checkbox" name="spswifter_twitch_scheduler_settings[auto_sync_twitch]" 
                                        <?php checked($this->scheduler_settings['auto_sync_twitch'], true); ?> />
                                 <label>Automatically sync stream status with Twitch API</label>
                             </td>
@@ -756,7 +756,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
         
         wp_localize_script('twitch-stream-scheduler', 'twitchStreamScheduler', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('twitch_stream_scheduler_nonce'),
+            'nonce' => wp_create_nonce('spswifter_twitch_stream_scheduler_nonce'),
             'currentUser' => get_current_user_id(),
             'timezones' => $this->get_supported_timezones(),
             'streamTypes' => $this->get_stream_types(),
@@ -781,7 +781,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
      * Get scheduler settings
      */
     private function get_scheduler_settings() {
-        return get_option('twitch_scheduler_settings', array(
+        return get_option('spswifter_twitch_scheduler_settings', array(
             'enabled' => true,
             'default_timezone' => wp_timezone_string(),
             'allow_public_booking' => false,
@@ -800,7 +800,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
      */
     private function get_stream_schedules() {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         return $wpdb->get_results("SELECT * FROM $table_name ORDER BY start_time ASC");
     }
@@ -810,7 +810,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
      */
     private function get_recurring_patterns() {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_recurring_patterns';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_recurring_patterns';
         
         return $wpdb->get_results("SELECT * FROM $table_name ORDER BY created_at DESC");
     }
@@ -900,12 +900,12 @@ class WP_Twitch_Visual_Stream_Scheduler {
      */
     private function get_current_user_channel() {
         // Get user's Twitch channel from user meta or settings
-        return get_user_meta(get_current_user_id(), 'twitch_channel', true) ?: '';
+        return get_user_meta(get_current_user_id(), 'spswifter_twitch_channel', true) ?: '';
     }
     
     private function get_upcoming_streams($channel = '', $limit = 5) {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         $where = "WHERE start_time > NOW() AND status = 'scheduled'";
         if ($channel) {
@@ -919,7 +919,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
     
     private function get_filtered_streams($channel, $start_date, $end_date, $status, $category, $limit) {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         $where = array("1=1");
         $values = array();
@@ -982,7 +982,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
     
     private function save_stream($data) {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         $data['created_by'] = get_current_user_id();
         $data['updated_at'] = current_time('mysql');
@@ -1000,14 +1000,14 @@ class WP_Twitch_Visual_Stream_Scheduler {
     
     private function delete_stream($stream_id) {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         return $wpdb->delete($table_name, array('id' => $stream_id));
     }
     
     private function update_stream($stream_id, $updates) {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         return $wpdb->update($table_name, $updates, array('id' => $stream_id));
     }
@@ -1040,7 +1040,7 @@ class WP_Twitch_Visual_Stream_Scheduler {
     
     private function bulk_update_streams($stream_ids, $updates) {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         $updated = 0;
         foreach ($stream_ids as $stream_id) {
@@ -1054,18 +1054,18 @@ class WP_Twitch_Visual_Stream_Scheduler {
     
     private function set_stream_reminder($user_id, $stream_id, $reminder_time) {
         // Store reminder in user meta
-        $reminders = get_user_meta($user_id, 'twitch_stream_reminders', true) ?: array();
+        $reminders = get_user_meta($user_id, 'spswifter_twitch_stream_reminders', true) ?: array();
         $reminders[$stream_id] = array(
             'reminder_time' => $reminder_time,
             'set_at' => current_time('mysql')
         );
         
-        return update_user_meta($user_id, 'twitch_stream_reminders', $reminders);
+        return update_user_meta($user_id, 'spswifter_twitch_stream_reminders', $reminders);
     }
     
     private function get_stream_stats($channel, $period = 'month') {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         $date_format = $period === 'month' ? 'DATE_FORMAT(start_time, "%Y-%m")' : 'DATE_FORMAT(start_time, "%Y-%m-%d")';
         
@@ -1106,11 +1106,11 @@ class WP_Twitch_Visual_Stream_Scheduler {
     private function handle_stream_started($channel, $stream_data) {
         // Update stream status when it goes live
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         $wpdb->update(
             $table_name,
-            array('status' => 'live', 'twitch_stream_id' => $stream_data['id']),
+            array('status' => 'live', 'spswifter_twitch_stream_id' => $stream_data['id']),
             array(
                 'channel' => $channel,
                 'status' => 'scheduled',
@@ -1123,18 +1123,18 @@ class WP_Twitch_Visual_Stream_Scheduler {
     private function handle_stream_ended($channel, $stream_data) {
         // Update stream status when it ends
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         $wpdb->update(
             $table_name,
             array('status' => 'completed'),
-            array('twitch_stream_id' => $stream_data['id'])
+            array('spswifter_twitch_stream_id' => $stream_data['id'])
         );
     }
     
     public function cleanup_old_schedules() {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'twitch_stream_schedules';
+        $table_name = $wpdb->prefix . 'spswifter_twitch_stream_schedules';
         
         // Delete completed streams older than 90 days
         $wpdb->query($wpdb->prepare("
@@ -1153,4 +1153,4 @@ class WP_Twitch_Visual_Stream_Scheduler {
 }
 
 // Initialize visual stream scheduler
-new WP_Twitch_Visual_Stream_Scheduler();
+new SPSWIFTER_Twitch_Visual_Stream_Scheduler();

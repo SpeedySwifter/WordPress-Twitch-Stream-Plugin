@@ -7,19 +7,19 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Recording_Download {
+class SPSWIFTER_Twitch_Recording_Download {
     
     private $download_settings;
     private $recording;
     
     public function __construct() {
         $this->download_settings = $this->get_download_settings();
-        $this->recording = new WP_Twitch_Stream_Recording();
+        $this->recording = new SPSWIFTER_Twitch_Stream_Recording();
         
         add_action('init', array($this, 'register_download_shortcodes'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_download_scripts'));
-        add_action('wp_ajax_twitch_recording_download', array($this, 'handle_download_ajax'));
-        add_action('wp_ajax_nopriv_twitch_recording_download', array($this, 'handle_download_ajax'));
+        add_action('wp_ajax_spswifter_twitch_recording_download', array($this, 'handle_download_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_recording_download', array($this, 'handle_download_ajax'));
         add_action('admin_menu', array($this, 'add_download_settings_menu'));
         
         // Add rewrite rules for direct downloads
@@ -32,9 +32,9 @@ class WP_Twitch_Recording_Download {
      * Register download shortcodes
      */
     public function register_download_shortcodes() {
-        add_shortcode('twitch_recording_downloads', array($this, 'render_downloads_shortcode'));
-        add_shortcode('twitch_recording_download', array($this, 'render_download_shortcode'));
-        add_shortcode('twitch_recording_player', array($this, 'render_player_shortcode'));
+        add_shortcode('spswifter_twitch_recording_downloads', array($this, 'render_downloads_shortcode'));
+        add_shortcode('spswifter_twitch_recording_download', array($this, 'render_download_shortcode'));
+        add_shortcode('spswifter_twitch_recording_player', array($this, 'render_player_shortcode'));
     }
     
     /**
@@ -58,7 +58,7 @@ class WP_Twitch_Recording_Download {
         
         wp_localize_script('twitch-recording-download', 'twitchRecordingDownload', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('twitch_recording_download_nonce'),
+            'nonce' => wp_create_nonce('spswifter_twitch_recording_download_nonce'),
             'downloadUrl' => home_url('/twitch-recording-download/'),
             'maxFileSize' => $this->download_settings['max_file_size'] ?? 1073741824, // 1GB
             'chunkSize' => $this->download_settings['chunk_size'] ?? 1048576, // 1MB
@@ -80,7 +80,7 @@ class WP_Twitch_Recording_Download {
         ), $atts);
         
         if (empty($atts['channel'])) {
-            return '<p class="twitch-recording-error">Bitte geben Sie einen Kanal an: [twitch_recording_downloads channel="username"]</p>';
+            return '<p class="twitch-recording-error">Bitte geben Sie einen Kanal an: [spswifter_twitch_recording_downloads channel="username"]</p>';
         }
         
         $recordings = $this->recording->get_all_recordings($atts['channel'], $atts['status'], $atts['limit']);
@@ -141,7 +141,7 @@ class WP_Twitch_Recording_Download {
         ), $atts);
         
         if (empty($atts['id'])) {
-            return '<p class="twitch-recording-error">Bitte geben Sie eine Aufnahme-ID an: [twitch_recording_download id="recording_id"]</p>';
+            return '<p class="twitch-recording-error">Bitte geben Sie eine Aufnahme-ID an: [spswifter_twitch_recording_download id="recording_id"]</p>';
         }
         
         $recording = $this->recording->get_recording($atts['id']);
@@ -214,7 +214,7 @@ class WP_Twitch_Recording_Download {
         ), $atts);
         
         if (empty($atts['id'])) {
-            return '<p class="twitch-recording-error">Bitte geben Sie eine Aufnahme-ID an: [twitch_recording_player id="recording_id"]</p>';
+            return '<p class="twitch-recording-error">Bitte geben Sie eine Aufnahme-ID an: [spswifter_twitch_recording_player id="recording_id"]</p>';
         }
         
         $recording = $this->recording->get_recording($atts['id']);
@@ -431,7 +431,7 @@ class WP_Twitch_Recording_Download {
     public function add_download_rewrite_rules() {
         add_rewrite_rule(
             '^twitch-recording-download/?$',
-            'index.php?twitch_recording_download=1',
+            'index.php?spswifter_twitch_recording_download=1',
             'top'
         );
         
@@ -442,7 +442,7 @@ class WP_Twitch_Recording_Download {
      * Add download query vars
      */
     public function add_download_query_vars($query_vars) {
-        $query_vars[] = 'twitch_recording_download';
+        $query_vars[] = 'spswifter_twitch_recording_download';
         return $query_vars;
     }
     
@@ -450,7 +450,7 @@ class WP_Twitch_Recording_Download {
      * Handle direct download
      */
     public function handle_direct_download() {
-        if (get_query_var('twitch_recording_download') && isset($_GET['id'])) {
+        if (get_query_var('spswifter_twitch_recording_download') && isset($_GET['id'])) {
             $recording_id = sanitize_text_field($_GET['id']);
             $this->process_download($recording_id);
             exit;
@@ -553,7 +553,7 @@ class WP_Twitch_Recording_Download {
      * Handle download AJAX
      */
     public function handle_download_ajax() {
-        check_ajax_referer('twitch_recording_download_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_recording_download_nonce', 'nonce');
         
         $action = $_POST['download_action'] ?? '';
         
@@ -673,14 +673,14 @@ class WP_Twitch_Recording_Download {
             <h1 class="wp-heading-inline">Recording Download Settings</h1>
             
             <form method="post" action="options.php">
-                <?php settings_fields('twitch_recording_download_settings'); ?>
-                <?php do_settings_sections('twitch_recording_download_settings'); ?>
+                <?php settings_fields('spswifter_twitch_recording_download_settings'); ?>
+                <?php do_settings_sections('spswifter_twitch_recording_download_settings'); ?>
                 
                 <table class="form-table">
                     <tr>
                         <th scope="row">Enable Downloads</th>
                         <td>
-                            <input type="checkbox" name="twitch_recording_download_settings[enabled]" <?php checked($this->download_settings['enabled'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_recording_download_settings[enabled]" <?php checked($this->download_settings['enabled'], true); ?> />
                             <label>Enable recording downloads</label>
                         </td>
                     </tr>
@@ -688,7 +688,7 @@ class WP_Twitch_Recording_Download {
                     <tr>
                         <th scope="row">Public Downloads</th>
                         <td>
-                            <input type="checkbox" name="twitch_recording_download_settings[public_downloads]" <?php checked($this->download_settings['public_downloads'], false); ?> />
+                            <input type="checkbox" name="spswifter_twitch_recording_download_settings[public_downloads]" <?php checked($this->download_settings['public_downloads'], false); ?> />
                             <label>Allow public downloads (no login required)</label>
                         </td>
                     </tr>
@@ -696,7 +696,7 @@ class WP_Twitch_Recording_Download {
                     <tr>
                         <th scope="row">Require Login</th>
                         <td>
-                            <input type="checkbox" name="twitch_recording_download_settings[require_login]" <?php checked($this->download_settings['require_login'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_recording_download_settings[require_login]" <?php checked($this->download_settings['require_login'], true); ?> />
                             <label>Require users to be logged in to download</label>
                         </td>
                     </tr>
@@ -704,7 +704,7 @@ class WP_Twitch_Recording_Download {
                     <tr>
                         <th scope="row">Allowed Channels</th>
                         <td>
-                            <textarea name="twitch_recording_download_settings[allowed_channels]" rows="3" class="large-text"><?php echo esc_textarea(implode("\n", $this->download_settings['allowed_channels'] ?? array())); ?></textarea>
+                            <textarea name="spswifter_twitch_recording_download_settings[allowed_channels]" rows="3" class="large-text"><?php echo esc_textarea(implode("\n", $this->download_settings['allowed_channels'] ?? array())); ?></textarea>
                             <p class="description">One channel per line. Leave empty to allow all channels.</p>
                         </td>
                     </tr>
@@ -712,7 +712,7 @@ class WP_Twitch_Recording_Download {
                     <tr>
                         <th scope="row">Max File Size</th>
                         <td>
-                            <input type="number" name="twitch_recording_download_settings[max_file_size]" value="<?php echo esc_attr($this->download_settings['max_file_size'] ?? 1073741824); ?>" step="1048576" min="1048576" class="regular-text" />
+                            <input type="number" name="spswifter_twitch_recording_download_settings[max_file_size]" value="<?php echo esc_attr($this->download_settings['max_file_size'] ?? 1073741824); ?>" step="1048576" min="1048576" class="regular-text" />
                             <p class="description">Maximum file size in bytes (default: 1GB)</p>
                         </td>
                     </tr>
@@ -720,7 +720,7 @@ class WP_Twitch_Recording_Download {
                     <tr>
                         <th scope="row">Chunk Size</th>
                         <td>
-                            <input type="number" name="twitch_recording_download_settings[chunk_size]" value="<?php echo esc_attr($this->download_settings['chunk_size'] ?? 1048576); ?>" step="1024" min="1024" class="regular-text" />
+                            <input type="number" name="spswifter_twitch_recording_download_settings[chunk_size]" value="<?php echo esc_attr($this->download_settings['chunk_size'] ?? 1048576); ?>" step="1024" min="1024" class="regular-text" />
                             <p class="description">Chunk size for large downloads in bytes (default: 1MB)</p>
                         </td>
                     </tr>
@@ -728,7 +728,7 @@ class WP_Twitch_Recording_Download {
                     <tr>
                         <th scope="row">Download Expiration</th>
                         <td>
-                            <input type="number" name="twitch_recording_download_settings[expiration_days]" value="<?php echo esc_attr($this->download_settings['expiration_days'] ?? 30); ?>" min="1" max="365" class="small-text" />
+                            <input type="number" name="spswifter_twitch_recording_download_settings[expiration_days]" value="<?php echo esc_attr($this->download_settings['expiration_days'] ?? 30); ?>" min="1" max="365" class="small-text" />
                             <label>days</label>
                             <p class="description">How long download links remain valid</p>
                         </td>
@@ -737,7 +737,7 @@ class WP_Twitch_Recording_Download {
                     <tr>
                         <th scope="row">Rate Limiting</th>
                         <td>
-                            <input type="number" name="twitch_recording_download_settings[rate_limit]" value="<?php echo esc_attr($this->download_settings['rate_limit'] ?? 5); ?>" min="1" max="100" class="small-text" />
+                            <input type="number" name="spswifter_twitch_recording_download_settings[rate_limit]" value="<?php echo esc_attr($this->download_settings['rate_limit'] ?? 5); ?>" min="1" max="100" class="small-text" />
                             <label>downloads per hour per user</label>
                         </td>
                     </tr>
@@ -753,7 +753,7 @@ class WP_Twitch_Recording_Download {
      * Get download settings
      */
     private function get_download_settings() {
-        return get_option('twitch_recording_download_settings', array(
+        return get_option('spswifter_twitch_recording_download_settings', array(
             'enabled' => false,
             'public_downloads' => false,
             'require_login' => true,
@@ -802,4 +802,4 @@ class WP_Twitch_Recording_Download {
 }
 
 // Initialize recording download
-new WP_Twitch_Recording_Download();
+new SPSWIFTER_Twitch_Recording_Download();

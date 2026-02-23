@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Analytics_Dashboard {
+class SPSWIFTER_Twitch_Analytics_Dashboard {
     
     private $analytics;
     private $dashboard_settings;
@@ -18,13 +18,13 @@ class WP_Twitch_Analytics_Dashboard {
     }
 
     public function init() {
-        $this->analytics = new WP_Twitch_Analytics();
+        $this->analytics = new SPSWIFTER_Twitch_Analytics();
         $this->dashboard_settings = $this->get_dashboard_settings();
         
         add_action('admin_menu', array($this, 'add_dashboard_menu'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_dashboard_scripts'));
-        add_action('wp_ajax_twitch_analytics_dashboard', array($this, 'handle_dashboard_ajax'));
-        add_action('wp_ajax_nopriv_twitch_analytics_dashboard', array($this, 'handle_dashboard_ajax'));
+        add_action('wp_ajax_spswifter_twitch_analytics_dashboard', array($this, 'handle_dashboard_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_analytics_dashboard', array($this, 'handle_dashboard_ajax'));
         add_action('init', array($this, 'register_dashboard_shortcodes'));
     }
     
@@ -46,9 +46,9 @@ class WP_Twitch_Analytics_Dashboard {
      * Register dashboard shortcodes
      */
     public function register_dashboard_shortcodes() {
-        add_shortcode('twitch_analytics_dashboard', array($this, 'render_dashboard_shortcode'));
-        add_shortcode('twitch_analytics_widget', array($this, 'render_widget_shortcode'));
-        add_shortcode('twitch_analytics_chart', array($this, 'render_chart_shortcode'));
+        add_shortcode('spswifter_twitch_analytics_dashboard', array($this, 'render_dashboard_shortcode'));
+        add_shortcode('spswifter_twitch_analytics_widget', array($this, 'render_widget_shortcode'));
+        add_shortcode('spswifter_twitch_analytics_chart', array($this, 'render_chart_shortcode'));
     }
     
     /**
@@ -72,7 +72,7 @@ class WP_Twitch_Analytics_Dashboard {
         
         wp_localize_script('twitch-analytics-dashboard', 'twitchAnalyticsDashboard', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('twitch_analytics_dashboard_nonce'),
+            'nonce' => wp_create_nonce('spswifter_twitch_analytics_dashboard_nonce'),
             'refreshInterval' => $this->dashboard_settings['refresh_interval'] ?? 30000,
             'chartColors' => array(
                 'primary' => '#9146ff',
@@ -498,7 +498,7 @@ class WP_Twitch_Analytics_Dashboard {
      * Handle dashboard AJAX
      */
     public function handle_dashboard_ajax() {
-        check_ajax_referer('twitch_analytics_dashboard_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_analytics_dashboard_nonce', 'nonce');
         
         $action = $_POST['analytics_action'] ?? '';
         
@@ -609,7 +609,7 @@ class WP_Twitch_Analytics_Dashboard {
      * Get dashboard settings
      */
     private function get_dashboard_settings() {
-        return get_option('twitch_analytics_dashboard_settings', array(
+        return get_option('spswifter_twitch_analytics_dashboard_settings', array(
             'refresh_interval' => 30000,
             'default_period' => 30,
             'chart_animation' => true,
@@ -642,14 +642,14 @@ class WP_Twitch_Analytics_Dashboard {
             <h1 class="wp-heading-inline">Analytics Dashboard Settings</h1>
             
             <form method="post" action="options.php">
-                <?php settings_fields('twitch_analytics_dashboard_settings'); ?>
-                <?php do_settings_sections('twitch_analytics_dashboard_settings'); ?>
+                <?php settings_fields('spswifter_twitch_analytics_dashboard_settings'); ?>
+                <?php do_settings_sections('spswifter_twitch_analytics_dashboard_settings'); ?>
                 
                 <table class="form-table">
                     <tr>
                         <th scope="row">Refresh Interval</th>
                         <td>
-                            <input type="number" name="twitch_analytics_dashboard_settings[refresh_interval]" 
+                            <input type="number" name="spswifter_twitch_analytics_dashboard_settings[refresh_interval]" 
                                    value="<?php echo esc_attr($this->dashboard_settings['refresh_interval'] ?? 30000); ?>" 
                                    min="5000" max="300000" step="1000" class="regular-text" />
                             <p class="description">Auto-refresh interval in milliseconds (default: 30000 = 30 seconds)</p>
@@ -659,7 +659,7 @@ class WP_Twitch_Analytics_Dashboard {
                     <tr>
                         <th scope="row">Default Period</th>
                         <td>
-                            <select name="twitch_analytics_dashboard_settings[default_period]">
+                            <select name="spswifter_twitch_analytics_dashboard_settings[default_period]">
                                 <option value="7" <?php selected($this->dashboard_settings['default_period'], 7); ?>>7 Tage</option>
                                 <option value="30" <?php selected($this->dashboard_settings['default_period'], 30); ?>>30 Tage</option>
                                 <option value="90" <?php selected($this->dashboard_settings['default_period'], 90); ?>>90 Tage</option>
@@ -671,7 +671,7 @@ class WP_Twitch_Analytics_Dashboard {
                     <tr>
                         <th scope="row">Chart Animation</th>
                         <td>
-                            <input type="checkbox" name="twitch_analytics_dashboard_settings[chart_animation]" 
+                            <input type="checkbox" name="spswifter_twitch_analytics_dashboard_settings[chart_animation]" 
                                    <?php checked($this->dashboard_settings['chart_animation'], true); ?> />
                             <label>Enable chart animations</label>
                         </td>
@@ -680,7 +680,7 @@ class WP_Twitch_Analytics_Dashboard {
                     <tr>
                         <th scope="row">Show Trends</th>
                         <td>
-                            <input type="checkbox" name="twitch_analytics_dashboard_settings[show_trends]" 
+                            <input type="checkbox" name="spswifter_twitch_analytics_dashboard_settings[show_trends]" 
                                    <?php checked($this->dashboard_settings['show_trends'], true); ?> />
                             <label>Show trend indicators</label>
                         </td>
@@ -689,7 +689,7 @@ class WP_Twitch_Analytics_Dashboard {
                     <tr>
                         <th scope="row">Enable Export</th>
                         <td>
-                            <input type="checkbox" name="twitch_analytics_dashboard_settings[enable_export]" 
+                            <input type="checkbox" name="spswifter_twitch_analytics_dashboard_settings[enable_export]" 
                                    <?php checked($this->dashboard_settings['enable_export'], true); ?> />
                             <label>Enable data export functionality</label>
                         </td>
@@ -698,7 +698,7 @@ class WP_Twitch_Analytics_Dashboard {
                     <tr>
                         <th scope="row">Max Data Points</th>
                         <td>
-                            <input type="number" name="twitch_analytics_dashboard_settings[max_data_points]" 
+                            <input type="number" name="spswifter_twitch_analytics_dashboard_settings[max_data_points]" 
                                    value="<?php echo esc_attr($this->dashboard_settings['max_data_points'] ?? 100); ?>" 
                                    min="10" max="1000" step="10" class="regular-text" />
                             <p class="description">Maximum number of data points to display in charts</p>
@@ -714,4 +714,4 @@ class WP_Twitch_Analytics_Dashboard {
 }
 
 // Initialize analytics dashboard
-new WP_Twitch_Analytics_Dashboard();
+new SPSWIFTER_Twitch_Analytics_Dashboard();

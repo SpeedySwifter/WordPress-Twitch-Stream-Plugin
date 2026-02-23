@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Donation_Integration {
+class SPSWIFTER_Twitch_Donation_Integration {
     
     private $donation_settings;
     
@@ -17,17 +17,17 @@ class WP_Twitch_Donation_Integration {
         add_action('init', array($this, 'register_donation_shortcodes'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_donation_scripts'));
         add_action('admin_menu', array($this, 'add_donation_settings_menu'));
-        add_action('wp_ajax_twitch_donation_settings', array($this, 'handle_donation_ajax'));
-        add_action('wp_ajax_nopriv_twitch_donation_settings', array($this, 'handle_donation_ajax'));
+        add_action('wp_ajax_spswifter_twitch_donation_settings', array($this, 'handle_donation_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_donation_settings', array($this, 'handle_donation_ajax'));
     }
     
     /**
      * Register donation shortcodes
      */
     public function register_donation_shortcodes() {
-        add_shortcode('twitch_donations', array($this, 'render_donations_shortcode'));
-        add_shortcode('twitch_donation_button', array($this, 'render_donation_button_shortcode'));
-        add_shortcode('twitch_donation_goal', array($this, 'render_donation_goal_shortcode'));
+        add_shortcode('spswifter_twitch_donations', array($this, 'render_donations_shortcode'));
+        add_shortcode('spswifter_twitch_donation_button', array($this, 'render_donation_button_shortcode'));
+        add_shortcode('spswifter_twitch_donation_goal', array($this, 'render_donation_goal_shortcode'));
     }
     
     /**
@@ -51,7 +51,7 @@ class WP_Twitch_Donation_Integration {
         
         wp_localize_script('twitch-donations', 'twitchDonations', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('twitch_donations_nonce'),
+            'nonce' => wp_create_nonce('spswifter_twitch_donations_nonce'),
             'currency' => $this->donation_settings['currency'] ?? 'EUR',
             'thankYouMessage' => $this->donation_settings['thank_you_message'] ?? 'Vielen Dank für Ihre Spende!',
         ));
@@ -281,7 +281,7 @@ class WP_Twitch_Donation_Integration {
             <input type="hidden" name="business" value="<?php echo esc_attr($paypal_email); ?>">
             <input type="hidden" name="currency_code" value="<?php echo esc_attr($paypal_currency); ?>">
             <input type="hidden" name="item_name" value="Twitch Stream Plugin Donation">
-            <input type="hidden" name="bn" value="WP_Twitch_Plugin_Donation">
+            <input type="hidden" name="bn" value="SPSWIFTER_Twitch_Plugin_Donation">
             
             <button type="submit" class="twitch-paypal-button">
                 <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_logo_mark_100x30.png" 
@@ -368,14 +368,14 @@ class WP_Twitch_Donation_Integration {
             <h1 class="wp-heading-inline">Donation Settings</h1>
             
             <form method="post" action="options.php">
-                <?php settings_fields('twitch_donation_settings'); ?>
-                <?php do_settings_sections('twitch_donation_settings'); ?>
+                <?php settings_fields('spswifter_twitch_donation_settings'); ?>
+                <?php do_settings_sections('spswifter_twitch_donation_settings'); ?>
                 
                 <table class="form-table">
                     <tr>
                         <th scope="row">Enable Donations</th>
                         <td>
-                            <input type="checkbox" name="twitch_donation_settings[enabled]" <?php checked($this->donation_settings['enabled'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_donation_settings[enabled]" <?php checked($this->donation_settings['enabled'], true); ?> />
                             <label>Enable donation buttons and features</label>
                         </td>
                     </tr>
@@ -383,7 +383,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">Currency</th>
                         <td>
-                            <select name="twitch_donation_settings[currency]">
+                            <select name="spswifter_twitch_donation_settings[currency]">
                                 <option value="EUR" <?php selected($this->donation_settings['currency'], 'EUR'); ?>>EUR (€)</option>
                                 <option value="USD" <?php selected($this->donation_settings['currency'], 'USD'); ?>>USD ($)</option>
                                 <option value="GBP" <?php selected($this->donation_settings['currency'], 'GBP'); ?>>GBP (£)</option>
@@ -395,7 +395,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">Custom Message</th>
                         <td>
-                            <textarea name="twitch_donation_settings[custom_message]" rows="3" class="large-text"><?php echo esc_textarea($this->donation_settings['custom_message'] ?? ''); ?></textarea>
+                            <textarea name="spswifter_twitch_donation_settings[custom_message]" rows="3" class="large-text"><?php echo esc_textarea($this->donation_settings['custom_message'] ?? ''); ?></textarea>
                             <p class="description">HTML allowed. Displayed below donation buttons.</p>
                         </td>
                     </tr>
@@ -403,7 +403,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">Thank You Message</th>
                         <td>
-                            <input type="text" name="twitch_donation_settings[thank_you_message]" value="<?php echo esc_attr($this->donation_settings['thank_you_message'] ?? ''); ?>" class="regular-text" />
+                            <input type="text" name="spswifter_twitch_donation_settings[thank_you_message]" value="<?php echo esc_attr($this->donation_settings['thank_you_message'] ?? ''); ?>" class="regular-text" />
                             <p class="description">Message shown after successful donation.</p>
                         </td>
                     </tr>
@@ -414,7 +414,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">Enable BMC</th>
                         <td>
-                            <input type="checkbox" name="twitch_donation_settings[bmc][enabled]" <?php checked($this->donation_settings['bmc']['enabled'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_donation_settings[bmc][enabled]" <?php checked($this->donation_settings['bmc']['enabled'], true); ?> />
                             <label>Enable Buy Me a Coffee button</label>
                         </td>
                     </tr>
@@ -422,7 +422,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">BMC Username</th>
                         <td>
-                            <input type="text" name="twitch_donation_settings[bmc][username]" value="<?php echo esc_attr($this->donation_settings['bmc']['username'] ?? ''); ?>" class="regular-text" />
+                            <input type="text" name="spswifter_twitch_donation_settings[bmc][username]" value="<?php echo esc_attr($this->donation_settings['bmc']['username'] ?? ''); ?>" class="regular-text" />
                             <p class="description">Your Buy Me a Coffee username (without @)</p>
                         </td>
                     </tr>
@@ -430,7 +430,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">Button Text</th>
                         <td>
-                            <input type="text" name="twitch_donation_settings[bmc][button_text]" value="<?php echo esc_attr($this->donation_settings['bmc']['button_text'] ?? 'Buy me a coffee'); ?>" class="regular-text" />
+                            <input type="text" name="spswifter_twitch_donation_settings[bmc][button_text]" value="<?php echo esc_attr($this->donation_settings['bmc']['button_text'] ?? 'Buy me a coffee'); ?>" class="regular-text" />
                         </td>
                     </tr>
                 </table>
@@ -440,7 +440,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">Enable PayPal</th>
                         <td>
-                            <input type="checkbox" name="twitch_donation_settings[paypal][enabled]" <?php checked($this->donation_settings['paypal']['enabled'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_donation_settings[paypal][enabled]" <?php checked($this->donation_settings['paypal']['enabled'], true); ?> />
                             <label>Enable PayPal donation button</label>
                         </td>
                     </tr>
@@ -448,7 +448,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">PayPal Email</th>
                         <td>
-                            <input type="email" name="twitch_donation_settings[paypal][email]" value="<?php echo esc_attr($this->donation_settings['paypal']['email'] ?? ''); ?>" class="regular-text" />
+                            <input type="email" name="spswifter_twitch_donation_settings[paypal][email]" value="<?php echo esc_attr($this->donation_settings['paypal']['email'] ?? ''); ?>" class="regular-text" />
                             <p class="description">Your PayPal email address for donations</p>
                         </td>
                     </tr>
@@ -456,7 +456,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">PayPal Currency</th>
                         <td>
-                            <select name="twitch_donation_settings[paypal][currency]">
+                            <select name="spswifter_twitch_donation_settings[paypal][currency]">
                                 <option value="EUR" <?php selected($this->donation_settings['paypal']['currency'], 'EUR'); ?>>EUR (€)</option>
                                 <option value="USD" <?php selected($this->donation_settings['paypal']['currency'], 'USD'); ?>>USD ($)</option>
                                 <option value="GBP" <?php selected($this->donation_settings['paypal']['currency'], 'GBP'); ?>>GBP (£)</option>
@@ -468,7 +468,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">Button Text</th>
                         <td>
-                            <input type="text" name="twitch_donation_settings[paypal][button_text]" value="<?php echo esc_attr($this->donation_settings['paypal']['button_text'] ?? 'Spenden'); ?>" class="regular-text" />
+                            <input type="text" name="spswifter_twitch_donation_settings[paypal][button_text]" value="<?php echo esc_attr($this->donation_settings['paypal']['button_text'] ?? 'Spenden'); ?>" class="regular-text" />
                         </td>
                     </tr>
                 </table>
@@ -478,7 +478,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">Enable Goal</th>
                         <td>
-                            <input type="checkbox" name="twitch_donation_settings[goal][enabled]" <?php checked($this->donation_settings['goal']['enabled'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_donation_settings[goal][enabled]" <?php checked($this->donation_settings['goal']['enabled'], true); ?> />
                             <label>Show donation goal progress</label>
                         </td>
                     </tr>
@@ -486,7 +486,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">Goal Amount</th>
                         <td>
-                            <input type="number" name="twitch_donation_settings[goal][amount]" value="<?php echo esc_attr($this->donation_settings['goal']['amount'] ?? ''); ?>" step="0.01" min="0" class="regular-text" />
+                            <input type="number" name="spswifter_twitch_donation_settings[goal][amount]" value="<?php echo esc_attr($this->donation_settings['goal']['amount'] ?? ''); ?>" step="0.01" min="0" class="regular-text" />
                             <p class="description">Your donation goal amount</p>
                         </td>
                     </tr>
@@ -494,7 +494,7 @@ class WP_Twitch_Donation_Integration {
                     <tr>
                         <th scope="row">Goal Description</th>
                         <td>
-                            <input type="text" name="twitch_donation_settings[goal][description]" value="<?php echo esc_attr($this->donation_settings['goal']['description'] ?? ''); ?>" class="regular-text" />
+                            <input type="text" name="spswifter_twitch_donation_settings[goal][description]" value="<?php echo esc_attr($this->donation_settings['goal']['description'] ?? ''); ?>" class="regular-text" />
                             <p class="description">Description of your donation goal</p>
                         </td>
                     </tr>
@@ -510,7 +510,7 @@ class WP_Twitch_Donation_Integration {
      * Handle donation AJAX
      */
     public function handle_donation_ajax() {
-        check_ajax_referer('twitch_donations_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_donations_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
             wp_send_json_error('Unauthorized');
@@ -581,7 +581,7 @@ class WP_Twitch_Donation_Integration {
      * Get current donation amount
      */
     private function get_current_donation_amount() {
-        $donations = get_option('twitch_donations', array());
+        $donations = get_option('spswifter_twitch_donations', array());
         return array_sum(array_column($donations, 'amount'));
     }
     
@@ -589,7 +589,7 @@ class WP_Twitch_Donation_Integration {
      * Get donation stats
      */
     private function get_donation_stats() {
-        $donations = get_option('twitch_donations', array());
+        $donations = get_option('spswifter_twitch_donations', array());
         
         if (empty($donations)) {
             return array(
@@ -619,7 +619,7 @@ class WP_Twitch_Donation_Integration {
      * Record donation
      */
     private function record_donation($amount, $type, $message = '') {
-        $donations = get_option('twitch_donations', array());
+        $donations = get_option('spswifter_twitch_donations', array());
         
         $donations[] = array(
             'amount' => $amount,
@@ -629,10 +629,10 @@ class WP_Twitch_Donation_Integration {
             'currency' => $this->donation_settings['currency'] ?? 'EUR',
         );
         
-        update_option('twitch_donations', $donations);
+        update_option('spswifter_twitch_donations', $donations);
         
         // Trigger action for custom handling
-        do_action('wp_twitch_donation_recorded', $amount, $type, $message);
+        do_action('spswifter_spswifter_twitch_donation_recorded', $amount, $type, $message);
     }
     
     /**
@@ -657,7 +657,7 @@ class WP_Twitch_Donation_Integration {
      * Get donation settings
      */
     private function get_donation_settings() {
-        return get_option('twitch_donation_settings', array(
+        return get_option('spswifter_twitch_donation_settings', array(
             'enabled' => false,
             'currency' => 'EUR',
             'custom_message' => '',
@@ -684,4 +684,4 @@ class WP_Twitch_Donation_Integration {
 }
 
 // Initialize donation integration
-new WP_Twitch_Donation_Integration();
+new SPSWIFTER_Twitch_Donation_Integration();

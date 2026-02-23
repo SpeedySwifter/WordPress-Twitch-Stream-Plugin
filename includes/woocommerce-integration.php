@@ -12,30 +12,30 @@ if (!class_exists('WooCommerce')) {
     return;
 }
 
-class WP_Twitch_WooCommerce_Integration {
+class SPSWIFTER_Twitch_WooCommerce_Integration {
     
     private $woo_settings;
-    private $twitch_api;
+    private $spswifter_twitch_api;
     
     public function __construct() {
         $this->woo_settings = $this->get_woo_settings();
-        $this->twitch_api = new WP_Twitch_API();
+        $this->spswifter_twitch_api = new SPSWIFTER_Twitch_API();
         
         add_action('init', array($this, 'init_woocommerce_integration'));
         add_action('plugins_loaded', array($this, 'load_woocommerce_hooks'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_woocommerce_scripts'));
-        add_action('wp_ajax_twitch_woo_product', array($this, 'handle_woo_product_ajax'));
-        add_action('wp_ajax_nopriv_twitch_woo_product', array($this, 'handle_woo_product_ajax'));
+        add_action('wp_ajax_spswifter_twitch_woo_product', array($this, 'handle_woo_product_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_woo_product', array($this, 'handle_woo_product_ajax'));
         add_action('admin_menu', array($this, 'add_woo_settings_menu'));
         
         // WooCommerce hooks
-        add_action('woocommerce_before_single_product', array($this, 'add_twitch_product_info'));
-        add_action('woocommerce_after_single_product_summary', array($this, 'add_twitch_stream_button'));
-        add_action('woocommerce_product_options_general_product_data', array($this, 'add_twitch_product_fields'));
-        add_action('woocommerce_process_product_meta', array($this, 'save_twitch_product_fields'));
-        add_action('woocommerce_before_cart', array($this, 'add_twitch_cart_notice'));
-        add_action('woocommerce_before_checkout_form', array($this, 'add_twitch_checkout_notice'));
-        add_action('woocommerce_thankyou', array($this, 'add_twitch_order_notice'));
+        add_action('woocommerce_before_single_product', array($this, 'add_spswifter_twitch_product_info'));
+        add_action('woocommerce_after_single_product_summary', array($this, 'add_spswifter_twitch_stream_button'));
+        add_action('woocommerce_product_options_general_product_data', array($this, 'add_spswifter_twitch_product_fields'));
+        add_action('woocommerce_process_product_meta', array($this, 'save_spswifter_twitch_product_fields'));
+        add_action('woocommerce_before_cart', array($this, 'add_spswifter_twitch_cart_notice'));
+        add_action('woocommerce_before_checkout_form', array($this, 'add_spswifter_twitch_checkout_notice'));
+        add_action('woocommerce_thankyou', array($this, 'add_spswifter_twitch_order_notice'));
         
         // Register shortcodes
         add_action('init', array($this, 'register_woo_shortcodes'));
@@ -51,22 +51,22 @@ class WP_Twitch_WooCommerce_Integration {
         }
         
         // Add Twitch product type
-        $this->register_twitch_product_type();
+        $this->register_spswifter_twitch_product_type();
         
         // Add custom product tabs
-        add_filter('woocommerce_product_tabs', array($this, 'add_twitch_product_tabs'));
+        add_filter('woocommerce_product_tabs', array($this, 'add_spswifter_twitch_product_tabs'));
         
         // Add custom cart item data
-        add_filter('woocommerce_add_cart_item_data', array($this, 'add_twitch_cart_item_data'), 10, 2);
+        add_filter('woocommerce_add_cart_item_data', array($this, 'add_spswifter_twitch_cart_item_data'), 10, 2);
         
         // Add custom order item meta
-        add_action('woocommerce_add_order_item_meta', array($this, 'add_twitch_order_item_meta'), 10, 3);
+        add_action('woocommerce_add_order_item_meta', array($this, 'add_spswifter_twitch_order_item_meta'), 10, 3);
         
         // Display custom cart item data
-        add_filter('woocommerce_get_item_data', array($this, 'display_twitch_cart_item_data'), 10, 2);
+        add_filter('woocommerce_get_item_data', array($this, 'display_spswifter_twitch_cart_item_data'), 10, 2);
         
         // Display custom order item meta
-        add_action('woocommerce_order_item_meta_end', array($this, 'display_twitch_order_item_meta'), 10, 3);
+        add_action('woocommerce_order_item_meta_end', array($this, 'display_spswifter_twitch_order_item_meta'), 10, 3);
     }
     
     /**
@@ -86,7 +86,7 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Register Twitch product type
      */
-    private function register_twitch_product_type() {
+    private function register_spswifter_twitch_product_type() {
         // This would register a custom product type for Twitch-related products
         // For now, we'll use existing product types with custom fields
     }
@@ -95,10 +95,10 @@ class WP_Twitch_WooCommerce_Integration {
      * Register WooCommerce shortcodes
      */
     public function register_woo_shortcodes() {
-        add_shortcode('twitch_woo_products', array($this, 'render_woo_products_shortcode'));
-        add_shortcode('twitch_woo_product', array($this, 'render_woo_product_shortcode'));
-        add_shortcode('twitch_woo_cart', array($this, 'render_woo_cart_shortcode'));
-        add_shortcode('twitch_woo_checkout', array($this, 'render_woo_checkout_shortcode'));
+        add_shortcode('spswifter_twitch_woo_products', array($this, 'render_woo_products_shortcode'));
+        add_shortcode('spswifter_twitch_woo_product', array($this, 'render_woo_product_shortcode'));
+        add_shortcode('spswifter_twitch_woo_cart', array($this, 'render_woo_cart_shortcode'));
+        add_shortcode('spswifter_twitch_woo_checkout', array($this, 'render_woo_checkout_shortcode'));
     }
     
     /**
@@ -115,7 +115,7 @@ class WP_Twitch_WooCommerce_Integration {
             'columns' => '4',
             'orderby' => 'date',
             'order' => 'DESC',
-            'twitch_only' => 'false',
+            'spswifter_twitch_only' => 'false',
             'show_stream' => 'true',
             'show_price' => 'true',
             'show_add_to_cart' => 'true',
@@ -138,10 +138,10 @@ class WP_Twitch_WooCommerce_Integration {
             );
         }
         
-        if ($atts['twitch_only'] === 'true') {
+        if ($atts['spswifter_twitch_only'] === 'true') {
             $args['meta_query'] = array(
                 array(
-                    'key' => '_twitch_enabled',
+                    'key' => '_spswifter_twitch_enabled',
                     'value' => 'yes',
                 ),
             );
@@ -159,14 +159,14 @@ class WP_Twitch_WooCommerce_Integration {
             <?php foreach ($products as $product_post): ?>
                 <?php
                 $product = wc_get_product($product_post->ID);
-                $twitch_enabled = get_post_meta($product_post->ID, '_twitch_enabled', true) === 'yes';
-                $twitch_channel = get_post_meta($product_post->ID, '_twitch_channel', true);
-                $twitch_stream_url = get_post_meta($product_post->ID, '_twitch_stream_url', true);
+                $spswifter_twitch_enabled = get_post_meta($product_post->ID, '_spswifter_twitch_enabled', true) === 'yes';
+                $spswifter_twitch_channel = get_post_meta($product_post->ID, '_spswifter_twitch_channel', true);
+                $spswifter_twitch_stream_url = get_post_meta($product_post->ID, '_spswifter_twitch_stream_url', true);
                 ?>
                 <div class="twitch-woo-product">
                     <div class="twitch-woo-product-image">
                         <?php echo $product->get_image(); ?>
-                        <?php if ($twitch_enabled && $atts['show_stream'] === 'true' && $twitch_stream_url): ?>
+                        <?php if ($spswifter_twitch_enabled && $atts['show_stream'] === 'true' && $spswifter_twitch_stream_url): ?>
                             <div class="twitch-woo-stream-badge">
                                 <span class="twitch-badge-icon">🔴</span>
                                 <span class="twitch-badge-text">Live</span>
@@ -187,10 +187,10 @@ class WP_Twitch_WooCommerce_Integration {
                             </div>
                         <?php endif; ?>
                         
-                        <?php if ($twitch_enabled && $atts['show_stream'] === 'true' && $twitch_channel): ?>
+                        <?php if ($spswifter_twitch_enabled && $atts['show_stream'] === 'true' && $spswifter_twitch_channel): ?>
                             <div class="twitch-woo-product-stream">
                                 <span class="twitch-stream-info">
-                                    🎮 <?php echo esc_html($twitch_channel); ?>
+                                    🎮 <?php echo esc_html($spswifter_twitch_channel); ?>
                                 </span>
                             </div>
                         <?php endif; ?>
@@ -234,9 +234,9 @@ class WP_Twitch_WooCommerce_Integration {
             return '<p class="twitch-woo-error">Product not found</p>';
         }
         
-        $twitch_enabled = get_post_meta($atts['id'], '_twitch_enabled', true) === 'yes';
-        $twitch_channel = get_post_meta($atts['id'], '_twitch_channel', true);
-        $twitch_stream_url = get_post_meta($atts['id'], '_twitch_stream_url', true);
+        $spswifter_twitch_enabled = get_post_meta($atts['id'], '_spswifter_twitch_enabled', true) === 'yes';
+        $spswifter_twitch_channel = get_post_meta($atts['id'], '_spswifter_twitch_channel', true);
+        $spswifter_twitch_stream_url = get_post_meta($atts['id'], '_spswifter_twitch_stream_url', true);
         
         ob_start();
         ?>
@@ -244,7 +244,7 @@ class WP_Twitch_WooCommerce_Integration {
             <div class="twitch-woo-product-header">
                 <div class="twitch-woo-product-image">
                     <?php echo $product->get_image('woocommerce_single'); ?>
-                    <?php if ($twitch_enabled && $atts['show_stream'] === 'true' && $twitch_stream_url): ?>
+                    <?php if ($spswifter_twitch_enabled && $atts['show_stream'] === 'true' && $spswifter_twitch_stream_url): ?>
                         <div class="twitch-woo-stream-badge">
                             <span class="twitch-badge-icon">🔴</span>
                             <span class="twitch-badge-text">Live</span>
@@ -261,13 +261,13 @@ class WP_Twitch_WooCommerce_Integration {
                         </div>
                     <?php endif; ?>
                     
-                    <?php if ($twitch_enabled && $atts['show_stream'] === 'true' && $twitch_channel): ?>
+                    <?php if ($spswifter_twitch_enabled && $atts['show_stream'] === 'true' && $spswifter_twitch_channel): ?>
                         <div class="twitch-woo-product-stream">
                             <span class="twitch-stream-info">
-                                🎮 <?php echo esc_html($twitch_channel); ?>
+                                🎮 <?php echo esc_html($spswifter_twitch_channel); ?>
                             </span>
-                            <?php if ($twitch_stream_url): ?>
-                                <a href="<?php echo esc_url($twitch_stream_url); ?>" class="twitch-stream-link" target="_blank">
+                            <?php if ($spswifter_twitch_stream_url): ?>
+                                <a href="<?php echo esc_url($spswifter_twitch_stream_url); ?>" class="twitch-stream-link" target="_blank">
                                     Watch Stream
                                 </a>
                             <?php endif; ?>
@@ -302,14 +302,14 @@ class WP_Twitch_WooCommerce_Integration {
         }
         
         $atts = shortcode_atts(array(
-            'show_twitch_items' => 'true',
+            'show_spswifter_twitch_items' => 'true',
             'show_stream_notice' => 'true',
         ), $atts);
         
         ob_start();
         ?>
         <div class="twitch-woo-cart">
-            <?php if ($atts['show_stream_notice'] === 'true' && $this->has_twitch_products_in_cart()): ?>
+            <?php if ($atts['show_stream_notice'] === 'true' && $this->has_spswifter_twitch_products_in_cart()): ?>
                 <div class="twitch-woo-cart-notice">
                     <div class="twitch-notice-content">
                         <span class="twitch-notice-icon">🎮</span>
@@ -339,14 +339,14 @@ class WP_Twitch_WooCommerce_Integration {
         }
         
         $atts = shortcode_atts(array(
-            'show_twitch_items' => 'true',
+            'show_spswifter_twitch_items' => 'true',
             'show_stream_notice' => 'true',
         ), $atts);
         
         ob_start();
         ?>
         <div class="twitch-woo-checkout">
-            <?php if ($atts['show_stream_notice'] === 'true' && $this->has_twitch_products_in_cart()): ?>
+            <?php if ($atts['show_stream_notice'] === 'true' && $this->has_spswifter_twitch_products_in_cart()): ?>
                 <div class="twitch-woo-checkout-notice">
                     <div class="twitch-notice-content">
                         <span class="twitch-notice-icon">🎮</span>
@@ -369,16 +369,16 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Add Twitch product tabs
      */
-    public function add_twitch_product_tabs($tabs) {
+    public function add_spswifter_twitch_product_tabs($tabs) {
         global $product;
         
-        $twitch_enabled = get_post_meta($product->get_id(), '_twitch_enabled', true) === 'yes';
+        $spswifter_twitch_enabled = get_post_meta($product->get_id(), '_spswifter_twitch_enabled', true) === 'yes';
         
-        if ($twitch_enabled) {
-            $tabs['twitch_stream'] = array(
-                'title' => __('Twitch Stream', 'wp-twitch-stream'),
+        if ($spswifter_twitch_enabled) {
+            $tabs['spswifter_twitch_stream'] = array(
+                'title' => __('Twitch Stream', 'speedyswifter-twitch'),
                 'priority' => 50,
-                'callback' => array($this, 'render_twitch_stream_tab'),
+                'callback' => array($this, 'render_spswifter_twitch_stream_tab'),
             );
         }
         
@@ -388,24 +388,24 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Render Twitch stream tab
      */
-    public function render_twitch_stream_tab() {
+    public function render_spswifter_twitch_stream_tab() {
         global $product;
         
-        $twitch_channel = get_post_meta($product->get_id(), '_twitch_channel', true);
-        $twitch_stream_url = get_post_meta($product->get_id(), '_twitch_stream_url', true);
-        $twitch_chat_embed = get_post_meta($product->get_id(), '_twitch_chat_embed', true);
+        $spswifter_twitch_channel = get_post_meta($product->get_id(), '_spswifter_twitch_channel', true);
+        $spswifter_twitch_stream_url = get_post_meta($product->get_id(), '_spswifter_twitch_stream_url', true);
+        $spswifter_twitch_chat_embed = get_post_meta($product->get_id(), '_spswifter_twitch_chat_embed', true);
         
         echo '<div class="twitch-stream-tab">';
         
-        if ($twitch_stream_url) {
+        if ($spswifter_twitch_stream_url) {
             echo '<div class="twitch-stream-embed">';
-            echo '<iframe src="' . esc_url($twitch_stream_url) . '" frameborder="0" allowfullscreen></iframe>';
+            echo '<iframe src="' . esc_url($spswifter_twitch_stream_url) . '" frameborder="0" allowfullscreen></iframe>';
             echo '</div>';
         }
         
-        if ($twitch_chat_embed && $twitch_channel) {
+        if ($spswifter_twitch_chat_embed && $spswifter_twitch_channel) {
             echo '<div class="twitch-chat-embed">';
-            echo '<iframe src="https://www.twitch.tv/embed/' . esc_attr($twitch_channel) . '/chat" frameborder="0"></iframe>';
+            echo '<iframe src="https://www.twitch.tv/embed/' . esc_attr($spswifter_twitch_channel) . '/chat" frameborder="0"></iframe>';
             echo '</div>';
         }
         
@@ -415,61 +415,61 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Add Twitch product fields
      */
-    public function add_twitch_product_fields($product) {
+    public function add_spswifter_twitch_product_fields($product) {
         woocommerce_wp_text_input(array(
-            'id' => '_twitch_channel',
-            'label' => __('Twitch Channel', 'wp-twitch-stream'),
+            'id' => '_spswifter_twitch_channel',
+            'label' => __('Twitch Channel', 'speedyswifter-twitch'),
             'placeholder' => 'channel_name',
             'desc_tip' => true,
-            'description' => __('Enter the Twitch channel name associated with this product', 'wp-twitch-stream'),
+            'description' => __('Enter the Twitch channel name associated with this product', 'speedyswifter-twitch'),
         ));
         
         woocommerce_wp_text_input(array(
-            'id' => '_twitch_stream_url',
-            'label' => __('Stream URL', 'wp-twitch-stream'),
+            'id' => '_spswifter_twitch_stream_url',
+            'label' => __('Stream URL', 'speedyswifter-twitch'),
             'placeholder' => 'https://www.twitch.tv/channel_name/embed',
             'desc_tip' => true,
-            'description' => __('Enter the embed URL for the Twitch stream', 'wp-twitch-stream'),
+            'description' => __('Enter the embed URL for the Twitch stream', 'speedyswifter-twitch'),
         ));
         
         woocommerce_wp_checkbox(array(
-            'id' => '_twitch_enabled',
-            'label' => __('Enable Twitch Integration', 'wp-twitch-stream'),
-            'description' => __('Enable Twitch features for this product', 'wp-twitch-stream'),
+            'id' => '_spswifter_twitch_enabled',
+            'label' => __('Enable Twitch Integration', 'speedyswifter-twitch'),
+            'description' => __('Enable Twitch features for this product', 'speedyswifter-twitch'),
         ));
         
         woocommerce_wp_checkbox(array(
-            'id' => '_twitch_chat_embed',
-            'label' => __('Embed Chat', 'wp-twitch-stream'),
-            'description' => __('Show embedded chat on product page', 'wp-twitch-stream'),
+            'id' => '_spswifter_twitch_chat_embed',
+            'label' => __('Embed Chat', 'speedyswifter-twitch'),
+            'description' => __('Show embedded chat on product page', 'speedyswifter-twitch'),
         ));
     }
     
     /**
      * Save Twitch product fields
      */
-    public function save_twitch_product_fields($post_id) {
-        $twitch_channel = isset($_POST['_twitch_channel']) ? sanitize_text_field($_POST['_twitch_channel']) : '';
-        $twitch_stream_url = isset($_POST['_twitch_stream_url']) ? sanitize_url($_POST['_twitch_stream_url']) : '';
-        $twitch_enabled = isset($_POST['_twitch_enabled']) ? 'yes' : 'no';
-        $twitch_chat_embed = isset($_POST['_twitch_chat_embed']) ? 'yes' : 'no';
+    public function save_spswifter_twitch_product_fields($post_id) {
+        $spswifter_twitch_channel = isset($_POST['_spswifter_twitch_channel']) ? sanitize_text_field($_POST['_spswifter_twitch_channel']) : '';
+        $spswifter_twitch_stream_url = isset($_POST['_spswifter_twitch_stream_url']) ? sanitize_url($_POST['_spswifter_twitch_stream_url']) : '';
+        $spswifter_twitch_enabled = isset($_POST['_spswifter_twitch_enabled']) ? 'yes' : 'no';
+        $spswifter_twitch_chat_embed = isset($_POST['_spswifter_twitch_chat_embed']) ? 'yes' : 'no';
         
-        update_post_meta($post_id, '_twitch_channel', $twitch_channel);
-        update_post_meta($post_id, '_twitch_stream_url', $twitch_stream_url);
-        update_post_meta($post_id, '_twitch_enabled', $twitch_enabled);
-        update_post_meta($post_id, '_twitch_chat_embed', $twitch_chat_embed);
+        update_post_meta($post_id, '_spswifter_twitch_channel', $spswifter_twitch_channel);
+        update_post_meta($post_id, '_spswifter_twitch_stream_url', $spswifter_twitch_stream_url);
+        update_post_meta($post_id, '_spswifter_twitch_enabled', $spswifter_twitch_enabled);
+        update_post_meta($post_id, '_spswifter_twitch_chat_embed', $spswifter_twitch_chat_embed);
     }
     
     /**
      * Add Twitch cart item data
      */
-    public function add_twitch_cart_item_data($cart_item_data, $product_id) {
-        $twitch_enabled = get_post_meta($product_id, '_twitch_enabled', true) === 'yes';
-        $twitch_channel = get_post_meta($product_id, '_twitch_channel', true);
+    public function add_spswifter_twitch_cart_item_data($cart_item_data, $product_id) {
+        $spswifter_twitch_enabled = get_post_meta($product_id, '_spswifter_twitch_enabled', true) === 'yes';
+        $spswifter_twitch_channel = get_post_meta($product_id, '_spswifter_twitch_channel', true);
         
-        if ($twitch_enabled) {
-            $cart_item_data['twitch_enabled'] = $twitch_enabled;
-            $cart_item_data['twitch_channel'] = $twitch_channel;
+        if ($spswifter_twitch_enabled) {
+            $cart_item_data['spswifter_twitch_enabled'] = $spswifter_twitch_enabled;
+            $cart_item_data['spswifter_twitch_channel'] = $spswifter_twitch_channel;
         }
         
         return $cart_item_data;
@@ -478,24 +478,24 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Add Twitch order item meta
      */
-    public function add_twitch_order_item_meta($item_id, $values, $cart_item_key) {
-        if (isset($values['twitch_enabled'])) {
-            wc_add_order_item_meta($item_id, '_twitch_enabled', $values['twitch_enabled']);
+    public function add_spswifter_twitch_order_item_meta($item_id, $values, $cart_item_key) {
+        if (isset($values['spswifter_twitch_enabled'])) {
+            wc_add_order_item_meta($item_id, '_spswifter_twitch_enabled', $values['spswifter_twitch_enabled']);
         }
         
-        if (isset($values['twitch_channel'])) {
-            wc_add_order_item_meta($item_id, '_twitch_channel', $values['twitch_channel']);
+        if (isset($values['spswifter_twitch_channel'])) {
+            wc_add_order_item_meta($item_id, '_spswifter_twitch_channel', $values['spswifter_twitch_channel']);
         }
     }
     
     /**
      * Display Twitch cart item data
      */
-    public function display_twitch_cart_item_data($item_data, $cart_item) {
-        if (isset($cart_item['twitch_enabled']) && $cart_item['twitch_enabled']) {
+    public function display_spswifter_twitch_cart_item_data($item_data, $cart_item) {
+        if (isset($cart_item['spswifter_twitch_enabled']) && $cart_item['spswifter_twitch_enabled']) {
             $item_data[] = array(
-                'key' => __('Twitch Channel', 'wp-twitch-stream'),
-                'value' => $cart_item['twitch_channel'],
+                'key' => __('Twitch Channel', 'speedyswifter-twitch'),
+                'value' => $cart_item['spswifter_twitch_channel'],
             );
         }
         
@@ -505,39 +505,39 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Display Twitch order item meta
      */
-    public function display_twitch_order_item_meta($item_id, $item, $order) {
-        $twitch_channel = $item->get_meta('_twitch_channel');
+    public function display_spswifter_twitch_order_item_meta($item_id, $item, $order) {
+        $spswifter_twitch_channel = $item->get_meta('_spswifter_twitch_channel');
         
-        if ($twitch_channel) {
-            echo '<p><strong>' . __('Twitch Channel', 'wp-twitch-stream') . ':</strong> ' . esc_html($twitch_channel) . '</p>';
+        if ($spswifter_twitch_channel) {
+            echo '<p><strong>' . __('Twitch Channel', 'speedyswifter-twitch') . ':</strong> ' . esc_html($spswifter_twitch_channel) . '</p>';
         }
     }
     
     /**
      * Add Twitch product info
      */
-    public function add_twitch_product_info() {
+    public function add_spswifter_twitch_product_info() {
         global $product;
         
-        $twitch_enabled = get_post_meta($product->get_id(), '_twitch_enabled', true) === 'yes';
+        $spswifter_twitch_enabled = get_post_meta($product->get_id(), '_spswifter_twitch_enabled', true) === 'yes';
         
-        if ($twitch_enabled) {
-            $twitch_channel = get_post_meta($product->get_id(), '_twitch_channel', true);
-            $twitch_stream_url = get_post_meta($product->get_id(), '_twitch_stream_url', true);
+        if ($spswifter_twitch_enabled) {
+            $spswifter_twitch_channel = get_post_meta($product->get_id(), '_spswifter_twitch_channel', true);
+            $spswifter_twitch_stream_url = get_post_meta($product->get_id(), '_spswifter_twitch_stream_url', true);
             
             echo '<div class="twitch-product-info">';
             echo '<div class="twitch-product-header">';
             echo '<span class="twitch-product-badge">🎮 Twitch Product</span>';
             
-            if ($twitch_channel) {
-                echo '<span class="twitch-product-channel">Channel: ' . esc_html($twitch_channel) . '</span>';
+            if ($spswifter_twitch_channel) {
+                echo '<span class="twitch-product-channel">Channel: ' . esc_html($spswifter_twitch_channel) . '</span>';
             }
             
             echo '</div>';
             
-            if ($twitch_stream_url) {
+            if ($spswifter_twitch_stream_url) {
                 echo '<div class="twitch-product-stream">';
-                echo '<iframe src="' . esc_url($twitch_stream_url) . '" frameborder="0" allowfullscreen></iframe>';
+                echo '<iframe src="' . esc_url($spswifter_twitch_stream_url) . '" frameborder="0" allowfullscreen></iframe>';
                 echo '</div>';
             }
             
@@ -548,15 +548,15 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Add Twitch stream button
      */
-    public function add_twitch_stream_button() {
+    public function add_spswifter_twitch_stream_button() {
         global $product;
         
-        $twitch_enabled = get_post_meta($product->get_id(), '_twitch_enabled', true) === 'yes';
-        $twitch_channel = get_post_meta($product->get_id(), '_twitch_channel', true);
+        $spswifter_twitch_enabled = get_post_meta($product->get_id(), '_spswifter_twitch_enabled', true) === 'yes';
+        $spswifter_twitch_channel = get_post_meta($product->get_id(), '_spswifter_twitch_channel', true);
         
-        if ($twitch_enabled && $twitch_channel) {
+        if ($spswifter_twitch_enabled && $spswifter_twitch_channel) {
             echo '<div class="twitch-stream-button-container">';
-            echo '<a href="https://www.twitch.tv/' . esc_attr($twitch_channel) . '" class="twitch-stream-button" target="_blank">';
+            echo '<a href="https://www.twitch.tv/' . esc_attr($spswifter_twitch_channel) . '" class="twitch-stream-button" target="_blank">';
             echo '<span class="twitch-button-icon">🎮</span>';
             echo '<span class="twitch-button-text">Watch Stream</span>';
             echo '</a>';
@@ -567,8 +567,8 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Add Twitch cart notice
      */
-    public function add_twitch_cart_notice() {
-        if ($this->has_twitch_products_in_cart()) {
+    public function add_spswifter_twitch_cart_notice() {
+        if ($this->has_spswifter_twitch_products_in_cart()) {
             echo '<div class="twitch-cart-notice">';
             echo '<div class="twitch-notice-content">';
             echo '<span class="twitch-notice-icon">🎮</span>';
@@ -581,8 +581,8 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Add Twitch checkout notice
      */
-    public function add_twitch_checkout_notice() {
-        if ($this->has_twitch_products_in_cart()) {
+    public function add_spswifter_twitch_checkout_notice() {
+        if ($this->has_spswifter_twitch_products_in_cart()) {
             echo '<div class="twitch-checkout-notice">';
             echo '<div class="twitch-notice-content">';
             echo '<span class="twitch-notice-icon">🎮</span>';
@@ -595,10 +595,10 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Add Twitch order notice
      */
-    public function add_twitch_order_notice($order_id) {
+    public function add_spswifter_twitch_order_notice($order_id) {
         $order = wc_get_order($order_id);
         
-        if ($this->order_has_twitch_products($order)) {
+        if ($this->order_has_spswifter_twitch_products($order)) {
             echo '<div class="twitch-order-notice">';
             echo '<div class="twitch-notice-content">';
             echo '<span class="twitch-notice-icon">🎮</span>';
@@ -611,10 +611,10 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Check if cart has Twitch products
      */
-    private function has_twitch_products_in_cart() {
+    private function has_spswifter_twitch_products_in_cart() {
         if (WC()->cart) {
             foreach (WC()->cart->get_cart() as $cart_item) {
-                if (isset($cart_item['twitch_enabled']) && $cart_item['twitch_enabled']) {
+                if (isset($cart_item['spswifter_twitch_enabled']) && $cart_item['spswifter_twitch_enabled']) {
                     return true;
                 }
             }
@@ -625,9 +625,9 @@ class WP_Twitch_WooCommerce_Integration {
     /**
      * Check if order has Twitch products
      */
-    private function order_has_twitch_products($order) {
+    private function order_has_spswifter_twitch_products($order) {
         foreach ($order->get_items() as $item) {
-            if ($item->get_meta('_twitch_enabled') === 'yes') {
+            if ($item->get_meta('_spswifter_twitch_enabled') === 'yes') {
                 return true;
             }
         }
@@ -640,10 +640,10 @@ class WP_Twitch_WooCommerce_Integration {
     public function customize_add_to_cart_text($text) {
         global $product;
         
-        $twitch_enabled = get_post_meta($product->get_id(), '_twitch_enabled', true) === 'yes';
+        $spswifter_twitch_enabled = get_post_meta($product->get_id(), '_spswifter_twitch_enabled', true) === 'yes';
         
-        if ($twitch_enabled) {
-            return __('Buy & Watch Stream', 'wp-twitch-stream');
+        if ($spswifter_twitch_enabled) {
+            return __('Buy & Watch Stream', 'speedyswifter-twitch');
         }
         
         return $text;
@@ -655,10 +655,10 @@ class WP_Twitch_WooCommerce_Integration {
     public function customize_loop_add_to_cart_text($text) {
         global $product;
         
-        $twitch_enabled = get_post_meta($product->get_id(), '_twitch_enabled', true) === 'yes';
+        $spswifter_twitch_enabled = get_post_meta($product->get_id(), '_spswifter_twitch_enabled', true) === 'yes';
         
-        if ($twitch_enabled) {
-            return __('Buy & Watch', 'wp-twitch-stream');
+        if ($spswifter_twitch_enabled) {
+            return __('Buy & Watch', 'speedyswifter-twitch');
         }
         
         return $text;
@@ -668,9 +668,9 @@ class WP_Twitch_WooCommerce_Integration {
      * Customize loop add to cart link
      */
     public function customize_loop_add_to_cart_link($link, $product) {
-        $twitch_enabled = get_post_meta($product->get_id(), '_twitch_enabled', true) === 'yes';
+        $spswifter_twitch_enabled = get_post_meta($product->get_id(), '_spswifter_twitch_enabled', true) === 'yes';
         
-        if ($twitch_enabled) {
+        if ($spswifter_twitch_enabled) {
             $link = str_replace('add_to_cart_button', 'add_to_cart_button twitch-product', $link);
         }
         
@@ -681,7 +681,7 @@ class WP_Twitch_WooCommerce_Integration {
      * Handle WooCommerce AJAX
      */
     public function handle_woo_product_ajax() {
-        check_ajax_referer('twitch_woo_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_woo_nonce', 'nonce');
         
         $action = $_POST['woo_action'] ?? '';
         
@@ -713,14 +713,14 @@ class WP_Twitch_WooCommerce_Integration {
             wp_send_json_error('Product not found');
         }
         
-        $twitch_enabled = get_post_meta($product_id, '_twitch_enabled', true) === 'yes';
-        $twitch_channel = get_post_meta($product_id, '_twitch_channel', true);
-        $twitch_stream_url = get_post_meta($product_id, '_twitch_stream_url', true);
+        $spswifter_twitch_enabled = get_post_meta($product_id, '_spswifter_twitch_enabled', true) === 'yes';
+        $spswifter_twitch_channel = get_post_meta($product_id, '_spswifter_twitch_channel', true);
+        $spswifter_twitch_stream_url = get_post_meta($product_id, '_spswifter_twitch_stream_url', true);
         
         wp_send_json_success(array(
-            'enabled' => $twitch_enabled,
-            'channel' => $twitch_channel,
-            'stream_url' => $twitch_stream_url,
+            'enabled' => $spswifter_twitch_enabled,
+            'channel' => $spswifter_twitch_channel,
+            'stream_url' => $spswifter_twitch_stream_url,
         ));
     }
     
@@ -734,7 +734,7 @@ class WP_Twitch_WooCommerce_Integration {
             wp_send_json_error('Channel is required');
         }
         
-        $stream_data = $this->twitch_api->get_stream_data($channel);
+        $stream_data = $this->spswifter_twitch_api->get_stream_data($channel);
         
         wp_send_json_success(array(
             'is_live' => !empty($stream_data),
@@ -766,14 +766,14 @@ class WP_Twitch_WooCommerce_Integration {
             <h1 class="wp-heading-inline">Twitch WooCommerce Integration Settings</h1>
             
             <form method="post" action="options.php">
-                <?php settings_fields('twitch_woocommerce_settings'); ?>
-                <?php do_settings_sections('twitch_woocommerce_settings'); ?>
+                <?php settings_fields('spswifter_twitch_woocommerce_settings'); ?>
+                <?php do_settings_sections('spswifter_twitch_woocommerce_settings'); ?>
                 
                 <table class="form-table">
                     <tr>
                         <th scope="row">Enable WooCommerce Integration</th>
                         <td>
-                            <input type="checkbox" name="twitch_woocommerce_settings[enabled]" 
+                            <input type="checkbox" name="spswifter_twitch_woocommerce_settings[enabled]" 
                                    <?php checked($this->woo_settings['enabled'], true); ?> />
                             <label>Enable Twitch integration with WooCommerce products</label>
                         </td>
@@ -782,7 +782,7 @@ class WP_Twitch_WooCommerce_Integration {
                     <tr>
                         <th scope="row">Show Stream on Product Pages</th>
                         <td>
-                            <input type="checkbox" name="twitch_woocommerce_settings[show_stream_product]" 
+                            <input type="checkbox" name="spswifter_twitch_woocommerce_settings[show_stream_product]" 
                                    <?php checked($this->woo_settings['show_stream_product'], true); ?> />
                             <label>Show embedded stream on product pages</label>
                         </td>
@@ -791,7 +791,7 @@ class WP_Twitch_WooCommerce_Integration {
                     <tr>
                         <th scope="row">Show Chat on Product Pages</th>
                         <td>
-                            <input type="checkbox" name="twitch_woocommerce_settings[show_chat_product]" 
+                            <input type="checkbox" name="spswifter_twitch_woocommerce_settings[show_chat_product]" 
                                    <?php checked($this->woo_settings['show_chat_product'], false); ?> />
                             <label>Show embedded chat on product pages</label>
                         </td>
@@ -800,7 +800,7 @@ class WP_Twitch_WooCommerce_Integration {
                     <tr>
                         <th scope="row">Show Cart Notices</th>
                         <td>
-                            <input type="checkbox" name="twitch_woocommerce_settings[show_cart_notices]" 
+                            <input type="checkbox" name="spswifter_twitch_woocommerce_settings[show_cart_notices]" 
                                    <?php checked($this->woo_settings['show_cart_notices'], true); ?> />
                             <label>Show notices when Twitch products are in cart</label>
                         </td>
@@ -809,7 +809,7 @@ class WP_Twitch_WooCommerce_Integration {
                     <tr>
                         <th scope="row">Show Checkout Notices</th>
                         <td>
-                            <input type="checkbox" name="twitch_woocommerce_settings[show_checkout_notices]" 
+                            <input type="checkbox" name="spswifter_twitch_woocommerce_settings[show_checkout_notices]" 
                                    <?php checked($this->woo_settings['show_checkout_notices'], true); ?> />
                             <label>Show notices during checkout for Twitch products</label>
                         </td>
@@ -818,7 +818,7 @@ class WP_Twitch_WooCommerce_Integration {
                     <tr>
                         <th scope="row">Custom Add to Cart Text</th>
                         <td>
-                            <input type="text" name="twitch_woocommerce_settings[add_to_cart_text]" 
+                            <input type="text" name="spswifter_twitch_woocommerce_settings[add_to_cart_text]" 
                                    value="<?php echo esc_attr($this->woo_settings['add_to_cart_text'] ?? 'Buy & Watch Stream'); ?>" 
                                    class="regular-text" />
                             <p class="description">Custom text for add to cart button on Twitch products</p>
@@ -828,7 +828,7 @@ class WP_Twitch_WooCommerce_Integration {
                     <tr>
                         <th scope="row">Stream Embed Width</th>
                         <td>
-                            <input type="number" name="twitch_woocommerce_settings[stream_width]" 
+                            <input type="number" name="spswifter_twitch_woocommerce_settings[stream_width]" 
                                    value="<?php echo esc_attr($this->woo_settings['stream_width'] ?? 640); ?>" 
                                    min="300" max="1920" step="10" class="small-text" />
                             <label>px</label>
@@ -838,7 +838,7 @@ class WP_Twitch_WooCommerce_Integration {
                     <tr>
                         <th scope="row">Stream Embed Height</th>
                         <td>
-                            <input type="number" name="twitch_woocommerce_settings[stream_height]" 
+                            <input type="number" name="spswifter_twitch_woocommerce_settings[stream_height]" 
                                    value="<?php echo esc_attr($this->woo_settings['stream_height'] ?? 360); ?>" 
                                    min="200" max="1080" step="10" class="small-text" />
                             <label>px</label>
@@ -856,7 +856,7 @@ class WP_Twitch_WooCommerce_Integration {
      * Get WooCommerce settings
      */
     private function get_woo_settings() {
-        return get_option('twitch_woocommerce_settings', array(
+        return get_option('spswifter_twitch_woocommerce_settings', array(
             'enabled' => true,
             'show_stream_product' => true,
             'show_chat_product' => false,
@@ -893,7 +893,7 @@ class WP_Twitch_WooCommerce_Integration {
         
         wp_localize_script('twitch-woocommerce', 'twitchWooCommerce', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('twitch_woo_nonce'),
+            'nonce' => wp_create_nonce('spswifter_twitch_woo_nonce'),
             'enabled' => $this->woo_settings['enabled'] ?? true,
             'showStreamProduct' => $this->woo_settings['show_stream_product'] ?? true,
             'showChatProduct' => $this->woo_settings['show_chat_product'] ?? false,
@@ -902,4 +902,4 @@ class WP_Twitch_WooCommerce_Integration {
 }
 
 // Initialize WooCommerce integration
-new WP_Twitch_WooCommerce_Integration();
+new SPSWIFTER_Twitch_WooCommerce_Integration();

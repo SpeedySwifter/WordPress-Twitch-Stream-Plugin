@@ -5,14 +5,14 @@
  * Für erweiterte OAuth-Funktionalität siehe:
  * https://github.com/SpeedySwifter/WP-Twitch-Access-Token
  */
-class WP_Twitch_Token_Manager {
+class SPSWIFTER_Twitch_Token_Manager {
     
     /**
      * Access Token abrufen oder erneuern
      */
     public static function get_access_token($force_refresh = false) {
-        $client_id = get_option('twitch_client_id');
-        $client_secret = get_option('twitch_client_secret');
+        $client_id = get_option('spswifter_twitch_client_id');
+        $client_secret = get_option('spswifter_twitch_client_secret');
         
         if (empty($client_id) || empty($client_secret)) {
             return false;
@@ -20,7 +20,7 @@ class WP_Twitch_Token_Manager {
         
         // Token aus Cache laden
         if (!$force_refresh) {
-            $token = get_transient('twitch_access_token');
+            $token = get_transient('spswifter_twitch_access_token');
             if ($token) {
                 return $token;
             }
@@ -54,7 +54,7 @@ class WP_Twitch_Token_Manager {
         $expires_in = $data['expires_in'] ?? 432000; // Standard: 5 Tage
         
         // Token cachen (etwas kürzer als die tatsächliche Gültigkeit)
-        set_transient('twitch_access_token', $token, $expires_in - 3600);
+        set_transient('spswifter_twitch_access_token', $token, $expires_in - 3600);
         
         return $token;
     }
@@ -67,7 +67,7 @@ class WP_Twitch_Token_Manager {
             return false;
         }
         
-        $client_id = get_option('twitch_client_id');
+        $client_id = get_option('spswifter_twitch_client_id');
         if (empty($client_id)) {
             return false;
         }
@@ -92,7 +92,7 @@ class WP_Twitch_Token_Manager {
      * Token zwangsläufig erneuern
      */
     public static function refresh_token() {
-        delete_transient('twitch_access_token');
+        delete_transient('spswifter_twitch_access_token');
         return self::get_access_token(true);
     }
     
@@ -100,12 +100,12 @@ class WP_Twitch_Token_Manager {
      * Alle Twitch-Caches löschen
      */
     public static function clear_all_caches() {
-        delete_transient('twitch_access_token');
+        delete_transient('spswifter_twitch_access_token');
         
         // Alle Stream-Status-Caches löschen
         global $wpdb;
         $transient_names = $wpdb->get_col(
-            "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '_transient_twitch_%'"
+            "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '_transient_spswifter_twitch_%'"
         );
         
         foreach ($transient_names as $transient_name) {
@@ -117,7 +117,7 @@ class WP_Twitch_Token_Manager {
      * API-Limits prüfen
      */
     public static function check_rate_limits() {
-        $rate_limit_key = 'twitch_api_calls_' . date('Y-m-d-H');
+        $rate_limit_key = 'spswifter_twitch_api_calls_' . date('Y-m-d-H');
         $calls = get_transient($rate_limit_key) ?: 0;
         
         // Twitch API Limit: 30 calls pro Minute
@@ -136,16 +136,16 @@ class WP_Twitch_Token_Manager {
      */
     public static function get_debug_info() {
         $info = [
-            'client_id_set' => !empty(get_option('twitch_client_id')),
-            'client_secret_set' => !empty(get_option('twitch_client_secret')),
-            'token_cached' => get_transient('twitch_access_token') !== false,
+            'client_id_set' => !empty(get_option('spswifter_twitch_client_id')),
+            'client_secret_set' => !empty(get_option('spswifter_twitch_client_secret')),
+            'token_cached' => get_transient('spswifter_twitch_access_token') !== false,
             'token_valid' => false,
-            'last_error' => get_transient('twitch_last_error'),
-            'api_calls_this_hour' => get_transient('twitch_api_calls_' . date('Y-m-d-H')) ?: 0
+            'last_error' => get_transient('spswifter_twitch_last_error'),
+            'api_calls_this_hour' => get_transient('spswifter_twitch_api_calls_' . date('Y-m-d-H')) ?: 0
         ];
         
         if ($info['token_cached']) {
-            $token = get_transient('twitch_access_token');
+            $token = get_transient('spswifter_twitch_access_token');
             $info['token_valid'] = self::validate_token($token);
         }
         
@@ -154,23 +154,23 @@ class WP_Twitch_Token_Manager {
 }
 
 // Admin-Actions
-add_action('admin_post_twitch_clear_cache', function() {
+add_action('admin_post_spswifter_twitch_clear_cache', function() {
     if (!current_user_can('manage_options')) {
         wp_die('Unauthorized');
     }
     
-    WP_Twitch_Token_Manager::clear_all_caches();
+    SPSWIFTER_Twitch_Token_Manager::clear_all_caches();
     
     wp_redirect(admin_url('options-general.php?page=twitch-api-settings&cleared=1'));
     exit;
 });
 
-add_action('admin_post_twitch_refresh_token', function() {
+add_action('admin_post_spswifter_twitch_refresh_token', function() {
     if (!current_user_can('manage_options')) {
         wp_die('Unauthorized');
     }
     
-    $success = WP_Twitch_Token_Manager::refresh_token();
+    $success = SPSWIFTER_Twitch_Token_Manager::refresh_token();
     
     wp_redirect(admin_url('options-general.php?page=twitch-api-settings&refreshed=' . ($success ? '1' : '0')));
     exit;

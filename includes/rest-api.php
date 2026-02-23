@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_REST_API {
+class SPSWIFTER_Twitch_REST_API {
     
     public function __construct() {
         add_action('rest_api_init', array($this, 'register_routes'));
@@ -18,7 +18,7 @@ class WP_Twitch_REST_API {
      */
     public function register_routes() {
         // Stream endpoints
-        register_rest_route('wp-twitch-stream/v1', '/streams', array(
+        register_rest_route('spswifter-twitch/v1', '/streams', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_streams'),
             'permission_callback' => array($this, 'check_permissions'),
@@ -45,7 +45,7 @@ class WP_Twitch_REST_API {
         ));
         
         // Single stream endpoint
-        register_rest_route('wp-twitch-stream/v1', '/streams/(?P<channel>[a-zA-Z0-9_]+)', array(
+        register_rest_route('spswifter-twitch/v1', '/streams/(?P<channel>[a-zA-Z0-9_]+)', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_stream'),
             'permission_callback' => array($this, 'check_permissions'),
@@ -59,7 +59,7 @@ class WP_Twitch_REST_API {
         ));
         
         // VOD endpoints
-        register_rest_route('wp-twitch-stream/v1', '/videos', array(
+        register_rest_route('spswifter-twitch/v1', '/videos', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_videos'),
             'permission_callback' => array($this, 'check_permissions'),
@@ -86,7 +86,7 @@ class WP_Twitch_REST_API {
         ));
         
         // Clips endpoints
-        register_rest_route('wp-twitch-stream/v1', '/clips', array(
+        register_rest_route('spswifter-twitch/v1', '/clips', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_clips'),
             'permission_callback' => array($this, 'check_permissions'),
@@ -107,7 +107,7 @@ class WP_Twitch_REST_API {
         ));
         
         // Analytics endpoints
-        register_rest_route('wp-twitch-stream/v1', '/analytics/(?P<channel>[a-zA-Z0-9_]+)', array(
+        register_rest_route('spswifter-twitch/v1', '/analytics/(?P<channel>[a-zA-Z0-9_]+)', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_analytics'),
             'permission_callback' => array($this, 'check_permissions'),
@@ -127,7 +127,7 @@ class WP_Twitch_REST_API {
         ));
         
         // Dashboard endpoint
-        register_rest_route('wp-twitch-stream/v1', '/dashboard', array(
+        register_rest_route('spswifter-twitch/v1', '/dashboard', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_dashboard_data'),
             'permission_callback' => array($this, 'check_permissions'),
@@ -147,14 +147,14 @@ class WP_Twitch_REST_API {
         ));
         
         // Settings endpoint
-        register_rest_route('wp-twitch-stream/v1', '/settings', array(
+        register_rest_route('spswifter-twitch/v1', '/settings', array(
             'methods' => array('GET', 'POST'),
             'callback' => array($this, 'handle_settings'),
             'permission_callback' => array($this, 'check_admin_permissions'),
         ));
         
         // Cache management endpoint
-        register_rest_route('wp-twitch-stream/v1', '/cache/(?P<action>[a-z]+)', array(
+        register_rest_route('spswifter-twitch/v1', '/cache/(?P<action>[a-z]+)', array(
             'methods' => 'POST',
             'callback' => array($this, 'handle_cache'),
             'permission_callback' => array($this, 'check_admin_permissions'),
@@ -191,7 +191,7 @@ class WP_Twitch_REST_API {
         $limit = $request->get_param('limit');
         $offset = $request->get_param('offset');
         
-        $api = new WP_Twitch_API();
+        $api = new SPSWIFTER_Twitch_API();
         $streams = array();
         
         if ($channels) {
@@ -225,7 +225,7 @@ class WP_Twitch_REST_API {
     public function get_stream($request) {
         $channel = $request->get_param('channel');
         
-        $api = new WP_Twitch_API();
+        $api = new SPSWIFTER_Twitch_API();
         $stream_data = $api->get_complete_stream_info($channel);
         
         if (!$stream_data) {
@@ -250,7 +250,7 @@ class WP_Twitch_REST_API {
         $type = $request->get_param('type');
         $limit = $request->get_param('limit');
         
-        $api = new WP_Twitch_API();
+        $api = new SPSWIFTER_Twitch_API();
         $videos = $api->get_channel_videos($channel, $limit, $type);
         
         if (!$videos) {
@@ -280,7 +280,7 @@ class WP_Twitch_REST_API {
         $channel = $request->get_param('channel');
         $limit = $request->get_param('limit');
         
-        $api = new WP_Twitch_API();
+        $api = new SPSWIFTER_Twitch_API();
         $clips = $api->get_channel_clips($channel, $limit);
         
         if (!$clips) {
@@ -310,7 +310,7 @@ class WP_Twitch_REST_API {
         $channel = $request->get_param('channel');
         $period = $request->get_param('period');
         
-        $analytics = new WP_Twitch_Analytics();
+        $analytics = new SPSWIFTER_Twitch_Analytics();
         $data = $analytics->get_channel_analytics($channel, $period);
         
         if (!$data) {
@@ -334,7 +334,7 @@ class WP_Twitch_REST_API {
         $channels = $request->get_param('channels');
         $period = $request->get_param('period');
         
-        $dashboard = new WP_Twitch_Dashboard();
+        $dashboard = new SPSWIFTER_Twitch_Dashboard();
         $data = $dashboard->get_dashboard_data($channels, $period);
         
         return new WP_REST_Response(array(
@@ -351,12 +351,12 @@ class WP_Twitch_REST_API {
         
         if ($method === 'GET') {
             $settings = array(
-                'client_id' => get_option('twitch_client_id'),
-                'api_connected' => get_option('twitch_api_connected', false),
-                'cache_enabled' => get_option('twitch_cache_enabled', true),
-                'cache_duration' => get_option('twitch_cache_duration', 300),
-                'analytics_enabled' => get_option('twitch_analytics_enabled', false),
-                'webhook_enabled' => get_option('twitch_webhook_enabled', false),
+                'client_id' => get_option('spswifter_twitch_client_id'),
+                'api_connected' => get_option('spswifter_twitch_api_connected', false),
+                'cache_enabled' => get_option('spswifter_twitch_cache_enabled', true),
+                'cache_duration' => get_option('spswifter_twitch_cache_duration', 300),
+                'analytics_enabled' => get_option('spswifter_twitch_analytics_enabled', false),
+                'webhook_enabled' => get_option('spswifter_twitch_webhook_enabled', false),
             );
             
             return new WP_REST_Response(array(
@@ -367,7 +367,7 @@ class WP_Twitch_REST_API {
             $settings = $request->get_json_params();
             
             foreach ($settings as $key => $value) {
-                update_option('twitch_' . $key, $value);
+                update_option('spswifter_twitch_' . $key, $value);
             }
             
             return new WP_REST_Response(array(
@@ -382,7 +382,7 @@ class WP_Twitch_REST_API {
      */
     public function handle_cache($request) {
         $action = $request->get_param('action');
-        $cache = new WP_Twitch_Cache();
+        $cache = new SPSWIFTER_Twitch_Cache();
         
         switch ($action) {
             case 'clear':
@@ -483,7 +483,7 @@ class WP_Twitch_REST_API {
      * Get top streams
      */
     private function get_top_streams($limit = 10, $offset = 0) {
-        $api = new WP_Twitch_API();
+        $api = new SPSWIFTER_Twitch_API();
         
         $response = wp_remote_get(
             "https://api.twitch.tv/helix/streams?first={$limit}",
@@ -526,4 +526,4 @@ class WP_Twitch_REST_API {
 }
 
 // Initialize REST API
-new WP_Twitch_REST_API();
+new SPSWIFTER_Twitch_REST_API();

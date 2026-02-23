@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Membership_Integration {
+class SPSWIFTER_Twitch_Membership_Integration {
     
     private $membership_settings;
     private $supported_plugins = array();
@@ -25,8 +25,8 @@ class WP_Twitch_Membership_Integration {
         add_action('init', array($this, 'init_membership_integration'));
         add_action('plugins_loaded', array($this, 'load_membership_hooks'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_membership_scripts'));
-        add_action('wp_ajax_twitch_membership', array($this, 'handle_membership_ajax'));
-        add_action('wp_ajax_nopriv_twitch_membership', array($this, 'handle_membership_ajax'));
+        add_action('wp_ajax_spswifter_twitch_membership', array($this, 'handle_membership_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_membership', array($this, 'handle_membership_ajax'));
         add_action('admin_menu', array($this, 'add_membership_settings_menu'));
         
         // Register shortcodes
@@ -117,9 +117,9 @@ class WP_Twitch_Membership_Integration {
         // Common membership hooks
         add_action('wp_head', array($this, 'add_membership_head_content'));
         add_filter('the_content', array($this, 'restrict_content_based_on_membership'));
-        add_filter('twitch_stream_content', array($this, 'filter_stream_content_for_members'));
-        add_action('twitch_before_stream', array($this, 'check_stream_access'));
-        add_action('twitch_stream_access_denied', array($this, 'show_membership_upgrade_prompt'));
+        add_filter('spswifter_twitch_stream_content', array($this, 'filter_stream_content_for_members'));
+        add_action('spswifter_twitch_before_stream', array($this, 'check_stream_access'));
+        add_action('spswifter_twitch_stream_access_denied', array($this, 'show_membership_upgrade_prompt'));
     }
     
     /**
@@ -157,9 +157,9 @@ class WP_Twitch_Membership_Integration {
         }
         
         // MemberPress specific hooks
-        add_action('mepr_account_nav', array($this, 'add_twitch_to_memberpress_account'));
-        add_action('mepr_account_content', array($this, 'show_twitch_membership_content'));
-        add_filter('mepr-rule-conditions', array($this, 'add_twitch_rule_conditions'));
+        add_action('mepr_account_nav', array($this, 'add_spswifter_twitch_to_memberpress_account'));
+        add_action('mepr_account_content', array($this, 'show_spswifter_twitch_membership_content'));
+        add_filter('mepr-rule-conditions', array($this, 'add_spswifter_twitch_rule_conditions'));
         add_action('mepr-process-signup', array($this, 'handle_memberpress_signup'));
         add_action('mepr_transaction-recorded', array($this, 'handle_memberpress_payment'));
     }
@@ -176,7 +176,7 @@ class WP_Twitch_Membership_Integration {
         add_action('rcp_member_level_updated', array($this, 'handle_rcp_level_change'));
         add_action('rcp_after_membership_expire', array($this, 'handle_rcp_expiration'));
         add_filter('rcp_can_access_content', array($this, 'check_rcp_content_access'), 10, 3);
-        add_action('rcp_before_subscription_form', array($this, 'add_twitch_to_rcp_form'));
+        add_action('rcp_before_subscription_form', array($this, 'add_spswifter_twitch_to_rcp_form'));
     }
     
     /**
@@ -188,10 +188,10 @@ class WP_Twitch_Membership_Integration {
         }
         
         // PMPro specific hooks
-        add_action('pmpro_membership_level_after_other_settings', array($this, 'add_twitch_pmpro_settings'));
+        add_action('pmpro_membership_level_after_other_settings', array($this, 'add_spswifter_twitch_pmpro_settings'));
         add_action('pmpro_after_checkout', array($this, 'handle_pmpro_checkout'));
         add_filter('pmpro_has_membership_access_filter', array($this, 'check_pmpro_access'), 10, 4);
-        add_action('pmpro_membership_post_membership_saved', array($this, 'save_pmpro_twitch_settings'));
+        add_action('pmpro_membership_post_membership_saved', array($this, 'save_pmpro_spswifter_twitch_settings'));
     }
     
     /**
@@ -205,8 +205,8 @@ class WP_Twitch_Membership_Integration {
         // WC Memberships specific hooks
         add_action('wc_memberships_membership_saved', array($this, 'handle_wc_membership_save'));
         add_filter('wc_memberships_user_has_membership_access', array($this, 'check_wc_membership_access'), 10, 4);
-        add_action('wc_memberships_before_members_area_content', array($this, 'add_twitch_to_members_area'));
-        add_filter('wc_memberships_members_area_my_memberships_actions', array($this, 'add_twitch_membership_actions'));
+        add_action('wc_memberships_before_members_area_content', array($this, 'add_spswifter_twitch_to_members_area'));
+        add_filter('wc_memberships_members_area_my_memberships_actions', array($this, 'add_spswifter_twitch_membership_actions'));
     }
     
     /**
@@ -218,10 +218,10 @@ class WP_Twitch_Membership_Integration {
         }
         
         // UM specific hooks
-        add_action('um_after_account_fields', array($this, 'add_twitch_to_um_account'));
+        add_action('um_after_account_fields', array($this, 'add_spswifter_twitch_to_um_account'));
         add_action('um_user_register', array($this, 'handle_um_registration'));
-        add_filter('um_user_profile_tabs', array($this, 'add_twitch_um_profile_tab'));
-        add_action('um_profile_content_twitch', array($this, 'show_twitch_um_profile_content'));
+        add_filter('um_user_profile_tabs', array($this, 'add_spswifter_twitch_um_profile_tab'));
+        add_action('um_profile_content_twitch', array($this, 'show_spswifter_twitch_um_profile_content'));
     }
     
     /**
@@ -233,7 +233,7 @@ class WP_Twitch_Membership_Integration {
         }
         
         // s2Member specific hooks
-        add_action('ws_plugin__s2member_during_configure_user_roles', array($this, 'add_twitch_s2member_roles'));
+        add_action('ws_plugin__s2member_during_configure_user_roles', array($this, 'add_spswifter_twitch_s2member_roles'));
         add_filter('ws_plugin__s2member_check_specific_level', array($this, 'check_s2member_level_access'));
         add_action('ws_plugin__s2member_after_payment', array($this, 'handle_s2member_payment'));
         add_filter('ws_plugin__s2member_content_filter', array($this, 'filter_s2member_content'));
@@ -244,16 +244,16 @@ class WP_Twitch_Membership_Integration {
      */
     private function add_membership_features() {
         // Add membership-based stream access
-        add_filter('twitch_stream_access_level', array($this, 'get_membership_access_level'));
+        add_filter('spswifter_twitch_stream_access_level', array($this, 'get_membership_access_level'));
         
         // Add membership badges
-        add_filter('twitch_chat_user_badges', array($this, 'add_membership_badges'));
+        add_filter('spswifter_twitch_chat_user_badges', array($this, 'add_membership_badges'));
         
         // Add membership-specific chat features
-        add_filter('twitch_chat_permissions', array($this, 'set_chat_permissions'));
+        add_filter('spswifter_twitch_chat_permissions', array($this, 'set_chat_permissions'));
         
         // Add membership analytics
-        add_filter('twitch_analytics_data', array($this, 'add_membership_analytics'));
+        add_filter('spswifter_twitch_analytics_data', array($this, 'add_membership_analytics'));
     }
     
     /**
@@ -261,16 +261,16 @@ class WP_Twitch_Membership_Integration {
      */
     private function add_content_restrictions() {
         // Restrict VODs based on membership
-        add_filter('twitch_vod_access', array($this, 'restrict_vod_access'));
+        add_filter('spswifter_twitch_vod_access', array($this, 'restrict_vod_access'));
         
         // Restrict clips based on membership
-        add_filter('twitch_clip_access', array($this, 'restrict_clip_access'));
+        add_filter('spswifter_twitch_clip_access', array($this, 'restrict_clip_access'));
         
         // Restrict chat based on membership
-        add_filter('twitch_chat_access', array($this, 'restrict_chat_access'));
+        add_filter('spswifter_twitch_chat_access', array($this, 'restrict_chat_access'));
         
         // Restrict analytics based on membership
-        add_filter('twitch_analytics_access', array($this, 'restrict_analytics_access'));
+        add_filter('spswifter_twitch_analytics_access', array($this, 'restrict_analytics_access'));
     }
     
     /**
@@ -278,7 +278,7 @@ class WP_Twitch_Membership_Integration {
      */
     private function add_membership_levels() {
         // Define Twitch-specific membership levels
-        $this->twitch_membership_levels = array(
+        $this->spswifter_twitch_membership_levels = array(
             'free' => array(
                 'name' => 'Free',
                 'access' => array('basic_stream', 'chat_read'),
@@ -306,11 +306,11 @@ class WP_Twitch_Membership_Integration {
      * Register membership shortcodes
      */
     public function register_membership_shortcodes() {
-        add_shortcode('twitch_membership_content', array($this, 'render_membership_content_shortcode'));
-        add_shortcode('twitch_membership_required', array($this, 'render_membership_required_shortcode'));
-        add_shortcode('twitch_membership_levels', array($this, 'render_membership_levels_shortcode'));
-        add_shortcode('twitch_membership_upgrade', array($this, 'render_membership_upgrade_shortcode'));
-        add_shortcode('twitch_membership_badge', array($this, 'render_membership_badge_shortcode'));
+        add_shortcode('spswifter_twitch_membership_content', array($this, 'render_membership_content_shortcode'));
+        add_shortcode('spswifter_twitch_membership_required', array($this, 'render_membership_required_shortcode'));
+        add_shortcode('spswifter_twitch_membership_levels', array($this, 'render_membership_levels_shortcode'));
+        add_shortcode('spswifter_twitch_membership_upgrade', array($this, 'render_membership_upgrade_shortcode'));
+        add_shortcode('spswifter_twitch_membership_badge', array($this, 'render_membership_badge_shortcode'));
     }
     
     /**
@@ -378,7 +378,7 @@ class WP_Twitch_Membership_Integration {
         ob_start();
         ?>
         <div class="twitch-membership-levels twitch-style-<?php echo esc_attr($atts['style']); ?>">
-            <?php foreach ($this->twitch_membership_levels as $level_key => $level): ?>
+            <?php foreach ($this->spswifter_twitch_membership_levels as $level_key => $level): ?>
                 <?php
                 $has_access = $this->user_has_membership_level($level_key);
                 $is_current = $this->get_current_membership_level() === $level_key;
@@ -461,7 +461,7 @@ class WP_Twitch_Membership_Integration {
             return '';
         }
         
-        $level_info = $this->twitch_membership_levels[$user_level];
+        $level_info = $this->spswifter_twitch_membership_levels[$user_level];
         
         ob_start();
         ?>
@@ -696,7 +696,7 @@ class WP_Twitch_Membership_Integration {
         $user_level = $this->get_current_membership_level();
         
         // Check for membership-specific content restrictions
-        if (has_shortcode($content, 'twitch_membership_required')) {
+        if (has_shortcode($content, 'spswifter_twitch_membership_required')) {
             // Let the shortcode handle the restriction
             return $content;
         }
@@ -735,7 +735,7 @@ class WP_Twitch_Membership_Integration {
         
         // Check if user has access to current stream
         if (!$this->user_has_stream_access($user_level)) {
-            do_action('twitch_stream_access_denied', $user_level);
+            do_action('spswifter_twitch_stream_access_denied', $user_level);
             wp_die('Access denied. Membership required.');
         }
     }
@@ -757,7 +757,7 @@ class WP_Twitch_Membership_Integration {
      * Handle membership AJAX
      */
     public function handle_membership_ajax() {
-        check_ajax_referer('twitch_membership_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_membership_nonce', 'nonce');
         
         $action = $_POST['membership_action'] ?? '';
         
@@ -801,7 +801,7 @@ class WP_Twitch_Membership_Integration {
         
         wp_send_json_success(array(
             'level' => $level,
-            'level_info' => $this->twitch_membership_levels[$level] ?? null
+            'level_info' => $this->spswifter_twitch_membership_levels[$level] ?? null
         ));
     }
     
@@ -815,7 +815,7 @@ class WP_Twitch_Membership_Integration {
         wp_send_json_success(array(
             'current_level' => $current_level,
             'target_level' => $target_level,
-            'target_info' => $this->twitch_membership_levels[$target_level] ?? null,
+            'target_info' => $this->spswifter_twitch_membership_levels[$target_level] ?? null,
             'upgrade_url' => $this->get_upgrade_url($target_level)
         ));
     }
@@ -856,14 +856,14 @@ class WP_Twitch_Membership_Integration {
             </div>
             
             <form method="post" action="options.php">
-                <?php settings_fields('twitch_membership_settings'); ?>
-                <?php do_settings_sections('twitch_membership_settings'); ?>
+                <?php settings_fields('spswifter_twitch_membership_settings'); ?>
+                <?php do_settings_sections('spswifter_twitch_membership_settings'); ?>
                 
                 <table class="form-table">
                     <tr>
                         <th scope="row">Enable Membership Integration</th>
                         <td>
-                            <input type="checkbox" name="twitch_membership_settings[enabled]" 
+                            <input type="checkbox" name="spswifter_twitch_membership_settings[enabled]" 
                                    <?php checked($this->membership_settings['enabled'], true); ?> />
                             <label>Enable Twitch integration with membership plugins</label>
                         </td>
@@ -872,8 +872,8 @@ class WP_Twitch_Membership_Integration {
                     <tr>
                         <th scope="row">Default Access Level</th>
                         <td>
-                            <select name="twitch_membership_settings[default_level]">
-                                <?php foreach ($this->twitch_membership_levels as $level_key => $level): ?>
+                            <select name="spswifter_twitch_membership_settings[default_level]">
+                                <?php foreach ($this->spswifter_twitch_membership_levels as $level_key => $level): ?>
                                     <option value="<?php echo esc_attr($level_key); ?>" 
                                             <?php selected($this->membership_settings['default_level'], $level_key); ?>>
                                         <?php echo esc_html($level['name']); ?>
@@ -888,7 +888,7 @@ class WP_Twitch_Membership_Integration {
                         <td>
                             <?php
                             wp_dropdown_pages(array(
-                                'name' => 'twitch_membership_settings[upgrade_page_id]',
+                                'name' => 'spswifter_twitch_membership_settings[upgrade_page_id]',
                                 'show_option_none' => 'Select a page',
                                 'selected' => $this->membership_settings['upgrade_page_id'] ?? 0
                             ));
@@ -900,7 +900,7 @@ class WP_Twitch_Membership_Integration {
                     <tr>
                         <th scope="row">Show Membership Badges</th>
                         <td>
-                            <input type="checkbox" name="twitch_membership_settings[show_badges]" 
+                            <input type="checkbox" name="spswifter_twitch_membership_settings[show_badges]" 
                                    <?php checked($this->membership_settings['show_badges'], true); ?> />
                             <label>Show membership badges in chat and user profiles</label>
                         </td>
@@ -909,7 +909,7 @@ class WP_Twitch_Membership_Integration {
                     <tr>
                         <th scope="row">Restrict VOD Access</th>
                         <td>
-                            <input type="checkbox" name="twitch_membership_settings[restrict_vods]" 
+                            <input type="checkbox" name="spswifter_twitch_membership_settings[restrict_vods]" 
                                    <?php checked($this->membership_settings['restrict_vods'], false); ?> />
                             <label>Restrict VOD access based on membership level</label>
                         </td>
@@ -918,7 +918,7 @@ class WP_Twitch_Membership_Integration {
                     <tr>
                         <th scope="row">Restrict Chat Access</th>
                         <td>
-                            <input type="checkbox" name="twitch_membership_settings[restrict_chat]" 
+                            <input type="checkbox" name="spswifter_twitch_membership_settings[restrict_chat]" 
                                    <?php checked($this->membership_settings['restrict_chat'], false); ?> />
                             <label>Restrict chat access based on membership level</label>
                         </td>
@@ -935,7 +935,7 @@ class WP_Twitch_Membership_Integration {
      * Get membership settings
      */
     private function get_membership_settings() {
-        return get_option('twitch_membership_settings', array(
+        return get_option('spswifter_twitch_membership_settings', array(
             'enabled' => true,
             'default_level' => 'free',
             'upgrade_page_id' => 0,
@@ -977,11 +977,11 @@ class WP_Twitch_Membership_Integration {
         
         wp_localize_script('twitch-membership', 'twitchMembership', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('twitch_membership_nonce'),
+            'nonce' => wp_create_nonce('spswifter_twitch_membership_nonce'),
             'enabled' => $this->membership_settings['enabled'] ?? true,
             'userLevel' => $this->get_current_membership_level(),
             'activePlugins' => array_keys($this->active_plugins),
-            'membershipLevels' => $this->twitch_membership_levels
+            'membershipLevels' => $this->spswifter_twitch_membership_levels
         ));
     }
     
@@ -989,11 +989,11 @@ class WP_Twitch_Membership_Integration {
      * Helper methods
      */
     private function user_has_stream_access($level) {
-        return in_array('basic_stream', $this->twitch_membership_levels[$level]['access'] ?? array());
+        return in_array('basic_stream', $this->spswifter_twitch_membership_levels[$level]['access'] ?? array());
     }
     
     private function user_has_content_access($content_type, $level) {
-        $access = $this->twitch_membership_levels[$level]['access'] ?? array();
+        $access = $this->spswifter_twitch_membership_levels[$level]['access'] ?? array();
         return in_array($content_type, $access);
     }
     
@@ -1010,7 +1010,7 @@ class WP_Twitch_Membership_Integration {
             return $content;
         }
         
-        $badge = do_shortcode('[twitch_membership_badge]');
+        $badge = do_shortcode('[spswifter_twitch_membership_badge]');
         return $badge . $content;
     }
     
@@ -1028,4 +1028,4 @@ class WP_Twitch_Membership_Integration {
 }
 
 // Initialize membership integration
-new WP_Twitch_Membership_Integration();
+new SPSWIFTER_Twitch_Membership_Integration();

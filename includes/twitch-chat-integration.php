@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Chat_Integration {
+class SPSWIFTER_Twitch_Chat_Integration {
     
     private $api;
     private $chat_settings;
@@ -15,23 +15,23 @@ class WP_Twitch_Chat_Integration {
     
     public function __construct() {
         $this->chat_settings = $this->get_chat_settings();
-        $this->api = new WP_Twitch_API();
+        $this->api = new SPSWIFTER_Twitch_API();
         
         add_action('init', array($this, 'register_chat_shortcodes'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_chat_scripts'));
-        add_action('wp_ajax_twitch_chat', array($this, 'handle_chat_ajax'));
-        add_action('wp_ajax_nopriv_twitch_chat', array($this, 'handle_chat_ajax'));
-        add_action('wp_ajax_twitch_chat_messages', array($this, 'handle_chat_messages_ajax'));
-        add_action('wp_ajax_nopriv_twitch_chat_messages', array($this, 'handle_chat_messages_ajax'));
+        add_action('wp_ajax_spswifter_twitch_chat', array($this, 'handle_chat_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_chat', array($this, 'handle_chat_ajax'));
+        add_action('wp_ajax_spswifter_twitch_chat_messages', array($this, 'handle_chat_messages_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_chat_messages', array($this, 'handle_chat_messages_ajax'));
     }
     
     /**
      * Register chat shortcodes
      */
     public function register_chat_shortcodes() {
-        add_shortcode('twitch_chat', array($this, 'render_chat_shortcode'));
-        add_shortcode('twitch_chat_embed', array($this, 'render_chat_embed_shortcode'));
-        add_shortcode('twitch_chat_recent', array($this, 'render_recent_chat_shortcode'));
+        add_shortcode('spswifter_twitch_chat', array($this, 'render_chat_shortcode'));
+        add_shortcode('spswifter_twitch_chat_embed', array($this, 'render_chat_embed_shortcode'));
+        add_shortcode('spswifter_twitch_chat_recent', array($this, 'render_recent_chat_shortcode'));
     }
     
     /**
@@ -55,7 +55,7 @@ class WP_Twitch_Chat_Integration {
         
         wp_localize_script('twitch-chat', 'twitchChat', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('twitch_chat_nonce'),
+            'nonce' => wp_create_nonce('spswifter_twitch_chat_nonce'),
             'websocketUrl' => $this->get_websocket_url(),
             'channel' => $this->chat_settings['default_channel'] ?? '',
             'theme' => $this->chat_settings['theme'] ?? 'dark',
@@ -80,7 +80,7 @@ class WP_Twitch_Chat_Integration {
         ), $atts);
         
         if (empty($atts['channel'])) {
-            return '<p class="twitch-chat-error">Bitte geben Sie einen Kanal an: [twitch_chat channel="username"]</p>';
+            return '<p class="twitch-chat-error">Bitte geben Sie einen Kanal an: [spswifter_twitch_chat channel="username"]</p>';
         }
         
         ob_start();
@@ -183,7 +183,7 @@ class WP_Twitch_Chat_Integration {
         ), $atts);
         
         if (empty($atts['channel'])) {
-            return '<p class="twitch-chat-error">Bitte geben Sie einen Kanal an: [twitch_chat_embed channel="username"]</p>';
+            return '<p class="twitch-chat-error">Bitte geben Sie einen Kanal an: [spswifter_twitch_chat_embed channel="username"]</p>';
         }
         
         $parent = $atts['parent'] ?: $_SERVER['HTTP_HOST'];
@@ -217,7 +217,7 @@ class WP_Twitch_Chat_Integration {
         ), $atts);
         
         if (empty($atts['channel'])) {
-            return '<p class="twitch-chat-error">Bitte geben Sie einen Kanal an: [twitch_chat_recent channel="username"]</p>';
+            return '<p class="twitch-chat-error">Bitte geben Sie einen Kanal an: [spswifter_twitch_chat_recent channel="username"]</p>';
         }
         
         return $this->render_recent_messages($atts['channel'], $atts['limit'], $atts);
@@ -326,7 +326,7 @@ class WP_Twitch_Chat_Integration {
      * Handle chat AJAX
      */
     public function handle_chat_ajax() {
-        check_ajax_referer('twitch_chat_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_chat_nonce', 'nonce');
         
         $action = $_POST['chat_action'] ?? '';
         
@@ -352,7 +352,7 @@ class WP_Twitch_Chat_Integration {
      * Handle chat messages AJAX
      */
     public function handle_chat_messages_ajax() {
-        check_ajax_referer('twitch_chat_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_chat_nonce', 'nonce');
         
         $channel = sanitize_text_field($_POST['channel'] ?? '');
         $limit = intval($_POST['limit'] ?? 50);
@@ -442,7 +442,7 @@ class WP_Twitch_Chat_Integration {
      * Get chat settings
      */
     private function get_chat_settings() {
-        return get_option('twitch_chat_settings', array(
+        return get_option('spswifter_twitch_chat_settings', array(
             'enabled' => false,
             'default_channel' => '',
             'theme' => 'dark',
@@ -482,14 +482,14 @@ class WP_Twitch_Chat_Integration {
             <h1 class="wp-heading-inline">Twitch Chat Settings</h1>
             
             <form method="post" action="options.php">
-                <?php settings_fields('twitch_chat_settings'); ?>
-                <?php do_settings_sections('twitch_chat_settings'); ?>
+                <?php settings_fields('spswifter_twitch_chat_settings'); ?>
+                <?php do_settings_sections('spswifter_twitch_chat_settings'); ?>
                 
                 <table class="form-table">
                     <tr>
                         <th scope="row">Enable Chat Integration</th>
                         <td>
-                            <input type="checkbox" name="twitch_chat_settings[enabled]" <?php checked($this->chat_settings['enabled'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_chat_settings[enabled]" <?php checked($this->chat_settings['enabled'], true); ?> />
                             <label>Enable Twitch chat integration</label>
                         </td>
                     </tr>
@@ -497,7 +497,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Default Channel</th>
                         <td>
-                            <input type="text" name="twitch_chat_settings[default_channel]" value="<?php echo esc_attr($this->chat_settings['default_channel'] ?? ''); ?>" class="regular-text" />
+                            <input type="text" name="spswifter_twitch_chat_settings[default_channel]" value="<?php echo esc_attr($this->chat_settings['default_channel'] ?? ''); ?>" class="regular-text" />
                             <p class="description">Default Twitch channel for chat widgets</p>
                         </td>
                     </tr>
@@ -505,7 +505,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Default Theme</th>
                         <td>
-                            <select name="twitch_chat_settings[theme]">
+                            <select name="spswifter_twitch_chat_settings[theme]">
                                 <option value="dark" <?php selected($this->chat_settings['theme'], 'dark'); ?>>Dark</option>
                                 <option value="light" <?php selected($this->chat_settings['theme'], 'light'); ?>>Light</option>
                                 <option value="blue" <?php selected($this->chat_settings['theme'], 'blue'); ?>>Blue</option>
@@ -516,7 +516,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Max Messages</th>
                         <td>
-                            <input type="number" name="twitch_chat_settings[max_messages]" value="<?php echo esc_attr($this->chat_settings['max_messages'] ?? 100); ?>" min="10" max="1000" class="small-text" />
+                            <input type="number" name="spswifter_twitch_chat_settings[max_messages]" value="<?php echo esc_attr($this->chat_settings['max_messages'] ?? 100); ?>" min="10" max="1000" class="small-text" />
                             <p class="description">Maximum number of messages to display</p>
                         </td>
                     </tr>
@@ -524,7 +524,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Show Timestamps</th>
                         <td>
-                            <input type="checkbox" name="twitch_chat_settings[show_timestamps]" <?php checked($this->chat_settings['show_timestamps'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_chat_settings[show_timestamps]" <?php checked($this->chat_settings['show_timestamps'], true); ?> />
                             <label>Show message timestamps</label>
                         </td>
                     </tr>
@@ -532,7 +532,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Show Badges</th>
                         <td>
-                            <input type="checkbox" name="twitch_chat_settings[show_badges]" <?php checked($this->chat_settings['show_badges'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_chat_settings[show_badges]" <?php checked($this->chat_settings['show_badges'], true); ?> />
                             <label>Show user badges (moderator, subscriber, etc.)</label>
                         </td>
                     </tr>
@@ -540,7 +540,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Filter Emotes</th>
                         <td>
-                            <input type="checkbox" name="twitch_chat_settings[filter_emotes]" <?php checked($this->chat_settings['filter_emotes'], false); ?> />
+                            <input type="checkbox" name="spswifter_twitch_chat_settings[filter_emotes]" <?php checked($this->chat_settings['filter_emotes'], false); ?> />
                             <label>Filter Twitch emotes from messages</label>
                         </td>
                     </tr>
@@ -548,7 +548,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Allow Anonymous Messages</th>
                         <td>
-                            <input type="checkbox" name="twitch_chat_settings[allow_anonymous]" <?php checked($this->chat_settings['allow_anonymous'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_chat_settings[allow_anonymous]" <?php checked($this->chat_settings['allow_anonymous'], true); ?> />
                             <label>Allow non-logged-in users to view chat</label>
                         </td>
                     </tr>
@@ -556,7 +556,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Require Login to Chat</th>
                         <td>
-                            <input type="checkbox" name="twitch_chat_settings[require_login]" <?php checked($this->chat_settings['require_login'], false); ?> />
+                            <input type="checkbox" name="spswifter_twitch_chat_settings[require_login]" <?php checked($this->chat_settings['require_login'], false); ?> />
                             <label>Require users to be logged in to send messages</label>
                         </td>
                     </tr>
@@ -564,7 +564,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Enable Moderation</th>
                         <td>
-                            <input type="checkbox" name="twitch_chat_settings[moderation_enabled]" <?php checked($this->chat_settings['moderation_enabled'], false); ?> />
+                            <input type="checkbox" name="spswifter_twitch_chat_settings[moderation_enabled]" <?php checked($this->chat_settings['moderation_enabled'], false); ?> />
                             <label>Enable basic moderation features</label>
                         </td>
                     </tr>
@@ -572,7 +572,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Blocked Words</th>
                         <td>
-                            <textarea name="twitch_chat_settings[blocked_words]" rows="3" class="large-text"><?php echo esc_textarea(implode("\n", $this->chat_settings['blocked_words'] ?? array())); ?></textarea>
+                            <textarea name="spswifter_twitch_chat_settings[blocked_words]" rows="3" class="large-text"><?php echo esc_textarea(implode("\n", $this->chat_settings['blocked_words'] ?? array())); ?></textarea>
                             <p class="description">One word per line. These words will be filtered from chat.</p>
                         </td>
                     </tr>
@@ -580,7 +580,7 @@ class WP_Twitch_Chat_Integration {
                     <tr>
                         <th scope="row">Allowed Commands</th>
                         <td>
-                            <textarea name="twitch_chat_settings[allowed_commands]" rows="3" class="large-text"><?php echo esc_textarea(implode("\n", $this->chat_settings['allowed_commands'] ?? array('!uptime', '!socials', '!commands'))); ?></textarea>
+                            <textarea name="spswifter_twitch_chat_settings[allowed_commands]" rows="3" class="large-text"><?php echo esc_textarea(implode("\n", $this->chat_settings['allowed_commands'] ?? array('!uptime', '!socials', '!commands'))); ?></textarea>
                             <p class="description">One command per line. These commands will be processed.</p>
                         </td>
                     </tr>
@@ -669,4 +669,4 @@ class WP_Twitch_Chat_Integration {
 }
 
 // Initialize chat integration
-new WP_Twitch_Chat_Integration();
+new SPSWIFTER_Twitch_Chat_Integration();

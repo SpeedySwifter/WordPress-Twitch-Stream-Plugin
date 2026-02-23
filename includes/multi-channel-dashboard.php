@@ -7,18 +7,18 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Dashboard {
+class SPSWIFTER_Twitch_Dashboard {
     
     private $api;
     private $analytics;
     
     public function __construct() {
-        $this->api = new WP_Twitch_API();
-        $this->analytics = new WP_Twitch_Analytics();
+        $this->api = new SPSWIFTER_Twitch_API();
+        $this->analytics = new SPSWIFTER_Twitch_Analytics();
         
         add_action('admin_menu', array($this, 'add_dashboard_menu'));
-        add_action('wp_ajax_twitch_dashboard_data', array($this, 'handle_dashboard_data'));
-        add_action('wp_ajax_nopriv_twitch_dashboard_data', array($this, 'handle_dashboard_data'));
+        add_action('wp_ajax_spswifter_twitch_dashboard_data', array($this, 'handle_dashboard_data'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_dashboard_data', array($this, 'handle_dashboard_data'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_dashboard_scripts'));
     }
     
@@ -95,8 +95,8 @@ class WP_Twitch_Dashboard {
             
             wp_localize_script('twitch-dashboard', 'twitchDashboard', array(
                 'ajaxUrl' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('twitch_dashboard_nonce'),
-                'apiUrl' => rest_url('wp-twitch-stream/v1/'),
+                'nonce' => wp_create_nonce('spswifter_twitch_dashboard_nonce'),
+                'apiUrl' => rest_url('spswifter-twitch/v1/'),
             ));
         }
     }
@@ -298,14 +298,14 @@ class WP_Twitch_Dashboard {
             <h1 class="wp-heading-inline">Dashboard Settings</h1>
             
             <form method="post" action="options.php">
-                <?php settings_fields('twitch_dashboard_settings'); ?>
-                <?php do_settings_sections('twitch_dashboard_settings'); ?>
+                <?php settings_fields('spswifter_twitch_dashboard_settings'); ?>
+                <?php do_settings_sections('spswifter_twitch_dashboard_settings'); ?>
                 
                 <table class="form-table">
                     <tr>
                         <th scope="row">Dashboard Channels</th>
                         <td>
-                            <textarea name="twitch_dashboard_settings[channels]" rows="5" class="large-text"><?php echo esc_textarea(implode("\n", $settings['channels'] ?? array())); ?></textarea>
+                            <textarea name="spswifter_twitch_dashboard_settings[channels]" rows="5" class="large-text"><?php echo esc_textarea(implode("\n", $settings['channels'] ?? array())); ?></textarea>
                             <p class="description">Enter one channel per line</p>
                         </td>
                     </tr>
@@ -313,7 +313,7 @@ class WP_Twitch_Dashboard {
                     <tr>
                         <th scope="row">Auto Refresh Interval</th>
                         <td>
-                            <select name="twitch_dashboard_settings[refresh_interval]">
+                            <select name="spswifter_twitch_dashboard_settings[refresh_interval]">
                                 <option value="30" <?php selected($settings['refresh_interval'], 30); ?>>30 seconds</option>
                                 <option value="60" <?php selected($settings['refresh_interval'], 60); ?>>1 minute</option>
                                 <option value="300" <?php selected($settings['refresh_interval'], 300); ?>>5 minutes</option>
@@ -325,7 +325,7 @@ class WP_Twitch_Dashboard {
                     <tr>
                         <th scope="row">Enable Recording</th>
                         <td>
-                            <input type="checkbox" name="twitch_dashboard_settings[enable_recording]" <?php checked($settings['enable_recording'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_dashboard_settings[enable_recording]" <?php checked($settings['enable_recording'], true); ?> />
                             <label>Enable stream recording for dashboard channels</label>
                         </td>
                     </tr>
@@ -333,7 +333,7 @@ class WP_Twitch_Dashboard {
                     <tr>
                         <th scope="row">Enable Analytics</th>
                         <td>
-                            <input type="checkbox" name="twitch_dashboard_settings[enable_analytics]" <?php checked($settings['enable_analytics'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_dashboard_settings[enable_analytics]" <?php checked($settings['enable_analytics'], true); ?> />
                             <label>Enable advanced analytics tracking</label>
                         </td>
                     </tr>
@@ -341,7 +341,7 @@ class WP_Twitch_Dashboard {
                     <tr>
                         <th scope="row">Chart Type</th>
                         <td>
-                            <select name="twitch_dashboard_settings[chart_type]">
+                            <select name="spswifter_twitch_dashboard_settings[chart_type]">
                                 <option value="line" <?php selected($settings['chart_type'], 'line'); ?>>Line Chart</option>
                                 <option value="bar" <?php selected($settings['chart_type'], 'bar'); ?>>Bar Chart</option>
                                 <option value="area" <?php selected($settings['chart_type'], 'area'); ?>>Area Chart</option>
@@ -352,7 +352,7 @@ class WP_Twitch_Dashboard {
                     <tr>
                         <th scope="row">Dark Mode</th>
                         <td>
-                            <input type="checkbox" name="twitch_dashboard_settings[dark_mode]" <?php checked($settings['dark_mode'], true); ?> />
+                            <input type="checkbox" name="spswifter_twitch_dashboard_settings[dark_mode]" <?php checked($settings['dark_mode'], true); ?> />
                             <label>Enable dark mode for dashboard</label>
                         </td>
                     </tr>
@@ -368,7 +368,7 @@ class WP_Twitch_Dashboard {
      * Handle dashboard data AJAX
      */
     public function handle_dashboard_data() {
-        check_ajax_referer('twitch_dashboard_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_dashboard_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
             wp_send_json_error('Unauthorized');
@@ -450,7 +450,7 @@ class WP_Twitch_Dashboard {
         $status = $_POST['status'] ?? 'all';
         $limit = $_POST['limit'] ?? 50;
         
-        $recording = new WP_Twitch_Stream_Recording();
+        $recording = new SPSWIFTER_Twitch_Stream_Recording();
         
         if ($channel === 'all') {
             $recordings = $recording->get_all_recordings(null, $status, $limit);
@@ -505,7 +505,7 @@ class WP_Twitch_Dashboard {
         $activity_data = array();
         
         // Get recent follows
-        $follow_events = get_option('twitch_follow_events', array());
+        $follow_events = get_option('spswifter_twitch_follow_events', array());
         $recent_follows = array();
         
         foreach ($follow_events as $event) {
@@ -520,7 +520,7 @@ class WP_Twitch_Dashboard {
         }
         
         // Get recent subscribes
-        $subscribe_events = get_option('twitch_subscribe_events', array());
+        $subscribe_events = get_option('spswifter_twitch_subscribe_events', array());
         $recent_subscribes = array();
         
         foreach ($subscribe_events as $event) {
@@ -536,7 +536,7 @@ class WP_Twitch_Dashboard {
         }
         
         // Get recent cheers
-        $cheer_events = get_option('twitch_cheer_events', array());
+        $cheer_events = get_option('spswifter_twitch_cheer_events', array());
         $recent_cheers = array();
         
         foreach ($cheer_events as $event) {
@@ -575,7 +575,7 @@ class WP_Twitch_Dashboard {
      * Get dashboard settings
      */
     private function get_dashboard_settings() {
-        return get_option('twitch_dashboard_settings', array(
+        return get_option('spswifter_twitch_dashboard_settings', array(
             'channels' => array(),
             'refresh_interval' => 60,
             'enable_recording' => false,
@@ -662,9 +662,9 @@ class WP_Twitch_Dashboard {
         $activity_data = array();
         
         // Get recent events from all channels
-        $follow_events = get_option('twitch_follow_events', array());
-        $subscribe_events = get_option('twitch_subscribe_events', array());
-        $cheer_events = get_option('twitch_cheer_events', array());
+        $follow_events = get_option('spswifter_twitch_follow_events', array());
+        $subscribe_events = get_option('spswifter_twitch_subscribe_events', array());
+        $cheer_events = get_option('spswifter_twitch_cheer_events', array());
         
         foreach ($follow_events as $event) {
             if (in_array($event['channel'], $channels)) {
@@ -713,7 +713,7 @@ class WP_Twitch_Dashboard {
      * Get recordings array
      */
     private function get_recordings_array($channels) {
-        $recording = new WP_Twitch_Stream_Recording();
+        $recording = new SPSWIFTER_Twitch_Stream_Recording();
         $recordings = array();
         
         foreach ($channels as $channel) {
@@ -728,7 +728,7 @@ class WP_Twitch_Dashboard {
      * Get statistics array
      */
     private function get_statistics_array($channels) {
-        $recording = new WP_Twitch_Stream_Recording();
+        $recording = new SPSWIFTER_Twitch_Stream_Recording();
         $statistics = array();
         
         foreach ($channels as $channel) {
@@ -740,4 +740,4 @@ class WP_Twitch_Dashboard {
 }
 
 // Initialize dashboard
-new WP_Twitch_Dashboard();
+new SPSWIFTER_Twitch_Dashboard();

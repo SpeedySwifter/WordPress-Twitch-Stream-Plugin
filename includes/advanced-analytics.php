@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Analytics {
+class SPSWIFTER_Twitch_Analytics {
     
     private $api;
     private $cache;
@@ -18,15 +18,15 @@ class WP_Twitch_Analytics {
     }
 
     public function init() {
-        $this->api = new WP_Twitch_API();
-        $this->cache = new WP_Twitch_Cache();
+        $this->api = new SPSWIFTER_Twitch_API();
+        $this->cache = new SPSWIFTER_Twitch_Cache();
     }
     
     /**
      * Get channel analytics
      */
     public function get_channel_analytics($channel, $period = 'week') {
-        $cache_key = "twitch_analytics_{$channel}_{$period}";
+        $cache_key = "spswifter_twitch_analytics_{$channel}_{$period}";
         $cached_data = $this->cache->get($cache_key);
         
         if ($cached_data !== false) {
@@ -141,10 +141,10 @@ class WP_Twitch_Analytics {
     private function get_engagement_analytics($channel, $period) {
         $date_range = $this->get_date_range($period);
         
-        $follow_events = $this->get_events_in_period('twitch_follow_events', $channel, $date_range);
-        $subscribe_events = $this->get_events_in_period('twitch_subscribe_events', $channel, $date_range);
-        $cheer_events = $this->get_events_in_period('twitch_cheer_events', $channel, $date_range);
-        $raid_events = $this->get_events_in_period('twitch_raid_events', $channel, $date_range);
+        $follow_events = $this->get_events_in_period('spswifter_twitch_follow_events', $channel, $date_range);
+        $subscribe_events = $this->get_events_in_period('spswifter_twitch_subscribe_events', $channel, $date_range);
+        $cheer_events = $this->get_events_in_period('spswifter_twitch_cheer_events', $channel, $date_range);
+        $raid_events = $this->get_events_in_period('spswifter_twitch_raid_events', $channel, $date_range);
         
         $total_bits = array_sum(array_column($cheer_events, 'bits'));
         $total_raiders = array_sum(array_column($raid_events, 'viewers'));
@@ -430,15 +430,15 @@ class WP_Twitch_Analytics {
             $end_time = strtotime($date_range['end']);
             
             if ($event_time >= $start_time && $event_time <= $end_time) {
-                if ($event_type === 'twitch_follow_events' || $event_type === 'twitch_subscribe_events') {
+                if ($event_type === 'spswifter_twitch_follow_events' || $event_type === 'spswifter_twitch_subscribe_events') {
                     if ($event['channel'] === $channel) {
                         $filtered_events[] = $event;
                     }
-                } elseif ($event_type === 'twitch_raid_events') {
+                } elseif ($event_type === 'spswifter_twitch_raid_events') {
                     if ($event['from_channel'] === $channel || $event['to_channel'] === $channel) {
                         $filtered_events[] = $event;
                     }
-                } elseif ($event_type === 'twitch_cheer_events') {
+                } elseif ($event_type === 'spswifter_twitch_cheer_events') {
                     if ($event['channel'] === $channel) {
                         $filtered_events[] = $event;
                     }
@@ -797,4 +797,4 @@ class WP_Twitch_Analytics {
 }
 
 // Initialize analytics
-new WP_Twitch_Analytics();
+new SPSWIFTER_Twitch_Analytics();

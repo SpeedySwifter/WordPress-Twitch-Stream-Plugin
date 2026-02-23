@@ -9,11 +9,11 @@ License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 7.4
 
-A powerful WordPress plugin for Twitch stream integration with mobile app, scheduling, analytics, and multi-language support.
+A WordPress plugin for Twitch stream integration with mobile app, scheduling, analytics, and multi-language support.
 
 == Description ==
 
-**WordPress Twitch Stream Plugin v1.7.1** is a comprehensive solution for integrating Twitch streams into WordPress websites. It provides everything from basic stream embedding to advanced features like mobile apps, scheduling, analytics, and more.
+WordPress Twitch Stream Plugin is a solution for integrating Twitch streams into WordPress websites. It provides features like mobile apps, scheduling, analytics, and more.
 
 ### ✨ Core Features
 
@@ -256,6 +256,23 @@ Sent when: A visitor loads a page containing an embedded stream or chat.
 7. **Admin Settings Panel** - Comprehensive configuration options
 
 == Changelog ==
+
+= 1.7.2 =
+* Security: Added proper sanitization for all $_SERVER, $_POST, $_GET inputs
+* Security: Added escaping for all outputs (replaced _e() with esc_html_e())
+* Security: Added HMAC signature verification for Twitch webhook endpoint
+* Security: Added sanitize_callback to all register_setting() calls
+* Security: Added nonce verification to all admin form handlers
+* Compliance: Renamed plugin to "SpeedySwifter Stream Integrator for Twitch"
+* Compliance: Updated all class/function/hook names with unique SPSWIFTER_ prefix
+* Compliance: Moved all inline <script> and <style> tags to wp_enqueue API
+* Compliance: Replaced remote jQuery UI CSS with WordPress Core built-in
+* Compliance: Downloaded FullCalendar library for local hosting
+* Compliance: Added External Services documentation to readme.txt
+* Compliance: Removed promotional language from plugin description
+* Compliance: Fixed "Tested up to" to use Major version only (6.8)
+* Performance: Added defer/async loading strategy for scripts (WP 6.3+)
+* Fix: Updated text domain to match new plugin slug
 
 = 1.7.1 - Bug Fixes & Stability Improvements =
 * 🐛 **Fixed critical WordPress activation errors** - Plugin now activates without fatal errors

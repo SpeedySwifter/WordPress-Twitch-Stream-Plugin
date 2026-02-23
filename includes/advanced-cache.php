@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Cache {
+class SPSWIFTER_Twitch_Cache {
     
     private $cache_settings;
     private $cache_engine;
@@ -22,9 +22,9 @@ class WP_Twitch_Cache {
         $this->cache_engine = $this->init_cache_engine();
 
         add_action('init', array($this, 'schedule_cache_cleanup'));
-        add_action('wp_twitch_cleanup_cache', array($this, 'cleanup_expired_cache'));
-        add_action('wp_ajax_twitch_cache_management', array($this, 'handle_cache_ajax'));
-        add_action('wp_ajax_nopriv_twitch_cache_management', array($this, 'handle_cache_ajax'));
+        add_action('spswifter_spswifter_twitch_cleanup_cache', array($this, 'cleanup_expired_cache'));
+        add_action('wp_ajax_spswifter_twitch_cache_management', array($this, 'handle_cache_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_cache_management', array($this, 'handle_cache_ajax'));
     }
     
     /**
@@ -35,14 +35,14 @@ class WP_Twitch_Cache {
         
         switch ($engine) {
             case 'redis':
-                return new WP_Twitch_Cache_Redis();
+                return new SPSWIFTER_Twitch_Cache_Redis();
             case 'memcached':
-                return new WP_Twitch_Cache_Memcached();
+                return new SPSWIFTER_Twitch_Cache_Memcached();
             case 'file':
-                return new WP_Twitch_Cache_File();
+                return new SPSWIFTER_Twitch_Cache_File();
             case 'transient':
             default:
-                return new WP_Twitch_Cache_Transient();
+                return new SPSWIFTER_Twitch_Cache_Transient();
         }
     }
     
@@ -96,30 +96,30 @@ class WP_Twitch_Cache {
      * Warm channel cache
      */
     private function warm_channel_cache($channel) {
-        $api = new WP_Twitch_API();
+        $api = new SPSWIFTER_Twitch_API();
         
         // Cache stream data
         $stream_data = $api->get_complete_stream_info($channel);
         if ($stream_data) {
-            $this->set("twitch_stream_{$channel}", $stream_data, $this->get_cache_duration('stream'));
+            $this->set("spswifter_twitch_stream_{$channel}", $stream_data, $this->get_cache_duration('stream'));
         }
         
         // Cache user info
         $user_info = $api->get_user_info($channel);
         if ($user_info) {
-            $this->set("twitch_user_{$channel}", $user_info, $this->get_cache_duration('user'));
+            $this->set("spswifter_twitch_user_{$channel}", $user_info, $this->get_cache_duration('user'));
         }
         
         // Cache videos
         $videos = $api->get_channel_videos($channel, 20, 'archive');
         if ($videos) {
-            $this->set("twitch_videos_{$channel}", $videos, $this->get_cache_duration('videos'));
+            $this->set("spswifter_twitch_videos_{$channel}", $videos, $this->get_cache_duration('videos'));
         }
         
         // Cache clips
         $clips = $api->get_channel_clips($channel, 20);
         if ($clips) {
-            $this->set("twitch_clips_{$channel}", $clips, $this->get_cache_duration('clips'));
+            $this->set("spswifter_twitch_clips_{$channel}", $clips, $this->get_cache_duration('clips'));
         }
     }
     
@@ -156,9 +156,9 @@ class WP_Twitch_Cache {
      * Schedule cache cleanup
      */
     public function schedule_cache_cleanup() {
-        if (!wp_next_scheduled('wp_twitch_cleanup_cache')) {
+        if (!wp_next_scheduled('spswifter_spswifter_twitch_cleanup_cache')) {
             $interval = $this->cache_settings['cleanup_interval'] ?? 'hourly';
-            wp_schedule_event(time(), $interval, 'wp_twitch_cleanup_cache');
+            wp_schedule_event(time(), $interval, 'spswifter_spswifter_twitch_cleanup_cache');
         }
     }
     
@@ -179,7 +179,7 @@ class WP_Twitch_Cache {
      * Handle cache AJAX
      */
     public function handle_cache_ajax() {
-        check_ajax_referer('twitch_cache_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_cache_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
             wp_send_json_error('Unauthorized');
@@ -276,7 +276,7 @@ class WP_Twitch_Cache {
         $cleared = 0;
         
         foreach ($channels as $channel) {
-            if ($this->delete("twitch_stream_{$channel}")) {
+            if ($this->delete("spswifter_twitch_stream_{$channel}")) {
                 $cleared++;
             }
         }
@@ -292,7 +292,7 @@ class WP_Twitch_Cache {
         $cleared = 0;
         
         foreach ($channels as $channel) {
-            if ($this->delete("twitch_user_{$channel}")) {
+            if ($this->delete("spswifter_twitch_user_{$channel}")) {
                 $cleared++;
             }
         }
@@ -308,7 +308,7 @@ class WP_Twitch_Cache {
         $cleared = 0;
         
         foreach ($channels as $channel) {
-            if ($this->delete("twitch_videos_{$channel}")) {
+            if ($this->delete("spswifter_twitch_videos_{$channel}")) {
                 $cleared++;
             }
         }
@@ -324,7 +324,7 @@ class WP_Twitch_Cache {
         $cleared = 0;
         
         foreach ($channels as $channel) {
-            if ($this->delete("twitch_clips_{$channel}")) {
+            if ($this->delete("spswifter_twitch_clips_{$channel}")) {
                 $cleared++;
             }
         }
@@ -341,7 +341,7 @@ class WP_Twitch_Cache {
         
         foreach ($channels as $channel) {
             foreach (array('day', 'week', 'month', 'year') as $period) {
-                if ($this->delete("twitch_analytics_{$channel}_{$period}")) {
+                if ($this->delete("spswifter_twitch_analytics_{$channel}_{$period}")) {
                     $cleared++;
                 }
             }
@@ -381,7 +381,7 @@ class WP_Twitch_Cache {
      * Get cache settings
      */
     private function get_cache_settings() {
-        return get_option('twitch_cache_settings', array(
+        return get_option('spswifter_twitch_cache_settings', array(
             'engine' => 'transient',
             'enabled' => true,
             'channels' => array(),
@@ -404,7 +404,7 @@ class WP_Twitch_Cache {
      * Log cache event
      */
     private function log_cache_event($event, $data) {
-        $logs = get_option('twitch_cache_logs', array());
+        $logs = get_option('spswifter_twitch_cache_logs', array());
         
         $logs[] = array(
             'event' => $event,
@@ -417,14 +417,14 @@ class WP_Twitch_Cache {
             $logs = array_slice($logs, -500);
         }
         
-        update_option('twitch_cache_logs', $logs);
+        update_option('spswifter_twitch_cache_logs', $logs);
     }
     
     /**
      * Get cache logs
      */
     public function get_cache_logs($limit = 100) {
-        $logs = get_option('twitch_cache_logs', array());
+        $logs = get_option('spswifter_twitch_cache_logs', array());
         
         // Sort by timestamp descending
         usort($logs, function($a, $b) {
@@ -469,7 +469,7 @@ class WP_Twitch_Cache {
      */
     public function import_configuration($config) {
         if (isset($config['settings'])) {
-            update_option('twitch_cache_settings', $config['settings']);
+            update_option('spswifter_twitch_cache_settings', $config['settings']);
             $this->cache_settings = $config['settings'];
             $this->cache_engine = $this->init_cache_engine();
         }
@@ -481,7 +481,7 @@ class WP_Twitch_Cache {
 /**
  * Transient Cache Engine
  */
-class WP_Twitch_Cache_Transient {
+class SPSWIFTER_Twitch_Cache_Transient {
     
     public function get($key, $default = false) {
         return get_transient($key, $default);
@@ -498,7 +498,7 @@ class WP_Twitch_Cache_Transient {
     public function clear_all() {
         global $wpdb;
         
-        $prefix = '_transient_twitch_';
+        $prefix = '_transient_spswifter_twitch_';
         $result = $wpdb->query(
             $wpdb->prepare(
                 "DELETE FROM $wpdb->options WHERE option_name LIKE %s",
@@ -512,7 +512,7 @@ class WP_Twitch_Cache_Transient {
     public function get_status() {
         global $wpdb;
         
-        $prefix = '_transient_twitch_';
+        $prefix = '_transient_spswifter_twitch_';
         $count = $wpdb->get_var(
             $wpdb->prepare(
                 "SELECT COUNT(*) FROM $wpdb->options WHERE option_name LIKE %s",
@@ -545,7 +545,7 @@ class WP_Twitch_Cache_Transient {
     public function get_size() {
         global $wpdb;
         
-        $prefix = '_transient_twitch_';
+        $prefix = '_transient_spswifter_twitch_';
         $size = $wpdb->get_var(
             $wpdb->prepare(
                 "SELECT SUM(LENGTH(option_value)) FROM $wpdb->options WHERE option_name LIKE %s",
@@ -560,7 +560,7 @@ class WP_Twitch_Cache_Transient {
 /**
  * File Cache Engine
  */
-class WP_Twitch_Cache_File {
+class SPSWIFTER_Twitch_Cache_File {
     
     private $cache_dir;
     
@@ -698,7 +698,7 @@ class WP_Twitch_Cache_File {
 /**
  * Redis Cache Engine (placeholder)
  */
-class WP_Twitch_Cache_Redis {
+class SPSWIFTER_Twitch_Cache_Redis {
     
     public function get($key, $default = false) {
         // Redis implementation would go here
@@ -750,7 +750,7 @@ class WP_Twitch_Cache_Redis {
 /**
  * Memcached Cache Engine (placeholder)
  */
-class WP_Twitch_Cache_Memcached {
+class SPSWIFTER_Twitch_Cache_Memcached {
     
     public function get($key, $default = false) {
         // Memcached implementation would go here
@@ -800,4 +800,4 @@ class WP_Twitch_Cache_Memcached {
 }
 
 // Initialize advanced cache
-new WP_Twitch_Cache();
+new SPSWIFTER_Twitch_Cache();

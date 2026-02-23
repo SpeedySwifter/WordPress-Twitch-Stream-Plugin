@@ -7,18 +7,18 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_CSS_Builder {
+class SPSWIFTER_Twitch_CSS_Builder {
     
     private $css_presets;
     private $custom_css;
     
     public function __construct() {
         $this->css_presets = $this->get_default_presets();
-        $this->custom_css = get_option('twitch_custom_css', array());
+        $this->custom_css = get_option('spswifter_twitch_custom_css', array());
         
         add_action('admin_menu', array($this, 'add_css_builder_menu'));
-        add_action('wp_ajax_twitch_css_builder', array($this, 'handle_css_builder_ajax'));
-        add_action('wp_ajax_nopriv_twitch_css_builder', array($this, 'handle_css_builder_ajax'));
+        add_action('wp_ajax_spswifter_twitch_css_builder', array($this, 'handle_css_builder_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_css_builder', array($this, 'handle_css_builder_ajax'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_custom_css'));
         add_action('wp_head', array($this, 'output_custom_css'));
     }
@@ -292,7 +292,7 @@ class WP_Twitch_CSS_Builder {
      * Handle CSS builder AJAX
      */
     public function handle_css_builder_ajax() {
-        check_ajax_referer('twitch_css_builder_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_css_builder_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
             wp_send_json_error('Unauthorized');
@@ -344,7 +344,7 @@ class WP_Twitch_CSS_Builder {
             'updated_at' => current_time('mysql'),
         );
         
-        update_option('twitch_custom_css', $this->custom_css);
+        update_option('spswifter_twitch_custom_css', $this->custom_css);
         
         wp_send_json_success(array('message' => 'CSS saved successfully'));
     }
@@ -361,7 +361,7 @@ class WP_Twitch_CSS_Builder {
         }
         
         $preset_id = sanitize_title($preset_name);
-        $custom_presets = get_option('twitch_custom_presets', array());
+        $custom_presets = get_option('spswifter_twitch_custom_presets', array());
         
         $custom_presets[$preset_id] = array(
             'name' => $preset_name,
@@ -369,7 +369,7 @@ class WP_Twitch_CSS_Builder {
             'created_at' => current_time('mysql'),
         );
         
-        update_option('twitch_custom_presets', $custom_presets);
+        update_option('spswifter_twitch_custom_presets', $custom_presets);
         
         wp_send_json_success(array('message' => 'Preset saved successfully'));
     }
@@ -384,11 +384,11 @@ class WP_Twitch_CSS_Builder {
             wp_send_json_error('Preset ID is required');
         }
         
-        $custom_presets = get_option('twitch_custom_presets', array());
+        $custom_presets = get_option('spswifter_twitch_custom_presets', array());
         
         if (isset($custom_presets[$preset_id])) {
             unset($custom_presets[$preset_id]);
-            update_option('twitch_custom_presets', $custom_presets);
+            update_option('spswifter_twitch_custom_presets', $custom_presets);
             
             wp_send_json_success(array('message' => 'Preset deleted successfully'));
         } else {
@@ -406,7 +406,7 @@ class WP_Twitch_CSS_Builder {
             'updated_at' => current_time('mysql'),
         );
         
-        update_option('twitch_custom_css', $this->custom_css);
+        update_option('spswifter_twitch_custom_css', $this->custom_css);
         
         wp_send_json_success(array('message' => 'CSS reset to default'));
     }
@@ -572,7 +572,7 @@ class WP_Twitch_CSS_Builder {
      */
     private function get_available_presets() {
         $default_presets = $this->get_default_presets();
-        $custom_presets = get_option('twitch_custom_presets', array());
+        $custom_presets = get_option('spswifter_twitch_custom_presets', array());
         
         return array_merge($default_presets, $custom_presets);
     }
@@ -846,7 +846,7 @@ class WP_Twitch_CSS_Builder {
      */
     public function enqueue_custom_css() {
         if (!empty($this->custom_css['styles'])) {
-            wp_add_inline_style('wp-twitch-stream-frontend', $this->generate_css());
+            wp_add_inline_style('spswifter-twitch-frontend', $this->generate_css());
         }
     }
     
@@ -896,7 +896,7 @@ class WP_Twitch_CSS_Builder {
             'updated_at' => current_time('mysql'),
         );
         
-        update_option('twitch_custom_css', $this->custom_css);
+        update_option('spswifter_twitch_custom_css', $this->custom_css);
         
         return true;
     }
@@ -1002,4 +1002,4 @@ class WP_Twitch_CSS_Builder {
 }
 
 // Initialize CSS builder
-new WP_Twitch_CSS_Builder();
+new SPSWIFTER_Twitch_CSS_Builder();

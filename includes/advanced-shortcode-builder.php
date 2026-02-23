@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Advanced_Shortcode_Builder {
+class SPSWIFTER_Twitch_Advanced_Shortcode_Builder {
     
     private $shortcode_definitions;
     private $builder_settings;
@@ -24,8 +24,8 @@ class WP_Twitch_Advanced_Shortcode_Builder {
         
         add_action('init', array($this, 'init_shortcode_builder'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_shortcode_builder_scripts'));
-        add_action('wp_ajax_twitch_shortcode_builder', array($this, 'handle_shortcode_builder_ajax'));
-        add_action('wp_ajax_nopriv_twitch_shortcode_builder', array($this, 'handle_shortcode_builder_ajax'));
+        add_action('wp_ajax_spswifter_twitch_shortcode_builder', array($this, 'handle_shortcode_builder_ajax'));
+        add_action('wp_ajax_nopriv_spswifter_twitch_shortcode_builder', array($this, 'handle_shortcode_builder_ajax'));
         add_action('admin_menu', array($this, 'add_shortcode_builder_menu'));
         
         // Register shortcodes
@@ -45,7 +45,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
      */
     private function load_supported_shortcodes() {
         $this->supported_shortcodes = array(
-            'twitch_stream' => array(
+            'spswifter_twitch_stream' => array(
                 'name' => 'Twitch Stream',
                 'description' => 'Display a Twitch live stream',
                 'category' => 'stream',
@@ -111,7 +111,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_chat' => array(
+            'spswifter_twitch_chat' => array(
                 'name' => 'Twitch Chat',
                 'description' => 'Display Twitch chat separately',
                 'category' => 'chat',
@@ -157,7 +157,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_follow_button' => array(
+            'spswifter_twitch_follow_button' => array(
                 'name' => 'Follow Button',
                 'description' => 'Twitch follow button',
                 'category' => 'social',
@@ -190,7 +190,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_subscribe_button' => array(
+            'spswifter_twitch_subscribe_button' => array(
                 'name' => 'Subscribe Button',
                 'description' => 'Twitch subscribe button',
                 'category' => 'social',
@@ -214,7 +214,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_clips' => array(
+            'spswifter_twitch_clips' => array(
                 'name' => 'Twitch Clips',
                 'description' => 'Display channel clips',
                 'category' => 'content',
@@ -256,7 +256,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_vod' => array(
+            'spswifter_twitch_vod' => array(
                 'name' => 'Twitch VOD',
                 'description' => 'Display past broadcasts',
                 'category' => 'content',
@@ -298,7 +298,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_donations' => array(
+            'spswifter_twitch_donations' => array(
                 'name' => 'Donation Integration',
                 'description' => 'Donation buttons and forms',
                 'category' => 'monetization',
@@ -344,7 +344,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_chat_integration' => array(
+            'spswifter_twitch_chat_integration' => array(
                 'name' => 'Advanced Chat',
                 'description' => 'Advanced chat integration',
                 'category' => 'chat',
@@ -389,7 +389,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_recording_download' => array(
+            'spswifter_twitch_recording_download' => array(
                 'name' => 'Recording Download',
                 'description' => 'Stream recording downloads',
                 'category' => 'content',
@@ -435,7 +435,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_analytics' => array(
+            'spswifter_twitch_analytics' => array(
                 'name' => 'Analytics Dashboard',
                 'description' => 'Stream analytics display',
                 'category' => 'analytics',
@@ -486,7 +486,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_membership_content' => array(
+            'spswifter_twitch_membership_content' => array(
                 'name' => 'Membership Content',
                 'description' => 'Membership-restricted content',
                 'category' => 'membership',
@@ -522,7 +522,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                     )
                 )
             ),
-            'twitch_shortcode_builder' => array(
+            'spswifter_twitch_shortcode_builder' => array(
                 'name' => 'Shortcode Builder',
                 'description' => 'Interactive shortcode builder',
                 'category' => 'builder',
@@ -551,15 +551,15 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                         'type' => 'multiselect',
                         'label' => 'Allowed Shortcodes',
                         'options' => array(
-                            'twitch_stream' => 'Stream',
-                            'twitch_chat' => 'Chat',
-                            'twitch_clips' => 'Clips',
-                            'twitch_vod' => 'VOD',
-                            'twitch_donations' => 'Donations',
-                            'twitch_analytics' => 'Analytics',
-                            'twitch_membership_content' => 'Membership Content'
+                            'spswifter_twitch_stream' => 'Stream',
+                            'spswifter_twitch_chat' => 'Chat',
+                            'spswifter_twitch_clips' => 'Clips',
+                            'spswifter_twitch_vod' => 'VOD',
+                            'spswifter_twitch_donations' => 'Donations',
+                            'spswifter_twitch_analytics' => 'Analytics',
+                            'spswifter_twitch_membership_content' => 'Membership Content'
                         ),
-                        'default' => array('twitch_stream', 'twitch_chat', 'twitch_clips')
+                        'default' => array('spswifter_twitch_stream', 'spswifter_twitch_chat', 'spswifter_twitch_clips')
                     )
                 )
             )
@@ -570,18 +570,18 @@ class WP_Twitch_Advanced_Shortcode_Builder {
      * Add shortcode builder filters
      */
     private function add_shortcode_builder_filters() {
-        add_filter('twitch_shortcode_builder_categories', array($this, 'get_shortcode_categories'));
-        add_filter('twitch_shortcode_builder_templates', array($this, 'get_shortcode_templates'));
-        add_filter('twitch_shortcode_builder_presets', array($this, 'get_shortcode_presets'));
+        add_filter('spswifter_twitch_shortcode_builder_categories', array($this, 'get_shortcode_categories'));
+        add_filter('spswifter_twitch_shortcode_builder_templates', array($this, 'get_shortcode_templates'));
+        add_filter('spswifter_twitch_shortcode_builder_presets', array($this, 'get_shortcode_presets'));
     }
     
     /**
      * Register builder shortcodes
      */
     public function register_builder_shortcodes() {
-        add_shortcode('twitch_shortcode_builder', array($this, 'render_shortcode_builder_shortcode'));
-        add_shortcode('twitch_shortcode_generator', array($this, 'render_shortcode_generator_shortcode'));
-        add_shortcode('twitch_shortcode_presets', array($this, 'render_shortcode_presets_shortcode'));
+        add_shortcode('spswifter_twitch_shortcode_builder', array($this, 'render_shortcode_builder_shortcode'));
+        add_shortcode('spswifter_twitch_shortcode_generator', array($this, 'render_shortcode_generator_shortcode'));
+        add_shortcode('spswifter_twitch_shortcode_presets', array($this, 'render_shortcode_presets_shortcode'));
     }
     
     /**
@@ -727,7 +727,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
      */
     public function render_shortcode_generator_shortcode($atts, $content = '') {
         $atts = shortcode_atts(array(
-            'shortcode' => 'twitch_stream',
+            'shortcode' => 'spswifter_twitch_stream',
             'show_form' => 'true',
             'show_output' => 'true',
             'theme' => 'light',
@@ -976,91 +976,91 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                 'description' => 'Simple live stream embed',
                 'icon' => '🎥',
                 'category' => 'stream',
-                'shortcode' => '[twitch_stream channel="yourchannel" width="560" height="315"]'
+                'shortcode' => '[spswifter_twitch_stream channel="yourchannel" width="560" height="315"]'
             ),
             'stream_with_chat' => array(
                 'name' => 'Stream + Chat',
                 'description' => 'Stream with integrated chat',
                 'icon' => '📺',
                 'category' => 'stream',
-                'shortcode' => '[twitch_stream channel="yourchannel" layout="video-with-chat" theme="dark"]'
+                'shortcode' => '[spswifter_twitch_stream channel="yourchannel" layout="video-with-chat" theme="dark"]'
             ),
             'chat_only' => array(
                 'name' => 'Chat Only',
                 'description' => 'Standalone chat embed',
                 'icon' => '💬',
                 'category' => 'chat',
-                'shortcode' => '[twitch_chat channel="yourchannel" width="350" height="500" theme="dark"]'
+                'shortcode' => '[spswifter_twitch_chat channel="yourchannel" width="350" height="500" theme="dark"]'
             ),
             'follow_button' => array(
                 'name' => 'Follow Button',
                 'description' => 'Twitch follow button',
                 'icon' => '👤',
                 'category' => 'social',
-                'shortcode' => '[twitch_follow_button channel="yourchannel" theme="dark" size="large"]'
+                'shortcode' => '[spswifter_twitch_follow_button channel="yourchannel" theme="dark" size="large"]'
             ),
             'subscribe_button' => array(
                 'name' => 'Subscribe Button',
                 'description' => 'Twitch subscribe button',
                 'icon' => '⭐',
                 'category' => 'social',
-                'shortcode' => '[twitch_subscribe_button channel="yourchannel" theme="dark"]'
+                'shortcode' => '[spswifter_twitch_subscribe_button channel="yourchannel" theme="dark"]'
             ),
             'channel_clips' => array(
                 'name' => 'Channel Clips',
                 'description' => 'Display channel clips',
                 'icon' => '🎬',
                 'category' => 'content',
-                'shortcode' => '[twitch_clips channel="yourchannel" limit="10" layout="grid" sort="views"]'
+                'shortcode' => '[spswifter_twitch_clips channel="yourchannel" limit="10" layout="grid" sort="views"]'
             ),
             'past_broadcasts' => array(
                 'name' => 'Past Broadcasts',
                 'description' => 'Show past VODs',
                 'icon' => '📼',
                 'category' => 'content',
-                'shortcode' => '[twitch_vod channel="yourchannel" limit="5" type="archive" layout="grid"]'
+                'shortcode' => '[spswifter_twitch_vod channel="yourchannel" limit="5" type="archive" layout="grid"]'
             ),
             'donation_buttons' => array(
                 'name' => 'Donation Buttons',
                 'description' => 'Buy Me a Coffee and PayPal',
                 'icon' => '💰',
                 'category' => 'monetization',
-                'shortcode' => '[twitch_donations type="both" buymeacoffee_username="yourusername" paypal_email="your@email.com"]'
+                'shortcode' => '[spswifter_twitch_donations type="both" buymeacoffee_username="yourusername" paypal_email="your@email.com"]'
             ),
             'advanced_chat' => array(
                 'name' => 'Advanced Chat',
                 'description' => 'Full-featured chat integration',
                 'icon' => '💬',
                 'category' => 'chat',
-                'shortcode' => '[twitch_chat_integration channel="yourchannel" theme="dark" show_emojis="true" show_badges="true" allow_commands="true"]'
+                'shortcode' => '[spswifter_twitch_chat_integration channel="yourchannel" theme="dark" show_emojis="true" show_badges="true" allow_commands="true"]'
             ),
             'recording_downloads' => array(
                 'name' => 'Recording Downloads',
                 'description' => 'Stream recording downloads',
                 'icon' => '📥',
                 'category' => 'content',
-                'shortcode' => '[twitch_recording_download channel="yourchannel" limit="10" download_type="both" show_thumbnails="true"]'
+                'shortcode' => '[spswifter_twitch_recording_download channel="yourchannel" limit="10" download_type="both" show_thumbnails="true"]'
             ),
             'analytics_dashboard' => array(
                 'name' => 'Analytics Dashboard',
                 'description' => 'Stream analytics display',
                 'icon' => '📊',
                 'category' => 'analytics',
-                'shortcode' => '[twitch_analytics channel="yourchannel" time_range="7d" chart_type="line" show_live_stats="true"]'
+                'shortcode' => '[spswifter_twitch_analytics channel="yourchannel" time_range="7d" chart_type="line" show_live_stats="true"]'
             ),
             'membership_content' => array(
                 'name' => 'Membership Content',
                 'description' => 'Restrict content by membership',
                 'icon' => '🔒',
                 'category' => 'membership',
-                'shortcode' => '[twitch_membership_content level="premium"]Your premium content here[/twitch_membership_content]'
+                'shortcode' => '[spswifter_twitch_membership_content level="premium"]Your premium content here[/spswifter_twitch_membership_content]'
             ),
             'shortcode_builder' => array(
                 'name' => 'Shortcode Builder',
                 'description' => 'Interactive shortcode builder',
                 'icon' => '🔧',
                 'category' => 'builder',
-                'shortcode' => '[twitch_shortcode_builder theme="light" show_preview="true" default_category="stream"]'
+                'shortcode' => '[spswifter_twitch_shortcode_builder theme="light" show_preview="true" default_category="stream"]'
             )
         );
     }
@@ -1075,9 +1075,9 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                 'description' => 'Complete stream page template',
                 'icon' => '📄',
                 'shortcodes' => array(
-                    '[twitch_stream channel="yourchannel" layout="video-with-chat" theme="dark" width="800" height="450"]',
-                    '[twitch_follow_button channel="yourchannel" theme="dark"]',
-                    '[twitch_donations type="both" buymeacoffee_username="yourusername" paypal_email="your@email.com"]'
+                    '[spswifter_twitch_stream channel="yourchannel" layout="video-with-chat" theme="dark" width="800" height="450"]',
+                    '[spswifter_twitch_follow_button channel="yourchannel" theme="dark"]',
+                    '[spswifter_twitch_donations type="both" buymeacoffee_username="yourusername" paypal_email="your@email.com"]'
                 )
             ),
             'content_showcase' => array(
@@ -1085,8 +1085,8 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                 'description' => 'Showcase clips and VODs',
                 'icon' => '🎪',
                 'shortcodes' => array(
-                    '[twitch_clips channel="yourchannel" limit="6" layout="grid"]',
-                    '[twitch_vod channel="yourchannel" limit="3" type="highlight" layout="list"]'
+                    '[spswifter_twitch_clips channel="yourchannel" limit="6" layout="grid"]',
+                    '[spswifter_twitch_vod channel="yourchannel" limit="3" type="highlight" layout="list"]'
                 )
             ),
             'community_page' => array(
@@ -1094,9 +1094,9 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                 'description' => 'Chat-focused community page',
                 'icon' => '👥',
                 'shortcodes' => array(
-                    '[twitch_chat_integration channel="yourchannel" theme="dark" height="600"]',
-                    '[twitch_subscribe_button channel="yourchannel" theme="dark"]',
-                    '[twitch_analytics channel="yourchannel" time_range="24h" metrics="viewers,followers"]'
+                    '[spswifter_twitch_chat_integration channel="yourchannel" theme="dark" height="600"]',
+                    '[spswifter_twitch_subscribe_button channel="yourchannel" theme="dark"]',
+                    '[spswifter_twitch_analytics channel="yourchannel" time_range="24h" metrics="viewers,followers"]'
                 )
             ),
             'premium_page' => array(
@@ -1104,9 +1104,9 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                 'description' => 'Membership-restricted content',
                 'icon' => '👑',
                 'shortcodes' => array(
-                    '[twitch_membership_content level="premium"]Exclusive premium content[/twitch_membership_content]',
-                    '[twitch_recording_download channel="yourchannel" limit="20" download_type="direct"]',
-                    '[twitch_analytics channel="yourchannel" time_range="30d" show_live_stats="true"]'
+                    '[spswifter_twitch_membership_content level="premium"]Exclusive premium content[/spswifter_twitch_membership_content]',
+                    '[spswifter_twitch_recording_download channel="yourchannel" limit="20" download_type="direct"]',
+                    '[spswifter_twitch_analytics channel="yourchannel" time_range="30d" show_live_stats="true"]'
                 )
             )
         );
@@ -1116,7 +1116,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
      * Handle shortcode builder AJAX
      */
     public function handle_shortcode_builder_ajax() {
-        check_ajax_referer('twitch_shortcode_builder_nonce', 'nonce');
+        check_ajax_referer('spswifter_twitch_shortcode_builder_nonce', 'nonce');
         
         $action = $_POST['builder_action'] ?? '';
         
@@ -1236,7 +1236,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
             return;
         }
         
-        $presets = get_option('twitch_shortcode_builder_presets', array());
+        $presets = get_option('spswifter_twitch_shortcode_builder_presets', array());
         $preset_key = sanitize_key($preset_name);
         
         $presets[$preset_key] = array(
@@ -1246,7 +1246,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
             'user_id' => get_current_user_id()
         );
         
-        update_option('twitch_shortcode_builder_presets', $presets);
+        update_option('spswifter_twitch_shortcode_builder_presets', $presets);
         
         wp_send_json_success(array(
             'preset_key' => $preset_key,
@@ -1260,7 +1260,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
     private function load_preset_ajax() {
         $preset_key = sanitize_key($_POST['preset_key'] ?? '');
         
-        $presets = get_option('twitch_shortcode_builder_presets', array());
+        $presets = get_option('spswifter_twitch_shortcode_builder_presets', array());
         
         if (!isset($presets[$preset_key])) {
             wp_send_json_error('Preset not found');
@@ -1372,7 +1372,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
                 <p>Use this tool to generate Twitch shortcodes with a visual interface. Copy the generated code and paste it into your posts, pages, or widgets.</p>
             </div>
             
-            <?php echo do_shortcode('[twitch_shortcode_builder theme="light" show_preview="true" compact_mode="false"]'); ?>
+            <?php echo do_shortcode('[spswifter_twitch_shortcode_builder theme="light" show_preview="true" compact_mode="false"]'); ?>
             
             <div class="twitch-builder-help">
                 <h3>Available Shortcodes</h3>
@@ -1434,7 +1434,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
         
         wp_localize_script('twitch-shortcode-builder', 'twitchShortcodeBuilder', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('twitch_shortcode_builder_nonce'),
+            'nonce' => wp_create_nonce('spswifter_twitch_shortcode_builder_nonce'),
             'shortcodes' => $this->supported_shortcodes,
             'categories' => $this->get_shortcode_categories(),
             'presets' => $this->get_shortcode_presets(),
@@ -1460,7 +1460,7 @@ class WP_Twitch_Advanced_Shortcode_Builder {
      * Get builder settings
      */
     private function get_builder_settings() {
-        return get_option('twitch_shortcode_builder_settings', array(
+        return get_option('spswifter_twitch_shortcode_builder_settings', array(
             'enabled' => true,
             'default_theme' => 'light',
             'show_preview' => true,
@@ -1472,4 +1472,4 @@ class WP_Twitch_Advanced_Shortcode_Builder {
 }
 
 // Initialize advanced shortcode builder
-new WP_Twitch_Advanced_Shortcode_Builder();
+new SPSWIFTER_Twitch_Advanced_Shortcode_Builder();

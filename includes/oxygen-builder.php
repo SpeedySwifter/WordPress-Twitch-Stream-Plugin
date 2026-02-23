@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_Twitch_Oxygen_Integration {
+class SPSWIFTER_Twitch_Oxygen_Integration {
     
     public function __construct() {
         add_action('oxygen_add_plus_components', array($this, 'register_components'));
@@ -20,71 +20,71 @@ class WP_Twitch_Oxygen_Integration {
      */
     public function register_components() {
         // Twitch Stream Component
-        $this->register_twitch_stream_component();
+        $this->register_spswifter_twitch_stream_component();
         
         // Twitch Grid Component
-        $this->register_twitch_grid_component();
+        $this->register_spswifter_twitch_grid_component();
     }
     
     /**
      * Twitch Stream Component
      */
-    private function register_twitch_stream_component() {
+    private function register_spswifter_twitch_stream_component() {
         $component = array(
-            'name' => 'twitch_stream',
-            'title' => __('Twitch Stream', 'wp-twitch-stream'),
-            'description' => __('Bettet einen Twitch Stream ein', 'wp-twitch-stream'),
+            'name' => 'spswifter_twitch_stream',
+            'title' => __('Twitch Stream', 'speedyswifter-twitch'),
+            'description' => __('Bettet einen Twitch Stream ein', 'speedyswifter-twitch'),
             'icon' => 'oxygen-icon-video',
             'wrapper' => true,
             'params' => array(
                 'channel' => array(
                     'type' => 'text',
-                    'name' => __('Kanal', 'wp-twitch-stream'),
+                    'name' => __('Kanal', 'speedyswifter-twitch'),
                     'value' => '',
-                    'placeholder' => __('z.B. shroud', 'wp-twitch-stream'),
-                    'help' => __('Gib den Twitch-Benutzernamen ein', 'wp-twitch-stream'),
+                    'placeholder' => __('z.B. shroud', 'speedyswifter-twitch'),
+                    'help' => __('Gib den Twitch-Benutzernamen ein', 'speedyswifter-twitch'),
                 ),
                 'width' => array(
                     'type' => 'text',
-                    'name' => __('Breite', 'wp-twitch-stream'),
+                    'name' => __('Breite', 'speedyswifter-twitch'),
                     'value' => '100%',
-                    'placeholder' => __('100% oder 800px', 'wp-twitch-stream'),
+                    'placeholder' => __('100% oder 800px', 'speedyswifter-twitch'),
                 ),
                 'height' => array(
                     'type' => 'number',
-                    'name' => __('Höhe', 'wp-twitch-stream'),
+                    'name' => __('Höhe', 'speedyswifter-twitch'),
                     'value' => 480,
                     'min' => 200,
                     'max' => 1080,
                 ),
                 'autoplay' => array(
                     'type' => 'checkbox',
-                    'name' => __('Autoplay', 'wp-twitch-stream'),
+                    'name' => __('Autoplay', 'speedyswifter-twitch'),
                     'value' => '1',
                 ),
                 'muted' => array(
                     'type' => 'checkbox',
-                    'name' => __('Stummgeschaltet', 'wp-twitch-stream'),
+                    'name' => __('Stummgeschaltet', 'speedyswifter-twitch'),
                     'value' => '0',
                 ),
                 'show_info' => array(
                     'type' => 'checkbox',
-                    'name' => __('Stream-Infos anzeigen', 'wp-twitch-stream'),
+                    'name' => __('Stream-Infos anzeigen', 'speedyswifter-twitch'),
                     'value' => '0',
                 ),
                 'info_layout' => array(
                     'type' => 'select',
-                    'name' => __('Info Layout', 'wp-twitch-stream'),
+                    'name' => __('Info Layout', 'speedyswifter-twitch'),
                     'value' => 'horizontal',
                     'options' => array(
-                        'horizontal' => __('Horizontal', 'wp-twitch-stream'),
-                        'vertical' => __('Vertikal', 'wp-twitch-stream'),
-                        'compact' => __('Kompakt', 'wp-twitch-stream'),
+                        'horizontal' => __('Horizontal', 'speedyswifter-twitch'),
+                        'vertical' => __('Vertikal', 'speedyswifter-twitch'),
+                        'compact' => __('Kompakt', 'speedyswifter-twitch'),
                     ),
                 ),
             ),
             'advanced' => array(
-                'id' => 'twitch_stream_' . uniqid(),
+                'id' => 'spswifter_twitch_stream_' . uniqid(),
                 'class' => 'twitch-stream-oxygen',
                 'wrapper_class' => 'twitch-stream-wrapper',
             ),
@@ -99,69 +99,69 @@ class WP_Twitch_Oxygen_Integration {
     /**
      * Twitch Grid Component
      */
-    private function register_twitch_grid_component() {
+    private function register_spswifter_twitch_grid_component() {
         $component = array(
-            'name' => 'twitch_grid',
-            'title' => __('Twitch Stream Grid', 'wp-twitch-stream'),
-            'description' => __('Zeigt mehrere Twitch Streams im Grid an', 'wp-twitch-stream'),
+            'name' => 'spswifter_twitch_grid',
+            'title' => __('Twitch Stream Grid', 'speedyswifter-twitch'),
+            'description' => __('Zeigt mehrere Twitch Streams im Grid an', 'speedyswifter-twitch'),
             'icon' => 'oxygen-icon-grid',
             'wrapper' => true,
             'params' => array(
                 'channels' => array(
                     'type' => 'text',
-                    'name' => __('Kanäle', 'wp-twitch-stream'),
+                    'name' => __('Kanäle', 'speedyswifter-twitch'),
                     'value' => '',
-                    'placeholder' => __('shroud, ninja, pokimane', 'wp-twitch-stream'),
-                    'help' => __('Kommagetrennte Liste von Twitch-Kanälen', 'wp-twitch-stream'),
+                    'placeholder' => __('shroud, ninja, pokimane', 'speedyswifter-twitch'),
+                    'help' => __('Kommagetrennte Liste von Twitch-Kanälen', 'speedyswifter-twitch'),
                 ),
                 'columns' => array(
                     'type' => 'number',
-                    'name' => __('Spalten', 'wp-twitch-stream'),
+                    'name' => __('Spalten', 'speedyswifter-twitch'),
                     'value' => 3,
                     'min' => 1,
                     'max' => 6,
                 ),
                 'layout' => array(
                     'type' => 'select',
-                    'name' => __('Layout', 'wp-twitch-stream'),
+                    'name' => __('Layout', 'speedyswifter-twitch'),
                     'value' => 'grid',
                     'options' => array(
-                        'grid' => __('Grid', 'wp-twitch-stream'),
-                        'list' => __('Liste', 'wp-twitch-stream'),
-                        'masonry' => __('Masonry', 'wp-twitch-stream'),
+                        'grid' => __('Grid', 'speedyswifter-twitch'),
+                        'list' => __('Liste', 'speedyswifter-twitch'),
+                        'masonry' => __('Masonry', 'speedyswifter-twitch'),
                     ),
                 ),
                 'gap' => array(
                     'type' => 'text',
-                    'name' => __('Abstand', 'wp-twitch-stream'),
+                    'name' => __('Abstand', 'speedyswifter-twitch'),
                     'value' => '20px',
-                    'placeholder' => __('20px', 'wp-twitch-stream'),
+                    'placeholder' => __('20px', 'speedyswifter-twitch'),
                 ),
                 'responsive' => array(
                     'type' => 'checkbox',
-                    'name' => __('Responsive', 'wp-twitch-stream'),
+                    'name' => __('Responsive', 'speedyswifter-twitch'),
                     'value' => '1',
                 ),
                 'show_player' => array(
                     'type' => 'checkbox',
-                    'name' => __('Player anzeigen', 'wp-twitch-stream'),
+                    'name' => __('Player anzeigen', 'speedyswifter-twitch'),
                     'value' => '1',
                 ),
                 'show_info' => array(
                     'type' => 'checkbox',
-                    'name' => __('Informationen anzeigen', 'wp-twitch-stream'),
+                    'name' => __('Informationen anzeigen', 'speedyswifter-twitch'),
                     'value' => '1',
                 ),
                 'player_height' => array(
                     'type' => 'number',
-                    'name' => __('Player Höhe', 'wp-twitch-stream'),
+                    'name' => __('Player Höhe', 'speedyswifter-twitch'),
                     'value' => 200,
                     'min' => 100,
                     'max' => 400,
                 ),
             ),
             'advanced' => array(
-                'id' => 'twitch_grid_' . uniqid(),
+                'id' => 'spswifter_twitch_grid_' . uniqid(),
                 'class' => 'twitch-grid-oxygen',
                 'wrapper_class' => 'twitch-grid-wrapper',
             ),
@@ -209,11 +209,11 @@ class WP_Twitch_Oxygen_Integration {
         $output = '';
         
         switch ($component) {
-            case 'twitch_stream':
-                $output = self::render_twitch_stream($atts);
+            case 'spswifter_twitch_stream':
+                $output = self::render_spswifter_twitch_stream($atts);
                 break;
-            case 'twitch_grid':
-                $output = self::render_twitch_grid($atts);
+            case 'spswifter_twitch_grid':
+                $output = self::render_spswifter_twitch_grid($atts);
                 break;
         }
         
@@ -223,7 +223,7 @@ class WP_Twitch_Oxygen_Integration {
     /**
      * Twitch Stream rendern
      */
-    private static function render_twitch_stream($atts) {
+    private static function render_spswifter_twitch_stream($atts) {
         $channel = $atts['channel'] ?? '';
         $width = $atts['width'] ?? '100%';
         $height = $atts['height'] ?? '480';
@@ -245,7 +245,7 @@ class WP_Twitch_Oxygen_Integration {
             'muted' => $muted,
         );
         
-        $output = wp_twitch_stream_shortcode($stream_atts);
+        $output = spswifter_spswifter_twitch_stream_shortcode($stream_atts);
         
         // Stream Info
         if ($show_info) {
@@ -259,7 +259,7 @@ class WP_Twitch_Oxygen_Integration {
                 'show_avatar' => 'true',
             );
             
-            $output .= wp_twitch_stream_info_shortcode($info_atts);
+            $output .= spswifter_spswifter_twitch_stream_info_shortcode($info_atts);
         }
         
         return $output;
@@ -268,7 +268,7 @@ class WP_Twitch_Oxygen_Integration {
     /**
      * Twitch Grid rendern
      */
-    private static function render_twitch_grid($atts) {
+    private static function render_spswifter_twitch_grid($atts) {
         $channels = $atts['channels'] ?? '';
         $columns = intval($atts['columns'] ?? 3);
         $layout = $atts['layout'] ?? 'grid';
@@ -293,29 +293,29 @@ class WP_Twitch_Oxygen_Integration {
             'show_info' => $show_info ? 'true' : 'false',
         );
         
-        return wp_twitch_streams_grid_shortcode($grid_atts);
+        return spswifter_spswifter_twitch_streams_grid_shortcode($grid_atts);
     }
 }
 
 // Oxygen Builder Hook
-function wp_twitch_oxygen_render_component($output, $component, $atts) {
-    if (strpos($component, 'twitch_') === 0) {
-        return WP_Twitch_Oxygen_Integration::render_component($component, $atts);
+function spswifter_spswifter_twitch_oxygen_render_component($output, $component, $atts) {
+    if (strpos($component, 'spswifter_twitch_') === 0) {
+        return SPSWIFTER_Twitch_Oxygen_Integration::render_component($component, $atts);
     }
     return $output;
 }
-add_filter('oxygen_vsb_component_render', 'wp_twitch_oxygen_render_component', 10, 3);
+add_filter('oxygen_vsb_component_render', 'spswifter_spswifter_twitch_oxygen_render_component', 10, 3);
 
 // Initialisierung
-function wp_twitch_oxygen_init() {
+function spswifter_spswifter_twitch_oxygen_init() {
     if (defined('OXYGEN_VSB_VERSION')) {
-        new WP_Twitch_Oxygen_Integration();
+        new SPSWIFTER_Twitch_Oxygen_Integration();
     }
 }
-add_action('init', 'wp_twitch_oxygen_init');
+add_action('init', 'spswifter_spswifter_twitch_oxygen_init');
 
 // Admin Notice für Oxygen
-function wp_twitch_oxygen_admin_notice() {
+function spswifter_spswifter_twitch_oxygen_admin_notice() {
     if (!defined('OXYGEN_VSB_VERSION')) {
         return;
     }
@@ -325,14 +325,14 @@ function wp_twitch_oxygen_admin_notice() {
         ?>
         <div class="notice notice-info is-dismissible">
             <p>
-                <?php _e('🎮 Twitch Stream Plugin: Oxygen Builder Components sind jetzt verfügbar!', 'wp-twitch-stream'); ?>
+                <?php esc_html_e('🎮 SpeedySwifter Twitch: Oxygen Builder Components sind jetzt verfügbar!', 'speedyswifter-twitch'); ?>
                 <a href="<?php echo admin_url('options-general.php?page=twitch-api-settings'); ?>">
-                    <?php _e('API-Einstellungen konfigurieren', 'wp-twitch-stream'); ?>
+                    <?php esc_html_e('API-Einstellungen konfigurieren', 'speedyswifter-twitch'); ?>
                 </a>
             </p>
         </div>
         <?php
     }
 }
-add_action('admin_notices', 'wp_twitch_oxygen_admin_notice');
+add_action('admin_notices', 'spswifter_spswifter_twitch_oxygen_admin_notice');
 ?>

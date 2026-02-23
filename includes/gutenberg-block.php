@@ -4,7 +4,7 @@
  */
 
 // Block registrieren
-function wp_twitch_register_block() {
+function spswifter_spswifter_twitch_register_block() {
     // Block Script registrieren
     wp_register_script(
         'twitch-stream-block',
@@ -23,10 +23,10 @@ function wp_twitch_register_block() {
     );
 
     // Block Type registrieren
-    register_block_type('wp-twitch-stream/stream', array(
+    register_block_type('spswifter-twitch/stream', array(
         'editor_script' => 'twitch-stream-block',
         'editor_style' => 'twitch-stream-block-style',
-        'style' => 'wp-twitch-stream-frontend',
+        'style' => 'spswifter-twitch-frontend',
         'attributes' => array(
             'channel' => array(
                 'type' => 'string',
@@ -57,14 +57,14 @@ function wp_twitch_register_block() {
                 'default' => 'horizontal',
             ),
         ),
-        'render_callback' => 'wp_twitch_render_block_stream',
+        'render_callback' => 'spswifter_spswifter_twitch_render_block_stream',
     ));
 
     // Grid Block registrieren
-    register_block_type('wp-twitch-stream/grid', array(
+    register_block_type('spswifter-twitch/grid', array(
         'editor_script' => 'twitch-stream-block',
         'editor_style' => 'twitch-stream-block-style',
-        'style' => 'wp-twitch-stream-frontend',
+        'style' => 'spswifter-twitch-frontend',
         'attributes' => array(
             'channels' => array(
                 'type' => 'string',
@@ -95,15 +95,15 @@ function wp_twitch_register_block() {
                 'default' => true,
             ),
         ),
-        'render_callback' => 'wp_twitch_render_block_grid',
+        'render_callback' => 'spswifter_spswifter_twitch_render_block_grid',
     ));
 }
-add_action('init', 'wp_twitch_register_block');
+add_action('init', 'spswifter_spswifter_twitch_register_block');
 
 /**
  * Stream Block Render Callback
  */
-function wp_twitch_render_block_stream($attributes) {
+function spswifter_spswifter_twitch_render_block_stream($attributes) {
     $atts = array(
         'channel' => $attributes['channel'] ?? '',
         'width' => $attributes['width'] ?? '100%',
@@ -112,7 +112,7 @@ function wp_twitch_render_block_stream($attributes) {
         'muted' => $attributes['muted'] ? 'true' : 'false',
     );
 
-    $output = wp_twitch_stream_shortcode($atts);
+    $output = spswifter_spswifter_twitch_stream_shortcode($atts);
 
     // Stream Info hinzufügen
     if ($attributes['showInfo'] && !empty($attributes['channel'])) {
@@ -125,7 +125,7 @@ function wp_twitch_render_block_stream($attributes) {
             'show_thumbnail' => 'true',
             'show_avatar' => 'true',
         );
-        $output .= wp_twitch_stream_info_shortcode($info_atts);
+        $output .= spswifter_spswifter_twitch_stream_info_shortcode($info_atts);
     }
 
     return $output;
@@ -134,7 +134,7 @@ function wp_twitch_render_block_stream($attributes) {
 /**
  * Grid Block Render Callback
  */
-function wp_twitch_render_block_grid($attributes) {
+function spswifter_spswifter_twitch_render_block_grid($attributes) {
     $atts = array(
         'channels' => $attributes['channels'] ?? '',
         'columns' => $attributes['columns'] ?? 3,
@@ -145,40 +145,40 @@ function wp_twitch_render_block_grid($attributes) {
         'responsive' => $attributes['responsive'] ? 'true' : 'false',
     );
 
-    return wp_twitch_streams_grid_shortcode($atts);
+    return spswifter_spswifter_twitch_streams_grid_shortcode($atts);
 }
 
 /**
  * Block Category hinzufügen
  */
-function wp_twitch_add_block_category($categories) {
+function spswifter_spswifter_twitch_add_block_category($categories) {
     return array_merge(
         $categories,
         array(
             array(
                 'slug' => 'twitch-stream',
-                'title' => __('Twitch Stream', 'wp-twitch-stream'),
+                'title' => __('Twitch Stream', 'speedyswifter-twitch'),
                 'icon' => 'video-alt3',
             ),
         )
     );
 }
-add_filter('block_categories_all', 'wp_twitch_add_block_category');
+add_filter('block_categories_all', 'spswifter_spswifter_twitch_add_block_category');
 
 /**
  * API-Daten für Block Editor bereitstellen
  */
-function wp_twitch_block_editor_data() {
+function spswifter_spswifter_twitch_block_editor_data() {
     wp_localize_script('twitch-stream-block', 'twitchBlockData', array(
-        'apiConnected' => !empty(get_option('twitch_client_id')) && !empty(get_option('twitch_client_secret')),
+        'apiConnected' => !empty(get_option('spswifter_twitch_client_id')) && !empty(get_option('spswifter_twitch_client_secret')),
         'adminUrl' => admin_url('options-general.php?page=twitch-api-settings'),
         'strings' => array(
-            'channelPlaceholder' => __('Twitch Kanalname eingeben...', 'wp-twitch-stream'),
-            'channelsPlaceholder' => __('Kanal1, Kanal2, Kanal3', 'wp-twitch-stream'),
-            'apiNotConnected' => __('Twitch API nicht verbunden. Bitte konfiguriere die API-Einstellungen.', 'wp-twitch-stream'),
-            'goToSettings' => __('Zu den Einstellungen', 'wp-twitch-stream'),
+            'channelPlaceholder' => __('Twitch Kanalname eingeben...', 'speedyswifter-twitch'),
+            'channelsPlaceholder' => __('Kanal1, Kanal2, Kanal3', 'speedyswifter-twitch'),
+            'apiNotConnected' => __('Twitch API nicht verbunden. Bitte konfiguriere die API-Einstellungen.', 'speedyswifter-twitch'),
+            'goToSettings' => __('Zu den Einstellungen', 'speedyswifter-twitch'),
         ),
     ));
 }
-add_action('enqueue_block_editor_assets', 'wp_twitch_block_editor_data');
+add_action('enqueue_block_editor_assets', 'spswifter_spswifter_twitch_block_editor_data');
 ?>
