@@ -527,9 +527,9 @@ function spswifter_twitch_cookie_admin_notice() {
         ?>
         <div class="notice notice-info is-dismissible">
             <p>
-                <?php esc_html_e('🍪 SpeedySwifter Twitch: Cookie-Integration aktiv für ', 'speedyswifter-twitch'); ?>
+                <?php esc_html_e('🍪 SpeedySwifter Twitch: Cookie-Integration aktiv für ', 'speedyswifter-stream-integrator-for-twitch'); ?>
                 <strong><?php echo implode(', ', array_keys($active_plugins)); ?></strong>
-                <?php esc_html_e(' - DSGVO-konform!', 'speedyswifter-twitch'); ?>
+                <?php esc_html_e(' - DSGVO-konform!', 'speedyswifter-stream-integrator-for-twitch'); ?>
             </p>
         </div>
         <?php

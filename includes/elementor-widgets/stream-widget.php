@@ -14,7 +14,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_title() {
-        return __('Twitch Stream', 'speedyswifter-twitch');
+        return __('Twitch Stream', 'speedyswifter-stream-integrator-for-twitch');
     }
 
     public function get_icon() {
@@ -30,7 +30,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'content_section',
             array(
-                'label' => __('Stream Einstellungen', 'speedyswifter-twitch'),
+                'label' => __('Stream Einstellungen', 'speedyswifter-stream-integrator-for-twitch'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             )
         );
@@ -38,27 +38,27 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'channel',
             array(
-                'label' => __('Twitch Kanal', 'speedyswifter-twitch'),
+                'label' => __('Twitch Kanal', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'placeholder' => __('z.B. shroud', 'speedyswifter-twitch'),
-                'description' => __('Gib den Twitch-Benutzernamen ein', 'speedyswifter-twitch'),
+                'placeholder' => __('z.B. shroud', 'speedyswifter-stream-integrator-for-twitch'),
+                'description' => __('Gib den Twitch-Benutzernamen ein', 'speedyswifter-stream-integrator-for-twitch'),
             )
         );
 
         $this->add_control(
             'width',
             array(
-                'label' => __('Breite', 'speedyswifter-twitch'),
+                'label' => __('Breite', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => '100%',
-                'placeholder' => __('100% oder 800px', 'speedyswifter-twitch'),
+                'placeholder' => __('100% oder 800px', 'speedyswifter-stream-integrator-for-twitch'),
             )
         );
 
         $this->add_control(
             'height',
             array(
-                'label' => __('Höhe', 'speedyswifter-twitch'),
+                'label' => __('Höhe', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'default' => 480,
                 'min' => 200,
@@ -69,22 +69,22 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'autoplay',
             array(
-                'label' => __('Autoplay', 'speedyswifter-twitch'),
+                'label' => __('Autoplay', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => __('Ja', 'speedyswifter-twitch'),
-                'label_off' => __('Nein', 'speedyswifter-twitch'),
+                'label_on' => __('Ja', 'speedyswifter-stream-integrator-for-twitch'),
+                'label_off' => __('Nein', 'speedyswifter-stream-integrator-for-twitch'),
             )
         );
 
         $this->add_control(
             'muted',
             array(
-                'label' => __('Stummgeschaltet', 'speedyswifter-twitch'),
+                'label' => __('Stummgeschaltet', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'no',
-                'label_on' => __('Ja', 'speedyswifter-twitch'),
-                'label_off' => __('Nein', 'speedyswifter-twitch'),
+                'label_on' => __('Ja', 'speedyswifter-stream-integrator-for-twitch'),
+                'label_off' => __('Nein', 'speedyswifter-stream-integrator-for-twitch'),
             )
         );
 
@@ -94,7 +94,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'info_section',
             array(
-                'label' => __('Stream-Informationen', 'speedyswifter-twitch'),
+                'label' => __('Stream-Informationen', 'speedyswifter-stream-integrator-for-twitch'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             )
         );
@@ -102,24 +102,24 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_info',
             array(
-                'label' => __('Stream-Infos anzeigen', 'speedyswifter-twitch'),
+                'label' => __('Stream-Infos anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'no',
-                'label_on' => __('Ja', 'speedyswifter-twitch'),
-                'label_off' => __('Nein', 'speedyswifter-twitch'),
+                'label_on' => __('Ja', 'speedyswifter-stream-integrator-for-twitch'),
+                'label_off' => __('Nein', 'speedyswifter-stream-integrator-for-twitch'),
             )
         );
 
         $this->add_control(
             'info_layout',
             array(
-                'label' => __('Info Layout', 'speedyswifter-twitch'),
+                'label' => __('Info Layout', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'horizontal',
                 'options' => array(
-                    'horizontal' => __('Horizontal', 'speedyswifter-twitch'),
-                    'vertical' => __('Vertikal', 'speedyswifter-twitch'),
-                    'compact' => __('Kompakt', 'speedyswifter-twitch'),
+                    'horizontal' => __('Horizontal', 'speedyswifter-stream-integrator-for-twitch'),
+                    'vertical' => __('Vertikal', 'speedyswifter-stream-integrator-for-twitch'),
+                    'compact' => __('Kompakt', 'speedyswifter-stream-integrator-for-twitch'),
                 ),
                 'condition' => array(
                     'show_info' => 'yes',
@@ -130,11 +130,11 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_avatar',
             array(
-                'label' => __('Avatar anzeigen', 'speedyswifter-twitch'),
+                'label' => __('Avatar anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => __('Ja', 'speedyswifter-twitch'),
-                'label_off' => __('Nein', 'speedyswifter-twitch'),
+                'label_on' => __('Ja', 'speedyswifter-stream-integrator-for-twitch'),
+                'label_off' => __('Nein', 'speedyswifter-stream-integrator-for-twitch'),
                 'condition' => array(
                     'show_info' => 'yes',
                 ),
@@ -144,11 +144,11 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_thumbnail',
             array(
-                'label' => __('Thumbnail anzeigen', 'speedyswifter-twitch'),
+                'label' => __('Thumbnail anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => __('Ja', 'speedyswifter-twitch'),
-                'label_off' => __('Nein', 'speedyswifter-twitch'),
+                'label_on' => __('Ja', 'speedyswifter-stream-integrator-for-twitch'),
+                'label_off' => __('Nein', 'speedyswifter-stream-integrator-for-twitch'),
                 'condition' => array(
                     'show_info' => 'yes',
                 ),
@@ -158,11 +158,11 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_game',
             array(
-                'label' => __('Spiel anzeigen', 'speedyswifter-twitch'),
+                'label' => __('Spiel anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => __('Ja', 'speedyswifter-twitch'),
-                'label_off' => __('Nein', 'speedyswifter-twitch'),
+                'label_on' => __('Ja', 'speedyswifter-stream-integrator-for-twitch'),
+                'label_off' => __('Nein', 'speedyswifter-stream-integrator-for-twitch'),
                 'condition' => array(
                     'show_info' => 'yes',
                 ),
@@ -172,11 +172,11 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_viewers',
             array(
-                'label' => __('Zuschauer anzeigen', 'speedyswifter-twitch'),
+                'label' => __('Zuschauer anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => __('Ja', 'speedyswifter-twitch'),
-                'label_off' => __('Nein', 'speedyswifter-twitch'),
+                'label_on' => __('Ja', 'speedyswifter-stream-integrator-for-twitch'),
+                'label_off' => __('Nein', 'speedyswifter-stream-integrator-for-twitch'),
                 'condition' => array(
                     'show_info' => 'yes',
                 ),
@@ -189,7 +189,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style_section',
             array(
-                'label' => __('Styling', 'speedyswifter-twitch'),
+                'label' => __('Styling', 'speedyswifter-stream-integrator-for-twitch'),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             )
         );
@@ -198,7 +198,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Border::get_type(),
             array(
                 'name' => 'border',
-                'label' => __('Rahmen', 'speedyswifter-twitch'),
+                'label' => __('Rahmen', 'speedyswifter-stream-integrator-for-twitch'),
                 'selector' => '{{WRAPPER}} .twitch-stream-container',
             )
         );
@@ -206,7 +206,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'border_radius',
             array(
-                'label' => __('Eckradius', 'speedyswifter-twitch'),
+                'label' => __('Eckradius', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => array('px', '%'),
                 'range' => array(
@@ -233,7 +233,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Box_Shadow::get_type(),
             array(
                 'name' => 'box_shadow',
-                'label' => __('Schatten', 'speedyswifter-twitch'),
+                'label' => __('Schatten', 'speedyswifter-stream-integrator-for-twitch'),
                 'selector' => '{{WRAPPER}} .twitch-stream-container',
             )
         );
@@ -241,7 +241,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'margin',
             array(
-                'label' => __('Abstand', 'speedyswifter-twitch'),
+                'label' => __('Abstand', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => array('px', 'em', '%'),
                 'selectors' => array(
@@ -258,7 +258,7 @@ class SPSWIFTER_Elementor_Twitch_Stream_Widget extends \Elementor\Widget_Base {
 
         if (empty($settings['channel'])) {
             echo '<div class="elementor-alert elementor-alert-warning">' . 
-                 __('Bitte gib einen Twitch-Kanal an.', 'speedyswifter-twitch') . 
+                 __('Bitte gib einen Twitch-Kanal an.', 'speedyswifter-stream-integrator-for-twitch') . 
                  '</div>';
             return;
         }

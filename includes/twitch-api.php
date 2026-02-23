@@ -1,4 +1,9 @@
 <?php
+
+// Sicherheitscheck
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * Twitch API Handler
  */

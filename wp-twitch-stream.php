@@ -11,7 +11,7 @@
  * Author URI: https://github.com/SpeedySwifter
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: speedyswifter-twitch
+ * Text Domain: speedyswifter-stream-integrator-for-twitch
  * Domain Path: /languages
  */
 
@@ -56,7 +56,7 @@ require_once SPSWIFTER_TWITCH_PLUGIN_DIR . 'admin/settings-page.php';
 add_action('plugins_loaded', 'spswifter_twitch_init');
 
 function spswifter_twitch_init() {
-    load_plugin_textdomain('speedyswifter-twitch', false, dirname(plugin_basename(__FILE__)) . '/languages');
+    // Text domain wird automatisch seit WordPress 4.6 geladen
 }
 
 // Frontend-Styles laden

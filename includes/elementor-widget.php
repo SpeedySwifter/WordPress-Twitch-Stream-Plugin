@@ -20,7 +20,7 @@ class SPSWIFTER_Twitch_Elementor_Integration {
      */
     public function add_widget_category($elements_manager) {
         $elements_manager->add_category('twitch-stream', array(
-            'title' => __('Twitch Stream', 'speedyswifter-twitch'),
+            'title' => __('Twitch Stream', 'speedyswifter-stream-integrator-for-twitch'),
             'icon' => 'fa fa-twitch',
         ));
     }
@@ -66,9 +66,9 @@ function spswifter_twitch_elementor_admin_notice() {
         ?>
         <div class="notice notice-info is-dismissible">
             <p>
-                <?php esc_html_e('🎮 SpeedySwifter Twitch: Elementor Widgets sind jetzt verfügbar!', 'speedyswifter-twitch'); ?>
+                <?php esc_html_e('🎮 SpeedySwifter Twitch: Elementor Widgets sind jetzt verfügbar!', 'speedyswifter-stream-integrator-for-twitch'); ?>
                 <a href="<?php echo admin_url('options-general.php?page=twitch-api-settings'); ?>">
-                    <?php esc_html_e('API-Einstellungen konfigurieren', 'speedyswifter-twitch'); ?>
+                    <?php esc_html_e('API-Einstellungen konfigurieren', 'speedyswifter-stream-integrator-for-twitch'); ?>
                 </a>
             </p>
         </div>

@@ -1,4 +1,9 @@
 <?php
+
+// Sicherheitscheck
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * Token Management für Twitch API
  * 

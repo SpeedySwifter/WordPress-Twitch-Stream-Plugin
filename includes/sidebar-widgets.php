@@ -12,8 +12,8 @@ class SPSWIFTER_Twitch_VOD_Widget extends WP_Widget {
     public function __construct() {
         parent::__construct(
             'spswifter_twitch_vod_widget',
-            __('Twitch VOD', 'speedyswifter-twitch'),
-            array('description' => __('Zeigt Twitch Videos oder VODs an', 'speedyswifter-twitch'))
+            __('Twitch VOD', 'speedyswifter-stream-integrator-for-twitch'),
+            array('description' => __('Zeigt Twitch Videos oder VODs an', 'speedyswifter-stream-integrator-for-twitch'))
         );
     }
     
@@ -79,65 +79,65 @@ class SPSWIFTER_Twitch_VOD_Widget extends WP_Widget {
         $layout = !empty($instance['layout']) ? $instance['layout'] : 'grid';
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Titel:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Titel:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('channel'); ?>"><?php esc_html_e('Kanal:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('channel'); ?>"><?php esc_html_e('Kanal:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('channel'); ?>" name="<?php echo $this->get_field_name('channel'); ?>" type="text" value="<?php echo esc_attr($channel); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('video_id'); ?>"><?php esc_html_e('Video ID:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('video_id'); ?>"><?php esc_html_e('Video ID:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('video_id'); ?>" name="<?php echo $this->get_field_name('video_id'); ?>" type="text" value="<?php echo esc_attr($video_id); ?>">
-            <small><?php esc_html_e('Optional: Zeigt ein spezifisches Video an', 'speedyswifter-twitch'); ?></small>
+            <small><?php esc_html_e('Optional: Zeigt ein spezifisches Video an', 'speedyswifter-stream-integrator-for-twitch'); ?></small>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('limit'); ?>"><?php esc_html_e('Anzahl:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('limit'); ?>"><?php esc_html_e('Anzahl:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('limit'); ?>" name="<?php echo $this->get_field_name('limit'); ?>" type="number" value="<?php echo esc_attr($limit); ?>" min="1" max="20">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('type'); ?>"><?php esc_html_e('Typ:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('type'); ?>"><?php esc_html_e('Typ:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>">
-                <option value="archive" <?php selected($type, 'archive'); ?>><?php esc_html_e('Archive', 'speedyswifter-twitch'); ?></option>
-                <option value="upload" <?php selected($type, 'upload'); ?>><?php esc_html_e('Uploads', 'speedyswifter-twitch'); ?></option>
-                <option value="highlight" <?php selected($type, 'highlight'); ?>><?php esc_html_e('Highlights', 'speedyswifter-twitch'); ?></option>
+                <option value="archive" <?php selected($type, 'archive'); ?>><?php esc_html_e('Archive', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="upload" <?php selected($type, 'upload'); ?>><?php esc_html_e('Uploads', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="highlight" <?php selected($type, 'highlight'); ?>><?php esc_html_e('Highlights', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('width'); ?>"><?php esc_html_e('Breite:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('width'); ?>"><?php esc_html_e('Breite:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name('width'); ?>" type="text" value="<?php echo esc_attr($width); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('height'); ?>"><?php esc_html_e('Höhe:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('height'); ?>"><?php esc_html_e('Höhe:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" type="number" value="<?php echo esc_attr($height); ?>" min="200" max="1080">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('autoplay'); ?>"><?php esc_html_e('Autoplay:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('autoplay'); ?>"><?php esc_html_e('Autoplay:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('autoplay'); ?>" name="<?php echo $this->get_field_name('autoplay'); ?>">
-                <option value="true" <?php selected($autoplay, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-twitch'); ?></option>
-                <option value="false" <?php selected($autoplay, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-twitch'); ?></option>
+                <option value="true" <?php selected($autoplay, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="false" <?php selected($autoplay, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('show_info'); ?>"><?php esc_html_e('Infos anzeigen:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('show_info'); ?>"><?php esc_html_e('Infos anzeigen:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('show_info'); ?>" name="<?php echo $this->get_field_name('show_info'); ?>">
-                <option value="true" <?php selected($show_info, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-twitch'); ?></option>
-                <option value="false" <?php selected($show_info, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-twitch'); ?></option>
+                <option value="true" <?php selected($show_info, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="false" <?php selected($show_info, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('show_thumbnail'); ?>"><?php esc_html_e('Thumbnail:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('show_thumbnail'); ?>"><?php esc_html_e('Thumbnail:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('show_thumbnail'); ?>" name="<?php echo $this->get_field_name('show_thumbnail'); ?>">
-                <option value="true" <?php selected($show_thumbnail, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-twitch'); ?></option>
-                <option value="false" <?php selected($show_thumbnail, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-twitch'); ?></option>
+                <option value="true" <?php selected($show_thumbnail, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="false" <?php selected($show_thumbnail, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('layout'); ?>"><?php esc_html_e('Layout:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('layout'); ?>"><?php esc_html_e('Layout:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('layout'); ?>" name="<?php echo $this->get_field_name('layout'); ?>">
-                <option value="grid" <?php selected($layout, 'grid'); ?>><?php esc_html_e('Grid', 'speedyswifter-twitch'); ?></option>
-                <option value="list" <?php selected($layout, 'list'); ?>><?php esc_html_e('Liste', 'speedyswifter-twitch'); ?></option>
-                <option value="single" <?php selected($layout, 'single'); ?>><?php esc_html_e('Einzelnes Video', 'speedyswifter-twitch'); ?></option>
+                <option value="grid" <?php selected($layout, 'grid'); ?>><?php esc_html_e('Grid', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="list" <?php selected($layout, 'list'); ?>><?php esc_html_e('Liste', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="single" <?php selected($layout, 'single'); ?>><?php esc_html_e('Einzelnes Video', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <?php
@@ -166,8 +166,8 @@ class SPSWIFTER_Twitch_Clips_Widget extends WP_Widget {
     public function __construct() {
         parent::__construct(
             'spswifter_twitch_clips_widget',
-            __('Twitch Clips', 'speedyswifter-twitch'),
-            array('description' => __('Zeigt Twitch Clips an', 'speedyswifter-twitch'))
+            __('Twitch Clips', 'speedyswifter-stream-integrator-for-twitch'),
+            array('description' => __('Zeigt Twitch Clips an', 'speedyswifter-stream-integrator-for-twitch'))
         );
     }
     
@@ -227,49 +227,49 @@ class SPSWIFTER_Twitch_Clips_Widget extends WP_Widget {
         $layout = !empty($instance['layout']) ? $instance['layout'] : 'grid';
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Titel:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Titel:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('channel'); ?>"><?php esc_html_e('Kanal:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('channel'); ?>"><?php esc_html_e('Kanal:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('channel'); ?>" name="<?php echo $this->get_field_name('channel'); ?>" type="text" value="<?php echo esc_attr($channel); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('clip_id'); ?>"><?php esc_html_e('Clip ID:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('clip_id'); ?>"><?php esc_html_e('Clip ID:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('clip_id'); ?>" name="<?php echo $this->get_field_name('clip_id'); ?>" type="text" value="<?php echo esc_attr($clip_id); ?>">
-            <small><?php esc_html_e('Optional: Zeigt einen spezifischen Clip an', 'speedyswifter-twitch'); ?></small>
+            <small><?php esc_html_e('Optional: Zeigt einen spezifischen Clip an', 'speedyswifter-stream-integrator-for-twitch'); ?></small>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('limit'); ?>"><?php esc_html_e('Anzahl:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('limit'); ?>"><?php esc_html_e('Anzahl:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('limit'); ?>" name="<?php echo $this->get_field_name('limit'); ?>" type="number" value="<?php echo esc_attr($limit); ?>" min="1" max="20">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('width'); ?>"><?php esc_html_e('Breite:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('width'); ?>"><?php esc_html_e('Breite:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name('width'); ?>" type="text" value="<?php echo esc_attr($width); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('height'); ?>"><?php esc_html_e('Höhe:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('height'); ?>"><?php esc_html_e('Höhe:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" type="number" value="<?php echo esc_attr($height); ?>" min="200" max="1080">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('autoplay'); ?>"><?php esc_html_e('Autoplay:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('autoplay'); ?>"><?php esc_html_e('Autoplay:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('autoplay'); ?>" name="<?php echo $this->get_field_name('autoplay'); ?>">
-                <option value="true" <?php selected($autoplay, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-twitch'); ?></option>
-                <option value="false" <?php selected($autoplay, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-twitch'); ?></option>
+                <option value="true" <?php selected($autoplay, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="false" <?php selected($autoplay, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('show_info'); ?>"><?php esc_html_e('Infos anzeigen:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('show_info'); ?>"><?php esc_html_e('Infos anzeigen:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('show_info'); ?>" name="<?php echo $this->get_field_name('show_info'); ?>">
-                <option value="true" <?php selected($show_info, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-twitch'); ?></option>
-                <option value="false" <?php selected($show_info, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-twitch'); ?></option>
+                <option value="true" <?php selected($show_info, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="false" <?php selected($show_info, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('layout'); ?>"><?php esc_html_e('Layout:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('layout'); ?>"><?php esc_html_e('Layout:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('layout'); ?>" name="<?php echo $this->get_field_name('layout'); ?>">
-                <option value="grid" <?php selected($layout, 'grid'); ?>><?php esc_html_e('Grid', 'speedyswifter-twitch'); ?></option>
-                <option value="list" <?php selected($layout, 'list'); ?>><?php esc_html_e('Liste', 'speedyswifter-twitch'); ?></option>
+                <option value="grid" <?php selected($layout, 'grid'); ?>><?php esc_html_e('Grid', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="list" <?php selected($layout, 'list'); ?>><?php esc_html_e('Liste', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <?php

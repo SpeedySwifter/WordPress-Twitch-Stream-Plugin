@@ -1,4 +1,9 @@
 <?php
+
+// Sicherheitscheck
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * Gutenberg Block für Twitch Stream Integration
  */
@@ -157,7 +162,7 @@ function spswifter_twitch_add_block_category($categories) {
         array(
             array(
                 'slug' => 'twitch-stream',
-                'title' => __('Twitch Stream', 'speedyswifter-twitch'),
+                'title' => __('Twitch Stream', 'speedyswifter-stream-integrator-for-twitch'),
                 'icon' => 'video-alt3',
             ),
         )
@@ -173,10 +178,10 @@ function spswifter_twitch_block_editor_data() {
         'apiConnected' => !empty(get_option('spswifter_twitch_client_id')) && !empty(get_option('spswifter_twitch_client_secret')),
         'adminUrl' => admin_url('options-general.php?page=spswifter-twitch-api-settings'),
         'strings' => array(
-            'channelPlaceholder' => __('Twitch Kanalname eingeben...', 'speedyswifter-twitch'),
-            'channelsPlaceholder' => __('Kanal1, Kanal2, Kanal3', 'speedyswifter-twitch'),
-            'apiNotConnected' => __('Twitch API nicht verbunden. Bitte konfiguriere die API-Einstellungen.', 'speedyswifter-twitch'),
-            'goToSettings' => __('Zu den Einstellungen', 'speedyswifter-twitch'),
+            'channelPlaceholder' => __('Twitch Kanalname eingeben...', 'speedyswifter-stream-integrator-for-twitch'),
+            'channelsPlaceholder' => __('Kanal1, Kanal2, Kanal3', 'speedyswifter-stream-integrator-for-twitch'),
+            'apiNotConnected' => __('Twitch API nicht verbunden. Bitte konfiguriere die API-Einstellungen.', 'speedyswifter-stream-integrator-for-twitch'),
+            'goToSettings' => __('Zu den Einstellungen', 'speedyswifter-stream-integrator-for-twitch'),
         ),
     ));
 }

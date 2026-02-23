@@ -319,9 +319,9 @@ class SPSWIFTER_Twitch_Page_Builder_Compatibility {
                 'apiConnected' => !empty(get_option('spswifter_twitch_client_id')) && !empty(get_option('spswifter_twitch_client_secret')),
                 'adminUrl' => admin_url('options-general.php?page=twitch-api-settings'),
                 'strings' => array(
-                    'apiNotConnected' => __('Twitch API nicht verbunden', 'speedyswifter-twitch'),
-                    'goToSettings' => __('API-Einstellungen', 'speedyswifter-twitch'),
-                    'builderNotSupported' => __('Builder wird nicht unterstützt', 'speedyswifter-twitch'),
+                    'apiNotConnected' => __('Twitch API nicht verbunden', 'speedyswifter-stream-integrator-for-twitch'),
+                    'goToSettings' => __('API-Einstellungen', 'speedyswifter-stream-integrator-for-twitch'),
+                    'builderNotSupported' => __('Builder wird nicht unterstützt', 'speedyswifter-stream-integrator-for-twitch'),
                 ),
             ));
         }
@@ -368,8 +368,8 @@ class SPSWIFTER_Twitch_Stream_Widget extends WP_Widget {
     public function __construct() {
         parent::__construct(
             'spswifter_twitch_stream_widget',
-            __('Twitch Stream', 'speedyswifter-twitch'),
-            array('description' => __('Zeigt einen Twitch Stream an', 'speedyswifter-twitch'))
+            __('Twitch Stream', 'speedyswifter-stream-integrator-for-twitch'),
+            array('description' => __('Zeigt einen Twitch Stream an', 'speedyswifter-stream-integrator-for-twitch'))
         );
     }
     
@@ -407,33 +407,33 @@ class SPSWIFTER_Twitch_Stream_Widget extends WP_Widget {
         $muted = !empty($instance['muted']) ? $instance['muted'] : 'true';
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Titel:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Titel:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('channel'); ?>"><?php esc_html_e('Kanal:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('channel'); ?>"><?php esc_html_e('Kanal:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('channel'); ?>" name="<?php echo $this->get_field_name('channel'); ?>" type="text" value="<?php echo esc_attr($channel); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('width'); ?>"><?php esc_html_e('Breite:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('width'); ?>"><?php esc_html_e('Breite:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name('width'); ?>" type="text" value="<?php echo esc_attr($width); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('height'); ?>"><?php esc_html_e('Höhe:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('height'); ?>"><?php esc_html_e('Höhe:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" type="number" value="<?php echo esc_attr($height); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('autoplay'); ?>"><?php esc_html_e('Autoplay:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('autoplay'); ?>"><?php esc_html_e('Autoplay:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('autoplay'); ?>" name="<?php echo $this->get_field_name('autoplay'); ?>">
-                <option value="true" <?php selected($autoplay, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-twitch'); ?></option>
-                <option value="false" <?php selected($autoplay, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-twitch'); ?></option>
+                <option value="true" <?php selected($autoplay, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="false" <?php selected($autoplay, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('muted'); ?>"><?php esc_html_e('Stumm:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('muted'); ?>"><?php esc_html_e('Stumm:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('muted'); ?>" name="<?php echo $this->get_field_name('muted'); ?>">
-                <option value="true" <?php selected($muted, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-twitch'); ?></option>
-                <option value="false" <?php selected($muted, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-twitch'); ?></option>
+                <option value="true" <?php selected($muted, 'true'); ?>><?php esc_html_e('Ja', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="false" <?php selected($muted, 'false'); ?>><?php esc_html_e('Nein', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <?php
@@ -457,8 +457,8 @@ class SPSWIFTER_Twitch_Grid_Widget extends WP_Widget {
     public function __construct() {
         parent::__construct(
             'spswifter_twitch_grid_widget',
-            __('Twitch Stream Grid', 'speedyswifter-twitch'),
-            array('description' => __('Zeigt mehrere Twitch Streams im Grid an', 'speedyswifter-twitch'))
+            __('Twitch Stream Grid', 'speedyswifter-stream-integrator-for-twitch'),
+            array('description' => __('Zeigt mehrere Twitch Streams im Grid an', 'speedyswifter-stream-integrator-for-twitch'))
         );
     }
     
@@ -492,23 +492,23 @@ class SPSWIFTER_Twitch_Grid_Widget extends WP_Widget {
         $layout = !empty($instance['layout']) ? $instance['layout'] : 'grid';
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Titel:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Titel:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('channels'); ?>"><?php esc_html_e('Kanäle:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('channels'); ?>"><?php esc_html_e('Kanäle:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('channels'); ?>" name="<?php echo $this->get_field_name('channels'); ?>" type="text" value="<?php echo esc_attr($channels); ?>">
-            <small><?php esc_html_e('Kommagetrennt: kanal1, kanal2, kanal3', 'speedyswifter-twitch'); ?></small>
+            <small><?php esc_html_e('Kommagetrennt: kanal1, kanal2, kanal3', 'speedyswifter-stream-integrator-for-twitch'); ?></small>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('columns'); ?>"><?php esc_html_e('Spalten:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('columns'); ?>"><?php esc_html_e('Spalten:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('columns'); ?>" name="<?php echo $this->get_field_name('columns'); ?>" type="number" value="<?php echo esc_attr($columns); ?>" min="1" max="4">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('layout'); ?>"><?php esc_html_e('Layout:', 'speedyswifter-twitch'); ?></label>
+            <label for="<?php echo $this->get_field_id('layout'); ?>"><?php esc_html_e('Layout:', 'speedyswifter-stream-integrator-for-twitch'); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id('layout'); ?>" name="<?php echo $this->get_field_name('layout'); ?>">
-                <option value="grid" <?php selected($layout, 'grid'); ?>><?php esc_html_e('Grid', 'speedyswifter-twitch'); ?></option>
-                <option value="list" <?php selected($layout, 'list'); ?>><?php esc_html_e('Liste', 'speedyswifter-twitch'); ?></option>
+                <option value="grid" <?php selected($layout, 'grid'); ?>><?php esc_html_e('Grid', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
+                <option value="list" <?php selected($layout, 'list'); ?>><?php esc_html_e('Liste', 'speedyswifter-stream-integrator-for-twitch'); ?></option>
             </select>
         </p>
         <?php
@@ -541,11 +541,11 @@ function spswifter_twitch_page_builder_admin_notice() {
         ?>
         <div class="notice notice-info is-dismissible">
             <p>
-                <?php esc_html_e('🎮 SpeedySwifter Twitch: Kompatibel mit ', 'speedyswifter-twitch'); ?>
+                <?php esc_html_e('🎮 SpeedySwifter Twitch: Kompatibel mit ', 'speedyswifter-stream-integrator-for-twitch'); ?>
                 <strong><?php echo implode(', ', array_keys($active_builders)); ?></strong>
-                <?php esc_html_e('Page Buildern!', 'speedyswifter-twitch'); ?>
+                <?php esc_html_e('Page Buildern!', 'speedyswifter-stream-integrator-for-twitch'); ?>
                 <a href="<?php echo admin_url('options-general.php?page=twitch-api-settings'); ?>">
-                    <?php esc_html_e('API-Einstellungen konfigurieren', 'speedyswifter-twitch'); ?>
+                    <?php esc_html_e('API-Einstellungen konfigurieren', 'speedyswifter-stream-integrator-for-twitch'); ?>
                 </a>
             </p>
         </div>

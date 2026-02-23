@@ -376,7 +376,7 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
         
         if ($spswifter_twitch_enabled) {
             $tabs['spswifter_twitch_stream'] = array(
-                'title' => __('Twitch Stream', 'speedyswifter-twitch'),
+                'title' => __('Twitch Stream', 'speedyswifter-stream-integrator-for-twitch'),
                 'priority' => 50,
                 'callback' => array($this, 'render_spswifter_twitch_stream_tab'),
             );
@@ -418,30 +418,30 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
     public function add_spswifter_twitch_product_fields($product) {
         woocommerce_wp_text_input(array(
             'id' => '_spswifter_twitch_channel',
-            'label' => __('Twitch Channel', 'speedyswifter-twitch'),
+            'label' => __('Twitch Channel', 'speedyswifter-stream-integrator-for-twitch'),
             'placeholder' => 'channel_name',
             'desc_tip' => true,
-            'description' => __('Enter the Twitch channel name associated with this product', 'speedyswifter-twitch'),
+            'description' => __('Enter the Twitch channel name associated with this product', 'speedyswifter-stream-integrator-for-twitch'),
         ));
         
         woocommerce_wp_text_input(array(
             'id' => '_spswifter_twitch_stream_url',
-            'label' => __('Stream URL', 'speedyswifter-twitch'),
+            'label' => __('Stream URL', 'speedyswifter-stream-integrator-for-twitch'),
             'placeholder' => 'https://www.twitch.tv/channel_name/embed',
             'desc_tip' => true,
-            'description' => __('Enter the embed URL for the Twitch stream', 'speedyswifter-twitch'),
+            'description' => __('Enter the embed URL for the Twitch stream', 'speedyswifter-stream-integrator-for-twitch'),
         ));
         
         woocommerce_wp_checkbox(array(
             'id' => '_spswifter_twitch_enabled',
-            'label' => __('Enable Twitch Integration', 'speedyswifter-twitch'),
-            'description' => __('Enable Twitch features for this product', 'speedyswifter-twitch'),
+            'label' => __('Enable Twitch Integration', 'speedyswifter-stream-integrator-for-twitch'),
+            'description' => __('Enable Twitch features for this product', 'speedyswifter-stream-integrator-for-twitch'),
         ));
         
         woocommerce_wp_checkbox(array(
             'id' => '_spswifter_twitch_chat_embed',
-            'label' => __('Embed Chat', 'speedyswifter-twitch'),
-            'description' => __('Show embedded chat on product page', 'speedyswifter-twitch'),
+            'label' => __('Embed Chat', 'speedyswifter-stream-integrator-for-twitch'),
+            'description' => __('Show embedded chat on product page', 'speedyswifter-stream-integrator-for-twitch'),
         ));
     }
     
@@ -494,7 +494,7 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
     public function display_spswifter_twitch_cart_item_data($item_data, $cart_item) {
         if (isset($cart_item['spswifter_twitch_enabled']) && $cart_item['spswifter_twitch_enabled']) {
             $item_data[] = array(
-                'key' => __('Twitch Channel', 'speedyswifter-twitch'),
+                'key' => __('Twitch Channel', 'speedyswifter-stream-integrator-for-twitch'),
                 'value' => $cart_item['spswifter_twitch_channel'],
             );
         }
@@ -509,7 +509,7 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
         $spswifter_twitch_channel = $item->get_meta('_spswifter_twitch_channel');
         
         if ($spswifter_twitch_channel) {
-            echo '<p><strong>' . __('Twitch Channel', 'speedyswifter-twitch') . ':</strong> ' . esc_html($spswifter_twitch_channel) . '</p>';
+            echo '<p><strong>' . __('Twitch Channel', 'speedyswifter-stream-integrator-for-twitch') . ':</strong> ' . esc_html($spswifter_twitch_channel) . '</p>';
         }
     }
     
@@ -643,7 +643,7 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
         $spswifter_twitch_enabled = get_post_meta($product->get_id(), '_spswifter_twitch_enabled', true) === 'yes';
         
         if ($spswifter_twitch_enabled) {
-            return __('Buy & Watch Stream', 'speedyswifter-twitch');
+            return __('Buy & Watch Stream', 'speedyswifter-stream-integrator-for-twitch');
         }
         
         return $text;
@@ -658,7 +658,7 @@ class SPSWIFTER_Twitch_WooCommerce_Integration {
         $spswifter_twitch_enabled = get_post_meta($product->get_id(), '_spswifter_twitch_enabled', true) === 'yes';
         
         if ($spswifter_twitch_enabled) {
-            return __('Buy & Watch', 'speedyswifter-twitch');
+            return __('Buy & Watch', 'speedyswifter-stream-integrator-for-twitch');
         }
         
         return $text;

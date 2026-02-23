@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 class Divi_Twitch_Stream_Module extends ET_Builder_Module {
     
     public function init() {
-        $this->name = __('Twitch Stream', 'speedyswifter-twitch');
+        $this->name = __('Twitch Stream', 'speedyswifter-stream-integrator-for-twitch');
         $this->slug = 'et_pb_spswifter_twitch_stream';
         $this->vb_support = 'on';
         $this->main_css_element = '%%order_class%%';
@@ -18,14 +18,14 @@ class Divi_Twitch_Stream_Module extends ET_Builder_Module {
         $this->settings_modal_toggles = array(
             'general' => array(
                 'toggles' => array(
-                    'main_content' => __('Stream Einstellungen', 'speedyswifter-twitch'),
-                    'stream_info' => __('Stream-Informationen', 'speedyswifter-twitch'),
+                    'main_content' => __('Stream Einstellungen', 'speedyswifter-stream-integrator-for-twitch'),
+                    'stream_info' => __('Stream-Informationen', 'speedyswifter-stream-integrator-for-twitch'),
                 ),
             ),
             'advanced' => array(
                 'toggles' => array(
-                    'layout' => __('Layout', 'speedyswifter-twitch'),
-                    'animation' => __('Animation', 'speedyswifter-twitch'),
+                    'layout' => __('Layout', 'speedyswifter-stream-integrator-for-twitch'),
+                    'animation' => __('Animation', 'speedyswifter-stream-integrator-for-twitch'),
                 ),
             ),
         );
@@ -34,56 +34,56 @@ class Divi_Twitch_Stream_Module extends ET_Builder_Module {
     public function get_fields() {
         return array(
             'channel' => array(
-                'label' => __('Twitch Kanal', 'speedyswifter-twitch'),
+                'label' => __('Twitch Kanal', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'text',
                 'option_category' => 'basic_option',
-                'description' => __('Gib den Twitch-Benutzernamen ein', 'speedyswifter-twitch'),
+                'description' => __('Gib den Twitch-Benutzernamen ein', 'speedyswifter-stream-integrator-for-twitch'),
                 'toggle_slug' => 'main_content',
             ),
             'width' => array(
-                'label' => __('Breite', 'speedyswifter-twitch'),
+                'label' => __('Breite', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'text',
                 'option_category' => 'basic_option',
                 'default' => '100%',
                 'toggle_slug' => 'main_content',
             ),
             'height' => array(
-                'label' => __('Höhe', 'speedyswifter-twitch'),
+                'label' => __('Höhe', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'number',
                 'option_category' => 'basic_option',
                 'default' => 480,
                 'toggle_slug' => 'main_content',
             ),
             'autoplay' => array(
-                'label' => __('Autoplay', 'speedyswifter-twitch'),
+                'label' => __('Autoplay', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'yes_no_button',
                 'option_category' => 'basic_option',
                 'default' => 'on',
                 'toggle_slug' => 'main_content',
             ),
             'muted' => array(
-                'label' => __('Stummgeschaltet', 'speedyswifter-twitch'),
+                'label' => __('Stummgeschaltet', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'yes_no_button',
                 'option_category' => 'basic_option',
                 'default' => 'off',
                 'toggle_slug' => 'main_content',
             ),
             'show_info' => array(
-                'label' => __('Stream-Infos anzeigen', 'speedyswifter-twitch'),
+                'label' => __('Stream-Infos anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'yes_no_button',
                 'option_category' => 'basic_option',
                 'default' => 'off',
                 'toggle_slug' => 'stream_info',
             ),
             'info_layout' => array(
-                'label' => __('Info Layout', 'speedyswifter-twitch'),
+                'label' => __('Info Layout', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'select',
                 'option_category' => 'basic_option',
                 'default' => 'horizontal',
                 'options' => array(
-                    'horizontal' => __('Horizontal', 'speedyswifter-twitch'),
-                    'vertical' => __('Vertikal', 'speedyswifter-twitch'),
-                    'compact' => __('Kompakt', 'speedyswifter-twitch'),
+                    'horizontal' => __('Horizontal', 'speedyswifter-stream-integrator-for-twitch'),
+                    'vertical' => __('Vertikal', 'speedyswifter-stream-integrator-for-twitch'),
+                    'compact' => __('Kompakt', 'speedyswifter-stream-integrator-for-twitch'),
                 ),
                 'toggle_slug' => 'stream_info',
                 'show_if' => array(
@@ -91,7 +91,7 @@ class Divi_Twitch_Stream_Module extends ET_Builder_Module {
                 ),
             ),
             'show_avatar' => array(
-                'label' => __('Avatar anzeigen', 'speedyswifter-twitch'),
+                'label' => __('Avatar anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'yes_no_button',
                 'option_category' => 'basic_option',
                 'default' => 'on',
@@ -101,7 +101,7 @@ class Divi_Twitch_Stream_Module extends ET_Builder_Module {
                 ),
             ),
             'show_thumbnail' => array(
-                'label' => __('Thumbnail anzeigen', 'speedyswifter-twitch'),
+                'label' => __('Thumbnail anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'yes_no_button',
                 'option_category' => 'basic_option',
                 'default' => 'on',
@@ -111,7 +111,7 @@ class Divi_Twitch_Stream_Module extends ET_Builder_Module {
                 ),
             ),
             'show_game' => array(
-                'label' => __('Spiel anzeigen', 'speedyswifter-twitch'),
+                'label' => __('Spiel anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'yes_no_button',
                 'option_category' => 'basic_option',
                 'default' => 'on',
@@ -121,7 +121,7 @@ class Divi_Twitch_Stream_Module extends ET_Builder_Module {
                 ),
             ),
             'show_viewers' => array(
-                'label' => __('Zuschauer anzeigen', 'speedyswifter-twitch'),
+                'label' => __('Zuschauer anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'yes_no_button',
                 'option_category' => 'basic_option',
                 'default' => 'on',
@@ -131,19 +131,19 @@ class Divi_Twitch_Stream_Module extends ET_Builder_Module {
                 ),
             ),
             'admin_label' => array(
-                'label' => __('Admin Label', 'speedyswifter-twitch'),
+                'label' => __('Admin Label', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'text',
                 'option_category' => 'basic_option',
                 'toggle_slug' => 'main_content',
             ),
             'module_id' => array(
-                'label' => __('CSS ID', 'speedyswifter-twitch'),
+                'label' => __('CSS ID', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'text',
                 'option_category' => 'basic_option',
                 'toggle_slug' => 'layout',
             ),
             'module_class' => array(
-                'label' => __('CSS Class', 'speedyswifter-twitch'),
+                'label' => __('CSS Class', 'speedyswifter-stream-integrator-for-twitch'),
                 'type' => 'text',
                 'option_category' => 'basic_option',
                 'toggle_slug' => 'layout',
@@ -166,7 +166,7 @@ class Divi_Twitch_Stream_Module extends ET_Builder_Module {
         
         if (empty($channel)) {
             return '<div class="et_pb_module et_pb_alert et_pb_alert_error">' . 
-                   __('Bitte gib einen Twitch-Kanal an.', 'speedyswifter-twitch') . 
+                   __('Bitte gib einen Twitch-Kanal an.', 'speedyswifter-stream-integrator-for-twitch') . 
                    '</div>';
         }
         

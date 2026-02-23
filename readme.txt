@@ -2,8 +2,8 @@
 Contributors: speedyswifter
 Donate link: https://www.paypal.com/donate/?hosted_button_id=YOUR_BUTTON_ID
 Tags: twitch, livestream, stream, gaming, twitch-api
-Requires at least: 6.3
-Tested up to: 6.8
+Requires at least: 5.8
+Tested up to: 6.9
 Stable tag: 1.7.2
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

@@ -73,7 +73,7 @@ class SPSWIFTER_Twitch_Multi_Language_Support {
      * Load textdomain
      */
     public function load_textdomain() {
-        $domain = 'speedyswifter-twitch';
+        $domain = 'speedyswifter-stream-integrator-for-twitch';
         $locale = $this->get_locale();
         
         // Traditional WordPress language files
@@ -854,7 +854,7 @@ class SPSWIFTER_Twitch_Multi_Language_Support {
      * Set plugin locale
      */
     public function set_plugin_locale($locale, $domain) {
-        if ($domain === 'speedyswifter-twitch') {
+        if ($domain === 'speedyswifter-stream-integrator-for-twitch') {
             return $this->get_locale();
         }
         return $locale;

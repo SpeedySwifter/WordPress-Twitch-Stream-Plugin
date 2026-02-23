@@ -3,6 +3,11 @@
  * Shortcode Handler
  */
 
+// Sicherheitscheck
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Shortcode: [spswifter_twitch_stream channel="beispiel"]
  */

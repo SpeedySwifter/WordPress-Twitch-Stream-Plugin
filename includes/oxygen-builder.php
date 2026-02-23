@@ -32,54 +32,54 @@ class SPSWIFTER_Twitch_Oxygen_Integration {
     private function register_spswifter_twitch_stream_component() {
         $component = array(
             'name' => 'spswifter_twitch_stream',
-            'title' => __('Twitch Stream', 'speedyswifter-twitch'),
-            'description' => __('Bettet einen Twitch Stream ein', 'speedyswifter-twitch'),
+            'title' => __('Twitch Stream', 'speedyswifter-stream-integrator-for-twitch'),
+            'description' => __('Bettet einen Twitch Stream ein', 'speedyswifter-stream-integrator-for-twitch'),
             'icon' => 'oxygen-icon-video',
             'wrapper' => true,
             'params' => array(
                 'channel' => array(
                     'type' => 'text',
-                    'name' => __('Kanal', 'speedyswifter-twitch'),
+                    'name' => __('Kanal', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => '',
-                    'placeholder' => __('z.B. shroud', 'speedyswifter-twitch'),
-                    'help' => __('Gib den Twitch-Benutzernamen ein', 'speedyswifter-twitch'),
+                    'placeholder' => __('z.B. shroud', 'speedyswifter-stream-integrator-for-twitch'),
+                    'help' => __('Gib den Twitch-Benutzernamen ein', 'speedyswifter-stream-integrator-for-twitch'),
                 ),
                 'width' => array(
                     'type' => 'text',
-                    'name' => __('Breite', 'speedyswifter-twitch'),
+                    'name' => __('Breite', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => '100%',
-                    'placeholder' => __('100% oder 800px', 'speedyswifter-twitch'),
+                    'placeholder' => __('100% oder 800px', 'speedyswifter-stream-integrator-for-twitch'),
                 ),
                 'height' => array(
                     'type' => 'number',
-                    'name' => __('Höhe', 'speedyswifter-twitch'),
+                    'name' => __('Höhe', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => 480,
                     'min' => 200,
                     'max' => 1080,
                 ),
                 'autoplay' => array(
                     'type' => 'checkbox',
-                    'name' => __('Autoplay', 'speedyswifter-twitch'),
+                    'name' => __('Autoplay', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => '1',
                 ),
                 'muted' => array(
                     'type' => 'checkbox',
-                    'name' => __('Stummgeschaltet', 'speedyswifter-twitch'),
+                    'name' => __('Stummgeschaltet', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => '0',
                 ),
                 'show_info' => array(
                     'type' => 'checkbox',
-                    'name' => __('Stream-Infos anzeigen', 'speedyswifter-twitch'),
+                    'name' => __('Stream-Infos anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => '0',
                 ),
                 'info_layout' => array(
                     'type' => 'select',
-                    'name' => __('Info Layout', 'speedyswifter-twitch'),
+                    'name' => __('Info Layout', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => 'horizontal',
                     'options' => array(
-                        'horizontal' => __('Horizontal', 'speedyswifter-twitch'),
-                        'vertical' => __('Vertikal', 'speedyswifter-twitch'),
-                        'compact' => __('Kompakt', 'speedyswifter-twitch'),
+                        'horizontal' => __('Horizontal', 'speedyswifter-stream-integrator-for-twitch'),
+                        'vertical' => __('Vertikal', 'speedyswifter-stream-integrator-for-twitch'),
+                        'compact' => __('Kompakt', 'speedyswifter-stream-integrator-for-twitch'),
                     ),
                 ),
             ),
@@ -102,59 +102,59 @@ class SPSWIFTER_Twitch_Oxygen_Integration {
     private function register_spswifter_twitch_grid_component() {
         $component = array(
             'name' => 'spswifter_twitch_grid',
-            'title' => __('Twitch Stream Grid', 'speedyswifter-twitch'),
-            'description' => __('Zeigt mehrere Twitch Streams im Grid an', 'speedyswifter-twitch'),
+            'title' => __('Twitch Stream Grid', 'speedyswifter-stream-integrator-for-twitch'),
+            'description' => __('Zeigt mehrere Twitch Streams im Grid an', 'speedyswifter-stream-integrator-for-twitch'),
             'icon' => 'oxygen-icon-grid',
             'wrapper' => true,
             'params' => array(
                 'channels' => array(
                     'type' => 'text',
-                    'name' => __('Kanäle', 'speedyswifter-twitch'),
+                    'name' => __('Kanäle', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => '',
-                    'placeholder' => __('shroud, ninja, pokimane', 'speedyswifter-twitch'),
-                    'help' => __('Kommagetrennte Liste von Twitch-Kanälen', 'speedyswifter-twitch'),
+                    'placeholder' => __('shroud, ninja, pokimane', 'speedyswifter-stream-integrator-for-twitch'),
+                    'help' => __('Kommagetrennte Liste von Twitch-Kanälen', 'speedyswifter-stream-integrator-for-twitch'),
                 ),
                 'columns' => array(
                     'type' => 'number',
-                    'name' => __('Spalten', 'speedyswifter-twitch'),
+                    'name' => __('Spalten', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => 3,
                     'min' => 1,
                     'max' => 6,
                 ),
                 'layout' => array(
                     'type' => 'select',
-                    'name' => __('Layout', 'speedyswifter-twitch'),
+                    'name' => __('Layout', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => 'grid',
                     'options' => array(
-                        'grid' => __('Grid', 'speedyswifter-twitch'),
-                        'list' => __('Liste', 'speedyswifter-twitch'),
-                        'masonry' => __('Masonry', 'speedyswifter-twitch'),
+                        'grid' => __('Grid', 'speedyswifter-stream-integrator-for-twitch'),
+                        'list' => __('Liste', 'speedyswifter-stream-integrator-for-twitch'),
+                        'masonry' => __('Masonry', 'speedyswifter-stream-integrator-for-twitch'),
                     ),
                 ),
                 'gap' => array(
                     'type' => 'text',
-                    'name' => __('Abstand', 'speedyswifter-twitch'),
+                    'name' => __('Abstand', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => '20px',
-                    'placeholder' => __('20px', 'speedyswifter-twitch'),
+                    'placeholder' => __('20px', 'speedyswifter-stream-integrator-for-twitch'),
                 ),
                 'responsive' => array(
                     'type' => 'checkbox',
-                    'name' => __('Responsive', 'speedyswifter-twitch'),
+                    'name' => __('Responsive', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => '1',
                 ),
                 'show_player' => array(
                     'type' => 'checkbox',
-                    'name' => __('Player anzeigen', 'speedyswifter-twitch'),
+                    'name' => __('Player anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => '1',
                 ),
                 'show_info' => array(
                     'type' => 'checkbox',
-                    'name' => __('Informationen anzeigen', 'speedyswifter-twitch'),
+                    'name' => __('Informationen anzeigen', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => '1',
                 ),
                 'player_height' => array(
                     'type' => 'number',
-                    'name' => __('Player Höhe', 'speedyswifter-twitch'),
+                    'name' => __('Player Höhe', 'speedyswifter-stream-integrator-for-twitch'),
                     'value' => 200,
                     'min' => 100,
                     'max' => 400,
@@ -325,9 +325,9 @@ function spswifter_twitch_oxygen_admin_notice() {
         ?>
         <div class="notice notice-info is-dismissible">
             <p>
-                <?php esc_html_e('🎮 SpeedySwifter Twitch: Oxygen Builder Components sind jetzt verfügbar!', 'speedyswifter-twitch'); ?>
+                <?php esc_html_e('🎮 SpeedySwifter Twitch: Oxygen Builder Components sind jetzt verfügbar!', 'speedyswifter-stream-integrator-for-twitch'); ?>
                 <a href="<?php echo admin_url('options-general.php?page=twitch-api-settings'); ?>">
-                    <?php esc_html_e('API-Einstellungen konfigurieren', 'speedyswifter-twitch'); ?>
+                    <?php esc_html_e('API-Einstellungen konfigurieren', 'speedyswifter-stream-integrator-for-twitch'); ?>
                 </a>
             </p>
         </div>
