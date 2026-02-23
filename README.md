@@ -1,17 +1,17 @@
-# 🎮 WordPress Twitch Stream Plugin v1.7.1
+# 🎮 SpeedySwifter Stream Integrator for Twitch v1.7.2
 
 <div align="center">
 
-![WordPress](https://img.shields.io/badge/WordPress-6.9.1-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
+![WordPress](https://img.shields.io/badge/WordPress-6.8-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-7.4+-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![Twitch](https://img.shields.io/badge/Twitch_API-9146FF?style=for-the-badge&logo=twitch&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-GPL_v2+-green?style=for-the-badge)
 
 [![GitHub Stars](https://img.shields.io/github/stars/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/SpeedySwifter/WordPress-Twitch-Stream-Plugin?style=social)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/forks)
 [![GitHub Issues](https://img.shields.io/github/issues/SpeedySwifter/WordPress-Twitch-Stream-Plugin)](https://github.com/SpeedySwifter/WordPress-Twitch-Stream-Plugin/issues)
 
-**The Ultimate WordPress Plugin for Twitch Stream Integration**
+**A WordPress plugin for Twitch stream integration with mobile app support, scheduling, analytics, and multi-language support.**
 
 [🚀 Features](#-features) • [📦 Installation](#-installation) • [🧩 Usage](#-usage) • [📋 Shortcodes](#-shortcodes) • [⚙️ Admin](#-admin-settings) • [🌍 Languages](#-languages)
 
@@ -21,7 +21,7 @@
 
 ## 📌 What is this?
 
-The **WordPress Twitch Stream Plugin v1.7.1** is a comprehensive solution for integrating Twitch streams into WordPress websites. It provides everything from basic stream embedding to advanced features like mobile apps, scheduling, analytics, and more.
+The **SpeedySwifter Stream Integrator for Twitch v1.7.2** provides a solution for integrating Twitch streams into WordPress websites. It offers features like mobile app integration, stream scheduling, analytics, and multi-language support.
 
 ### ✨ Core Features
 
@@ -32,7 +32,7 @@ The **WordPress Twitch Stream Plugin v1.7.1** is a comprehensive solution for in
 - 🔐 **Secure API Integration** – Uses official Twitch Helix API
 - 💾 **Token Caching** – Reduces API calls through intelligent caching
 - 🎨 **Customizable** – CSS classes for individual styling
-- 🧩 **WordPress 6.9.1 Compatible** – Tested with current WP version
+- 🧩 **WordPress 6.8 Compatible** – Tested with current WP version
 - 🎯 **Stream Info** – Title, game, viewers, avatar, live badge
 - 📱 **Multiple Streams Grid** – Multiple streams in grid layout
 - 🧩 **Gutenberg Blocks** – Native WordPress Block Editor integration
@@ -41,7 +41,14 @@ The **WordPress Twitch Stream Plugin v1.7.1** is a comprehensive solution for in
 
 ---
 
-## 🚀 Advanced Features (v1.7.1)
+## 🚀 Advanced Features (v1.7.2)
+
+### 🔒 **WordPress.org Review Compliance**
+- ✅ **Security Best Practices** – Proper sanitization and escaping
+- ✅ **Code Standards** – WordPress coding standards compliant
+- ✅ **Unique Prefixing** – All global names use `SPSWIFTER_` prefix
+- ✅ **External Services Documentation** – Complete transparency
+- ✅ **Trademark Compliance** – No trademark terms in plugin name
 
 ### 📱 **Mobile App Integration**
 - **Progressive Web App (PWA)** with complete manifest
@@ -196,7 +203,7 @@ Category:             Website Integration
 
 ### 2️⃣ Enter Credentials in WordPress
 
-1. In WordPress Admin: **Settings → Twitch API**
+1. In WordPress Admin: **Settings → SpeedySwifter Twitch API**
 2. Enter **Client ID**
 3. Enter **Client Secret**
 4. **Save Changes**
@@ -283,28 +290,28 @@ Your premium content here
 ## ⚙️ Admin Settings
 
 ### Main Settings Page
-**WordPress Admin → Settings → Twitch API**
+**WordPress Admin → Settings → SpeedySwifter Twitch API**
 
 - **Client ID & Secret** – Twitch API credentials
 - **Caching Options** – Token and data caching settings
 - **Display Options** – Default player dimensions and themes
 
 ### Mobile App Settings
-**WordPress Admin → Twitch Dashboard → Mobile App**
+**WordPress Admin → SpeedySwifter Twitch Dashboard → Mobile App**
 
 - **PWA Configuration** – App manifest and service worker settings
 - **Push Notifications** – VAPID keys and notification preferences
 - **Theme Settings** – Mobile app appearance customization
 
 ### Stream Scheduler
-**WordPress Admin → Twitch Dashboard → Stream Scheduler**
+**WordPress Admin → SpeedySwifter Twitch Dashboard → Stream Scheduler**
 
 - **Calendar Settings** – Default view and time zone
 - **Notification Settings** – Email and push notification preferences
 - **Recurring Patterns** – Automated stream scheduling
 
 ### Membership Integration
-**WordPress Admin → Twitch Dashboard → Membership**
+**WordPress Admin → SpeedySwifter Twitch Dashboard → Membership**
 
 - **Plugin Detection** – Auto-detection of membership plugins
 - **Level Mapping** – Map membership levels to access tiers
@@ -435,6 +442,23 @@ The plugin supports **7 languages** with complete translations:
 
 ## 📊 Version History
 
+### v1.7.2 - WordPress.org Review Compliance 🔒
+- 🔒 **Security**: Added proper sanitization for all $_SERVER, $_POST, $_GET inputs
+- 🔒 **Security**: Added escaping for all outputs (replaced _e() with esc_html_e())
+- 🔒 **Security**: Added HMAC signature verification for Twitch webhook endpoint
+- 🔒 **Security**: Added sanitize_callback to all register_setting() calls
+- 🔒 **Security**: Added nonce verification to all admin form handlers
+- 📋 **Compliance**: Renamed plugin to "SpeedySwifter Stream Integrator for Twitch"
+- 📋 **Compliance**: Updated all class/function/hook names with unique SPSWIFTER_ prefix
+- 📋 **Compliance**: Moved all inline <script> and <style> tags to wp_enqueue API
+- 📋 **Compliance**: Replaced remote jQuery UI CSS with WordPress Core built-in
+- 📋 **Compliance**: Downloaded FullCalendar library for local hosting
+- 📋 **Compliance**: Added External Services documentation to readme.txt
+- 📋 **Compliance**: Removed promotional language from plugin description
+- 📋 **Compliance**: Fixed "Tested up to" to use Major version only (6.8)
+- ⚡ **Performance**: Added defer/async loading strategy for scripts (WP 6.3+)
+- 🔄 **Fix**: Updated text domain to match new plugin slug
+
 ### v1.7.1 - Bug Fixes & Stability Improvements 🛠️
 - 🐛 **Fixed critical WordPress activation errors** - Plugin now activates without fatal errors
 - 🔧 **PHP syntax errors resolved** - All missing braces and syntax issues fixed
@@ -518,7 +542,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **GPL v2 or later** - see the [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -546,7 +570,33 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ⭐ If you find this plugin helpful, please give it a star!
 
+🔒 **WordPress.org Review Compliant v1.7.2**
+
 </div>
+
+---
+
+## 🛡️ Security & Compliance
+
+This plugin follows WordPress.org security and compliance guidelines:
+
+### Security Features
+- ✅ **Input Sanitization** – All user inputs properly sanitized
+- ✅ **Output Escaping** – All outputs escaped to prevent XSS
+- ✅ **Nonce Verification** – Admin forms protected with nonces
+- ✅ **HMAC Verification** – Twitch webhooks verified with signatures
+- ✅ **Capability Checks** – User permissions validated
+
+### Compliance Features
+- ✅ **WordPress Coding Standards** – Follows all WP coding standards
+- ✅ **Unique Prefixing** – No global namespace conflicts
+- ✅ **External Services Documentation** – Transparent data usage
+- ✅ **Trademark Compliance** – No trademark terms in plugin name
+- ✅ **Content Guidelines** – No promotional language
+
+---
+
+**Ready for WordPress.org Plugin Directory submission!** 🚀🏆
 
 ---
 
